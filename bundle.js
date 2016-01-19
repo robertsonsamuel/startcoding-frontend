@@ -20195,12 +20195,12 @@
 	  _createClass(Navbar, [{
 	    key: 'showRegister',
 	    value: function showRegister() {
-	      hideLoginRegisterLogout(true, false, false);
+	      hideLoginRegisterLogout(true, false, true);
 	    }
 	  }, {
 	    key: 'showLogin',
 	    value: function showLogin() {
-	      hideLoginRegisterLogout(false, true, false);
+	      hideLoginRegisterLogout(false, true, true);
 	    }
 	  }, {
 	    key: 'login',

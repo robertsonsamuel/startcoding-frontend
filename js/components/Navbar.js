@@ -11,10 +11,10 @@ function hideLoginRegisterLogout(login, register, logout) {
 
 class Navbar extends React.Component{
   showRegister() {
-    hideLoginRegisterLogout(true, false, false);
+    hideLoginRegisterLogout(true, false, true);
   }
   showLogin() {
-    hideLoginRegisterLogout(false, true, false);
+    hideLoginRegisterLogout(false, true, true);
   }
   login(userInfo) {
     API.login(userInfo)
