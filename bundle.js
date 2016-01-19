@@ -63,8 +63,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	$(document).ready(function () {});
-	
 	_reactDom2.default.render(_react2.default.createElement(_Navbar2.default, null), document.getElementById('navbar'));
 	
 	console.log('im being compiled or translated');
@@ -20193,6 +20191,22 @@
 	  }
 	
 	  _createClass(Navbar, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      // check for a token and display logged-in state if a valid token exists
+	      var token = localStorage.getItem('token');
+	      if (!token) return;
+	      var tokenPayload = JSON.parse(atob(token.split('.')[1]));
+	      var stillGood = Date.now() < tokenPayload.exp * 1000;
+	      if (stillGood) {
+	        console.log('yay!');
+	        hideLoginRegisterLogout(true, true, false);
+	      } else {
+	        console.log('nay!');
+	        localStorage.removeItem('token');
+	      }
+	    }
+	  }, {
 	    key: 'showRegister',
 	    value: function showRegister() {
 	      hideLoginRegisterLogout(true, false, true);
@@ -20474,7 +20488,7 @@
 	          ),
 	          _react2.default.createElement(
 	            "button",
-	            { onClick: this.login.bind(this), className: "btn btn-default" },
+	            { onClick: this.login.bind(this), className: "btn btn-danger" },
 	            "Login"
 	          )
 	        )

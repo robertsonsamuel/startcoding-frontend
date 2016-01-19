@@ -10,6 +10,20 @@ function hideLoginRegisterLogout(login, register, logout) {
 }
 
 class Navbar extends React.Component{
+  componentDidMount() {
+    // check for a token and display logged-in state if a valid token exists
+    let token = localStorage.getItem('token');
+    if (!token) return;
+    let tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    let stillGood = Date.now() < tokenPayload.exp * 1000;
+    if (stillGood) {
+      console.log('yay!')
+      hideLoginRegisterLogout(true, true, false);
+    } else {
+      console.log('nay!')
+      localStorage.removeItem('token');
+    }
+  }
   showRegister() {
     hideLoginRegisterLogout(true, false, true);
   }
