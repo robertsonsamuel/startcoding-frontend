@@ -64,8 +64,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	_reactDom2.default.render(_react2.default.createElement(_Navbar2.default, null), document.getElementById('navbar'));
-	
-	console.log('im being compiled or translated');
 
 /***/ },
 /* 1 */
@@ -20175,10 +20173,21 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	function hideLoginRegisterLogout(login, register, logout) {
+	function hideLoginRegisterLogoutUsername(login, register, logout, username) {
 	  login ? $('#Login').hide() : $('#Login').show();
 	  register ? $('#Register').hide() : $('#Register').show();
 	  logout ? $('#Logout').hide() : $('#Logout').show();
+	  if (username) {
+	    $('#username').text(retrieveToken().username);
+	    $('#welcome').show();
+	  } else {
+	    $('#welcome').hide();
+	  }
+	}
+	
+	function retrieveToken() {
+	  var token = localStorage.getItem('token');
+	  return token ? JSON.parse(atob(token.split('.')[1])) : false;
 	}
 	
 	var Navbar = function (_React$Component) {
@@ -20194,34 +20203,31 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      // check for a token and display logged-in state if a valid token exists
-	      var token = localStorage.getItem('token');
-	      if (!token) return;
-	      var tokenPayload = JSON.parse(atob(token.split('.')[1]));
-	      var stillGood = Date.now() < tokenPayload.exp * 1000;
-	      if (stillGood) {
-	        console.log('yay!');
-	        hideLoginRegisterLogout(true, true, false);
+	      var tokenPayload = retrieveToken();
+	      if (!tokenPayload) return;
+	
+	      if (Date.now() < tokenPayload.exp * 1000) {
+	        hideLoginRegisterLogoutUsername(true, true, false, true);
 	      } else {
-	        console.log('nay!');
 	        localStorage.removeItem('token');
 	      }
 	    }
 	  }, {
 	    key: 'showRegister',
 	    value: function showRegister() {
-	      hideLoginRegisterLogout(true, false, true);
+	      hideLoginRegisterLogoutUsername(true, false, true, false);
 	    }
 	  }, {
 	    key: 'showLogin',
 	    value: function showLogin() {
-	      hideLoginRegisterLogout(false, true, true);
+	      hideLoginRegisterLogoutUsername(false, true, true, false);
 	    }
 	  }, {
 	    key: 'login',
 	    value: function login(userInfo) {
 	      _API2.default.login(userInfo).done(function (token) {
 	        localStorage.setItem('token', token);
-	        hideLoginRegisterLogout(true, true, false);
+	        hideLoginRegisterLogoutUsername(true, true, false, true);
 	      }).fail(function (err) {
 	        return console.log(err);
 	      });
@@ -20231,7 +20237,7 @@
 	    value: function register(newUserInfo) {
 	      _API2.default.register(newUserInfo).done(function (token) {
 	        localStorage.setItem('token', token);
-	        hideLoginRegisterLogout(true, true, false);
+	        hideLoginRegisterLogoutUsername(true, true, false, true);
 	      }).fail(function (err) {
 	        return console.log(err);
 	      });
@@ -20240,7 +20246,7 @@
 	    key: 'logout',
 	    value: function logout() {
 	      localStorage.removeItem('token');
-	      hideLoginRegisterLogout(false, true, true);
+	      hideLoginRegisterLogoutUsername(false, true, true, false);
 	    }
 	  }, {
 	    key: 'render',
@@ -20278,6 +20284,20 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-2' },
+	              _react2.default.createElement(
+	                'ul',
+	                { id: 'welcome', className: 'nav navbar-nav navbar-left' },
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '#' },
+	                    'Hello, ',
+	                    _react2.default.createElement('span', { id: 'username' })
+	                  )
+	                )
+	              ),
 	              _react2.default.createElement(
 	                'ul',
 	                { id: 'Login', className: 'nav navbar-nav' },
