@@ -63,25 +63,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	$(document).ready(function () {
-	
-	  $('#loginForm').submit(function (event) {
-	    event.preventDefault();
-	    var username = $('#userNameLogin').val();
-	    var password = $('#passwordLogin').val();
-	    var password2 = $('#passwordLogin').val();
-	
-	    console.log(username, password);
-	    $.post('https://vast-sierra-7757.herokuapp.com/users/login', {
-	      username: username,
-	      password: password
-	    }).done(function (token) {
-	      localStorage.setItem('token', token);
-	    }).fail(function (err) {
-	      console.log(err);
-	    });
-	  });
-	});
+	$(document).ready(function () {});
 	
 	_reactDom2.default.render(_react2.default.createElement(_Navbar2.default, null), document.getElementById('navbar'));
 	
@@ -20183,6 +20165,10 @@
 	
 	var _LoginForm2 = _interopRequireDefault(_LoginForm);
 	
+	var _API = __webpack_require__(/*! ../API */ 162);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20190,6 +20176,12 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function hideLoginRegisterLogout(login, register, logout) {
+	  login ? $('#Login').hide() : $('#Login').show();
+	  register ? $('#Register').hide() : $('#Register').show();
+	  logout ? $('#Logout').hide() : $('#Logout').show();
+	}
 	
 	var Navbar = function (_React$Component) {
 	  _inherits(Navbar, _React$Component);
@@ -20203,14 +20195,38 @@
 	  _createClass(Navbar, [{
 	    key: 'showRegister',
 	    value: function showRegister() {
-	      $('#Login').hide();
-	      $('#Register').show();
+	      hideLoginRegisterLogout(true, false, false);
 	    }
 	  }, {
 	    key: 'showLogin',
 	    value: function showLogin() {
-	      $('#Login').show();
-	      $('#Register').hide();
+	      hideLoginRegisterLogout(false, true, false);
+	    }
+	  }, {
+	    key: 'login',
+	    value: function login(userInfo) {
+	      _API2.default.login(userInfo).done(function (token) {
+	        localStorage.setItem('token', token);
+	        hideLoginRegisterLogout(true, true, false);
+	      }).fail(function (err) {
+	        return console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'register',
+	    value: function register(newUserInfo) {
+	      _API2.default.register(newUserInfo).done(function (token) {
+	        localStorage.setItem('token', token);
+	        hideLoginRegisterLogout(true, true, false);
+	      }).fail(function (err) {
+	        return console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'logout',
+	    value: function logout() {
+	      localStorage.removeItem('token');
+	      hideLoginRegisterLogout(false, true, true);
 	    }
 	  }, {
 	    key: 'render',
@@ -20254,7 +20270,7 @@
 	                _react2.default.createElement(
 	                  'li',
 	                  null,
-	                  _react2.default.createElement(_LoginForm2.default, null)
+	                  _react2.default.createElement(_LoginForm2.default, { login: this.login.bind(this) })
 	                ),
 	                _react2.default.createElement(
 	                  'li',
@@ -20277,7 +20293,7 @@
 	                _react2.default.createElement(
 	                  'li',
 	                  null,
-	                  _react2.default.createElement(_RegisterForm2.default, null)
+	                  _react2.default.createElement(_RegisterForm2.default, { register: this.register.bind(this) })
 	                ),
 	                _react2.default.createElement(
 	                  'li',
@@ -20296,13 +20312,13 @@
 	              ),
 	              _react2.default.createElement(
 	                'ul',
-	                { className: 'nav navbar-nav navbar-right' },
+	                { id: 'Logout', className: 'nav navbar-nav navbar-right' },
 	                _react2.default.createElement(
 	                  'li',
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#' },
+	                    { href: '#', onClick: this.logout.bind(this) },
 	                    'Logout'
 	                  )
 	                )
@@ -20356,6 +20372,16 @@
 	  }
 	
 	  _createClass(RegisterForm, [{
+	    key: "register",
+	    value: function register(e) {
+	      e.preventDefault();
+	      this.props.register({
+	        username: this.refs.username.value,
+	        password: this.refs.password.value,
+	        password2: this.refs.password2.value
+	      });
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -20367,13 +20393,13 @@
 	          _react2.default.createElement(
 	            "div",
 	            { className: "form-group" },
-	            _react2.default.createElement("input", { id: "userNameRegister", refs: "username", type: "text", className: "form-control", placeholder: "Username" }),
-	            _react2.default.createElement("input", { id: "passwordRegister", refs: "password", type: "password", className: "form-control", placeholder: "Password" }),
-	            _react2.default.createElement("input", { id: "passwordRegister2", refs: "password2", type: "password", className: "form-control", placeholder: "Confirm Password" })
+	            _react2.default.createElement("input", { id: "userNameRegister", ref: "username", type: "text", className: "form-control", placeholder: "Username" }),
+	            _react2.default.createElement("input", { id: "passwordRegister", ref: "password", type: "password", className: "form-control", placeholder: "Password" }),
+	            _react2.default.createElement("input", { id: "passwordRegister2", ref: "password2", type: "password", className: "form-control", placeholder: "Confirm Password" })
 	          ),
 	          _react2.default.createElement(
 	            "button",
-	            { type: "submit", className: "btn btn-danger" },
+	            { onClick: this.register.bind(this), className: "btn btn-danger" },
 	            "Register"
 	          )
 	        )
@@ -20423,6 +20449,15 @@
 	  }
 	
 	  _createClass(LoginForm, [{
+	    key: "login",
+	    value: function login(e) {
+	      e.preventDefault();
+	      this.props.login({
+	        username: this.refs.username.value,
+	        password: this.refs.password.value
+	      });
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -20430,16 +20465,16 @@
 	        null,
 	        _react2.default.createElement(
 	          "form",
-	          { id: "loginForm", className: "navbar-form navbar-left", role: "search" },
+	          { id: "loginForm", className: "navbar-form navbar-left" },
 	          _react2.default.createElement(
 	            "div",
 	            { className: "form-group" },
-	            _react2.default.createElement("input", { id: "userNameLogin", refs: "username", type: "text", className: "form-control", placeholder: "Username" }),
-	            _react2.default.createElement("input", { id: "passwordLogin", refs: "password", type: "password", className: "form-control", placeholder: "Password" })
+	            _react2.default.createElement("input", { id: "userNameLogin", ref: "username", type: "text", className: "form-control", placeholder: "Username" }),
+	            _react2.default.createElement("input", { id: "passwordLogin", ref: "password", type: "password", className: "form-control", placeholder: "Password" })
 	          ),
 	          _react2.default.createElement(
 	            "button",
-	            { type: "submit", className: "btn btn-default" },
+	            { onClick: this.login.bind(this), className: "btn btn-default" },
 	            "Login"
 	          )
 	        )
@@ -20451,6 +20486,31 @@
 	}(_react2.default.Component);
 	
 	exports.default = LoginForm;
+
+/***/ },
+/* 162 */
+/*!*******************!*\
+  !*** ./js/API.js ***!
+  \*******************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+	
+	var API = {
+	  register: function register(newUserInfo) {
+	    return $.post(apiUrl + '/users/register', newUserInfo);
+	  },
+	  login: function login(userInfo) {
+	    return $.post(apiUrl + '/users/login', userInfo);
+	  }
+	};
+	
+	exports.default = API;
 
 /***/ }
 /******/ ]);

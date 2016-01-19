@@ -1,21 +1,26 @@
 import React from 'react';
 
 class LoginForm extends React.Component{
-  render(){
+  login(e) {
+    e.preventDefault();
+    this.props.login({
+      username: this.refs.username.value,
+      password: this.refs.password.value
+    });
+  }
+  render() {
     return(
       <div>
-        <form id="loginForm" className="navbar-form navbar-left" role="search">
+        <form id="loginForm" className="navbar-form navbar-left" >
           <div className="form-group">
-            <input id="userNameLogin" refs="username" type="text" className="form-control" placeholder="Username" />
-            <input id="passwordLogin" refs="password" type="password" className="form-control" placeholder="Password" />
+            <input id="userNameLogin" ref="username" type="text" className="form-control" placeholder="Username" />
+            <input id="passwordLogin" ref="password" type="password" className="form-control" placeholder="Password" />
           </div>
-          <button type="submit" className="btn btn-default">Login</button>
+          <button onClick={this.login.bind(this)} className="btn btn-default">Login</button>
         </form>
       </div>
     )
   }
 }
-
-
 
 export default LoginForm;
