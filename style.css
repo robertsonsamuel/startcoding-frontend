@@ -27,13 +27,19 @@ body {
   height: calc(100vh - 64px);
   overflow-y: scroll;
 }
+.displayTopic {
+  overflow: hidden;
+}
 .active {
-  position:absolute;
+  position: fixed;
   background: white;
-  height:100%;
-  width:100%;
-  margin:0;
-  top:0;
+  height: calc(100vh - 64px);
+  top: 64px;
+  right: 0;
+  left: 0;
+  margin:auto;
+  padding-bottom: 1em;
+  overflow-y: scroll;
 }
 .topicHead > h3{
   margin: 0px;

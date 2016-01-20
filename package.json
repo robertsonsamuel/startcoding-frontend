@@ -27,5 +27,8 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "webpack": "^1.12.11"
+  },
+  "dependencies": {
+    "classnames": "^2.2.3"
   }
 }

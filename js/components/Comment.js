@@ -4,8 +4,8 @@ import API from '../API';
 
 class Comment extends React.Component {
   render() {
-    let commentEls = this.props.children.map(child => {
-      return <Comment {...child} />
+    let commentEls = this.props.children.map( (child,i) => {
+      return <Comment {...child } key={i} />
     })
     return (
       <div className="panel panel-default comment">
