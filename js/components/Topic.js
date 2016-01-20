@@ -1,11 +1,12 @@
 import React from 'react';
 import API from '../API';
 import Comment from './Comment';
+import NewComment from './NewComment';
 
 class Topic extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allComments: [] };
+    this.state = { allComments: [], replying: false };
   }
   fetchComments() {
     API.getComments(this.props._id)
@@ -16,13 +17,29 @@ class Topic extends React.Component {
       console.log(err);
     })
   }
+  reply(e) {
+    e.preventDefault();
+    this.setState({ replying: true });
+  }
+  postComment(body) {
+    this.setState({ replying: false });
+    API.postComment(this.props._id, body, 'seed')
+    .done(resp => (this.fetchComments.bind(this))())
+    .fail(err => alert(err.responseText));
+  }
+  discard() {
+    this.setState({ replying: false });
+  }
   componentWillMount() {
     (this.fetchComments.bind(this))();
   }
   render() {
     let commentEls = this.state.allComments.map(comment => {
       return <Comment {...comment} update={this.fetchComments.bind(this)} />
-    })
+    });
+    let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
+                                                       discard={this.discard.bind(this)} />
+                                         : [];
     return (
       <div>
         <div className="panel panel-default">
@@ -36,6 +53,13 @@ class Topic extends React.Component {
           <div id="collapseOne" className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div className="panel-body">
               {this.props.body}
+            </div>
+            <ol className="panel-footer breadcrumb">
+              <span>{this.props.timestamp}</span>
+              <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
+            </ol>
+            <div className="panel-body">
+              {newComment}
               {commentEls}
             </div>
           </div>

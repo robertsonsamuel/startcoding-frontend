@@ -14,10 +14,11 @@ let API = {
   getComments(topicId) {
     return $.get(`${apiUrl}/comments/${topicId}`)
   },
-  postComment(parentId, body) {
+  postComment(parentId, body, seed) {
+    let query = seed ? '?seed=true' : '';
     let token = localStorage.getItem('token');
     return $.ajax({
-      url: `${apiUrl}/comments/${parentId}`,
+      url: `${apiUrl}/comments/${parentId + query}`,
       type: 'POST',
       beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', `Bearer ${token}`);
