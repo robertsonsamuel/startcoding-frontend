@@ -22,8 +22,8 @@ class Comment extends React.Component {
     this.setState({ replying: false });
   }
   render() {
-    let commentEls = this.props.children.map(child => {
-      return <Comment {...child} update={this.props.update} />
+    let commentEls = this.props.children.map( (child, i) => {
+      return <Comment {...child} update={this.props.update} key={i} />
     });
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
                                                        discard={this.discard.bind(this)} />

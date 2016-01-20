@@ -17,6 +17,7 @@ textarea {
 .navbar-inverse {
   background: #4caf50;
   color: #FFF;
+  margin-bottom: 0;
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
@@ -28,6 +29,35 @@ textarea {
 
 #Register, #Logout, #welcome {
   display: none;
+}
+
+.main{
+  position: relative;
+  height: calc(100vh - 64px);
+  overflow-y: scroll;
+}
+.displayTopic {
+  overflow: hidden;
+}
+.active {
+  position: fixed;
+  background: white;
+  height: calc(100vh - 64px);
+  top: 64px;
+  right: 0;
+  left: 0;
+  margin:auto;
+  padding-bottom: 1em;
+  overflow-y: scroll;
+}
+.topicHead > h3{
+  margin: 0px;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+.topicHead:hover{
+  background-color: #E4E4E4;
+  cursor: pointer;
 }
 
 .comment {

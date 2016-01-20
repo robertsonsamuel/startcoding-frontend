@@ -1,11 +1,15 @@
 import React from 'react';
 import API from '../API';
 import Topic from './Topic';
+import classNames from 'classnames';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allTopics: [] };
+    this.state = { allTopics: [], activeTopic:false};
+  }
+  handleClick(topicId){
+    this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId})
   }
   componentWillMount() {
     API.getTopics()
@@ -17,15 +21,14 @@ class Main extends React.Component {
     })
   }
   render() {
-    let topicEls = this.state.allTopics.map( topic => {
-      return <Topic {...topic} />
+    let topicEls = this.state.allTopics.map((topic,i) => {
+      let topicClasses = this.state.activeTopic === topic._id ? true : false;
+      return <Topic {...topic} isActive={topicClasses} onClick={this.handleClick.bind(this,topic._id)} key={i}  />
     });
+    let mainClasses = classNames('main', {displayTopic : this.state.activeTopic})
     return (
-      <div>
-      <h1>TOPIC LIST</h1>
-        <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-          {topicEls}
-        </div>
+      <div className={mainClasses}>
+        {topicEls}
       </div>
     )
   }
