@@ -20666,7 +20666,11 @@
 	          null,
 	          'TOPIC LIST'
 	        ),
-	        topicEls
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-group', id: 'accordion', role: 'tablist', 'aria-multiselectable': 'true' },
+	          topicEls
+	        )
 	      );
 	    }
 	  }]);
@@ -20745,11 +20749,31 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          this.props.title
-	        ),
-	        commentEls
+	          'div',
+	          { className: 'panel panel-default' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-heading', role: 'tab', id: 'headingOne' },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'panel-title' },
+	              _react2.default.createElement(
+	                'a',
+	                { role: 'button', 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapseOne', 'aria-expanded': 'true', 'aria-controls': 'collapseOne' },
+	                this.props.title
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { id: 'collapseOne', className: 'panel-collapse collapse in', role: 'tabpanel', 'aria-labelledby': 'headingOne' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'panel-body' },
+	              commentEls
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);

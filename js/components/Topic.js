@@ -23,8 +23,20 @@ class Topic extends React.Component {
     })
     return (
       <div>
-        <h3>{this.props.title}</h3>
-        {commentEls}
+        <div className="panel panel-default">
+          <div className="panel-heading" role="tab" id="headingOne">
+            <h4 className="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                {this.props.title}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div className="panel-body">
+              {commentEls}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

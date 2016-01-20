@@ -24,7 +24,9 @@ class Main extends React.Component {
     return (
       <div>
       <h1>TOPIC LIST</h1>
-        {topicEls}
+        <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          {topicEls}
+        </div>
       </div>
     )
   }
