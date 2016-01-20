@@ -1,3 +1,45 @@
+$primary-color: #4caf50;
+
+body {
+  color: #1F4832;
+  background: #fcfffc;
+}
+
+.navbar-inverse {
+  background: #4caf50;
+  color: #FFF;
+}
+
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
+    color: #FFF !important;
+}
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {
+    color: peachpuff;
+}
+
 #Register, #Logout, #welcome {
   display: none;
+}
+
+.comment {
+  /*border: 1px solid grey;*/
+  margin: 1em 0 0 1em;
+  padding: 1em .5em 1em 1em;
+}
+
+.panel-footer {
+  margin: 0 15px;
+  padding: 0px;
+  border-top: 1px solid #4caf50;
+  background: white;
+  font-style: italic;
+}
+
+.breadcrumb {
+  text-align: right;
+}
+
+.breadcrumb > span{
+  float: left;
+  color: gray;
 }

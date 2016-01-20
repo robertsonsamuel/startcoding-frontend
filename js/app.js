@@ -1,7 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from './components/Navbar';
-import Comment from './components/Comment';
+import Main from './components/Main';
 
-ReactDOM.render(<Navbar />, document.getElementById('navbar'));
-ReactDOM.render(<Comment />, document.getElementById('test'));
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <div className="container">
+          <Main />
+        </div>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('React'));

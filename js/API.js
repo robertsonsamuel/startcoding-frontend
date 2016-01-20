@@ -1,4 +1,5 @@
-let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+// let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+let apiUrl = 'http://localhost:3000';
 
 let API = {
   register(newUserInfo) {
@@ -6,7 +7,11 @@ let API = {
   },
   login(userInfo) {
     return $.post(`${apiUrl}/users/login`, userInfo);
+  },
+  getTopics() {
+    return $.get(`${apiUrl}/topics/`)
   }
+
 };
 
 export default API;
