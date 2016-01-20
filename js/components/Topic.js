@@ -47,9 +47,9 @@ class Topic extends React.Component {
       <div className={addedClasses}>
         <div >
           <div onClick={this.props.onClick} className="topicHead">
-            <h3>{this.props.title}</h3>
+            <h4>{this.props.title}</h4>
           </div>
-          <div className="container">
+          <div className="container topic-content">
             <div className="panel-body">
               {this.props.body}
             </div>

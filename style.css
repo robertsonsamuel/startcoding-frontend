@@ -50,7 +50,13 @@ textarea {
   padding-bottom: 1em;
   overflow-y: scroll;
 }
-.topicHead > h3{
+.topic-content {
+  display: none;
+}
+.active .topic-content {
+  display: block;
+}
+.topicHead > h4{
   margin: 0px;
   padding: 0.5em 1em;
   text-align: center;

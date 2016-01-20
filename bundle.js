@@ -20822,14 +20822,14 @@
 	            'div',
 	            { onClick: this.props.onClick, className: 'topicHead' },
 	            _react2.default.createElement(
-	              'h3',
+	              'h4',
 	              null,
 	              this.props.title
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'container' },
+	            { className: 'container topic-content' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'panel-body' },
