@@ -8,7 +8,7 @@ class Topic extends React.Component {
     super(props);
     this.state = { allComments: [], isActive:false };
   }
-  componentWillMount() {
+  fetchAllComments() {
     API.getComments(this.props._id)
     .done( resp => {
       this.setState( {allComments: resp} )
@@ -19,7 +19,8 @@ class Topic extends React.Component {
   }
   render() {
     let commentEls = [];
-    if(this.props.isActive){
+    if (this.props.isActive) {
+      this.fetchAllComments();
       commentEls = this.state.allComments.map((comment, i) => {
         return <Comment {...comment} key={i} />
       });

@@ -20739,8 +20739,8 @@
 	  }
 	
 	  _createClass(Topic, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
+	    key: 'fetchAllComments',
+	    value: function fetchAllComments() {
 	      var _this2 = this;
 	
 	      _API2.default.getComments(this.props._id).done(function (resp) {
@@ -20754,6 +20754,7 @@
 	    value: function render() {
 	      var commentEls = [];
 	      if (this.props.isActive) {
+	        this.fetchAllComments();
 	        commentEls = this.state.allComments.map(function (comment, i) {
 	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { key: i }));
 	        });
