@@ -28,6 +28,7 @@ class Main extends React.Component {
     let mainClasses = classNames('main', {displayTopic : this.state.activeTopic})
     return (
       <div className={mainClasses}>
+        <button className="floatingActionButton"><span>+</span></button>
         {topicEls}
       </div>
     )

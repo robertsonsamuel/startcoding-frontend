@@ -1,8 +1,36 @@
 $primary-color: #4caf50;
+$secondary-color: #F44336;
 
 body {
   color: #1F4832;
   background: #fcfffc;
+}
+
+.floatingActionButton {
+  position: fixed;
+  top: 80px;
+  right: 16px;
+  background-color: #F44336;
+  width:60px;
+  height:60px;
+  border-radius:100%;
+  border:none;
+  outline:none;
+  color:#FFF;
+  font-size:36px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.floatingActionButton span {
+  position: absolute;
+  -ms-transform: translate(-10px, -32px);
+  -webkit-transform: translate(-10px, -32px);
+  transform: translate(-10px, -32px);
+}
+
+.floatingActionButton:hover {
+  background-color: #D32F2F;
 }
 
 textarea {
@@ -18,11 +46,13 @@ textarea {
   background: #4caf50;
   color: #FFF;
   margin-bottom: 0;
+  z-index: 9999;
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
     color: #FFF !important;
 }
+
 .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {
     color: peachpuff;
 }
