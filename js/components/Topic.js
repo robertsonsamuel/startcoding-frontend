@@ -5,7 +5,7 @@ import Comment from './Comment';
 class Topic extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allComments: [] };
+    this.state = { allComments: [], isActive:false };
   }
   componentWillMount() {
     API.getComments(this.props._id)
@@ -18,25 +18,21 @@ class Topic extends React.Component {
     })
   }
   render() {
-    let commentEls = this.state.allComments.map(comment => {
-      return <Comment {...comment} />
-    })
+    let commentEls = [];
+    if(this.props.isActive){
+      commentEls = this.state.allComments.map((comment, i) => {
+        console.log("have coments", comment);
+        return <Comment {...comment} key={i} />
+      });
+    }
+    console.log("making comments", commentEls);
+    let addedClasses = `topic ${(this.props.isActive) ? "active" : ""}`;
     return (
-      <div>
-        <div className="panel panel-default">
-          <div className="panel-heading" role="tab" id="headingOne">
-            <h4 className="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                {this.props.title}
-              </a>
-            </h4>
-          </div>
-          <div id="collapseOne" className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-            <div className="panel-body">
-              {commentEls}
-            </div>
-          </div>
+      <div className={addedClasses}>
+        <div onClick={this.props.onClick} className="topicHead">
+          <h3>{this.props.title}</h3>
         </div>
+        {commentEls}
       </div>
     )
   }

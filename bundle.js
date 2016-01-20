@@ -20602,6 +20602,8 @@
 
 	'use strict';
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -20636,11 +20638,16 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
 	
-	    _this.state = { allTopics: [] };
+	    _this.state = { allTopics: [], activeTopic: null };
 	    return _this;
 	  }
 	
 	  _createClass(Main, [{
+	    key: 'handleClick',
+	    value: function handleClick(topicId) {
+	      this.setState({ activeTopic: this.state.activeTopic === topicId ? null : topicId });
+	    }
+	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      var _this2 = this;
@@ -20655,22 +20662,16 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var topicEls = this.state.allTopics.map(function (topic) {
-	        return _react2.default.createElement(_Topic2.default, topic);
+	      var _this3 = this;
+	
+	      var topicEls = this.state.allTopics.map(function (topic, i) {
+	        var activeClass = _this3.state.activeTopic === topic._id ? true : false;
+	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: activeClass, onClick: _this3.handleClick.bind(_this3, topic._id), key: i }));
 	      });
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'TOPIC LIST'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-group', id: 'accordion', role: 'tablist', 'aria-multiselectable': 'true' },
-	          topicEls
-	        )
+	        { className: 'main' },
+	        topicEls
 	      );
 	    }
 	  }]);
@@ -20688,6 +20689,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -20723,7 +20726,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Topic).call(this, props));
 	
-	    _this.state = { allComments: [] };
+	    _this.state = { allComments: [], isActive: false };
 	    return _this;
 	  }
 	
@@ -20742,38 +20745,28 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var commentEls = this.state.allComments.map(function (comment) {
-	        return _react2.default.createElement(_Comment2.default, comment);
-	      });
+	      var commentEls = [];
+	      if (this.props.isActive) {
+	        commentEls = this.state.allComments.map(function (comment, i) {
+	          console.log("have coments", comment);
+	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { key: i }));
+	        });
+	      }
+	      console.log("making comments", commentEls);
+	      var addedClasses = 'topic ' + (this.props.isActive ? "active" : "");
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: addedClasses },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'panel panel-default' },
+	          { onClick: this.props.onClick, className: 'topicHead' },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-heading', role: 'tab', id: 'headingOne' },
-	            _react2.default.createElement(
-	              'h4',
-	              { className: 'panel-title' },
-	              _react2.default.createElement(
-	                'a',
-	                { role: 'button', 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapseOne', 'aria-expanded': 'true', 'aria-controls': 'collapseOne' },
-	                this.props.title
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { id: 'collapseOne', className: 'panel-collapse collapse in', role: 'tabpanel', 'aria-labelledby': 'headingOne' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'panel-body' },
-	              commentEls
-	            )
+	            'h3',
+	            null,
+	            this.props.title
 	          )
-	        )
+	        ),
+	        commentEls
 	      );
 	    }
 	  }]);

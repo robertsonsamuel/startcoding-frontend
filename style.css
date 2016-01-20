@@ -8,6 +8,7 @@ body {
 .navbar-inverse {
   background: #4caf50;
   color: #FFF;
+  margin-bottom: 0;
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
@@ -19,6 +20,29 @@ body {
 
 #Register, #Logout, #welcome {
   display: none;
+}
+
+.main{
+  position: relative;
+  height: calc(100vh - 64px);
+  overflow-y: scroll;
+}
+.active {
+  position:absolute;
+  background: white;
+  height:100%;
+  width:100%;
+  margin:0;
+  top:0;
+}
+.topicHead > h3{
+  margin: 0px;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+.topicHead:hover{
+  background-color: #E4E4E4;
+  cursor: pointer;
 }
 
 .comment {

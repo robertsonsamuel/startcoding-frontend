@@ -5,7 +5,10 @@ import Topic from './Topic';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allTopics: [] };
+    this.state = { allTopics: [], activeTopic:null};
+  }
+  handleClick(topicId){
+    this.setState({activeTopic:this.state.activeTopic === topicId ? null : topicId})
   }
   componentWillMount() {
     API.getTopics()
@@ -18,15 +21,13 @@ class Main extends React.Component {
     })
   }
   render() {
-    let topicEls = this.state.allTopics.map( topic => {
-      return <Topic {...topic} />
+    let topicEls = this.state.allTopics.map((topic,i) => {
+      let activeClass = this.state.activeTopic === topic._id ? true : false;
+      return <Topic {...topic} isActive={activeClass} onClick={this.handleClick.bind(this,topic._id)} key={i}  />
     });
     return (
-      <div>
-      <h1>TOPIC LIST</h1>
-        <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div className="main">
           {topicEls}
-        </div>
       </div>
     )
   }
