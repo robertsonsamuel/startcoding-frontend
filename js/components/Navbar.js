@@ -20,6 +20,11 @@ function retrieveToken() {
   return token ? JSON.parse(atob(token.split('.')[1])) : false;
 }
 
+function clearInput() {
+  ['userNameLogin', 'passwordLogin', 'userNameRegister', 'passwordRegister', 'passwordRegister2']
+  .forEach(input => $(`#${input}`).val(''));
+}
+
 class Navbar extends React.Component {
   componentDidMount() {
     // check for a token and display logged-in state if a valid token exists
@@ -41,18 +46,20 @@ class Navbar extends React.Component {
   login(userInfo) {
     API.login(userInfo)
     .done(token => {
+      clearInput();
       localStorage.setItem('token', token);
       hideLoginRegisterLogoutUsername(true, true, false, true);
     })
-    .fail(err => console.log(err));
+    .fail(err => alert(err.responseText));
   }
   register(newUserInfo) {
     API.register(newUserInfo)
     .done(token => {
+      clearInput();
       localStorage.setItem('token', token);
       hideLoginRegisterLogoutUsername(true, true, false, true);
     })
-    .fail(err => console.log(err));
+    .fail(err => alert(err.responseText));
   }
   logout() {
     localStorage.removeItem('token');
