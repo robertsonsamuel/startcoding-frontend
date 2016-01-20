@@ -10,7 +10,6 @@ class Main extends React.Component {
   componentWillMount() {
     API.getTopics()
     .done( resp => {
-      console.log("resp", resp);
       this.setState( {allTopics: resp} )
     })
     .fail( err => {

@@ -10,7 +10,6 @@ class Topic extends React.Component {
   componentWillMount() {
     API.getComments(this.props._id)
     .done( resp => {
-      console.log("resp", resp);
       this.setState( {allComments: resp} )
     })
     .fail( err => {
@@ -27,12 +26,13 @@ class Topic extends React.Component {
           <div className="panel-heading" role="tab" id="headingOne">
             <h4 className="panel-title">
               <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                {this.props.title}
-              </a>
+                {this.props.title} by {this.props.user.username}
+              </a>              
             </h4>
           </div>
           <div id="collapseOne" className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div className="panel-body">
+              {this.props.body}
               {commentEls}
             </div>
           </div>

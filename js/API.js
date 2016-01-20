@@ -13,8 +13,19 @@ let API = {
   },
   getComments(topicId) {
     return $.get(`${apiUrl}/comments/${topicId}`)
+  },
+  postComment(parentId, body) {
+    let token = localStorage.getItem('token');
+    return $.ajax({
+      url: `${apiUrl}/comments/${parentId}`,
+      type: 'POST',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+      },
+      datatype: 'json',
+      data: {body: body}
+    });
   }
-
 };
 
 export default API;
