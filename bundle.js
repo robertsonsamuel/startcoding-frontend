@@ -20585,6 +20585,9 @@
 	  },
 	  getTopics: function getTopics() {
 	    return $.get(apiUrl + '/topics/');
+	  },
+	  getComments: function getComments(topicId) {
+	    return $.get(apiUrl + '/comments/' + topicId);
 	  }
 	};
 	
@@ -20692,6 +20695,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _API = __webpack_require__(/*! ../API */ 162);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
 	var _Comment = __webpack_require__(/*! ./Comment */ 165);
 	
 	var _Comment2 = _interopRequireDefault(_Comment);
@@ -20707,15 +20714,33 @@
 	var Topic = function (_React$Component) {
 	  _inherits(Topic, _React$Component);
 	
-	  function Topic() {
+	  function Topic(props) {
 	    _classCallCheck(this, Topic);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Topic).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Topic).call(this, props));
+	
+	    _this.state = { allComments: [] };
+	    return _this;
 	  }
 	
 	  _createClass(Topic, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+	
+	      _API2.default.getComments(this.props._id).done(function (resp) {
+	        console.log("resp", resp);
+	        _this2.setState({ allComments: resp });
+	      }).fail(function (err) {
+	        console.log(err);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var commentEls = this.state.allComments.map(function (comment) {
+	        return _react2.default.createElement(_Comment2.default, comment);
+	      });
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -20723,7 +20748,8 @@
 	          'h3',
 	          null,
 	          this.props.title
-	        )
+	        ),
+	        commentEls
 	      );
 	    }
 	  }]);
@@ -20780,6 +20806,9 @@
 	  _createClass(Comment, [{
 	    key: 'render',
 	    value: function render() {
+	      var commentEls = this.props.children.map(function (child) {
+	        return _react2.default.createElement(Comment, child);
+	      });
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'panel panel-default comment' },
@@ -20792,14 +20821,14 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'panel-title' },
-	              'Paul'
+	              this.props.user.username
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
-	          'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut nemo consequuntur tenetur alias eum quas dolore hic repellendus quos, doloribus dignissimos obcaecati vitae modi cumque minima aut quisquam excepturi odio aspernatur, tempore eius. Obcaecati modi, eum harum voluptatibus veniam delectus!'
+	          this.props.body
 	        ),
 	        _react2.default.createElement(
 	          'ol',
@@ -20807,7 +20836,7 @@
 	          _react2.default.createElement(
 	            'span',
 	            null,
-	            'timestamp'
+	            this.props.timestamp
 	          ),
 	          _react2.default.createElement(
 	            'li',
@@ -20836,7 +20865,8 @@
 	              'delete'
 	            )
 	          )
-	        )
+	        ),
+	        commentEls
 	      );
 	    }
 	  }]);

@@ -4,18 +4,22 @@ import API from '../API';
 
 class Comment extends React.Component {
   render() {
+    let commentEls = this.props.children.map(child => {
+      return <Comment {...child} />
+    })
     return (
       <div className="panel panel-default comment">
-        <div className="panel-heading"><div className="panel-title"><div className="panel-title">Paul</div></div></div>
+        <div className="panel-heading"><div className="panel-title"><div className="panel-title">{this.props.user.username}</div></div></div>
         <div className="panel-body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut nemo consequuntur tenetur alias eum quas dolore hic repellendus quos, doloribus dignissimos obcaecati vitae modi cumque minima aut quisquam excepturi odio aspernatur, tempore eius. Obcaecati modi, eum harum voluptatibus veniam delectus!
+          {this.props.body}
         </div>
         <ol className="panel-footer breadcrumb">
-          <span>timestamp</span>
+          <span>{this.props.timestamp}</span>
           <li><a href="">edit</a></li>
           <li><a href="">reply</a></li>
           <li><a href="">delete</a></li>
         </ol>
+        {commentEls}
       </div>
     )
   }

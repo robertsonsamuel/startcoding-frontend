@@ -10,6 +10,9 @@ let API = {
   },
   getTopics() {
     return $.get(`${apiUrl}/topics/`)
+  },
+  getComments(topicId) {
+    return $.get(`${apiUrl}/comments/${topicId}`)
   }
 
 };
