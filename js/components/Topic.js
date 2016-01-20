@@ -47,9 +47,11 @@ class Topic extends React.Component {
       <div className={addedClasses}>
         <div >
           <div onClick={this.props.onClick} className="topicHead">
-            <h4>{this.props.title}</h4>
+            <div className="container">
+              <h4 className="topicTitle">{this.props.title} <span className="glyphicon glyphicon-remove closeTopic"></span></h4>
+            </div>
           </div>
-          <div className="container topic-content">
+          <div className="container topicContent">
             <div className="panel-body">
               {this.props.body}
             </div>

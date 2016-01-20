@@ -20692,7 +20692,7 @@
 	        var topicClasses = _this3.state.activeTopic === topic._id ? true : false;
 	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: topicClasses, onClick: _this3.handleClick.bind(_this3, topic._id), key: i }));
 	      });
-	      var mainClasses = (0, _classnames2.default)('main', { displayTopic: this.state.activeTopic });
+	      var mainClasses = (0, _classnames2.default)('main', 'panel', { displayTopic: this.state.activeTopic });
 	      return _react2.default.createElement(
 	        'div',
 	        { className: mainClasses },
@@ -20822,14 +20822,20 @@
 	            'div',
 	            { onClick: this.props.onClick, className: 'topicHead' },
 	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              this.props.title
+	              'div',
+	              { className: 'container' },
+	              _react2.default.createElement(
+	                'h4',
+	                { className: 'topicTitle' },
+	                this.props.title,
+	                ' ',
+	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeTopic' })
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'container topic-content' },
+	            { className: 'container topicContent' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'panel-body' },
@@ -21097,27 +21103,27 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'panel-title' },
-	            this.state.name,
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'new-comment-buttons' },
-	              _react2.default.createElement(
-	                'button',
-	                { className: 'btn btn-default', onClick: this.post.bind(this) },
-	                'Post'
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { className: 'btn btn-default', onClick: this.discard.bind(this) },
-	                'Discard'
-	              )
-	            )
+	            this.state.name
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
-	          _react2.default.createElement('textarea', { id: 'newCommentBody', ref: 'body', rows: '4', cols: '50' })
+	          _react2.default.createElement('textarea', { id: 'newCommentBody', className: 'form-control', ref: 'body', rows: '4' }),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'new-comment-buttons' },
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'btn btn-default', onClick: this.discard.bind(this) },
+	              'Discard'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'btn btn-primary', onClick: this.post.bind(this) },
+	              'Post'
+	            )
+	          )
 	        )
 	      );
 	    }

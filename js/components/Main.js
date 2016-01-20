@@ -25,7 +25,7 @@ class Main extends React.Component {
       let topicClasses = this.state.activeTopic === topic._id ? true : false;
       return <Topic {...topic} isActive={topicClasses} onClick={this.handleClick.bind(this,topic._id)} key={i}  />
     });
-    let mainClasses = classNames('main', {displayTopic : this.state.activeTopic})
+    let mainClasses = classNames('main', 'panel', {displayTopic : this.state.activeTopic})
     return (
       <div className={mainClasses}>
         {topicEls}
