@@ -15,7 +15,7 @@ class Comment extends React.Component {
   postComment(body) {
     this.setState({ replying: false });
     API.postComment(this.props._id, body)
-    .done(resp => console.log(resp))
+    .done(resp => this.props.update())
     .fail(err => alert(err.responseText));
   }
   discard() {
@@ -23,8 +23,11 @@ class Comment extends React.Component {
   }
   render() {
     let commentEls = this.props.children.map(child => {
-      return <Comment {...child} />
-    })
+      return <Comment {...child} update={this.props.update} />
+    });
+    let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
+                                                       discard={this.discard.bind(this)} />
+                                         : [];
     return (
       <div className="panel panel-default comment">
         <div className="panel-heading"><div className="panel-title"><div className="panel-title">{this.props.user.username}</div></div></div>
@@ -37,8 +40,7 @@ class Comment extends React.Component {
           <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
           <li><a href="#">delete</a></li>
         </ol>
-        {this.state.replying ? <NewComment post={this.postComment.bind(this)}
-                                           discard={this.discard.bind(this)} /> : []}
+        {newComment}
         {commentEls}
       </div>
     )

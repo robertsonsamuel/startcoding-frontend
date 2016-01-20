@@ -7,18 +7,21 @@ class Topic extends React.Component {
     super(props);
     this.state = { allComments: [] };
   }
-  componentWillMount() {
+  fetchComments() {
     API.getComments(this.props._id)
     .done( resp => {
-      this.setState( {allComments: resp} )
+      this.setState( {allComments: resp} );
     })
     .fail( err => {
       console.log(err);
     })
   }
+  componentWillMount() {
+    (this.fetchComments.bind(this))();
+  }
   render() {
     let commentEls = this.state.allComments.map(comment => {
-      return <Comment {...comment} />
+      return <Comment {...comment} update={this.fetchComments.bind(this)} />
     })
     return (
       <div>

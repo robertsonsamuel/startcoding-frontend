@@ -12,7 +12,12 @@ class NewComment extends React.Component {
     $('#newCommentBody').focus();
   }
   post() {
-    this.props.post(this.refs.body.value);
+    if (this.refs.body.value) {
+      this.props.post(this.refs.body.value);
+    } else {
+      alert('Comment cannot be blank');
+      $('#newCommentBody').focus();
+    }
   }
   discard() {
     this.props.discard();
