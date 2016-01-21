@@ -20668,8 +20668,8 @@
 	  }
 	
 	  _createClass(Main, [{
-	    key: 'handleClick',
-	    value: function handleClick(topicId) {
+	    key: 'handleTopicClick',
+	    value: function handleTopicClick(topicId) {
 	      this.setState({ activeTopic: this.state.activeTopic === topicId ? false : topicId });
 	    }
 	  }, {
@@ -20690,7 +20690,7 @@
 	
 	      var topicEls = this.state.allTopics.map(function (topic, i) {
 	        var topicClasses = _this3.state.activeTopic === topic._id ? true : false;
-	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: topicClasses, onClick: _this3.handleClick.bind(_this3, topic._id), key: i }));
+	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: topicClasses, onClick: _this3.handleTopicClick.bind(_this3, topic._id), key: i }));
 	      });
 	      var mainClasses = (0, _classnames2.default)('main', 'panel', { displayTopic: this.state.activeTopic });
 	      return _react2.default.createElement(
@@ -20743,6 +20743,8 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 168);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20759,11 +20761,19 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Topic).call(this, props));
 	
-	    _this.state = { allComments: [], replying: false, isActive: false };
+	    _this.state = { allComments: [], replying: false };
 	    return _this;
 	  }
 	
 	  _createClass(Topic, [{
+	    key: 'headerClicked',
+	    value: function headerClicked() {
+	      if (!this.props.isActive) {
+	        this.fetchComments.bind(this)();
+	      }
+	      this.props.onClick();
+	    }
+	  }, {
 	    key: 'fetchComments',
 	    value: function fetchComments() {
 	      var _this2 = this;
@@ -20778,7 +20788,7 @@
 	    key: 'reply',
 	    value: function reply(e) {
 	      e.preventDefault();
-	      this.setState({ replying: true });
+	      this.setState({ replying: (0, _authorization.canHazToken)() });
 	    }
 	  }, {
 	    key: 'postComment',
@@ -20803,8 +20813,9 @@
 	      var _this4 = this;
 	
 	      var commentEls = [];
+	      var closeTopic = [];
 	      if (this.props.isActive) {
-	        this.fetchComments();
+	        closeTopic = _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeTopic' });
 	        commentEls = this.state.allComments.map(function (comment, i) {
 	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { update: _this4.fetchComments.bind(_this4), key: i }));
 	        });
@@ -20820,7 +20831,7 @@
 	          null,
 	          _react2.default.createElement(
 	            'div',
-	            { onClick: this.props.onClick, className: 'topicHead' },
+	            { onClick: this.headerClicked.bind(this), className: 'topicHead' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'container' },
@@ -20829,7 +20840,8 @@
 	                { className: 'topicTitle' },
 	                this.props.title,
 	                ' ',
-	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeTopic' })
+	                closeTopic,
+	                ' '
 	              )
 	            )
 	          ),
@@ -20905,6 +20917,8 @@
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
 	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 168);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20929,7 +20943,7 @@
 	    key: 'reply',
 	    value: function reply(e) {
 	      e.preventDefault();
-	      this.setState({ replying: true });
+	      this.setState({ replying: (0, _authorization.canHazToken)() });
 	    }
 	  }, {
 	    key: 'postComment',
@@ -21190,6 +21204,29 @@
 		}
 	}());
 
+
+/***/ },
+/* 168 */
+/*!**********************************!*\
+  !*** ./js/util/authorization.js ***!
+  \**********************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.canHazToken = canHazToken;
+	function canHazToken() {
+	  var token = localStorage.getItem('token');
+	  if (!token) {
+	    alert("Login you sneaky fool!");
+	    return false;
+	  }
+	  var payload = JSON.parse(atob(token.split('.')[1]));
+	  return payload;
+	}
 
 /***/ }
 /******/ ]);

@@ -34,6 +34,7 @@ textarea {
 .main{
   position: relative;
   height: calc(100vh - 64px);
+  margin-bottom: 0;
   overflow-y: scroll;
 }
 .displayTopic {
@@ -72,9 +73,6 @@ textarea {
 }
 
 .closeTopic {
-  display: none;
-}
-.active .closeTopic {
   display: inline;
   float: right;
   color: #4caf50;
