@@ -1,6 +1,7 @@
 import React from 'react';
 import API from '../API';
 import Topic from './Topic';
+import NewTopicModal from './NewTopicModal';
 import classNames from 'classnames';
 
 class Main extends React.Component {
@@ -28,7 +29,7 @@ class Main extends React.Component {
     let mainClasses = classNames('main', 'panel', {displayTopic : this.state.activeTopic})
     return (
       <div className={mainClasses}>
-        <button className="floatingActionButton"><span>+</span></button>
+        <NewTopicModal />
         {topicEls}
       </div>
     )
