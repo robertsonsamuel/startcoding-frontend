@@ -63,7 +63,7 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _Main = __webpack_require__(/*! ./components/Main */ 163);
+	var _Main = __webpack_require__(/*! ./components/Main */ 164);
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
@@ -20582,10 +20582,10 @@
 	  value: true
 	});
 	
-	var _authorization = __webpack_require__(/*! ./util/authorization */ 167);
+	var _authorization = __webpack_require__(/*! ./util/authorization */ 163);
 	
-	// let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
-	var apiUrl = 'http://localhost:3000';
+	var apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+	// let apiUrl = 'http://localhost:3000';
 	
 	var API = {
 	  register: function register(newUserInfo) {
@@ -20634,6 +20634,29 @@
 
 /***/ },
 /* 163 */
+/*!**********************************!*\
+  !*** ./js/util/authorization.js ***!
+  \**********************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.canHazToken = canHazToken;
+	function canHazToken() {
+	  var token = localStorage.getItem('token');
+	  if (!token) {
+	    alert("Login you sneaky fool!");
+	    return false;
+	  }
+	  var payload = JSON.parse(atob(token.split('.')[1]));
+	  return payload;
+	}
+
+/***/ },
+/* 164 */
 /*!*******************************!*\
   !*** ./js/components/Main.js ***!
   \*******************************/
@@ -20657,7 +20680,7 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
-	var _Topic = __webpack_require__(/*! ./Topic */ 164);
+	var _Topic = __webpack_require__(/*! ./Topic */ 165);
 	
 	var _Topic2 = _interopRequireDefault(_Topic);
 	
@@ -20736,7 +20759,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 164 */
+/* 165 */
 /*!********************************!*\
   !*** ./js/components/Topic.js ***!
   \********************************/
@@ -20760,11 +20783,11 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
-	var _Comment = __webpack_require__(/*! ./Comment */ 165);
+	var _Comment = __webpack_require__(/*! ./Comment */ 166);
 	
 	var _Comment2 = _interopRequireDefault(_Comment);
 	
-	var _NewComment = __webpack_require__(/*! ./NewComment */ 166);
+	var _NewComment = __webpack_require__(/*! ./NewComment */ 167);
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
 	
@@ -20772,7 +20795,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 167);
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 163);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -20914,7 +20937,7 @@
 	exports.default = Topic;
 
 /***/ },
-/* 165 */
+/* 166 */
 /*!**********************************!*\
   !*** ./js/components/Comment.js ***!
   \**********************************/
@@ -20942,11 +20965,11 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
-	var _NewComment = __webpack_require__(/*! ./NewComment */ 166);
+	var _NewComment = __webpack_require__(/*! ./NewComment */ 167);
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
 	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 167);
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 163);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21070,7 +21093,7 @@
 	exports.default = Comment;
 
 /***/ },
-/* 166 */
+/* 167 */
 /*!*************************************!*\
   !*** ./js/components/NewComment.js ***!
   \*************************************/
@@ -21176,29 +21199,6 @@
 	}(_react2.default.Component);
 	
 	exports.default = NewComment;
-
-/***/ },
-/* 167 */
-/*!**********************************!*\
-  !*** ./js/util/authorization.js ***!
-  \**********************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.canHazToken = canHazToken;
-	function canHazToken() {
-	  var token = localStorage.getItem('token');
-	  if (!token) {
-	    alert("Login you sneaky fool!");
-	    return false;
-	  }
-	  var payload = JSON.parse(atob(token.split('.')[1]));
-	  return payload;
-	}
 
 /***/ },
 /* 168 */
