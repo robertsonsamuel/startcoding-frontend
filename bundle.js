@@ -20696,6 +20696,15 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: mainClasses },
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'floatingActionButton' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            '+'
+	          )
+	        ),
 	        topicEls
 	      );
 	    }
