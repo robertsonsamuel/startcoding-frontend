@@ -20609,6 +20609,18 @@
 	      datatype: 'json',
 	      data: { body: body }
 	    });
+	  },
+	  updateComment: function updateComment(commentId, body) {
+	    var token = localStorage.getItem('token');
+	    return $.ajax({
+	      url: apiUrl + '/comments/' + commentId,
+	      type: 'PUT',
+	      beforeSend: function beforeSend(xhr) {
+	        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      },
+	      datatype: 'json',
+	      data: { body: body }
+	    });
 	  }
 	};
 	
@@ -20643,7 +20655,7 @@
 	
 	var _Topic2 = _interopRequireDefault(_Topic);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 167);
+	var _classnames = __webpack_require__(/*! classnames */ 169);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -20748,7 +20760,7 @@
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 167);
+	var _classnames = __webpack_require__(/*! classnames */ 169);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -20918,13 +20930,17 @@
 	
 	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
 	
-	var _API = __webpack_require__(/*! ../API */ 162);
-	
-	var _API2 = _interopRequireDefault(_API);
-	
 	var _NewComment = __webpack_require__(/*! ./NewComment */ 166);
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
+	
+	var _EditComment = __webpack_require__(/*! ./EditComment */ 167);
+	
+	var _EditComment2 = _interopRequireDefault(_EditComment);
+	
+	var _API = __webpack_require__(/*! ../API */ 162);
+	
+	var _API2 = _interopRequireDefault(_API);
 	
 	var _authorization = __webpack_require__(/*! ../util/authorization */ 168);
 	
@@ -20944,15 +20960,23 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Comment).call(this, props));
 	
-	    _this.state = { replying: false };
+	    _this.state = { replying: false, editing: false };
 	    return _this;
 	  }
 	
 	  _createClass(Comment, [{
 	    key: 'reply',
 	    value: function reply(e) {
+	      if (this.state.editing) return;
 	      e.preventDefault();
 	      this.setState({ replying: (0, _authorization.canHazToken)() });
+	    }
+	  }, {
+	    key: 'edit',
+	    value: function edit(e) {
+	      if (this.state.replying) return;
+	      e.preventDefault();
+	      this.setState({ editing: (0, _authorization.isAuthorized)(this.props.user._id) });
 	    }
 	  }, {
 	    key: 'postComment',
@@ -20967,20 +20991,40 @@
 	      });
 	    }
 	  }, {
+	    key: 'updateComment',
+	    value: function updateComment(update) {
+	      var _this3 = this;
+	
+	      this.setState({ editing: false });
+	      _API2.default.updateComment(this.props._id, update).done(function (resp) {
+	        return _this3.props.update();
+	      }).fail(function (err) {
+	        return alert(err.responseText);
+	      });
+	    }
+	  }, {
 	    key: 'discard',
 	    value: function discard() {
 	      this.setState({ replying: false });
+	      this.setState({ editing: false });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      var commentEls = this.props.children.map(function (child, i) {
-	        return _react2.default.createElement(Comment, _extends({}, child, { update: _this3.props.update, key: i }));
+	        return _react2.default.createElement(Comment, _extends({}, child, { update: _this4.props.update, key: i }));
 	      });
 	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
 	        discard: this.discard.bind(this) }) : [];
+	      var commentBody = this.state.editing ? _react2.default.createElement(_EditComment2.default, { update: this.updateComment.bind(this),
+	        discard: this.discard.bind(this),
+	        body: this.props.body }) : _react2.default.createElement(
+	        'div',
+	        null,
+	        this.props.body
+	      );
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'panel panel-default comment' },
@@ -21000,7 +21044,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
-	          this.props.body
+	          commentBody
 	        ),
 	        _react2.default.createElement(
 	          'ol',
@@ -21008,14 +21052,14 @@
 	          _react2.default.createElement(
 	            'span',
 	            null,
-	            this.props.timestamp
+	            this.props.editTime || this.props.timestamp
 	          ),
 	          _react2.default.createElement(
 	            'li',
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { href: '#' },
+	              { href: '#', onClick: this.edit.bind(this) },
 	              'edit'
 	            )
 	          ),
@@ -21159,6 +21203,134 @@
 
 /***/ },
 /* 167 */
+/*!**************************************!*\
+  !*** ./js/components/EditComment.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _RegisterForm = __webpack_require__(/*! ./RegisterForm */ 160);
+	
+	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var EditComment = function (_React$Component) {
+	  _inherits(EditComment, _React$Component);
+	
+	  function EditComment(props) {
+	    _classCallCheck(this, EditComment);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(EditComment).call(this, props));
+	  }
+	
+	  _createClass(EditComment, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $('#editCommentBody').focus();
+	      this.refs.editText.value = this.props.body;
+	    }
+	  }, {
+	    key: 'update',
+	    value: function update() {
+	      if (this.refs.editText.value) {
+	        this.props.update(this.refs.editText.value);
+	      } else {
+	        alert('Comment cannot be blank');
+	        $('#editCommentBody').focus();
+	      }
+	    }
+	  }, {
+	    key: 'discard',
+	    value: function discard() {
+	      this.props.discard();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('textarea', { id: 'editCommentBody',
+	          className: 'form-control',
+	          ref: 'editText',
+	          rows: '4' }),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'new-comment-buttons' },
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn-default', onClick: this.discard.bind(this) },
+	            'Discard'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn-primary', onClick: this.update.bind(this) },
+	            'Save Edit'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return EditComment;
+	}(_react2.default.Component);
+	
+	exports.default = EditComment;
+
+/***/ },
+/* 168 */
+/*!**********************************!*\
+  !*** ./js/util/authorization.js ***!
+  \**********************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.canHazToken = canHazToken;
+	exports.isAuthorized = isAuthorized;
+	var loginMSg = 'Login or register, you sneaky fool!';
+	
+	function canHazToken() {
+	  var token = localStorage.getItem('token');
+	  if (!token) {
+	    alert(loginMSg);
+	    return false;
+	  }
+	  var payload = JSON.parse(atob(token.split('.')[1]));
+	  return payload;
+	}
+	
+	function isAuthorized(userId) {
+	  var payload = canHazToken();
+	  if (payload.id !== userId) {
+	    return false;
+	  }
+	  return payload;
+	}
+
+/***/ },
+/* 169 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
   \*******************************/
@@ -21213,29 +21385,6 @@
 		}
 	}());
 
-
-/***/ },
-/* 168 */
-/*!**********************************!*\
-  !*** ./js/util/authorization.js ***!
-  \**********************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.canHazToken = canHazToken;
-	function canHazToken() {
-	  var token = localStorage.getItem('token');
-	  if (!token) {
-	    alert("Login you sneaky fool!");
-	    return false;
-	  }
-	  var payload = JSON.parse(atob(token.split('.')[1]));
-	  return payload;
-	}
 
 /***/ }
 /******/ ]);

@@ -26,6 +26,18 @@ let API = {
       datatype: 'json',
       data: {body: body}
     });
+  },
+  updateComment(commentId, body) {
+    let token = localStorage.getItem('token');
+    return $.ajax({
+      url: `${apiUrl}/comments/${commentId}`,
+      type: 'PUT',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+      },
+      datatype: 'json',
+      data: {body: body}
+    });
   }
 };
 
