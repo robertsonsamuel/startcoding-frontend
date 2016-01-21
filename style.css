@@ -73,6 +73,9 @@ textarea {
 }
 
 .closeTopic {
+  display: none;
+}
+.active .closeTopic {
   display: inline;
   float: right;
   color: #4caf50;
