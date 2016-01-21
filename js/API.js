@@ -1,5 +1,6 @@
-// let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
-let apiUrl = 'http://localhost:3000';
+import {canHazToken} from './util/authorization';
+let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+// let apiUrl = 'http://localhost:3000';
 
 let API = {
   register(newUserInfo) {
@@ -10,6 +11,21 @@ let API = {
   },
   getTopics() {
     return $.get(`${apiUrl}/topics/`)
+  },
+  postTopic(title, body) {
+    let token = localStorage.getItem('token');
+    return $.ajax({
+      url: `${apiUrl}/topics/`,
+      type: 'POST',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+      },
+      datatype: 'json',
+      data: {
+        title: title,
+        body: body
+      }
+    });
   },
   getComments(topicId) {
     return $.get(`${apiUrl}/comments/${topicId}`)

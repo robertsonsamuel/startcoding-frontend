@@ -46,7 +46,7 @@ textarea {
   background: #4caf50;
   color: #FFF;
   margin-bottom: 0;
-  z-index: 9999;
+  z-index: 1000;
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
@@ -61,6 +61,15 @@ textarea {
   display: none;
 }
 
+#newTopicModal {
+  z-index: 2000;
+  position: fixed;
+  top: 35%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
 .main{
   position: relative;
   height: calc(100vh - 64px);

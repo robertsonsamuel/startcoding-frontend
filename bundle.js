@@ -63,7 +63,7 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _Main = __webpack_require__(/*! ./components/Main */ 163);
+	var _Main = __webpack_require__(/*! ./components/Main */ 164);
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
@@ -20574,15 +20574,18 @@
 /*!*******************!*\
   !*** ./js/API.js ***!
   \*******************/
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	// let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
-	var apiUrl = 'http://localhost:3000';
+	
+	var _authorization = __webpack_require__(/*! ./util/authorization */ 163);
+	
+	var apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+	// let apiUrl = 'http://localhost:3000';
 	
 	var API = {
 	  register: function register(newUserInfo) {
@@ -20593,6 +20596,21 @@
 	  },
 	  getTopics: function getTopics() {
 	    return $.get(apiUrl + '/topics/');
+	  },
+	  postTopic: function postTopic(title, body) {
+	    var token = localStorage.getItem('token');
+	    return $.ajax({
+	      url: apiUrl + '/topics/',
+	      type: 'POST',
+	      beforeSend: function beforeSend(xhr) {
+	        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      },
+	      datatype: 'json',
+	      data: {
+	        title: title,
+	        body: body
+	      }
+	    });
 	  },
 	  getComments: function getComments(topicId) {
 	    return $.get(apiUrl + '/comments/' + topicId);
@@ -20628,6 +20646,40 @@
 
 /***/ },
 /* 163 */
+/*!**********************************!*\
+  !*** ./js/util/authorization.js ***!
+  \**********************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.canHazToken = canHazToken;
+	exports.isAuthorized = isAuthorized;
+	var loginMSg = 'Login or register, you sneaky fool!';
+	
+	function canHazToken() {
+	  var token = localStorage.getItem('token');
+	  if (!token) {
+	    alert(loginMSg);
+	    return false;
+	  }
+	  var payload = JSON.parse(atob(token.split('.')[1]));
+	  return payload;
+	}
+	
+	function isAuthorized(userId) {
+	  var payload = canHazToken();
+	  if (payload.id !== userId) {
+	    return false;
+	  }
+	  return payload;
+	}
+
+/***/ },
+/* 164 */
 /*!*******************************!*\
   !*** ./js/components/Main.js ***!
   \*******************************/
@@ -20651,9 +20703,13 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
-	var _Topic = __webpack_require__(/*! ./Topic */ 164);
+	var _Topic = __webpack_require__(/*! ./Topic */ 165);
 	
 	var _Topic2 = _interopRequireDefault(_Topic);
+	
+	var _NewTopicModal = __webpack_require__(/*! ./NewTopicModal */ 170);
+	
+	var _NewTopicModal2 = _interopRequireDefault(_NewTopicModal);
 	
 	var _classnames = __webpack_require__(/*! classnames */ 169);
 	
@@ -20685,15 +20741,21 @@
 	      this.setState({ activeTopic: this.state.activeTopic === topicId ? false : topicId });
 	    }
 	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
+	    key: 'getTopics',
+	    value: function getTopics() {
 	      var _this2 = this;
 	
 	      _API2.default.getTopics().done(function (resp) {
 	        _this2.setState({ allTopics: resp });
+	        $('#newTopicModal').modal('hide');
 	      }).fail(function (err) {
 	        console.log(err);
 	      });
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.getTopics.bind(this)();
 	    }
 	  }, {
 	    key: 'render',
@@ -20708,15 +20770,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: mainClasses },
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'floatingActionButton' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            '+'
-	          )
-	        ),
+	        _react2.default.createElement(_NewTopicModal2.default, { topicPosted: this.getTopics.bind(this) }),
 	        topicEls
 	      );
 	    }
@@ -20728,7 +20782,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 164 */
+/* 165 */
 /*!********************************!*\
   !*** ./js/components/Topic.js ***!
   \********************************/
@@ -20752,11 +20806,11 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
-	var _Comment = __webpack_require__(/*! ./Comment */ 165);
+	var _Comment = __webpack_require__(/*! ./Comment */ 166);
 	
 	var _Comment2 = _interopRequireDefault(_Comment);
 	
-	var _NewComment = __webpack_require__(/*! ./NewComment */ 166);
+	var _NewComment = __webpack_require__(/*! ./NewComment */ 167);
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
 	
@@ -20764,7 +20818,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 168);
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 163);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -20906,7 +20960,7 @@
 	exports.default = Topic;
 
 /***/ },
-/* 165 */
+/* 166 */
 /*!**********************************!*\
   !*** ./js/components/Comment.js ***!
   \**********************************/
@@ -20930,11 +20984,11 @@
 	
 	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
 	
-	var _NewComment = __webpack_require__(/*! ./NewComment */ 166);
+	var _NewComment = __webpack_require__(/*! ./NewComment */ 167);
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
 	
-	var _EditComment = __webpack_require__(/*! ./EditComment */ 167);
+	var _EditComment = __webpack_require__(/*! ./EditComment */ 168);
 	
 	var _EditComment2 = _interopRequireDefault(_EditComment);
 	
@@ -20942,7 +20996,7 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 168);
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 163);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21094,7 +21148,7 @@
 	exports.default = Comment;
 
 /***/ },
-/* 166 */
+/* 167 */
 /*!*************************************!*\
   !*** ./js/components/NewComment.js ***!
   \*************************************/
@@ -21202,7 +21256,7 @@
 	exports.default = NewComment;
 
 /***/ },
-/* 167 */
+/* 168 */
 /*!**************************************!*\
   !*** ./js/components/EditComment.js ***!
   \**************************************/
@@ -21296,40 +21350,6 @@
 	exports.default = EditComment;
 
 /***/ },
-/* 168 */
-/*!**********************************!*\
-  !*** ./js/util/authorization.js ***!
-  \**********************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.canHazToken = canHazToken;
-	exports.isAuthorized = isAuthorized;
-	var loginMSg = 'Login or register, you sneaky fool!';
-	
-	function canHazToken() {
-	  var token = localStorage.getItem('token');
-	  if (!token) {
-	    alert(loginMSg);
-	    return false;
-	  }
-	  var payload = JSON.parse(atob(token.split('.')[1]));
-	  return payload;
-	}
-	
-	function isAuthorized(userId) {
-	  var payload = canHazToken();
-	  if (payload.id !== userId) {
-	    return false;
-	  }
-	  return payload;
-	}
-
-/***/ },
 /* 169 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
@@ -21385,6 +21405,141 @@
 		}
 	}());
 
+
+/***/ },
+/* 170 */
+/*!****************************************!*\
+  !*** ./js/components/NewTopicModal.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _API = __webpack_require__(/*! ../API */ 162);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NewTopicModal = function (_React$Component) {
+	  _inherits(NewTopicModal, _React$Component);
+	
+	  function NewTopicModal(props) {
+	    _classCallCheck(this, NewTopicModal);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewTopicModal).call(this, props));
+	
+	    _this.displayName = 'NewTopicModal';
+	    return _this;
+	  }
+	
+	  _createClass(NewTopicModal, [{
+	    key: 'createTopic',
+	    value: function createTopic() {
+	      var _this2 = this;
+	
+	      var title = this.refs.title.value;
+	      var body = this.refs.body.value;
+	      if (title.length === 0 || body.length === 0) {
+	        return alert('Title and Body both required!');
+	      }
+	      _API2.default.postTopic(title, body).done(function () {
+	        _this2.refs.title.value = '';
+	        _this2.refs.body.value = '';
+	        _this2.props.topicPosted();
+	      }).fail(function (err) {
+	        return alert(err.responseText);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'button', className: 'floatingActionButton', 'data-toggle': 'modal', 'data-target': '#newTopicModal' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            '+'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'modal fade', id: 'newTopicModal' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-dialog', role: 'document' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-content' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-header' },
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'close', 'data-dismiss': 'modal' },
+	                  _react2.default.createElement(
+	                    'span',
+	                    { 'aria-hidden': 'true' },
+	                    '×'
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'h4',
+	                  { className: 'modal-title', id: 'topicModalLabel' },
+	                  'Create a new topic.'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-body' },
+	                _react2.default.createElement('input', { type: 'text', ref: 'title', className: 'newTopicTitle', placeholder: 'Title', required: true }),
+	                _react2.default.createElement('textarea', { id: 'newTitleBody', placeholder: '...', className: 'form-control', ref: 'body', rows: '4', required: true })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-footer' },
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
+	                  'Discard'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'btn btn-primary', onClick: this.createTopic.bind(this) },
+	                  'Post'
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NewTopicModal;
+	}(_react2.default.Component);
+	
+	exports.default = NewTopicModal;
 
 /***/ }
 /******/ ]);
