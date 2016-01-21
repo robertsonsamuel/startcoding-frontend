@@ -12,14 +12,18 @@ class Main extends React.Component {
   handleTopicClick(topicId){
     this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
   }
-  componentWillMount() {
+  getTopics(){
     API.getTopics()
     .done( resp => {
       this.setState( {allTopics: resp} )
+      $('#newTopicModal').modal('hide');
     })
     .fail( err => {
       console.log(err);
     })
+  }
+  componentWillMount() {
+    (this.getTopics.bind(this))();
   }
   render() {
     let topicEls = this.state.allTopics.map((topic,i) => {
@@ -29,7 +33,7 @@ class Main extends React.Component {
     let mainClasses = classNames('main', 'panel', {displayTopic : this.state.activeTopic})
     return (
       <div className={mainClasses}>
-        <NewTopicModal />
+        <NewTopicModal topicPosted={this.getTopics.bind(this)} />
         {topicEls}
       </div>
     )

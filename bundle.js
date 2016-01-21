@@ -20574,13 +20574,16 @@
 /*!*******************!*\
   !*** ./js/API.js ***!
   \*******************/
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _authorization = __webpack_require__(/*! ./util/authorization */ 167);
+	
 	// let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
 	var apiUrl = 'http://localhost:3000';
 	
@@ -20593,6 +20596,21 @@
 	  },
 	  getTopics: function getTopics() {
 	    return $.get(apiUrl + '/topics/');
+	  },
+	  postTopic: function postTopic(title, body) {
+	    var token = localStorage.getItem('token');
+	    return $.ajax({
+	      url: apiUrl + '/topics/',
+	      type: 'POST',
+	      beforeSend: function beforeSend(xhr) {
+	        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      },
+	      datatype: 'json',
+	      data: {
+	        title: title,
+	        body: body
+	      }
+	    });
 	  },
 	  getComments: function getComments(topicId) {
 	    return $.get(apiUrl + '/comments/' + topicId);
@@ -20643,7 +20661,11 @@
 	
 	var _Topic2 = _interopRequireDefault(_Topic);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 167);
+	var _NewTopicModal = __webpack_require__(/*! ./NewTopicModal */ 169);
+	
+	var _NewTopicModal2 = _interopRequireDefault(_NewTopicModal);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 168);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -20673,15 +20695,21 @@
 	      this.setState({ activeTopic: this.state.activeTopic === topicId ? false : topicId });
 	    }
 	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
+	    key: 'getTopics',
+	    value: function getTopics() {
 	      var _this2 = this;
 	
 	      _API2.default.getTopics().done(function (resp) {
 	        _this2.setState({ allTopics: resp });
+	        $('#newTopicModal').modal('hide');
 	      }).fail(function (err) {
 	        console.log(err);
 	      });
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.getTopics.bind(this)();
 	    }
 	  }, {
 	    key: 'render',
@@ -20696,6 +20724,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: mainClasses },
+	        _react2.default.createElement(_NewTopicModal2.default, { topicPosted: this.getTopics.bind(this) }),
 	        topicEls
 	      );
 	    }
@@ -20739,11 +20768,11 @@
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 167);
+	var _classnames = __webpack_require__(/*! classnames */ 168);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 168);
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 167);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -20917,7 +20946,7 @@
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
 	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 168);
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 167);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21150,6 +21179,29 @@
 
 /***/ },
 /* 167 */
+/*!**********************************!*\
+  !*** ./js/util/authorization.js ***!
+  \**********************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.canHazToken = canHazToken;
+	function canHazToken() {
+	  var token = localStorage.getItem('token');
+	  if (!token) {
+	    alert("Login you sneaky fool!");
+	    return false;
+	  }
+	  var payload = JSON.parse(atob(token.split('.')[1]));
+	  return payload;
+	}
+
+/***/ },
+/* 168 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
   \*******************************/
@@ -21206,27 +21258,139 @@
 
 
 /***/ },
-/* 168 */
-/*!**********************************!*\
-  !*** ./js/util/authorization.js ***!
-  \**********************************/
-/***/ function(module, exports) {
+/* 169 */
+/*!****************************************!*\
+  !*** ./js/components/NewTopicModal.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.canHazToken = canHazToken;
-	function canHazToken() {
-	  var token = localStorage.getItem('token');
-	  if (!token) {
-	    alert("Login you sneaky fool!");
-	    return false;
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _API = __webpack_require__(/*! ../API */ 162);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NewTopicModal = function (_React$Component) {
+	  _inherits(NewTopicModal, _React$Component);
+	
+	  function NewTopicModal(props) {
+	    _classCallCheck(this, NewTopicModal);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewTopicModal).call(this, props));
+	
+	    _this.displayName = 'NewTopicModal';
+	    return _this;
 	  }
-	  var payload = JSON.parse(atob(token.split('.')[1]));
-	  return payload;
-	}
+	
+	  _createClass(NewTopicModal, [{
+	    key: 'createTopic',
+	    value: function createTopic() {
+	      var _this2 = this;
+	
+	      var title = this.refs.title.value;
+	      var body = this.refs.body.value;
+	      if (title.length === 0 || body.length === 0) {
+	        return alert('Title and Body both required!');
+	      }
+	      _API2.default.postTopic(title, body).done(function () {
+	        _this2.refs.title.value = '';
+	        _this2.refs.body.value = '';
+	        _this2.props.topicPosted();
+	      }).fail(function (err) {
+	        return alert(err.responseText);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'button', className: 'floatingActionButton', 'data-toggle': 'modal', 'data-target': '#newTopicModal' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            '+'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'modal fade', id: 'newTopicModal' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-dialog', role: 'document' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-content' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-header' },
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'close', 'data-dismiss': 'modal' },
+	                  _react2.default.createElement(
+	                    'span',
+	                    { 'aria-hidden': 'true' },
+	                    '×'
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'h4',
+	                  { className: 'modal-title', id: 'topicModalLabel' },
+	                  'Create a new topic.'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-body' },
+	                _react2.default.createElement('input', { type: 'text', ref: 'title', className: 'newTopicTitle', placeholder: 'Title', required: true }),
+	                _react2.default.createElement('textarea', { id: 'newTitleBody', placeholder: '...', className: 'form-control', ref: 'body', rows: '4', required: true })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-footer' },
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
+	                  'Discard'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'btn btn-primary', onClick: this.createTopic.bind(this) },
+	                  'Post'
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NewTopicModal;
+	}(_react2.default.Component);
+	
+	exports.default = NewTopicModal;
 
 /***/ }
 /******/ ]);
