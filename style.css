@@ -39,7 +39,7 @@ textarea {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-  border: 3px solid #4caf50;
+  border: 1px solid lightgrey;
 }
 
 .navbar-inverse {
@@ -64,6 +64,7 @@ textarea {
 .main{
   position: relative;
   height: calc(100vh - 64px);
+  margin-bottom: 0;
   overflow-y: scroll;
 }
 .displayTopic {
@@ -80,20 +81,34 @@ textarea {
   padding-bottom: 1em;
   overflow-y: scroll;
 }
-.topic-content {
+.topicContent {
   display: none;
 }
-.active .topic-content {
+.active .topicContent {
   display: block;
 }
-.topicHead > h4{
+.topicTitle {
   margin: 0px;
   padding: 0.5em 1em;
   text-align: center;
 }
+
 .topicHead:hover{
-  background-color: #E4E4E4;
+  background-color: #F5F5F5;
   cursor: pointer;
+}
+
+.active .topicHead {
+  background-color: #F5F5F5;
+}
+
+.closeTopic {
+  display: none;
+}
+.active .closeTopic {
+  display: inline;
+  float: right;
+  color: #4caf50;
 }
 
 .comment {

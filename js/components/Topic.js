@@ -3,11 +3,18 @@ import API from '../API';
 import Comment from './Comment';
 import NewComment from './NewComment';
 import classNames from 'classnames';
+import {canHazToken} from '../util/authorization';
 
 class Topic extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allComments: [], replying: false, isActive:false};
+    this.state = { allComments: [], replying: false };
+  }
+  headerClicked() {
+    if (!this.props.isActive) {
+      (this.fetchComments.bind(this))();
+    }
+    this.props.onClick();
   }
   fetchComments() {
     API.getComments(this.props._id)
@@ -20,7 +27,7 @@ class Topic extends React.Component {
   }
   reply(e) {
     e.preventDefault();
-    this.setState({ replying: true });
+    this.setState({ replying: canHazToken() });
   }
   postComment(body) {
     this.setState({ replying: false });
@@ -33,8 +40,9 @@ class Topic extends React.Component {
   }
   render() {
     let commentEls = [];
+    let closeTopic = [];
     if (this.props.isActive) {
-      this.fetchComments();
+      closeTopic = <span className="glyphicon glyphicon-remove closeTopic" />;
       commentEls = this.state.allComments.map( (comment, i) => {
         return <Comment {...comment} update={this.fetchComments.bind(this)} key={i} />
       });
@@ -46,10 +54,12 @@ class Topic extends React.Component {
     return (
       <div className={addedClasses}>
         <div >
-          <div onClick={this.props.onClick} className="topicHead">
-            <h4>{this.props.title}</h4>
+          <div onClick={this.headerClicked.bind(this)} className="topicHead">
+            <div className="container">
+              <h4 className="topicTitle">{this.props.title} {closeTopic} </h4>
+            </div>
           </div>
-          <div className="container topic-content">
+          <div className="container topicContent">
             <div className="panel-body">
               {this.props.body}
             </div>

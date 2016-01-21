@@ -28,15 +28,15 @@ class NewComment extends React.Component {
         <div className="panel-heading">
           <div className="panel-title">
             {this.state.name}
-            <span className="new-comment-buttons">
-              <button className="btn btn-default" onClick={this.post.bind(this)}>Post</button>
-              <button className="btn btn-default" onClick={this.discard.bind(this)}>Discard</button>
-            </span>
           </div>
         </div>
         <div className="panel-body">
-          <textarea id="newCommentBody" ref="body" rows="4" cols="50">
+          <textarea id="newCommentBody" className="form-control" ref="body" rows="4">
           </textarea>
+          <span className="new-comment-buttons">
+            <button className="btn btn-default" onClick={this.discard.bind(this)}>Discard</button>
+            <button className="btn btn-primary" onClick={this.post.bind(this)}>Post</button>
+          </span>
         </div>
       </div>
     )

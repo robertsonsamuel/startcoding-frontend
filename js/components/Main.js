@@ -8,8 +8,8 @@ class Main extends React.Component {
     super(props);
     this.state = { allTopics: [], activeTopic:false};
   }
-  handleClick(topicId){
-    this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId})
+  handleTopicClick(topicId){
+    this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
   }
   componentWillMount() {
     API.getTopics()
@@ -23,9 +23,9 @@ class Main extends React.Component {
   render() {
     let topicEls = this.state.allTopics.map((topic,i) => {
       let topicClasses = this.state.activeTopic === topic._id ? true : false;
-      return <Topic {...topic} isActive={topicClasses} onClick={this.handleClick.bind(this,topic._id)} key={i}  />
+      return <Topic {...topic} isActive={topicClasses} onClick={this.handleTopicClick.bind(this,topic._id)} key={i}  />
     });
-    let mainClasses = classNames('main', {displayTopic : this.state.activeTopic})
+    let mainClasses = classNames('main', 'panel', {displayTopic : this.state.activeTopic})
     return (
       <div className={mainClasses}>
         <button className="floatingActionButton"><span>+</span></button>

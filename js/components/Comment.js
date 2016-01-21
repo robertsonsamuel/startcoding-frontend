@@ -2,6 +2,7 @@ import React from 'react';
 import RegisterForm from './RegisterForm';
 import API from '../API';
 import NewComment from './NewComment';
+import {canHazToken} from '../util/authorization';
 
 class Comment extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Comment extends React.Component {
   }
   reply(e) {
     e.preventDefault();
-    this.setState({ replying: true });
+    this.setState({ replying: canHazToken() });
   }
   postComment(body) {
     this.setState({ replying: false });
