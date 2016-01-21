@@ -1,6 +1,6 @@
 import {canHazToken} from './util/authorization';
-// let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
-let apiUrl = 'http://localhost:3000';
+let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+// let apiUrl = 'http://localhost:3000';
 
 let API = {
   register(newUserInfo) {
