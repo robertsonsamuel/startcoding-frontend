@@ -2,6 +2,11 @@ import {canHazToken} from './util/authorization';
 let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
 // let apiUrl = 'http://localhost:3000';
 
+function setAuthHeader(xhr) {
+  let token = localStorage.getItem('token');
+  xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+}
+
 let API = {
   register(newUserInfo) {
     return $.post(`${apiUrl}/users/register`, newUserInfo);
@@ -13,13 +18,10 @@ let API = {
     return $.get(`${apiUrl}/topics/`)
   },
   postTopic(title, body) {
-    let token = localStorage.getItem('token');
     return $.ajax({
       url: `${apiUrl}/topics/`,
       type: 'POST',
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-      },
+      beforeSend: setAuthHeader,
       datatype: 'json',
       data: {
         title: title,
@@ -32,25 +34,19 @@ let API = {
   },
   postComment(parentId, body, seed) {
     let query = seed ? '?seed=true' : '';
-    let token = localStorage.getItem('token');
     return $.ajax({
       url: `${apiUrl}/comments/${parentId + query}`,
       type: 'POST',
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-      },
+      beforeSend: setAuthHeader,
       datatype: 'json',
       data: {body: body}
     });
   },
   updateComment(commentId, body) {
-    let token = localStorage.getItem('token');
     return $.ajax({
       url: `${apiUrl}/comments/${commentId}`,
       type: 'PUT',
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-      },
+      beforeSend: setAuthHeader,
       datatype: 'json',
       data: {body: body}
     });
