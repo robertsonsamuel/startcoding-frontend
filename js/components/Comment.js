@@ -4,7 +4,7 @@ import NewComment from './NewComment';
 import EditComment from './EditComment';
 import classNames from 'classnames';
 import API from '../API';
-import {confirmDelete,genErr} from '../util/alerts';
+import {confirmDelete,genErr,pleaseLogin} from '../util/alerts';
 import {canHazToken, isAuthorized} from '../util/authorization';
 
 class Comment extends React.Component {
@@ -15,7 +15,9 @@ class Comment extends React.Component {
   reply(e) {
     if (this.state.editing) return;
     e.preventDefault();
-    this.setState({ replying: canHazToken() });
+    let haveToken = canHazToken();
+    if(!haveToken) return pleaseLogin();
+    this.setState({ replying: haveToken });
   }
   edit(e){
     if (this.state.replying) return;

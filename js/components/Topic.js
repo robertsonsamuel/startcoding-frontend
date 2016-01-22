@@ -3,7 +3,7 @@ import API from '../API';
 import Comment from './Comment';
 import NewComment from './NewComment';
 import classNames from 'classnames';
-import {genErr} from '../util/alerts';
+import {genErr, pleaseLogin} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
 
 class Topic extends React.Component {
@@ -28,7 +28,9 @@ class Topic extends React.Component {
   }
   reply(e) {
     e.preventDefault();
-    this.setState({ replying: canHazToken() });
+    let haveToken = canHazToken();
+    if(!haveToken) return pleaseLogin();
+    this.setState({ replying: haveToken });
   }
   postComment(body) {
     this.setState({ replying: false });
@@ -61,13 +63,13 @@ class Topic extends React.Component {
             </div>
           </div>
           <div className="container topicContent">
-            <div className="panel-body">
+            <div className="panel-body topicBody">
               {this.props.body}
             </div>
-            <ol className="panel-footer breadcrumb">
-              <span>{this.props.timestamp}</span>
-              <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
-            </ol>
+            <div className="topicFooter">
+              <span className="timeStamp">{this.props.timestamp}</span>
+              <button className="btn btn-success replyTopicButton" href="#" onClick={this.reply.bind(this)}>reply</button>
+            </div>
             {newComment}
             {commentEls}
           </div>

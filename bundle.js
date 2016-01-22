@@ -20654,7 +20654,7 @@
 /*!**********************************!*\
   !*** ./js/util/authorization.js ***!
   \**********************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -20663,14 +20663,11 @@
 	});
 	exports.canHazToken = canHazToken;
 	exports.isAuthorized = isAuthorized;
-	
-	var _alerts = __webpack_require__(/*! ./alerts */ 169);
-	
 	var loginMSg = 'Login or register, you sneaky fool!';
+	
 	function canHazToken() {
 	  var token = localStorage.getItem('token');
 	  if (!token) {
-	    (0, _alerts.pleaseLogin)();
 	    return false;
 	  }
 	  var payload = JSON.parse(atob(token.split('.')[1]));
@@ -20874,7 +20871,9 @@
 	    key: 'reply',
 	    value: function reply(e) {
 	      e.preventDefault();
-	      this.setState({ replying: (0, _authorization.canHazToken)() });
+	      var haveToken = (0, _authorization.canHazToken)();
+	      if (!haveToken) return (0, _alerts.pleaseLogin)();
+	      this.setState({ replying: haveToken });
 	    }
 	  }, {
 	    key: 'postComment',
@@ -20936,25 +20935,21 @@
 	            { className: 'container topicContent' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'panel-body' },
+	              { className: 'panel-body topicBody' },
 	              this.props.body
 	            ),
 	            _react2.default.createElement(
-	              'ol',
-	              { className: 'panel-footer breadcrumb' },
+	              'div',
+	              { className: 'topicFooter' },
 	              _react2.default.createElement(
 	                'span',
-	                null,
+	                { className: 'timeStamp' },
 	                this.props.timestamp
 	              ),
 	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#', onClick: this.reply.bind(this) },
-	                  'reply'
-	                )
+	                'button',
+	                { className: 'btn btn-success replyTopicButton', href: '#', onClick: this.reply.bind(this) },
+	                'reply'
 	              )
 	            ),
 	            newComment,
@@ -21040,7 +21035,9 @@
 	    value: function reply(e) {
 	      if (this.state.editing) return;
 	      e.preventDefault();
-	      this.setState({ replying: (0, _authorization.canHazToken)() });
+	      var haveToken = (0, _authorization.canHazToken)();
+	      if (!haveToken) return (0, _alerts.pleaseLogin)();
+	      this.setState({ replying: haveToken });
 	    }
 	  }, {
 	    key: 'edit',

@@ -105,7 +105,16 @@ a.disabled {
   padding: 0.5em 1em;
   text-align: center;
 }
-
+.panel-body.topicBody {
+    border-left: 26px solid green;
+    border-top: 2px solid green;
+    border-bottom: 2px solid green;
+    border-right: 2px solid green;
+    background: rgba(213, 232, 204, 0.22);
+    padding: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
 .topicHead:hover{
   background-color: #F5F5F5;
   cursor: pointer;
@@ -123,7 +132,12 @@ a.disabled {
   float: right;
   color: #4caf50;
 }
-
+.replyTopicButton {
+    float: right;
+}
+.topicFooter {
+    padding: 20px;
+}
 .comment {
   /*border: 1px solid grey;*/
   margin: 1em 0 0 1em;
