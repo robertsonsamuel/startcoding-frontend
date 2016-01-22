@@ -57,7 +57,10 @@ class Topic extends React.Component {
         <div >
           <div onClick={this.headerClicked.bind(this)} className="topicHead">
             <div className="container">
-              <h4 className="topicTitle">{this.props.title} {closeTopic} </h4>
+              <h4 className="topicTitle">
+                <strong>{this.props.title}</strong> &mdash; {this.props.user.username}
+                {closeTopic}
+              </h4>
             </div>
           </div>
           <div className="container topicContent">
