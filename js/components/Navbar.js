@@ -32,7 +32,6 @@ class Navbar extends React.Component {
     // check for a token and display logged-in state if a valid token exists
     let tokenPayload = retrieveToken();
     if (!tokenPayload) return;
-
     if (Date.now() < tokenPayload.exp * 1000) {
       hideLoginRegisterLogoutUsername(true, true, false, true);
     } else {

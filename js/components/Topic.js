@@ -14,7 +14,7 @@ class Topic extends React.Component {
     super(props);
     this.state = {
       allComments: [],
-      token: '',
+      token: canHazToken(),
       replying: false,
       loading: true,
     };

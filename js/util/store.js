@@ -1,15 +1,20 @@
 import API from '../API'
 
+let callbacks = Symbol();
 
-function EventEmitter() {
-  let callbacks = {};
-  this.registerListener = function(name,cb) {
-    let theEvent = callbacks[name];
-    callbacks[name] = theEvent ? theEvent.concat(cb) : [cb];
+class EventEmitter {
+
+  constructor() {
+    this[callbacks] = {};
   }
-  this.emitChange = function(name) {
-    callbacks[name].forEach( cb => cb() );
+  registerListener(name,cb) {
+    let theEvent = this[callbacks][name];
+    this[callbacks][name] = theEvent ? theEvent.concat(cb) : [cb];
   }
+  emitChange(name) {
+    this[callbacks][name].forEach( cb => cb() );
+  }
+
 }
 
 export const eventEmitter = new EventEmitter();
