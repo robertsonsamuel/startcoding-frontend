@@ -2,6 +2,7 @@ import React from 'react';
 import API from '../API';
 import Comment from './Comment';
 import NewComment from './NewComment';
+import LoadingSpinner from './LoadingSpinner';
 import classNames from 'classnames';
 import {canHazToken} from '../util/authorization';
 import {formatTime} from '../util/time';
@@ -9,7 +10,7 @@ import {formatTime} from '../util/time';
 class Topic extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allComments: [], replying: false };
+    this.state = { allComments: [], replying: false, loading: true };
   }
   headerClicked() {
     if (!this.props.isActive) {
@@ -17,23 +18,26 @@ class Topic extends React.Component {
     }
     this.props.onClick();
   }
-  fetchComments() {
+  fetchComments(callback) {
     API.getComments(this.props._id)
     .done( resp => {
-      this.setState( {allComments: resp} );
+      this.setState( {allComments: resp, loading: false} );
+      if (callback) callback();
     })
     .fail( err => {
       console.log(err);
-    })
+    });
   }
   reply(e) {
     e.preventDefault();
     this.setState({ replying: canHazToken() });
   }
   postComment(body) {
-    this.setState({ replying: false });
+    this.setState({ replying: false, loading: true });
     API.postComment(this.props._id, body, 'seed')
-    .done(resp => (this.fetchComments.bind(this))())
+    .done(resp => {
+      (this.fetchComments.bind(this))();
+    })
     .fail(err => alert(err.responseText));
   }
   discard() {
@@ -54,7 +58,7 @@ class Topic extends React.Component {
                                          : [];
     return (
       <div className={addedClasses}>
-        <div >
+        <div>
           <div onClick={this.headerClicked.bind(this)} className="topicHead">
             <div className="container">
               <h4 className="topicTitle">
@@ -72,6 +76,7 @@ class Topic extends React.Component {
               <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
             </ol>
             {newComment}
+            {this.state.loading ? <LoadingSpinner /> : []}
             {commentEls}
           </div>
         </div>

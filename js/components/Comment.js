@@ -1,6 +1,7 @@
 import React from 'react';
 import RegisterForm from './RegisterForm';
 import NewComment from './NewComment';
+import LoadingSpinner from './LoadingSpinner';
 import EditComment from './EditComment';
 import API from '../API';
 import {confirmDelete} from '../util/alerts';
@@ -10,7 +11,7 @@ import {formatTime} from '../util/time';
 class Comment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { replying: false, editing: false };
+    this.state = { replying: false, editing: false, loading: false };
   }
   reply(e) {
     if (this.state.editing) return;
@@ -26,9 +27,13 @@ class Comment extends React.Component {
     confirmDelete(this.deleteComment.bind(this))
   }
   postComment(body) {
-    this.setState({ replying: false });
+    this.setState({ replying: false, loading: true });
     API.postComment(this.props._id, body)
-    .done(resp => this.props.update())
+    .done(resp => {
+      this.props.update(() => {
+        this.setState({ loading: false });
+      });
+    })
     .fail(err => alert(err.responseText));
   }
   updateComment(update) {
@@ -72,6 +77,7 @@ class Comment extends React.Component {
           <li><a href="#" onClick={this.delete.bind(this)}>delete</a></li>
         </ol>
         {newComment}
+        {this.state.loading ? <LoadingSpinner /> : []}
         {commentEls}
       </div>
     )
