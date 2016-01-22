@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 const connectionErrorMsg = `Looks like you've been...
                             (•_•) /  \n
                             ( •_•)>⌐■-■ / \n

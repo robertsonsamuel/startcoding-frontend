@@ -30,6 +30,7 @@
     "classnames": "^2.2.3"
   },
   "dependencies": {
-    "moment": "^2.11.1"
+    "moment": "^2.11.1",
+    "sweetalert": "^1.1.3"
   }
 }
