@@ -33,13 +33,23 @@ body {
   background-color: #D32F2F;
 }
 
+.newTopicTitle {
+  margin-bottom: 1em;
+}
+
+.spinnerContainer {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
+
 textarea {
   padding: 0.5em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-  border: 1px solid lightgrey;
+  border: 1px solid lightgrey !important;
 }
 
 .navbar-inverse {

@@ -1,5 +1,6 @@
 import React from 'react';
 import API from '../API';
+import LoadingSpinner from './LoadingSpinner';
 import {canHazToken} from '../util/authorization';
 import {pleaseLogin,genErr} from '../util/alerts';
 
@@ -7,6 +8,7 @@ class NewTopicModal extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = 'NewTopicModal';
+    this.state = { loading: false };
   }
   newTopic(){
     if(!canHazToken()) return pleaseLogin();
@@ -19,6 +21,7 @@ class NewTopicModal extends React.Component {
       return genErr('Title and Body both required!')
     }
     $('#newTopicModal .input').prop('disabled', true); // disable inputs
+    this.setState({ loading: true });
     API.postTopic(title, body)
     .done(() =>{
       this.refs.title.value = '';
@@ -30,7 +33,8 @@ class NewTopicModal extends React.Component {
     .fail(err => {
       $('#newTopicModal .input').prop('disabled', false);
       genErr(err.responseText);
-    });
+    })
+    .always(() => this.setState({ loading: false }));
   }
   render() {
     return (
@@ -48,7 +52,10 @@ class NewTopicModal extends React.Component {
               </div>
               <div className="modal-body">
                 <input type="text" ref="title" className="newTopicTitle input" placeholder="Title" required />
-                <textarea id="newTitleBody" placeholder="..." className="form-control input" ref="body" rows="4" required >
+                <div className="spinnerContainer">
+                  {this.state.loading ? <LoadingSpinner /> : []}
+                </div>
+                <textarea id="newTitleBody" placeholder="..." className="form-control input" ref="body" rows="5" required >
                 </textarea>
               </div>
               <div className="modal-footer">
