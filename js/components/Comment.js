@@ -78,8 +78,10 @@ class Comment extends React.Component {
       <div className="panel panel-default comment">
         <div className="panel-heading"><div className="panel-title"><div className="panel-title">{this.props.user.username}</div></div></div>
         <div className="panel-body">
+          <div className="spinnerContainer">
+            {this.state.updating ? <LoadingSpinner /> : []}
+          </div>
           {commentBody}
-          {this.state.updating ? <LoadingSpinner /> : []}
         </div>
         <ol className="panel-footer breadcrumb">
           <span>{timestamp}</span>
