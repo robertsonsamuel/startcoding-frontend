@@ -18,11 +18,14 @@ class NewTopicModal extends React.Component {
     if(title.length === 0 || body.length === 0){
       return genErr('Title and Body both required!')
     }
-    API.postTopic(title,body)
+    $('#newTopicModal .input').prop('disabled', true); // disable inputs
+    API.postTopic(title, body)
     .done(() =>{
       this.refs.title.value = '';
       this.refs.body.value = '';
-      this.props.topicPosted()
+      this.props.topicPosted(() => {
+        $('#newTopicModal .input').prop('disabled', false);
+      });
     })
     .fail(err => genErr(err.responseText));
   }
@@ -41,13 +44,13 @@ class NewTopicModal extends React.Component {
                 <h4 className="modal-title" id="topicModalLabel">Create a new topic.</h4>
               </div>
               <div className="modal-body">
-                <input type="text" ref="title" className="newTopicTitle" placeholder="Title" required />
-                  <textarea id="newTitleBody" placeholder="..." className="form-control" ref="body" rows="4" required>
-                  </textarea>
+                <input type="text" ref="title" className="newTopicTitle input" placeholder="Title" required />
+                <textarea id="newTitleBody" placeholder="..." className="form-control input" ref="body" rows="4" required >
+                </textarea>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal">Discard</button>
-                <button type="button" className="btn btn-primary" onClick={this.createTopic.bind(this)}>Post</button>
+                <button type="button" className="btn btn-default input" data-dismiss="modal">Discard</button>
+                <button type="button" className="btn btn-primary input" onClick={this.createTopic.bind(this)}>Post</button>
               </div>
             </div>
           </div>

@@ -13,11 +13,12 @@ class Main extends React.Component {
   handleTopicClick(topicId){
     this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
   }
-  getTopics(){
+  getTopics(callback){
     API.getTopics()
     .done( resp => {
       this.setState( {allTopics: resp, loading: false} )
       $('#newTopicModal').modal('hide');
+      if (callback) callback();
     })
     .fail( err => {
       console.log(err);
