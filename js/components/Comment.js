@@ -12,7 +12,7 @@ import {isAuthorized} from '../util/authorization';
 class Comment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { replying: false, editing: false, loading: false };
+    this.state = { replying: false, editing: false, updating: false, loading: false };
   }
   reply(e) {
     if (this.state.editing) return;
@@ -39,9 +39,13 @@ class Comment extends React.Component {
     .fail(err => genErr(err.responseText));
   }
   updateComment(update) {
-    this.setState({ editing: false });
+    this.setState({ editing: false, updating: true });
     API.updateComment(this.props._id, update)
-    .done(resp => this.props.update())
+    .done(resp => {
+      this.props.update(() => {
+        this.setState({ updating: false });
+      })
+    })
     .fail(err => genErr(err.responseText));
   }
   deleteComment(){
@@ -75,6 +79,7 @@ class Comment extends React.Component {
         <div className="panel-heading"><div className="panel-title"><div className="panel-title">{this.props.user.username}</div></div></div>
         <div className="panel-body">
           {commentBody}
+          {this.state.updating ? <LoadingSpinner /> : []}
         </div>
         <ol className="panel-footer breadcrumb">
           <span>{timestamp}</span>
