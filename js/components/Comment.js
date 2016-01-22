@@ -4,6 +4,7 @@ import NewComment from './NewComment';
 import EditComment from './EditComment';
 import API from '../API';
 import {canHazToken, isAuthorized} from '../util/authorization';
+import {formatTime} from '../util/time';
 
 class Comment extends React.Component {
   constructor(props) {
@@ -47,6 +48,8 @@ class Comment extends React.Component {
                                                         discard={this.discard.bind(this)}
                                                         body={this.props.body}/>
                                          : <div>{this.props.body}</div>
+    let timestamp = this.props.editTime ? `*edited ${formatTime(this.props.editTime)}`
+                                        : formatTime(this.props.timestamp);
     return (
       <div className="panel panel-default comment">
         <div className="panel-heading"><div className="panel-title"><div className="panel-title">{this.props.user.username}</div></div></div>
@@ -54,7 +57,7 @@ class Comment extends React.Component {
           {commentBody}
         </div>
         <ol className="panel-footer breadcrumb">
-          <span>{this.props.editTime || this.props.timestamp}</span>
+          <span>{timestamp}</span>
           <li><a href="#" onClick={this.edit.bind(this)}>edit</a></li>
           <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
           <li><a href="#">delete</a></li>

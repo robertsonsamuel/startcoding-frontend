@@ -4,6 +4,7 @@ import Comment from './Comment';
 import NewComment from './NewComment';
 import classNames from 'classnames';
 import {canHazToken} from '../util/authorization';
+import {formatTime} from '../util/time';
 
 class Topic extends React.Component {
   constructor(props) {
@@ -64,7 +65,7 @@ class Topic extends React.Component {
               {this.props.body}
             </div>
             <ol className="panel-footer breadcrumb">
-              <span>{this.props.timestamp}</span>
+              <span>{formatTime(this.props.timestamp)}</span>
               <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
             </ol>
             {newComment}
