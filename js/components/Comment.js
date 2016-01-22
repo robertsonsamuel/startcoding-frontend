@@ -3,6 +3,7 @@ import RegisterForm from './RegisterForm';
 import NewComment from './NewComment';
 import EditComment from './EditComment';
 import API from '../API';
+import {confirmDelete} from '../util/alerts';
 import {canHazToken, isAuthorized} from '../util/authorization';
 
 class Comment extends React.Component {
@@ -20,6 +21,9 @@ class Comment extends React.Component {
     e.preventDefault();
     this.setState({ editing: isAuthorized(this.props.user._id) });
   }
+  delete() {
+    confirmDelete(this.deleteComment.bind(this))
+  }
   postComment(body) {
     this.setState({ replying: false });
     API.postComment(this.props._id, body)
@@ -31,6 +35,11 @@ class Comment extends React.Component {
     API.updateComment(this.props._id, update)
     .done(resp => this.props.update())
     .fail(err => alert(err.responseText));
+  }
+  deleteComment(){
+    API.deleteComment(this.props._id)
+    .done(resp => this.props.update())
+    .fail(err => swal('Delete Failed',err.responseText,'error'));
   }
   discard() {
     this.setState({ replying: false });
@@ -57,7 +66,7 @@ class Comment extends React.Component {
           <span>{this.props.editTime || this.props.timestamp}</span>
           <li><a href="#" onClick={this.edit.bind(this)}>edit</a></li>
           <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
-          <li><a href="#">delete</a></li>
+          <li><a href="#" onClick={this.delete.bind(this)}>delete</a></li>
         </ol>
         {newComment}
         {commentEls}

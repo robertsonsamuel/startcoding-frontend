@@ -1,0 +1,21 @@
+{
+  "name": "greenit-frontend",
+  "description": "An awesome react reddit clone",
+  "main": "webpack.config.js",
+  "authors": [
+    "Samuel Robertson <samuel.robertson93@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/paulgoblin/greenit-frontend",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sweetalert": "~1.1.3"
+  }
+}

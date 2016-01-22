@@ -20587,6 +20587,11 @@
 	var apiUrl = 'https://vast-sierra-7757.herokuapp.com';
 	// let apiUrl = 'http://localhost:3000';
 	
+	function setAuthHeader(xhr) {
+	  var token = localStorage.getItem('token');
+	  xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	}
+	
 	var API = {
 	  register: function register(newUserInfo) {
 	    return $.post(apiUrl + '/users/register', newUserInfo);
@@ -20598,13 +20603,10 @@
 	    return $.get(apiUrl + '/topics/');
 	  },
 	  postTopic: function postTopic(title, body) {
-	    var token = localStorage.getItem('token');
 	    return $.ajax({
 	      url: apiUrl + '/topics/',
 	      type: 'POST',
-	      beforeSend: function beforeSend(xhr) {
-	        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      },
+	      beforeSend: setAuthHeader,
 	      datatype: 'json',
 	      data: {
 	        title: title,
@@ -20617,27 +20619,28 @@
 	  },
 	  postComment: function postComment(parentId, body, seed) {
 	    var query = seed ? '?seed=true' : '';
-	    var token = localStorage.getItem('token');
 	    return $.ajax({
 	      url: apiUrl + '/comments/' + (parentId + query),
 	      type: 'POST',
-	      beforeSend: function beforeSend(xhr) {
-	        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      },
+	      beforeSend: setAuthHeader,
 	      datatype: 'json',
 	      data: { body: body }
 	    });
 	  },
 	  updateComment: function updateComment(commentId, body) {
-	    var token = localStorage.getItem('token');
 	    return $.ajax({
 	      url: apiUrl + '/comments/' + commentId,
 	      type: 'PUT',
-	      beforeSend: function beforeSend(xhr) {
-	        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      },
+	      beforeSend: setAuthHeader,
 	      datatype: 'json',
 	      data: { body: body }
+	    });
+	  },
+	  deleteComment: function deleteComment(commentId) {
+	    return $.ajax({
+	      url: apiUrl + '/comments/' + commentId,
+	      type: 'DELETE',
+	      beforeSend: setAuthHeader
 	    });
 	  }
 	};
@@ -20707,11 +20710,11 @@
 	
 	var _Topic2 = _interopRequireDefault(_Topic);
 	
-	var _NewTopicModal = __webpack_require__(/*! ./NewTopicModal */ 170);
+	var _NewTopicModal = __webpack_require__(/*! ./NewTopicModal */ 171);
 	
 	var _NewTopicModal2 = _interopRequireDefault(_NewTopicModal);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 169);
+	var _classnames = __webpack_require__(/*! classnames */ 170);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -20814,7 +20817,7 @@
 	
 	var _NewComment2 = _interopRequireDefault(_NewComment);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 169);
+	var _classnames = __webpack_require__(/*! classnames */ 170);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -20996,6 +20999,8 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 169);
+	
 	var _authorization = __webpack_require__(/*! ../util/authorization */ 163);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -21033,6 +21038,11 @@
 	      this.setState({ editing: (0, _authorization.isAuthorized)(this.props.user._id) });
 	    }
 	  }, {
+	    key: 'delete',
+	    value: function _delete() {
+	      (0, _alerts.confirmDelete)(this.deleteComment.bind(this));
+	    }
+	  }, {
 	    key: 'postComment',
 	    value: function postComment(body) {
 	      var _this2 = this;
@@ -21057,6 +21067,17 @@
 	      });
 	    }
 	  }, {
+	    key: 'deleteComment',
+	    value: function deleteComment() {
+	      var _this4 = this;
+	
+	      _API2.default.deleteComment(this.props._id).done(function (resp) {
+	        return _this4.props.update();
+	      }).fail(function (err) {
+	        return swal('Delete Failed', err.responseText, 'error');
+	      });
+	    }
+	  }, {
 	    key: 'discard',
 	    value: function discard() {
 	      this.setState({ replying: false });
@@ -21065,10 +21086,10 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
+	      var _this5 = this;
 	
 	      var commentEls = this.props.children.map(function (child, i) {
-	        return _react2.default.createElement(Comment, _extends({}, child, { update: _this4.props.update, key: i }));
+	        return _react2.default.createElement(Comment, _extends({}, child, { update: _this5.props.update, key: i }));
 	      });
 	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
 	        discard: this.discard.bind(this) }) : [];
@@ -21131,7 +21152,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { href: '#' },
+	              { href: '#', onClick: this.delete.bind(this) },
 	              'delete'
 	            )
 	          )
@@ -21351,6 +21372,33 @@
 
 /***/ },
 /* 169 */
+/*!***************************!*\
+  !*** ./js/util/alerts.js ***!
+  \***************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.confirmDelete = confirmDelete;
+	function confirmDelete(cb) {
+	  swal({
+	    title: "Are you sure?",
+	    text: "You will not be able to recover this.",
+	    type: "warning",
+	    showCancelButton: true,
+	    confirmButtonColor: "#DD6B55",
+	    confirmButtonText: "Yes, delete it!",
+	    closeOnConfirm: true
+	  }, function () {
+	    cb();
+	  });
+	}
+
+/***/ },
+/* 170 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
   \*******************************/
@@ -21407,7 +21455,7 @@
 
 
 /***/ },
-/* 170 */
+/* 171 */
 /*!****************************************!*\
   !*** ./js/components/NewTopicModal.js ***!
   \****************************************/
