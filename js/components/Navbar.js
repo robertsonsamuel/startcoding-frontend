@@ -3,6 +3,7 @@ import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import {LoginError, RegisterError} from '../util/alerts';
 import API from '../API';
+import {eventEmitter} from '../util/store'
 
 function hideLoginRegisterLogoutUsername(login, register, logout, username) {
   login    ? $('#Login').hide()    : $('#Login').show();
@@ -49,6 +50,7 @@ class Navbar extends React.Component {
     .done(token => {
       clearInput();
       localStorage.setItem('token', token);
+      eventEmitter.emitChange('login');
       hideLoginRegisterLogoutUsername(true, true, false, true);
     })
     .fail(err => LoginError(err.responseText));
@@ -58,12 +60,14 @@ class Navbar extends React.Component {
     .done(token => {
       clearInput();
       localStorage.setItem('token', token);
+      eventEmitter.emitChange('login')
       hideLoginRegisterLogoutUsername(true, true, false, true);
     })
     .fail(err => RegisterError(err.responseText));
   }
   logout() {
     localStorage.removeItem('token');
+    eventEmitter.emitChange('logout');
     hideLoginRegisterLogoutUsername(false, true, true, false);
   }
   render() {

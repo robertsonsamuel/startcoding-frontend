@@ -6,7 +6,6 @@ import EditComment from './EditComment';
 import classNames from 'classnames';
 import API from '../API';
 import {confirmDelete,genErr,pleaseLogin} from '../util/alerts';
-import {canHazToken, isAuthorized} from '../util/authorization';
 import {formatTime} from '../util/time';
 
 class Comment extends React.Component {
@@ -17,9 +16,8 @@ class Comment extends React.Component {
   reply(e) {
     if (this.state.editing) return;
     e.preventDefault();
-    let haveToken = canHazToken();
-    if(!haveToken) return pleaseLogin();
-    this.setState({ replying: haveToken });
+    if(!this.props.token) return pleaseLogin();
+    this.setState({ replying: this.props.token });
   }
   edit(e){
     if (this.state.replying) return;
@@ -56,14 +54,14 @@ class Comment extends React.Component {
   }
   render() {
     let changeButtons = classNames({
-      disabled:!(canHazToken().id === this.props.user._id )
+      disabled: !( this.props.token.id === this.props.user._id )
     })
 
     let commentEls = this.props.children.map( (child, i) => {
-      return <Comment {...child} update={this.props.update} key={i} />
+      return <Comment {...child} token={this.props.token} update={this.props.update} key={i} />
     });
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
-                                                       discard={this.discard.bind(this)} />
+                                                       discard={this.discard.bind(this)}/>
                                          : [];
     let commentBody = this.state.editing ? <EditComment update={this.updateComment.bind(this)}
                                                         discard={this.discard.bind(this)}

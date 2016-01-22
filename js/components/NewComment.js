@@ -1,12 +1,12 @@
 import React from 'react';
 import RegisterForm from './RegisterForm';
 import {genErr} from '../util/alerts';
+import {canHazToken} from '../util/authorization';
 
 class NewComment extends React.Component {
   constructor(props) {
     super(props);
-    let token = localStorage.getItem('token');
-    let name = JSON.parse(atob(token.split('.')[1])).username;
+    let name = canHazToken().username;
     this.state = { name: name };
   }
   componentDidMount() {

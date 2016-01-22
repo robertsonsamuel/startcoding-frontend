@@ -7,11 +7,25 @@ import classNames from 'classnames';
 import {genErr, pleaseLogin} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
 import {formatTime} from '../util/time';
+import {eventEmitter} from '../util/store';
 
 class Topic extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allComments: [], replying: false, loading: true };
+    this.state = {
+      allComments: [],
+      token: '',
+      replying: false,
+      loading: true,
+    };
+
+    eventEmitter.registerListener('login', ()=> {
+      this.setState({ token: canHazToken() });
+    });
+    eventEmitter.registerListener('logout', () => {
+      this.setState({ token: canHazToken() });
+    });
+
   }
   headerClicked() {
     if (!this.props.isActive) {
@@ -50,7 +64,7 @@ class Topic extends React.Component {
     if (this.props.isActive) {
       closeTopic = <span className="glyphicon glyphicon-remove closeTopic" />;
       commentEls = this.state.allComments.map( (comment, i) => {
-        return <Comment {...comment} update={this.fetchComments.bind(this)} key={i} />
+        return <Comment {...comment} token={this.state.token} update={this.fetchComments.bind(this)} key={i} />
       });
     }
     let addedClasses = classNames('topic', {active: this.props.isActive});

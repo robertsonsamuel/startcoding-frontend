@@ -1,6 +1,7 @@
-import {canHazToken} from './util/authorization';
 let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
 // let apiUrl = 'http://localhost:3000';
+
+import {canHazToken} from './util/authorization';
 
 function setAuthHeader(xhr) {
   let token = localStorage.getItem('token');
