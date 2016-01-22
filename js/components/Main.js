@@ -1,5 +1,6 @@
 import React from 'react';
 import API from '../API';
+import LoadingSpinner from './LoadingSpinner';
 import Topic from './Topic';
 import NewTopicModal from './NewTopicModal';
 import classNames from 'classnames';
@@ -7,7 +8,7 @@ import classNames from 'classnames';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allTopics: [], activeTopic:false};
+    this.state = { allTopics: [], activeTopic: false, loading: true};
   }
   handleTopicClick(topicId){
     this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
@@ -15,7 +16,7 @@ class Main extends React.Component {
   getTopics(){
     API.getTopics()
     .done( resp => {
-      this.setState( {allTopics: resp} )
+      this.setState( {allTopics: resp, loading: false} )
       $('#newTopicModal').modal('hide');
     })
     .fail( err => {
@@ -34,6 +35,7 @@ class Main extends React.Component {
     return (
       <div className={mainClasses}>
         <NewTopicModal topicPosted={this.getTopics.bind(this)} />
+        {this.state.loading ? <LoadingSpinner /> : []}
         {topicEls}
       </div>
     )

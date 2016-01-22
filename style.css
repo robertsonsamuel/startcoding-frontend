@@ -64,7 +64,7 @@ textarea {
 #newTopicModal {
   z-index: 2000;
   position: fixed;
-  top: 35%;
+  top: 15%;
   bottom: 0;
   left: 0;
   right: 0;

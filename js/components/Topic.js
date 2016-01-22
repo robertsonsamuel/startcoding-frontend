@@ -2,14 +2,16 @@ import React from 'react';
 import API from '../API';
 import Comment from './Comment';
 import NewComment from './NewComment';
+import LoadingSpinner from './LoadingSpinner';
 import classNames from 'classnames';
 import {genErr, pleaseLogin} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
+import {formatTime} from '../util/time';
 
 class Topic extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allComments: [], replying: false };
+    this.state = { allComments: [], replying: false, loading: true };
   }
   headerClicked() {
     if (!this.props.isActive) {
@@ -17,14 +19,15 @@ class Topic extends React.Component {
     }
     this.props.onClick();
   }
-  fetchComments() {
+  fetchComments(callback) {
     API.getComments(this.props._id)
     .done( resp => {
-      this.setState( {allComments: resp} );
+      this.setState( {allComments: resp, loading: false} );
+      if (callback) callback();
     })
     .fail( err => {
       console.log(err);
-    })
+    });
   }
   reply(e) {
     e.preventDefault();
@@ -33,7 +36,7 @@ class Topic extends React.Component {
     this.setState({ replying: haveToken });
   }
   postComment(body) {
-    this.setState({ replying: false });
+    this.setState({ replying: false, loading: true });
     API.postComment(this.props._id, body, 'seed')
     .done(resp => (this.fetchComments.bind(this))())
     .fail(err => genErr(err.responseText));
@@ -56,10 +59,13 @@ class Topic extends React.Component {
                                          : [];
     return (
       <div className={addedClasses}>
-        <div >
+        <div>
           <div onClick={this.headerClicked.bind(this)} className="topicHead">
             <div className="container">
-              <h4 className="topicTitle">{this.props.title} {closeTopic} </h4>
+              <h4 className="topicTitle">
+                <strong>{this.props.title}</strong> &mdash; {this.props.user.username}
+                {closeTopic}
+              </h4>
             </div>
           </div>
           <div className="container topicContent">
@@ -71,6 +77,7 @@ class Topic extends React.Component {
               <button className="btn btn-success replyTopicButton" href="#" onClick={this.reply.bind(this)}>reply</button>
             </div>
             {newComment}
+            {this.state.loading ? <LoadingSpinner /> : []}
             {commentEls}
           </div>
         </div>
