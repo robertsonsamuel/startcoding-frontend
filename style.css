@@ -8,8 +8,8 @@ body {
 
 .floatingActionButton {
   position: fixed;
-  top: 80px;
-  right: 16px;
+  bottom: 20px;
+  right: 20px;
   background-color: #F44336;
   width:60px;
   height:60px;

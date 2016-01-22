@@ -1,5 +1,6 @@
 import React from 'react';
 import RegisterForm from './RegisterForm';
+import {genErr} from '../util/alerts';
 
 class EditComment extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class EditComment extends React.Component {
     if (this.refs.editText.value) {
       this.props.update(this.refs.editText.value);
     } else {
-      alert('Comment cannot be blank');
+      genErr('Comment cannot be blank');
       $('#editCommentBody').focus();
     }
   }

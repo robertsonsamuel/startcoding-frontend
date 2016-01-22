@@ -1,6 +1,7 @@
 import React from 'react';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
+import {LoginError, RegisterError} from '../util/alerts';
 import API from '../API';
 
 function hideLoginRegisterLogoutUsername(login, register, logout, username) {
@@ -50,7 +51,7 @@ class Navbar extends React.Component {
       localStorage.setItem('token', token);
       hideLoginRegisterLogoutUsername(true, true, false, true);
     })
-    .fail(err => alert(err.responseText));
+    .fail(err => LoginError(err.responseText));
   }
   register(newUserInfo) {
     API.register(newUserInfo)
@@ -59,7 +60,7 @@ class Navbar extends React.Component {
       localStorage.setItem('token', token);
       hideLoginRegisterLogoutUsername(true, true, false, true);
     })
-    .fail(err => alert(err.responseText));
+    .fail(err => RegisterError(err.responseText));
   }
   logout() {
     localStorage.removeItem('token');

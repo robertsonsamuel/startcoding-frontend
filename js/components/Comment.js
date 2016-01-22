@@ -3,7 +3,7 @@ import RegisterForm from './RegisterForm';
 import NewComment from './NewComment';
 import EditComment from './EditComment';
 import API from '../API';
-import {confirmDelete} from '../util/alerts';
+import {confirmDelete,genErr} from '../util/alerts';
 import {canHazToken, isAuthorized} from '../util/authorization';
 
 class Comment extends React.Component {
@@ -28,13 +28,13 @@ class Comment extends React.Component {
     this.setState({ replying: false });
     API.postComment(this.props._id, body)
     .done(resp => this.props.update())
-    .fail(err => alert(err.responseText));
+    .fail(err => genErr(err.responseText));
   }
   updateComment(update) {
     this.setState({ editing: false });
     API.updateComment(this.props._id, update)
     .done(resp => this.props.update())
-    .fail(err => alert(err.responseText));
+    .fail(err => genErr(err.responseText));
   }
   deleteComment(){
     API.deleteComment(this.props._id)

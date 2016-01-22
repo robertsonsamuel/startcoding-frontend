@@ -1,5 +1,6 @@
 import React from 'react';
 import API from '../API';
+import {genErr} from '../util/alerts';
 
 class NewTopicModal extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class NewTopicModal extends React.Component {
     let title = this.refs.title.value;
     let body = this.refs.body.value;
     if(title.length === 0 || body.length === 0){
-      return alert('Title and Body both required!')
+      return genErr('Title and Body both required!')
     }
     API.postTopic(title,body)
     .done(() =>{
@@ -18,7 +19,7 @@ class NewTopicModal extends React.Component {
       this.refs.body.value = '';
       this.props.topicPosted()
     })
-    .fail(err => alert(err.responseText));
+    .fail(err => genErr(err.responseText));
   }
   render() {
     return (

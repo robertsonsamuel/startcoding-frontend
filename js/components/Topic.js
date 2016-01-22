@@ -3,6 +3,7 @@ import API from '../API';
 import Comment from './Comment';
 import NewComment from './NewComment';
 import classNames from 'classnames';
+import {genErr} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
 
 class Topic extends React.Component {
@@ -33,7 +34,7 @@ class Topic extends React.Component {
     this.setState({ replying: false });
     API.postComment(this.props._id, body, 'seed')
     .done(resp => (this.fetchComments.bind(this))())
-    .fail(err => alert(err.responseText));
+    .fail(err => genErr(err.responseText));
   }
   discard() {
     this.setState({ replying: false });

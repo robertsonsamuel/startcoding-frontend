@@ -1,3 +1,10 @@
+const connectionErrorMsg = `Looks like you've been...
+                            (•_•) /  \n
+                            ( •_•)>⌐■-■ / \n
+                            (⌐■_■)
+                            disconnected..YEAAHHHH!`;
+
+
 export function confirmDelete(cb) {
   swal({
     title: "Are you sure?",
@@ -9,5 +16,38 @@ export function confirmDelete(cb) {
     closeOnConfirm: true
   }, function() {
       cb();
+  });
+}
+
+export function LoginError(text){
+  swal({
+    title:"Login Error",
+    text:text || connectionErrorMsg,
+    type:'error'
+  });
+}
+
+export function RegisterError(text){
+  swal({
+    title:"Registration Error",
+    text:text || connectionErrorMsg,
+    type:'error'
+  });
+}
+
+export function genErr(text) {
+  swal({
+    title:"Error",
+    text:text || connectionErrorMsg,
+    type:'error'
+  });
+}
+
+export function pleaseLogin(text) {
+  swal({
+    title:"You shall not pass. Login or register!",
+    text:"<img src='http://i.imgur.com/hnwNX2L.gif' width='300px'>",
+    type:'error',
+    html:true
   });
 }

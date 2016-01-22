@@ -1,9 +1,10 @@
 let loginMSg = 'Login or register, you sneaky fool!'
+import {pleaseLogin} from './alerts';
 
 export function canHazToken() {
   let token = localStorage.getItem('token');
   if (!token) {
-    alert(loginMSg);
+    pleaseLogin();
     return false;
   }
   let payload = JSON.parse(atob(token.split('.')[1]));

@@ -20201,6 +20201,8 @@
 	
 	var _LoginForm2 = _interopRequireDefault(_LoginForm);
 	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 169);
+	
 	var _API = __webpack_require__(/*! ../API */ 162);
 	
 	var _API2 = _interopRequireDefault(_API);
@@ -20276,7 +20278,7 @@
 	        localStorage.setItem('token', token);
 	        hideLoginRegisterLogoutUsername(true, true, false, true);
 	      }).fail(function (err) {
-	        return alert(err.responseText);
+	        return (0, _alerts.LoginError)(err.responseText);
 	      });
 	    }
 	  }, {
@@ -20287,7 +20289,7 @@
 	        localStorage.setItem('token', token);
 	        hideLoginRegisterLogoutUsername(true, true, false, true);
 	      }).fail(function (err) {
-	        return alert(err.responseText);
+	        return (0, _alerts.RegisterError)(err.responseText);
 	      });
 	    }
 	  }, {
@@ -20652,7 +20654,7 @@
 /*!**********************************!*\
   !*** ./js/util/authorization.js ***!
   \**********************************/
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -20661,12 +20663,14 @@
 	});
 	exports.canHazToken = canHazToken;
 	exports.isAuthorized = isAuthorized;
-	var loginMSg = 'Login or register, you sneaky fool!';
 	
+	var _alerts = __webpack_require__(/*! ./alerts */ 169);
+	
+	var loginMSg = 'Login or register, you sneaky fool!';
 	function canHazToken() {
 	  var token = localStorage.getItem('token');
 	  if (!token) {
-	    alert(loginMSg);
+	    (0, _alerts.pleaseLogin)();
 	    return false;
 	  }
 	  var payload = JSON.parse(atob(token.split('.')[1]));
@@ -20821,6 +20825,8 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 169);
+	
 	var _authorization = __webpack_require__(/*! ../util/authorization */ 163);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -20877,7 +20883,7 @@
 	      _API2.default.postComment(this.props._id, body, 'seed').done(function (resp) {
 	        return _this3.fetchComments.bind(_this3)();
 	      }).fail(function (err) {
-	        return alert(err.responseText);
+	        return (0, _alerts.genErr)(err.responseText);
 	      });
 	    }
 	  }, {
@@ -21051,7 +21057,7 @@
 	      _API2.default.postComment(this.props._id, body).done(function (resp) {
 	        return _this2.props.update();
 	      }).fail(function (err) {
-	        return alert(err.responseText);
+	        return (0, _alerts.genErr)(err.responseText);
 	      });
 	    }
 	  }, {
@@ -21063,7 +21069,7 @@
 	      _API2.default.updateComment(this.props._id, update).done(function (resp) {
 	        return _this3.props.update();
 	      }).fail(function (err) {
-	        return alert(err.responseText);
+	        return (0, _alerts.genErr)(err.responseText);
 	      });
 	    }
 	  }, {
@@ -21191,6 +21197,8 @@
 	
 	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
 	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 169);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21224,7 +21232,7 @@
 	      if (this.refs.body.value) {
 	        this.props.post(this.refs.body.value);
 	      } else {
-	        alert('Comment cannot be blank');
+	        (0, _alerts.genErr)('Comment cannot be blank');
 	        $('#newCommentBody').focus();
 	      }
 	    }
@@ -21299,6 +21307,8 @@
 	
 	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
 	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 169);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21328,7 +21338,7 @@
 	      if (this.refs.editText.value) {
 	        this.props.update(this.refs.editText.value);
 	      } else {
-	        alert('Comment cannot be blank');
+	        (0, _alerts.genErr)('Comment cannot be blank');
 	        $('#editCommentBody').focus();
 	      }
 	    }
@@ -21383,6 +21393,12 @@
 	  value: true
 	});
 	exports.confirmDelete = confirmDelete;
+	exports.LoginError = LoginError;
+	exports.RegisterError = RegisterError;
+	exports.genErr = genErr;
+	exports.pleaseLogin = pleaseLogin;
+	var connectionErrorMsg = "Looks like you've been...\n                            (•_•) /  \n\n                            ( •_•)>⌐■-■ / \n\n                            (⌐■_■)\n                            disconnected..YEAAHHHH!";
+	
 	function confirmDelete(cb) {
 	  swal({
 	    title: "Are you sure?",
@@ -21394,6 +21410,39 @@
 	    closeOnConfirm: true
 	  }, function () {
 	    cb();
+	  });
+	}
+	
+	function LoginError(text) {
+	  swal({
+	    title: "Login Error",
+	    text: text || connectionErrorMsg,
+	    type: 'error'
+	  });
+	}
+	
+	function RegisterError(text) {
+	  swal({
+	    title: "Registration Error",
+	    text: text || connectionErrorMsg,
+	    type: 'error'
+	  });
+	}
+	
+	function genErr(text) {
+	  swal({
+	    title: "Error",
+	    text: text || connectionErrorMsg,
+	    type: 'error'
+	  });
+	}
+	
+	function pleaseLogin(text) {
+	  swal({
+	    title: "You shall not pass. Login or register!",
+	    text: "<img src='http://i.imgur.com/hnwNX2L.gif' width='300px'>",
+	    type: 'error',
+	    html: true
 	  });
 	}
 
@@ -21477,6 +21526,8 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 169);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21505,14 +21556,14 @@
 	      var title = this.refs.title.value;
 	      var body = this.refs.body.value;
 	      if (title.length === 0 || body.length === 0) {
-	        return alert('Title and Body both required!');
+	        return (0, _alerts.genErr)('Title and Body both required!');
 	      }
 	      _API2.default.postTopic(title, body).done(function () {
 	        _this2.refs.title.value = '';
 	        _this2.refs.body.value = '';
 	        _this2.props.topicPosted();
 	      }).fail(function (err) {
-	        return alert(err.responseText);
+	        return (0, _alerts.genErr)(err.responseText);
 	      });
 	    }
 	  }, {

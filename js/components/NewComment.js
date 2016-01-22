@@ -1,5 +1,6 @@
 import React from 'react';
 import RegisterForm from './RegisterForm';
+import {genErr} from '../util/alerts';
 
 class NewComment extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class NewComment extends React.Component {
     if (this.refs.body.value) {
       this.props.post(this.refs.body.value);
     } else {
-      alert('Comment cannot be blank');
+      genErr('Comment cannot be blank');
       $('#newCommentBody').focus();
     }
   }
