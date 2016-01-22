@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import API from '../API';
 import {confirmDelete,genErr,pleaseLogin} from '../util/alerts';
 import {formatTime} from '../util/time';
+import {isAuthorized} from '../util/authorization';
 
 class Comment extends React.Component {
   constructor(props) {
