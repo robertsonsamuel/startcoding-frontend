@@ -27,7 +27,10 @@ class NewTopicModal extends React.Component {
         $('#newTopicModal .input').prop('disabled', false);
       });
     })
-    .fail(err => genErr(err.responseText));
+    .fail(err => {
+      $('#newTopicModal .input').prop('disabled', false);
+      genErr(err.responseText);
+    });
   }
   render() {
     return (

@@ -4,6 +4,7 @@ import LoadingSpinner from './LoadingSpinner';
 import Topic from './Topic';
 import NewTopicModal from './NewTopicModal';
 import classNames from 'classnames';
+import {genErr} from '../util/alerts';
 
 class Main extends React.Component {
   constructor(props) {
@@ -18,11 +19,11 @@ class Main extends React.Component {
     .done( resp => {
       this.setState( {allTopics: resp, loading: false} )
       $('#newTopicModal').modal('hide');
+    })
+    .fail( err => genErr(err.responseText))
+    .always( () => {
       if (callback) callback();
-    })
-    .fail( err => {
-      console.log(err);
-    })
+    });
   }
   componentWillMount() {
     (this.getTopics.bind(this))();
