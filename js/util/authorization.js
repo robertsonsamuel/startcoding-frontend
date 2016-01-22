@@ -18,3 +18,6 @@ export function isAuthorized(userId) {
   }
   return payload
 }
+
+
+//data-toggle="modal"

@@ -20684,6 +20684,8 @@
 	  }
 	  return payload;
 	}
+	
+	//data-toggle="modal"
 
 /***/ },
 /* 164 */
@@ -21001,6 +21003,10 @@
 	
 	var _EditComment2 = _interopRequireDefault(_EditComment);
 	
+	var _classnames = __webpack_require__(/*! classnames */ 170);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	var _API = __webpack_require__(/*! ../API */ 162);
 	
 	var _API2 = _interopRequireDefault(_API);
@@ -21094,6 +21100,10 @@
 	    value: function render() {
 	      var _this5 = this;
 	
+	      var changeButtons = (0, _classnames2.default)({
+	        disabled: !((0, _authorization.canHazToken)().id === this.props.user._id)
+	      });
+	
 	      var commentEls = this.props.children.map(function (child, i) {
 	        return _react2.default.createElement(Comment, _extends({}, child, { update: _this5.props.update, key: i }));
 	      });
@@ -21140,7 +21150,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { href: '#', onClick: this.edit.bind(this) },
+	              { href: '#', className: changeButtons, onClick: this.edit.bind(this) },
 	              'edit'
 	            )
 	          ),
@@ -21158,7 +21168,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { href: '#', onClick: this.delete.bind(this) },
+	              { href: '#', className: changeButtons, onClick: this.delete.bind(this) },
 	              'delete'
 	            )
 	          )
@@ -21437,7 +21447,7 @@
 	  });
 	}
 	
-	function pleaseLogin(text) {
+	function pleaseLogin() {
 	  swal({
 	    title: "You shall not pass. Login or register!",
 	    text: "<img src='http://i.imgur.com/hnwNX2L.gif' width='300px'>",
@@ -21526,6 +21536,8 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 163);
+	
 	var _alerts = __webpack_require__(/*! ../util/alerts */ 169);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -21549,6 +21561,12 @@
 	  }
 	
 	  _createClass(NewTopicModal, [{
+	    key: 'newTopic',
+	    value: function newTopic() {
+	      if (!(0, _authorization.canHazToken)()) return (0, _alerts.pleaseLogin)();
+	      $('#newTopicModal').modal('show');
+	    }
+	  }, {
 	    key: 'createTopic',
 	    value: function createTopic() {
 	      var _this2 = this;
@@ -21574,7 +21592,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'button',
-	          { type: 'button', className: 'floatingActionButton', 'data-toggle': 'modal', 'data-target': '#newTopicModal' },
+	          { type: 'button', className: 'floatingActionButton', onClick: this.newTopic.bind(this), 'data-target': '#newTopicModal' },
 	          _react2.default.createElement(
 	            'span',
 	            null,

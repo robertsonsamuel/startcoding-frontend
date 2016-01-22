@@ -1,11 +1,16 @@
 import React from 'react';
 import API from '../API';
-import {genErr} from '../util/alerts';
+import {canHazToken} from '../util/authorization';
+import {pleaseLogin,genErr} from '../util/alerts';
 
 class NewTopicModal extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = 'NewTopicModal';
+  }
+  newTopic(){
+    if(!canHazToken()) return pleaseLogin();
+    $('#newTopicModal').modal('show');
   }
   createTopic(){
     let title = this.refs.title.value;
@@ -24,7 +29,7 @@ class NewTopicModal extends React.Component {
   render() {
     return (
       <div>
-        <button type="button" className="floatingActionButton" data-toggle="modal" data-target="#newTopicModal">
+        <button type="button" className="floatingActionButton" onClick={this.newTopic.bind(this)}  data-target="#newTopicModal">
           <span>+</span>
         </button>
 

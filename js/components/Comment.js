@@ -2,6 +2,7 @@ import React from 'react';
 import RegisterForm from './RegisterForm';
 import NewComment from './NewComment';
 import EditComment from './EditComment';
+import classNames from 'classnames';
 import API from '../API';
 import {confirmDelete,genErr} from '../util/alerts';
 import {canHazToken, isAuthorized} from '../util/authorization';
@@ -46,6 +47,10 @@ class Comment extends React.Component {
     this.setState({ editing: false });
   }
   render() {
+    let changeButtons = classNames({
+      disabled:!(canHazToken().id === this.props.user._id )
+    })
+
     let commentEls = this.props.children.map( (child, i) => {
       return <Comment {...child} update={this.props.update} key={i} />
     });
@@ -64,9 +69,9 @@ class Comment extends React.Component {
         </div>
         <ol className="panel-footer breadcrumb">
           <span>{this.props.editTime || this.props.timestamp}</span>
-          <li><a href="#" onClick={this.edit.bind(this)}>edit</a></li>
+          <li><a href="#" className={changeButtons} onClick={this.edit.bind(this)}>edit</a></li>
           <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
-          <li><a href="#" onClick={this.delete.bind(this)}>delete</a></li>
+          <li><a href="#" className={changeButtons} onClick={this.delete.bind(this)}>delete</a></li>
         </ol>
         {newComment}
         {commentEls}

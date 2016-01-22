@@ -90,6 +90,10 @@ textarea {
   padding-bottom: 1em;
   overflow-y: scroll;
 }
+a.disabled {
+    pointer-events: none;
+    color: lightgrey;
+}
 .topicContent {
   display: none;
 }

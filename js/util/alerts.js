@@ -43,7 +43,7 @@ export function genErr(text) {
   });
 }
 
-export function pleaseLogin(text) {
+export function pleaseLogin() {
   swal({
     title:"You shall not pass. Login or register!",
     text:"<img src='http://i.imgur.com/hnwNX2L.gif' width='300px'>",
