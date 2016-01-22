@@ -73,7 +73,7 @@ class Topic extends React.Component {
               {this.props.body}
             </div>
             <div className="topicFooter">
-              <span className="timeStamp">{this.props.timestamp}</span>
+              <span className="timeStamp">{formatTime(this.props.timestamp)}</span>
               <button className="btn btn-success replyTopicButton" href="#" onClick={this.reply.bind(this)}>reply</button>
             </div>
             {newComment}
