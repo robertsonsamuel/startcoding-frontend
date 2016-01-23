@@ -24,6 +24,7 @@ class NewTopicModal extends React.Component {
     this.setState({ loading: true });
     API.postTopic(title, body)
     .done(() =>{
+      $('#newTopicModal').modal('hide');
       this.refs.title.value = '';
       this.refs.body.value = '';
       this.props.topicPosted(() => {

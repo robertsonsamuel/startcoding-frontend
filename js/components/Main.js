@@ -27,8 +27,7 @@ class Main extends React.Component {
   getTopics(callback){
     API.getTopics()
     .done( resp => {
-      this.setState( {allTopics: resp, loading: false} )
-      $('#newTopicModal').modal('hide');
+      this.setState( {allTopics: resp, loading: false} );
     })
     .fail( err => genErr(err.responseText))
     .always( () => {
