@@ -22631,15 +22631,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'button',
-	          { type: 'button', className: 'floatingActionButton', onClick: this.newTopic.bind(this), 'data-target': '#newTopicModal' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            '+'
-	          )
-	        ),
+	        _react2.default.createElement('img', { src: '../../fab.png', className: 'floatingActionButton', onClick: this.newTopic.bind(this), 'data-target': '#newTopicModal' }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'modal fade', id: 'newTopicModal' },

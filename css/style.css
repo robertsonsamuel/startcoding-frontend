@@ -109,11 +109,7 @@ span.greenItName {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #F44336;
-  width:60px;
-  height:60px;
   border-radius:100%;
-  border:none;
   outline:none;
   color:#FFF;
   font-size:36px;
@@ -335,9 +331,9 @@ a.disabled {
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
 
-    h4, .h4 {
+    /*h4, .h4 {
         font-size: 15px;
-    }
+    }*/
     span.greenItName {
         position: absolute;
         top: 20px;
@@ -375,7 +371,7 @@ a.disabled {
       position: relative;
       height: 100%;
       margin-bottom: 0;
-      overflow-y: initial;
+      /*overflow-y: initial;*/
     }
     .active {
         position: fixed;
@@ -557,22 +553,6 @@ span.greenItName {
       padding-bottom: 1em;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
-  }
-
-  .floatingActionButton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #F44336;
-    width:60px;
-    height:70px;
-    border-radius:100%;
-    border:none;
-    outline:none;
-    color:#FFF;
-    font-size:36px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
 }
