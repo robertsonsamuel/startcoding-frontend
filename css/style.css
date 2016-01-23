@@ -116,15 +116,17 @@ a.disabled {
   text-align: center;
 }
 .panel-body.topicBody {
-    border-left: 26px solid green;
-    border-top: 2px solid green;
-    border-bottom: 2px solid green;
-    border-right: 2px solid green;
-    background: rgba(213, 232, 204, 0.22);
-    padding: 50px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+  white-space: pre-line;
+  border-left: 26px solid green;
+  border-top: 2px solid green;
+  border-bottom: 2px solid green;
+  border-right: 2px solid green;
+  background: rgba(213, 232, 204, 0.22);
+  padding: 50px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
+
 .topicHead:hover{
   background-color: #F5F5F5;
   cursor: pointer;
@@ -147,6 +149,9 @@ a.disabled {
 }
 .topicFooter {
     padding: 20px;
+}
+.green .topicTitle {
+  background: #E8F5E9;
 }
 .comment {
   /*border: 1px solid grey;*/

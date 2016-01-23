@@ -12,6 +12,8 @@ class EventEmitter {
     this[callbacks][name] = theEvent ? theEvent.concat(cb) : [cb];
   }
   emitChange(name) {
+    console.log("emitting change", name);
+    if (!this[callbacks][name]) return;
     this[callbacks][name].forEach( cb => cb() );
   }
 }
@@ -22,11 +24,15 @@ class Store extends EventEmitter {
     this[data] = {};
   }
   saveDatum(name, datum) {
+    console.log("saving in store", name);
     this[data][name] = datum;
+    this.emitChange(name);
   }
   getDatum(name) {
+    console.log("sending out datum", name);
     return this[data][name];
   }
 }
 
 export const eventEmitter = new EventEmitter();
+export const store = new Store();

@@ -20277,7 +20277,6 @@
 	      _API2.default.login(userInfo).done(function (token) {
 	        clearInput();
 	        localStorage.setItem('token', token);
-	        _store.eventEmitter.emitChange('login');
 	        hideLoginRegisterLogoutUsername(true, true, false, true);
 	      }).fail(function (err) {
 	        return (0, _alerts.LoginError)(err.responseText);
@@ -20289,7 +20288,7 @@
 	      _API2.default.register(newUserInfo).done(function (token) {
 	        clearInput();
 	        localStorage.setItem('token', token);
-	        _store.eventEmitter.emitChange('login');
+	        _store.store.saveDatum('token', token);
 	        hideLoginRegisterLogoutUsername(true, true, false, true);
 	      }).fail(function (err) {
 	        return (0, _alerts.RegisterError)(err.responseText);
@@ -21982,11 +21981,13 @@
 	
 	var _authorization = __webpack_require__(/*! ./util/authorization */ 173);
 	
+	var _store = __webpack_require__(/*! ./util/store */ 174);
+	
 	var apiUrl = 'https://vast-sierra-7757.herokuapp.com';
 	// let apiUrl = 'http://localhost:3000';
 	
 	function setAuthHeader(xhr) {
-	  var token = localStorage.getItem('token');
+	  var token = _store.store.getDatum('token');
 	  xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 	}
 	
@@ -21995,7 +21996,24 @@
 	    return $.post(apiUrl + '/users/register', newUserInfo);
 	  },
 	  login: function login(userInfo) {
-	    return $.post(apiUrl + '/users/login', userInfo);
+	    return $.post(apiUrl + '/users/login', userInfo).done(function (resp) {
+	      console.log("got token on login", resp);
+	      _store.store.saveDatum('token', resp);
+	    });
+	  },
+	  getMyInfo: function getMyInfo() {
+	    var token = _store.store.getDatum('token');
+	    var payload = (0, _authorization.parseToken)(token);
+	    console.log("API.getMyInfo for", payload.id);
+	    $.ajax({
+	      url: apiUrl + '/users/' + payload.id,
+	      type: 'GET',
+	      beforeSend: setAuthHeader
+	    }).done(function (resp) {
+	      console.log("API.getMyInfo response", resp);
+	      resp.greenTopics = new Set(resp.greenTopics);
+	      _store.store.saveDatum('me', resp);
+	    });
 	  },
 	  getTopics: function getTopics() {
 	    return $.get(apiUrl + '/topics/');
@@ -22043,6 +22061,9 @@
 	  }
 	};
 	
+	//listeners
+	_store.store.registerListener('token', API.getMyInfo);
+	
 	exports.default = API;
 
 /***/ },
@@ -22057,14 +22078,20 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.parseToken = parseToken;
 	exports.canHazToken = canHazToken;
 	exports.isAuthorized = isAuthorized;
 	var loginMSg = 'Login or register, you sneaky fool!';
 	
-	function canHazToken() {
-	  var token = localStorage.getItem('token');
+	function parseToken(token) {
 	  if (!token) return '';
 	  var payload = JSON.parse(atob(token.split('.')[1]));
+	  return payload;
+	}
+	
+	function canHazToken() {
+	  var token = localStorage.getItem('token');
+	  var payload = parseToken(token);
 	  return payload;
 	}
 	
@@ -22081,14 +22108,14 @@
   \**************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.eventEmitter = undefined;
+	exports.store = exports.eventEmitter = undefined;
 	
 	var _API = __webpack_require__(/*! ../API */ 172);
 	
@@ -22113,14 +22140,16 @@
 	  }
 	
 	  _createClass(EventEmitter, [{
-	    key: 'registerListener',
+	    key: "registerListener",
 	    value: function registerListener(name, cb) {
 	      var theEvent = this[callbacks][name];
 	      this[callbacks][name] = theEvent ? theEvent.concat(cb) : [cb];
 	    }
 	  }, {
-	    key: 'emitChange',
+	    key: "emitChange",
 	    value: function emitChange(name) {
+	      console.log("emitting change", name);
+	      if (!this[callbacks][name]) return;
 	      this[callbacks][name].forEach(function (cb) {
 	        return cb();
 	      });
@@ -22143,13 +22172,16 @@
 	  }
 	
 	  _createClass(Store, [{
-	    key: 'saveDatum',
+	    key: "saveDatum",
 	    value: function saveDatum(name, datum) {
+	      console.log("saving in store", name);
 	      this[data][name] = datum;
+	      this.emitChange(name);
 	    }
 	  }, {
-	    key: 'getDatum',
+	    key: "getDatum",
 	    value: function getDatum(name) {
+	      console.log("sending out datum", name);
 	      return this[data][name];
 	    }
 	  }]);
@@ -22158,6 +22190,7 @@
 	}(EventEmitter);
 	
 	var eventEmitter = exports.eventEmitter = new EventEmitter();
+	var store = exports.store = new Store();
 
 /***/ },
 /* 175 */
@@ -22202,6 +22235,8 @@
 	
 	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
 	
+	var _store = __webpack_require__(/*! ../util/store */ 174);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22218,7 +22253,17 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
 	
-	    _this.state = { allTopics: [], activeTopic: false, loading: true };
+	    _this.state = {
+	      allTopics: [],
+	      greens: new Set(),
+	      activeTopic: false,
+	      loading: true
+	    };
+	    _store.store.registerListener('me', function () {
+	      console.log("got new me!");
+	      var greens = _store.store.getDatum('me') ? _store.store.getDatum('me').greenTopics : new Set();
+	      _this.setState({ greens: greens });
+	    });
 	    return _this;
 	  }
 	
@@ -22252,8 +22297,14 @@
 	      var _this3 = this;
 	
 	      var topicEls = this.state.allTopics.map(function (topic, i) {
-	        var topicClasses = _this3.state.activeTopic === topic._id ? true : false;
-	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: topicClasses, onClick: _this3.handleTopicClick.bind(_this3, topic._id), key: i }));
+	        var isActive = _this3.state.activeTopic === topic._id;
+	        //this.state.greens.has(topic._id)
+	        var topicClasses = (0, _classnames2.default)({ green: true });
+	        console.log("topicClasses", topicClasses);
+	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: isActive,
+	          isGreen: true,
+	          onClick: _this3.handleTopicClick.bind(_this3, topic._id),
+	          key: i }));
 	      });
 	      var mainClasses = (0, _classnames2.default)('main', 'panel', { displayTopic: this.state.activeTopic });
 	      return _react2.default.createElement(
@@ -22403,13 +22454,9 @@
 	      loading: true
 	    };
 	
-	    _store.eventEmitter.registerListener('login', function () {
-	      _this.setState({ token: (0, _authorization.canHazToken)() });
+	    _store.store.registerListener('token', function () {
+	      _this.setState({ token: _store.store.getDatum('token') });
 	    });
-	    _store.eventEmitter.registerListener('logout', function () {
-	      _this.setState({ token: (0, _authorization.canHazToken)() });
-	    });
-	
 	    return _this;
 	  }
 	
@@ -22471,7 +22518,10 @@
 	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { token: _this4.state.token, update: _this4.fetchComments.bind(_this4), key: i }));
 	        });
 	      }
-	      var addedClasses = (0, _classnames2.default)('topic', { active: this.props.isActive });
+	      var addedClasses = (0, _classnames2.default)('topic', {
+	        active: this.props.isActive,
+	        green: this.props.isGreen
+	      });
 	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
 	        discard: this.discard.bind(this) }) : [];
 	      return _react2.default.createElement(

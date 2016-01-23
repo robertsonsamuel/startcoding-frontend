@@ -1,10 +1,15 @@
 let loginMSg = 'Login or register, you sneaky fool!';
 
-export function canHazToken() {
-  let token = localStorage.getItem('token');
+export function parseToken(token) {
   if (!token) return '';
   let payload = JSON.parse(atob(token.split('.')[1]));
-  return payload
+  return payload;
+}
+
+export function canHazToken() {
+  let token = localStorage.getItem('token');
+  let payload = parseToken(token);
+  return payload;
 }
 
 export function isAuthorized(userId) {
