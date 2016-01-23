@@ -59,7 +59,7 @@ class Comment extends React.Component {
   }
   render() {
     let changeButtons = classNames({
-      disabled: !( this.props.token.id === this.props.user._id )
+      disabled: (this.props.token.id !== this.props.user._id) || !this.props.timestamp
     })
 
     let commentEls = this.props.children.map( (child, i) => {
@@ -72,8 +72,12 @@ class Comment extends React.Component {
                                                         discard={this.discard.bind(this)}
                                                         body={this.props.body}/>
                                          : <div>{this.props.body}</div>
-    let timestamp = this.props.editTime ? `*edited ${formatTime(this.props.editTime)}`
-                                        : formatTime(this.props.timestamp);
+    let timestamp;
+    if (this.props.editTime) {
+      timestamp = `*edited ${formatTime(this.props.editTime)}`;
+    } else {
+      timestamp = this.props.timestamp ? formatTime(this.props.timestamp) : '';
+    }
     return (
       <div className="panel panel-default comment">
         <div className="panel-heading"><div className="panel-title"><div className="panel-title">{this.props.user.username}</div></div></div>
