@@ -22032,6 +22032,11 @@
 	    });
 	  },
 	  getComments: function getComments(topicId) {
+	    var me = _store.store.getDatum('me');
+	    console.log("this is me in API.getComments", me);
+	    me.greenTopics.add(topicId);
+	    console.log("new Greens", me.greenTopics);
+	    _store.store.saveDatum('me', me);
 	    return $.ajax({
 	      url: apiUrl + '/comments/' + topicId,
 	      type: 'GET',
