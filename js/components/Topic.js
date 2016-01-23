@@ -15,10 +15,11 @@ class Topic extends React.Component {
     super(props);
     this.state = {
       allComments: [],
-      token: "",
+      token: store.getDatum("token") ? store.getDatum("token") : "",
       replying: false,
       loading: true
     };
+
     store.registerListener('token', ()=> {
       this.setState({ token: store.getDatum('token') });
     });

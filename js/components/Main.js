@@ -12,7 +12,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       allTopics: [],
-      greens: new Set(),
+      greens: store.getDatum('me') ? store.getDatum('me').greenTopics : new Set(),
       activeTopic: false,
       loading: true
     };

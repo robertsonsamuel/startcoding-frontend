@@ -63,10 +63,9 @@ class Comment extends React.Component {
     this.setState({ editing: false });
   }
   render() {
-    let myId = parseToken(this.props.token);
-    console.log("my ID", myId);
+    let payload = parseToken(this.props.token);
     let changeButtons = classNames({
-      disabled: (myId != this.props.user._id) || !this.props.timestamp
+      disabled: (payload.id != this.props.user._id) || !this.props.timestamp
     })
 
     let commentEls = this.props.children.map( (child, i) => {
