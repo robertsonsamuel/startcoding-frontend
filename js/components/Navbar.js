@@ -3,23 +3,21 @@ import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import {LoginError, RegisterError} from '../util/alerts';
 import API from '../API';
-import {eventEmitter, store} from '../util/store'
+import {store} from '../util/store';
+import init from '../util/init';
+import {parseToken} from '../util/authorization';
 
 function hideLoginRegisterLogoutUsername(login, register, logout, username) {
   login    ? $('#Login').hide()    : $('#Login').show();
   register ? $('#Register').hide() : $('#Register').show();
   logout   ? $('#Logout').hide()   : $('#Logout').show();
   if (username) {
-    $('#username').text(retrieveToken().username);
+    let payload = parseToken(store.getDatum('token'));
+    $('#username').text(payload.username);
     $('#welcome').show();
   } else {
     $('#welcome').hide();
   }
-}
-
-function retrieveToken() {
-  let token = localStorage.getItem('token');
-  return token ? JSON.parse(atob(token.split('.')[1])) : false;
 }
 
 function clearInput() {
@@ -29,13 +27,8 @@ function clearInput() {
 
 class Navbar extends React.Component {
   componentDidMount() {
-    // check for a token and display logged-in state if a valid token exists
-    let tokenPayload = retrieveToken();
-    if (!tokenPayload) return;
-    if (Date.now() < tokenPayload.exp * 1000) {
+    if (init()) {
       hideLoginRegisterLogoutUsername(true, true, false, true);
-    } else {
-      localStorage.removeItem('token');
     }
   }
   showRegister() {
@@ -48,7 +41,6 @@ class Navbar extends React.Component {
     API.login(userInfo)
     .done(token => {
       clearInput();
-      localStorage.setItem('token', token);
       hideLoginRegisterLogoutUsername(true, true, false, true);
     })
     .fail(err => LoginError(err.responseText));
@@ -65,7 +57,6 @@ class Navbar extends React.Component {
   }
   logout() {
     localStorage.removeItem('token');
-    eventEmitter.emitChange('logout');
     hideLoginRegisterLogoutUsername(false, true, true, false);
   }
   render() {

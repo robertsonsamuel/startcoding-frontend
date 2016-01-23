@@ -18,6 +18,7 @@ let API = {
     return $.post(`${apiUrl}/users/login`, userInfo)
     .done( resp => {
       console.log("got token on login", resp);
+      localStorage.setItem('token', resp);
       store.saveDatum('token', resp);
     });
   },

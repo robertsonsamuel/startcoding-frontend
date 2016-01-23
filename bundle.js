@@ -20209,6 +20209,12 @@
 	
 	var _store = __webpack_require__(/*! ../util/store */ 174);
 	
+	var _init = __webpack_require__(/*! ../util/init */ 283);
+	
+	var _init2 = _interopRequireDefault(_init);
+	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20222,16 +20228,12 @@
 	  register ? $('#Register').hide() : $('#Register').show();
 	  logout ? $('#Logout').hide() : $('#Logout').show();
 	  if (username) {
-	    $('#username').text(retrieveToken().username);
+	    var payload = (0, _authorization.parseToken)(_store.store.getDatum('token'));
+	    $('#username').text(payload.username);
 	    $('#welcome').show();
 	  } else {
 	    $('#welcome').hide();
 	  }
-	}
-	
-	function retrieveToken() {
-	  var token = localStorage.getItem('token');
-	  return token ? JSON.parse(atob(token.split('.')[1])) : false;
 	}
 	
 	function clearInput() {
@@ -20252,13 +20254,8 @@
 	  _createClass(Navbar, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      // check for a token and display logged-in state if a valid token exists
-	      var tokenPayload = retrieveToken();
-	      if (!tokenPayload) return;
-	      if (Date.now() < tokenPayload.exp * 1000) {
+	      if ((0, _init2.default)()) {
 	        hideLoginRegisterLogoutUsername(true, true, false, true);
-	      } else {
-	        localStorage.removeItem('token');
 	      }
 	    }
 	  }, {
@@ -20276,7 +20273,6 @@
 	    value: function login(userInfo) {
 	      _API2.default.login(userInfo).done(function (token) {
 	        clearInput();
-	        localStorage.setItem('token', token);
 	        hideLoginRegisterLogoutUsername(true, true, false, true);
 	      }).fail(function (err) {
 	        return (0, _alerts.LoginError)(err.responseText);
@@ -20298,7 +20294,6 @@
 	    key: 'logout',
 	    value: function logout() {
 	      localStorage.removeItem('token');
-	      _store.eventEmitter.emitChange('logout');
 	      hideLoginRegisterLogoutUsername(false, true, true, false);
 	    }
 	  }, {
@@ -21999,6 +21994,7 @@
 	  login: function login(userInfo) {
 	    return $.post(apiUrl + '/users/login', userInfo).done(function (resp) {
 	      console.log("got token on login", resp);
+	      localStorage.setItem('token', resp);
 	      _store.store.saveDatum('token', resp);
 	    });
 	  },
@@ -36385,6 +36381,38 @@
 	}(_react2.default.Component);
 	
 	exports.default = NewTopicModal;
+
+/***/ },
+/* 283 */
+/*!*************************!*\
+  !*** ./js/util/init.js ***!
+  \*************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = init;
+	
+	var _store = __webpack_require__(/*! ./store */ 174);
+	
+	function init() {
+	
+	  var token = localStorage.getItem('token');
+	  var tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : false;
+	
+	  if (!tokenPayload) return false;
+	
+	  if (Date.now() > tokenPayload.exp * 1000) {
+	    localStorage.removeItem('token');
+	    return false;
+	  }
+	
+	  _store.store.saveDatum('token', token);
+	  return true;
+	}
 
 /***/ }
 /******/ ]);
