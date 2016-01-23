@@ -22200,6 +22200,8 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22227,14 +22229,16 @@
 	    }
 	  }, {
 	    key: 'getTopics',
-	    value: function getTopics() {
+	    value: function getTopics(callback) {
 	      var _this2 = this;
 	
 	      _API2.default.getTopics().done(function (resp) {
 	        _this2.setState({ allTopics: resp, loading: false });
 	        $('#newTopicModal').modal('hide');
 	      }).fail(function (err) {
-	        console.log(err);
+	        return (0, _alerts.genErr)(err.responseText);
+	      }).always(function () {
+	        if (callback) callback();
 	      });
 	    }
 	  }, {
@@ -22595,7 +22599,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Comment).call(this, props));
 	
-	    _this.state = { replying: false, editing: false, loading: false };
+	    _this.state = { replying: false, editing: false, updating: false, loading: false };
 	    return _this;
 	  }
 	
@@ -22638,9 +22642,11 @@
 	    value: function updateComment(update) {
 	      var _this3 = this;
 	
-	      this.setState({ editing: false });
+	      this.setState({ editing: false, updating: true });
 	      _API2.default.updateComment(this.props._id, update).done(function (resp) {
-	        return _this3.props.update();
+	        _this3.props.update(function () {
+	          _this3.setState({ updating: false });
+	        });
 	      }).fail(function (err) {
 	        return (0, _alerts.genErr)(err.responseText);
 	      });
@@ -22668,7 +22674,7 @@
 	      var _this5 = this;
 	
 	      var changeButtons = (0, _classnames2.default)({
-	        disabled: !(this.props.token.id === this.props.user._id)
+	        disabled: this.props.token.id !== this.props.user._id || !this.props.timestamp
 	      });
 	
 	      var commentEls = this.props.children.map(function (child, i) {
@@ -22683,7 +22689,12 @@
 	        null,
 	        this.props.body
 	      );
-	      var timestamp = this.props.editTime ? '*edited ' + (0, _time.formatTime)(this.props.editTime) : (0, _time.formatTime)(this.props.timestamp);
+	      var timestamp = undefined;
+	      if (this.props.editTime) {
+	        timestamp = '*edited ' + (0, _time.formatTime)(this.props.editTime);
+	      } else {
+	        timestamp = this.props.timestamp ? (0, _time.formatTime)(this.props.timestamp) : '';
+	      }
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'panel panel-default comment' },
@@ -22703,6 +22714,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
+	          this.state.updating ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
 	          commentBody
 	        ),
 	        _react2.default.createElement(
@@ -36179,6 +36191,10 @@
 	
 	var _API2 = _interopRequireDefault(_API);
 	
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner */ 176);
+	
+	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+	
 	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
 	
 	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
@@ -36200,6 +36216,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewTopicModal).call(this, props));
 	
 	    _this.displayName = 'NewTopicModal';
+	    _this.state = { loading: false };
 	    return _this;
 	  }
 	
@@ -36219,12 +36236,19 @@
 	      if (title.length === 0 || body.length === 0) {
 	        return (0, _alerts.genErr)('Title and Body both required!');
 	      }
+	      $('#newTopicModal .input').prop('disabled', true); // disable inputs
+	      this.setState({ loading: true });
 	      _API2.default.postTopic(title, body).done(function () {
 	        _this2.refs.title.value = '';
 	        _this2.refs.body.value = '';
-	        _this2.props.topicPosted();
+	        _this2.props.topicPosted(function () {
+	          $('#newTopicModal .input').prop('disabled', false);
+	        });
 	      }).fail(function (err) {
-	        return (0, _alerts.genErr)(err.responseText);
+	        $('#newTopicModal .input').prop('disabled', false);
+	        (0, _alerts.genErr)(err.responseText);
+	      }).always(function () {
+	        return _this2.setState({ loading: false });
 	      });
 	    }
 	  }, {
@@ -36272,20 +36296,25 @@
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'modal-body' },
-	                _react2.default.createElement('input', { type: 'text', ref: 'title', className: 'newTopicTitle', placeholder: 'Title', required: true }),
-	                _react2.default.createElement('textarea', { id: 'newTitleBody', placeholder: '...', className: 'form-control', ref: 'body', rows: '4', required: true })
+	                _react2.default.createElement('input', { type: 'text', ref: 'title', className: 'newTopicTitle input', placeholder: 'Title', required: true }),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'spinnerContainer' },
+	                  this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : []
+	                ),
+	                _react2.default.createElement('textarea', { id: 'newTitleBody', placeholder: '...', className: 'form-control input', ref: 'body', rows: '5', required: true })
 	              ),
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'modal-footer' },
 	                _react2.default.createElement(
 	                  'button',
-	                  { type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
+	                  { type: 'button', className: 'btn btn-default input', 'data-dismiss': 'modal' },
 	                  'Discard'
 	                ),
 	                _react2.default.createElement(
 	                  'button',
-	                  { type: 'button', className: 'btn btn-primary', onClick: this.createTopic.bind(this) },
+	                  { type: 'button', className: 'btn btn-primary input', onClick: this.createTopic.bind(this) },
 	                  'Post'
 	                )
 	              )
