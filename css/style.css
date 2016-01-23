@@ -5,16 +5,111 @@ body {
   color: #1F4832;
   background: #fcfffc;
 }
+ul#Login {
+    left: 10%;
+    position: relative;
+}
+ul#Register {
+    position: relative;
+    left: 15%;
+}
+
+.btn-round {
+  background-color: white;
+  border-radius: 999em;
+  width: 1.7em;
+  height: 1.7em;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  line-height: 1;
+  font-size: 36px;
+  z-index: -1;
+  position: relative;
+  cursor: pointer;
+  top: -20px;
+  left: -5px;
+}
+
+div.greenit-logo{
+  margin:3em auto;
+  width:50em;
+}
+
+div.greenit-logo a{
+  text-decoration:none;
+  color:#64AF67;
+}
+
+div.leaf-logo{
+  border-radius: 0 75% 0 70%;
+  background-color: #90D788;
+  width: 1.0em;
+  height: 1.0em;
+  overflow: hidden;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  display: inline-block;
+  vertical-align: center;
+  position: absolute;
+  bottom: 13px;
+  right: 12px;
+  margin: 0 auto;
+}
+
+div.leaf-logo div.leaf-shadow{
+  width:6.3em;
+  height:10.6em;
+  background-color:#64AF67;
+  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);
+}
+
+.\#title{
+  display:inline-block;
+  font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;
+  padding:0;
+  margin:0;
+}
+
+.greenit-logo:hover {
+
+}
+.greenit-logo:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.4);
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+
+}
+.greenit-logo:hover:after {
+    width: 120%;
+    background-color: rgba(255,255,255,0);
+    -webkit-transition: all 0.9s ease-out;
+    -moz-transition: all 0.9s ease-out;
+    -ms-transition: all 0.9s ease-out;
+    -o-transition: all 0.9s ease-out;
+    transition: all 0.9s ease-out;
+}
+div#bs-example-navbar-collapse-2 {
+    position: relative;
+    /*left: 8%;*/
+}
+span.greenItName {
+    position: absolute;
+    top: 20px;
+    left: 7%;
+}
 
 .floatingActionButton {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #F44336;
-  width:60px;
-  height:60px;
   border-radius:100%;
-  border:none;
   outline:none;
   color:#FFF;
   font-size:36px;
@@ -89,17 +184,20 @@ textarea {
 .displayTopic {
   overflow: hidden;
 }
+
 .active {
-  position: fixed;
-  background: white;
-  height: calc(100vh - 64px);
-  top: 64px;
-  right: 0;
-  left: 0;
-  margin:auto;
-  padding-bottom: 1em;
-  overflow-y: scroll;
+    position: fixed;
+    background: white;
+    height: calc(100vh - 64px);
+    bottom: 0;
+    right: 0;
+    z-index: 4000;
+    left: 0;
+    margin: auto;
+    padding-bottom: 1em;
+    overflow-y: scroll;
 }
+
 a.disabled {
     pointer-events: none;
     color: lightgrey;
@@ -182,4 +280,364 @@ a.disabled {
 
 .new-comment-buttons .btn {
   margin-left: 1em;
+}
+
+
+@media (max-width:768px) and (min-width:667px) {
+  span.greenItName {
+      position: absolute;
+      top: 20px;
+      left: 38%;
+      display: none;
+  }
+}
+
+/* ----------- iPhone 4 and 4S ----------- */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+  h4, .h4 {
+      font-size: 15px;
+  }
+  span.greenItName {
+      position: absolute;
+      top: 20px;
+      left: 38%;
+  }
+  .main {
+    position: relative;
+      height: 100%;
+      margin-bottom: 0;
+      overflow-y: initial;
+
+  }
+
+  .active {
+      position: fixed;
+      background: white;
+      height: calc(100vh);
+      top: 0;
+      right: 0;
+      z-index: 4000;
+      left: 0;
+      margin: auto;
+      padding-bottom: 1em;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+  }
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+    /*h4, .h4 {
+        font-size: 15px;
+    }*/
+    span.greenItName {
+        position: absolute;
+        top: 20px;
+        left: 38%;
+    }
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+    h4, .h4 {
+        font-size: 15px;
+    }
+    span.greenItName {
+        position: absolute;
+        top: 20px;
+        left: 38%;
+    }
+
+}
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    .main {
+      position: relative;
+      height: 100%;
+      margin-bottom: 0;
+      /*overflow-y: initial;*/
+    }
+    .active {
+        position: fixed;
+        background: white;
+        height: calc(100vh);
+        top: 0;
+        right: 0;
+        z-index: 4000;
+        left: 0;
+        margin: auto;
+        padding-bottom: 1em;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+    main {
+      position: relative;
+        height: 100%;
+        margin-bottom: 0;
+        overflow-y: initial;
+    }
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+  .main {
+    position: relative;
+      height: 100%;
+      margin-bottom: 0;
+      overflow-y: initial;
+  }
+  .active {
+      position: fixed;
+      background: white;
+      height: calc(100vh);
+      top: 0;
+      right: 0;
+      z-index: 4000;
+      left: 0;
+      margin: auto;
+      padding-bottom: 1em;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+  }
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+span.greenItName {
+    position: absolute;
+    top: 20px;
+    left: 43%;
+}
+
+}
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+    .main {
+      position: relative;
+      height: 100%;
+      margin-bottom: 0;
+      overflow-y: initial;
+    }
+    .active {
+        position: fixed;
+        background: white;
+        height: calc(100vh);
+        top: 0;
+        right: 0;
+        z-index: 4000;
+        left: 0;
+        margin: auto;
+        padding-bottom: 1em;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) {
+    .main {
+      position: relative;
+      height: 100%;
+      margin-bottom: 0;
+      overflow-y: initial;
+    }
+
+    span.greenItName {
+        position: absolute;
+        top: 20px;
+        left: 43%;
+    }
+}
+
+/* ----------- iPad mini ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+    .main {
+      position: relative;
+    height: 100%;
+    margin-bottom: 0;
+    overflow-y: initial;
+  }
+  span.greenItName {
+      position: absolute;
+      top: 20px;
+      left: 7%;
+      display: none;
+  }
+  .active {
+      position: fixed;
+      background: white;
+      height: calc(100vh);
+      top: 0;
+      right: 0;
+      z-index: 4000;
+      left: 0;
+      margin: auto;
+      padding-bottom: 1em;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+  }
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: portrait)
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+}
+
+
+/* ----------- iPad 3 and 4 ----------- */
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+span.greenItName {
+    position: absolute;
+    top: 20px;
+    left: 7%;
+    display: none;
+}
+
+.main {
+  position: relative;
+      height: 100%;
+      margin-bottom: 0;
+      overflow-y: initial;
+}
+.active {
+    position: fixed;
+    background: white;
+    height: calc(100vh);
+    top: 0;
+    right: 0;
+    z-index: 4000;
+    left: 0;
+    margin: auto;
+    padding-bottom: 1em;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: portrait)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    span.greenItName {
+    position: absolute;
+    top: 20px;
+    left: 7%;
+    display: none;
+}
+
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
 }

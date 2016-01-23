@@ -73,12 +73,21 @@ class Navbar extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a className="navbar-brand" href="#">Green it!</a>
+              <div className="navbar-brand" href="#">
+                <div className="btn-round">
+                      <div className='leaf-logo'>
+                        <div className='leaf-shadow'>
+                        </div>
+                     </div>
+                  </div>
+                  <span className="greenItName">Green it!</span>
+              </div>
+
+
             </div>
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
               <ul id="welcome" className="nav navbar-nav navbar-left">
-                <li><a href="#">Hello, <span id="username"></span></a></li>
               </ul>
               <ul id="Login" className="nav navbar-nav">
                 <li><LoginForm login={this.login.bind(this)} /></li>
@@ -89,6 +98,7 @@ class Navbar extends React.Component {
                 <li><a href="#" onClick={this.showLogin.bind(this)}>Already a member? <strong>Log in!</strong></a></li>
               </ul>
               <ul id="Logout" className="nav navbar-nav navbar-right">
+                <li><a href="#">Hello, <span id="username"></span></a></li>
                 <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
               </ul>
             </div>

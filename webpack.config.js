@@ -7,7 +7,11 @@ module.exports = {
     filename: "bundle.js"
   },
   plugins: [
+<<<<<<< HEAD
     new webpack.optimize.UglifyJsPlugin({minimize: true})
+=======
+     new webpack.optimize.UglifyJsPlugin({minimize: true})
+>>>>>>> master
   ],
   module:{
     loaders:[
