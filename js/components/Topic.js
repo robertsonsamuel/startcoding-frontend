@@ -15,7 +15,7 @@ class Topic extends React.Component {
     super(props);
     this.state = {
       allComments: [],
-      token: canHazToken(),
+      token: "",
       replying: false,
       loading: true
     };
@@ -60,7 +60,9 @@ class Topic extends React.Component {
     if (this.props.isActive) {
       closeTopic = <span className="glyphicon glyphicon-remove closeTopic" />;
       commentEls = this.state.allComments.map( (comment, i) => {
-        return <Comment {...comment} token={this.state.token} update={this.fetchComments.bind(this)} key={i} />
+        return <Comment {...comment} token={this.state.token}
+                                     update={this.fetchComments.bind(this)}
+                                     key={i} />
       });
     }
     let addedClasses = classNames('topic', {

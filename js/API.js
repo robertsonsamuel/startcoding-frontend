@@ -51,8 +51,10 @@ let API = {
   },
   getComments(topicId) {
     let me = store.getDatum('me');
-    me.greenTopics.add(topicId);
-    store.saveDatum('me', me);
+    if (me) {
+      me.greenTopics.add(topicId);
+      store.saveDatum('me', me);
+    };
     return $.ajax({
       url: `${apiUrl}/comments/${topicId}`,
       type: 'GET',
