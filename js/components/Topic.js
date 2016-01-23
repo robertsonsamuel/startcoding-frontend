@@ -7,25 +7,22 @@ import classNames from 'classnames';
 import {genErr, pleaseLogin} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
 import {formatTime} from '../util/time';
-import {eventEmitter} from '../util/store';
+import {store} from '../util/store';
+
 
 class Topic extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       allComments: [],
-      token: canHazToken(),
+      token: store.getDatum("token") ? store.getDatum("token") : "",
       replying: false,
-      loading: true,
+      loading: true
     };
 
-    eventEmitter.registerListener('login', ()=> {
-      this.setState({ token: canHazToken() });
+    store.registerListener('token', ()=> {
+      this.setState({ token: store.getDatum('token') });
     });
-    eventEmitter.registerListener('logout', () => {
-      this.setState({ token: canHazToken() });
-    });
-
   }
   headerClicked() {
     if (!this.props.isActive) {
@@ -64,10 +61,15 @@ class Topic extends React.Component {
     if (this.props.isActive) {
       closeTopic = <span className="glyphicon glyphicon-remove closeTopic" />;
       commentEls = this.state.allComments.map( (comment, i) => {
-        return <Comment {...comment} token={this.state.token} update={this.fetchComments.bind(this)} key={i} />
+        return <Comment {...comment} token={this.state.token}
+                                     update={this.fetchComments.bind(this)}
+                                     key={i} />
       });
     }
-    let addedClasses = classNames('topic', {active: this.props.isActive});
+    let addedClasses = classNames('topic', {
+        active: this.props.isActive,
+        green: this.props.isGreen
+      });
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
                                                        discard={this.discard.bind(this)} />
                                          : [];

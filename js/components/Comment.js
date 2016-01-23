@@ -7,12 +7,17 @@ import classNames from 'classnames';
 import API from '../API';
 import {confirmDelete,genErr,pleaseLogin} from '../util/alerts';
 import {formatTime} from '../util/time';
-import {isAuthorized} from '../util/authorization';
+import {isAuthorized, parseToken} from '../util/authorization';
 
 class Comment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { replying: false, editing: false, updating: false, loading: false };
+    this.state = {
+      replying: false,
+      editing: false,
+      updating: false,
+      loading: false
+    };
   }
   reply(e) {
     if (this.state.editing) return;
@@ -58,8 +63,9 @@ class Comment extends React.Component {
     this.setState({ editing: false });
   }
   render() {
+    let payload = parseToken(this.props.token);
     let changeButtons = classNames({
-      disabled: (this.props.token.id !== this.props.user._id) || !this.props.timestamp
+      disabled: (payload.id != this.props.user._id) || !this.props.timestamp
     })
 
     let commentEls = this.props.children.map( (child, i) => {
