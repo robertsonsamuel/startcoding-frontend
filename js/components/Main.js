@@ -17,8 +17,8 @@ class Main extends React.Component {
       loading: true
     };
     store.registerListener('me', () => {
-      console.log("got new me!");
       let greens = store.getDatum('me') ? store.getDatum('me').greenTopics : new Set();
+      console.log("my greens, in main", greens);
       this.setState({ greens: greens });
     })
   }
@@ -42,11 +42,8 @@ class Main extends React.Component {
   render() {
     let topicEls = this.state.allTopics.map((topic,i) => {
       let isActive = this.state.activeTopic === topic._id;
-      //this.state.greens.has(topic._id)
-      let topicClasses = classNames({ green : true});
-      console.log("topicClasses", topicClasses);
       return <Topic {...topic} isActive={isActive}
-                               isGreen={true}
+                               isGreen={this.state.greens.has(topic._id)}
                                onClick={this.handleTopicClick.bind(this,topic._id)}
                                key={i}/>
     });

@@ -21988,6 +21988,7 @@
 	
 	function setAuthHeader(xhr) {
 	  var token = _store.store.getDatum('token');
+	  console.log("setting header", token);
 	  xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 	}
 	
@@ -22031,7 +22032,11 @@
 	    });
 	  },
 	  getComments: function getComments(topicId) {
-	    return $.get(apiUrl + '/comments/' + topicId);
+	    return $.ajax({
+	      url: apiUrl + '/comments/' + topicId,
+	      type: 'GET',
+	      beforeSend: setAuthHeader
+	    });
 	  },
 	  postComment: function postComment(parentId, body, seed) {
 	    var query = seed ? '?seed=true' : '';
@@ -22260,8 +22265,8 @@
 	      loading: true
 	    };
 	    _store.store.registerListener('me', function () {
-	      console.log("got new me!");
 	      var greens = _store.store.getDatum('me') ? _store.store.getDatum('me').greenTopics : new Set();
+	      console.log("my greens, in main", greens);
 	      _this.setState({ greens: greens });
 	    });
 	    return _this;
@@ -22298,11 +22303,8 @@
 	
 	      var topicEls = this.state.allTopics.map(function (topic, i) {
 	        var isActive = _this3.state.activeTopic === topic._id;
-	        //this.state.greens.has(topic._id)
-	        var topicClasses = (0, _classnames2.default)({ green: true });
-	        console.log("topicClasses", topicClasses);
 	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: isActive,
-	          isGreen: true,
+	          isGreen: _this3.state.greens.has(topic._id),
 	          onClick: _this3.handleTopicClick.bind(_this3, topic._id),
 	          key: i }));
 	      });
@@ -22453,7 +22455,6 @@
 	      replying: false,
 	      loading: true
 	    };
-	
 	    _store.store.registerListener('token', function () {
 	      _this.setState({ token: _store.store.getDatum('token') });
 	    });

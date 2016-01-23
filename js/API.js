@@ -6,6 +6,7 @@ import {store} from './util/store';
 
 function setAuthHeader(xhr) {
   let token = store.getDatum('token');
+  console.log("setting header", token);
   xhr.setRequestHeader('Authorization', `Bearer ${token}`);
 }
 
@@ -51,7 +52,11 @@ let API = {
     });
   },
   getComments(topicId) {
-    return $.get(`${apiUrl}/comments/${topicId}`)
+    return $.ajax({
+      url: `${apiUrl}/comments/${topicId}`,
+      type: 'GET',
+      beforeSend: setAuthHeader
+    })
   },
   postComment(parentId, body, seed) {
     let query = seed ? '?seed=true' : '';

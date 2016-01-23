@@ -19,7 +19,6 @@ class Topic extends React.Component {
       replying: false,
       loading: true
     };
-
     store.registerListener('token', ()=> {
       this.setState({ token: store.getDatum('token') });
     });
