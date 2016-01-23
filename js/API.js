@@ -6,7 +6,6 @@ import {store} from './util/store';
 
 function setAuthHeader(xhr) {
   let token = store.getDatum('token');
-  console.log("setting header", token);
   xhr.setRequestHeader('Authorization', `Bearer ${token}`);
 }
 
@@ -17,22 +16,20 @@ let API = {
   login(userInfo) {
     return $.post(`${apiUrl}/users/login`, userInfo)
     .done( resp => {
-      console.log("got token on login", resp);
       localStorage.setItem('token', resp);
       store.saveDatum('token', resp);
     });
   },
   getMyInfo() {
     let token = store.getDatum('token');
+    if (!token) return;
     let payload = parseToken(token);
-    console.log("API.getMyInfo for", payload.id);
     $.ajax({
       url: `${apiUrl}/users/${payload.id}`,
       type: 'GET',
       beforeSend: setAuthHeader
     })
     .done( resp => {
-      console.log("API.getMyInfo response", resp);
       resp.greenTopics = new Set(resp.greenTopics);
       store.saveDatum('me', resp);
     })
@@ -54,9 +51,7 @@ let API = {
   },
   getComments(topicId) {
     let me = store.getDatum('me');
-    console.log("this is me in API.getComments", me);
     me.greenTopics.add(topicId);
-    console.log("new Greens", me.greenTopics);
     store.saveDatum('me', me);
     return $.ajax({
       url: `${apiUrl}/comments/${topicId}`,

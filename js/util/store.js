@@ -3,6 +3,11 @@ import API from '../API'
 let callbacks = Symbol();
 let data = Symbol();
 
+// THINGS IN THE STORE
+// token - full token
+// me - full user info (sans pword)
+//
+
 class EventEmitter {
   constructor() {
     this[callbacks] = {};
@@ -29,7 +34,6 @@ class Store extends EventEmitter {
     this.emitChange(name);
   }
   getDatum(name) {
-    console.log("sending out datum", name);
     return this[data][name];
   }
 }

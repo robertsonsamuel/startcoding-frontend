@@ -20294,6 +20294,8 @@
 	    key: 'logout',
 	    value: function logout() {
 	      localStorage.removeItem('token');
+	      _store.store.saveDatum('me', null);
+	      _store.store.saveDatum('token', null);
 	      hideLoginRegisterLogoutUsername(false, true, true, false);
 	    }
 	  }, {
@@ -21983,7 +21985,6 @@
 	
 	function setAuthHeader(xhr) {
 	  var token = _store.store.getDatum('token');
-	  console.log("setting header", token);
 	  xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 	}
 	
@@ -21993,21 +21994,19 @@
 	  },
 	  login: function login(userInfo) {
 	    return $.post(apiUrl + '/users/login', userInfo).done(function (resp) {
-	      console.log("got token on login", resp);
 	      localStorage.setItem('token', resp);
 	      _store.store.saveDatum('token', resp);
 	    });
 	  },
 	  getMyInfo: function getMyInfo() {
 	    var token = _store.store.getDatum('token');
+	    if (!token) return;
 	    var payload = (0, _authorization.parseToken)(token);
-	    console.log("API.getMyInfo for", payload.id);
 	    $.ajax({
 	      url: apiUrl + '/users/' + payload.id,
 	      type: 'GET',
 	      beforeSend: setAuthHeader
 	    }).done(function (resp) {
-	      console.log("API.getMyInfo response", resp);
 	      resp.greenTopics = new Set(resp.greenTopics);
 	      _store.store.saveDatum('me', resp);
 	    });
@@ -22029,9 +22028,7 @@
 	  },
 	  getComments: function getComments(topicId) {
 	    var me = _store.store.getDatum('me');
-	    console.log("this is me in API.getComments", me);
 	    me.greenTopics.add(topicId);
-	    console.log("new Greens", me.greenTopics);
 	    _store.store.saveDatum('me', me);
 	    return $.ajax({
 	      url: apiUrl + '/comments/' + topicId,
@@ -22138,6 +22135,11 @@
 	var callbacks = Symbol();
 	var data = Symbol();
 	
+	// THINGS IN THE STORE
+	// token - full token
+	// me - full user info (sans pword)
+	//
+	
 	var EventEmitter = function () {
 	  function EventEmitter() {
 	    _classCallCheck(this, EventEmitter);
@@ -22187,7 +22189,6 @@
 	  }, {
 	    key: "getDatum",
 	    value: function getDatum(name) {
-	      console.log("sending out datum", name);
 	      return this[data][name];
 	    }
 	  }]);
@@ -22267,7 +22268,6 @@
 	    };
 	    _store.store.registerListener('me', function () {
 	      var greens = _store.store.getDatum('me') ? _store.store.getDatum('me').greenTopics : new Set();
-	      console.log("my greens, in main", greens);
 	      _this.setState({ greens: greens });
 	    });
 	    return _this;

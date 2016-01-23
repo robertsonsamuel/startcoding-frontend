@@ -18,7 +18,6 @@ class Main extends React.Component {
     };
     store.registerListener('me', () => {
       let greens = store.getDatum('me') ? store.getDatum('me').greenTopics : new Set();
-      console.log("my greens, in main", greens);
       this.setState({ greens: greens });
     })
   }
