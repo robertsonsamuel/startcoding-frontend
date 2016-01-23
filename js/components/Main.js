@@ -5,11 +5,21 @@ import Topic from './Topic';
 import NewTopicModal from './NewTopicModal';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
+import {store} from '../util/store';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { allTopics: [], activeTopic: false, loading: true};
+    this.state = {
+      allTopics: [],
+      greens: new Set(),
+      activeTopic: false,
+      loading: true
+    };
+    store.registerListener('me', () => {
+      let greens = store.getDatum('me') ? store.getDatum('me').greenTopics : new Set();
+      this.setState({ greens: greens });
+    })
   }
   handleTopicClick(topicId){
     this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
@@ -30,8 +40,11 @@ class Main extends React.Component {
   }
   render() {
     let topicEls = this.state.allTopics.map((topic,i) => {
-      let topicClasses = this.state.activeTopic === topic._id ? true : false;
-      return <Topic {...topic} isActive={topicClasses} onClick={this.handleTopicClick.bind(this,topic._id)} key={i}  />
+      let isActive = this.state.activeTopic === topic._id;
+      return <Topic {...topic} isActive={isActive}
+                               isGreen={this.state.greens.has(topic._id)}
+                               onClick={this.handleTopicClick.bind(this,topic._id)}
+                               key={i}/>
     });
     let mainClasses = classNames('main', 'panel', {displayTopic : this.state.activeTopic})
     return (

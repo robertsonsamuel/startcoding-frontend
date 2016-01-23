@@ -7,7 +7,8 @@ import classNames from 'classnames';
 import {genErr, pleaseLogin} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
 import {formatTime} from '../util/time';
-import {eventEmitter} from '../util/store';
+import {store} from '../util/store';
+
 
 class Topic extends React.Component {
   constructor(props) {
@@ -16,16 +17,11 @@ class Topic extends React.Component {
       allComments: [],
       token: canHazToken(),
       replying: false,
-      loading: true,
+      loading: true
     };
-
-    eventEmitter.registerListener('login', ()=> {
-      this.setState({ token: canHazToken() });
+    store.registerListener('token', ()=> {
+      this.setState({ token: store.getDatum('token') });
     });
-    eventEmitter.registerListener('logout', () => {
-      this.setState({ token: canHazToken() });
-    });
-
   }
   headerClicked() {
     if (!this.props.isActive) {
@@ -67,7 +63,10 @@ class Topic extends React.Component {
         return <Comment {...comment} token={this.state.token} update={this.fetchComments.bind(this)} key={i} />
       });
     }
-    let addedClasses = classNames('topic', {active: this.props.isActive});
+    let addedClasses = classNames('topic', {
+        active: this.props.isActive,
+        green: this.props.isGreen
+      });
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
                                                        discard={this.discard.bind(this)} />
                                          : [];
