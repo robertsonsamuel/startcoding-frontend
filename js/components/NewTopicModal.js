@@ -40,7 +40,7 @@ class NewTopicModal extends React.Component {
   render() {
     return (
       <div>
-        <img src="../../img/fab.png" className="floatingActionButton" onClick={this.newTopic.bind(this)}  data-target="#newTopicModal" />
+        <img src="./../../img/fab.png" className="floatingActionButton" onClick={this.newTopic.bind(this)}  data-target="#newTopicModal" />
 
 
         <div className="modal fade" id="newTopicModal">
