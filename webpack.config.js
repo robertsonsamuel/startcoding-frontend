@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var css = require("css-loader");
 
 module.exports = {
   entry:"./js/app.js",
@@ -10,13 +11,16 @@ module.exports = {
      new webpack.optimize.UglifyJsPlugin({minimize: true})
   ],
   module:{
-    loaders:[
-      // JS and JSX
-      { test: /\.jsx?$/,
-        exclude: [/node_modules/,/bower_components/],
-        loader: 'babel-loader',
-        query: {presets: ['react', 'es2015']}
+    loaders:[{
+      test: /\.jsx?$/,
+      exclude: [/node_modules/, /bower_components/],
+      loader: 'babel-loader',
+      query: {
+        presets: ['react', 'es2015']
       }
-    ]
+    }, {
+      test: /\.css$/,
+      loader: "style!css"
+    }]
   }
 };
