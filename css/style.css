@@ -660,6 +660,19 @@ span.greenItName {
       left: 4em;
 
     }
+    .active {
+        position: fixed;
+        background: white;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: 4000;
+        left: 0;
+        margin: auto;
+        padding-bottom: 1em;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
 
 }
 
