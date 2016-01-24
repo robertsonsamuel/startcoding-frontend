@@ -693,18 +693,18 @@ span.greenItName {
       overflow-y: initial;
 }
 .active {
-      position: fixed;
-      background: white;
-      height: 100%;
-      width: 97%;
-      top: 0;
-      right: 0;
-      z-index: 4000;
-      left: 0;
-      margin: auto;
-      padding-bottom: 1em;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
+  position: fixed;
+  background: white;
+  height: 100%;
+  width: 100vw;
+  top: 0;
+  right: 3em;
+  z-index: 4000;
+  left: 0;
+  margin: auto;
+  padding-bottom: 1em;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 #Register, #Logout, #welcome {
     display: none;
