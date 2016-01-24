@@ -102,13 +102,18 @@ div#bs-example-navbar-collapse-2 {
 span.greenItName {
     position: absolute;
     top: 20px;
-    left: 9%;
+    left: 4em;
 }
 
 #registerForm {
   position: relative;
   left: 15%;
   top: 15px;
+}
+#registerButton{
+  display: inline-block;
+  z-index: 100000;
+  position: relative;
 }
 
 a.alreadyMember {
@@ -612,7 +617,7 @@ and (orientation : portrait) {
 span.greenItName {
   position: absolute;
   top: 23px;
-  left: 11%;
+  left: 8%;
 
 }
   .active {
@@ -637,6 +642,18 @@ span.greenItName {
   and (max-device-width: 1024px)
   and (orientation: portrait)
   and (-webkit-min-device-pixel-ratio: 1) {
+    .floatingActionButton {
+        position: fixed;
+        bottom: 1.7em;
+        right: 1.5em;
+        border-radius: 100%;
+        outline: none;
+        color: #FFF;
+        font-size: 36px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        cursor: pointer;
+    }
 
 }
 
@@ -647,6 +664,12 @@ span.greenItName {
   and (orientation: landscape)
   and (-webkit-min-device-pixel-ratio: 1) {
 
+    #greenItName{
+      position: absolute;
+        top: 20px;
+        left:8%;
+    }
+
 }
 
 
@@ -656,13 +679,6 @@ span.greenItName {
   and (min-device-width: 768px)
   and (max-device-width: 1024px)
   and (-webkit-min-device-pixel-ratio: 2) {
-
-span.greenItName {
-  position: absolute;
-  top: 23px;
-  left: 11%;
-
-}
 
 .main {
   position: relative;
@@ -691,6 +707,7 @@ span.greenItName {
 
 
 
+
 }
 
 /* Portrait */
@@ -709,6 +726,16 @@ a.alreadyMember {
   left: 200px;
   bottom: 33px;
 }
+#registerButton {
+    display: inline-block;
+    z-index: 100000;
+    position: relative;
+    top: 6px;
+}
+#forgotPassword {
+  position: relative;
+  left: 1em;
+}
 
 }
 
@@ -718,6 +745,12 @@ a.alreadyMember {
   and (max-device-width: 1024px)
   and (orientation: landscape)
   and (-webkit-min-device-pixel-ratio: 2) {
+
+#greenItName{
+  position: absolute;
+    top: 20px;
+    left:8%;
+}
 
 }
 

@@ -20,7 +20,7 @@ class RegisterForm extends React.Component {
             <input id="passwordRegister" ref="password" type="password" className="form-control" placeholder="Password" required/>
             <input id="passwordRegister2" ref="password2" type="password" className="form-control" placeholder="Confirm Password" required/>
           </div>
-          <button type="submit" onClick={this.register.bind(this)} className="btn btn-danger">Register</button>
+          <button id="registerButton" type="submit" onClick={this.register.bind(this)} className="btn btn-danger">Register</button>
         </form>
       </div>
     )
