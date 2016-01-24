@@ -654,6 +654,12 @@ span.greenItName {
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         cursor: pointer;
     }
+    span.greenItName {
+      position: absolute;
+      top: 23px;
+      left: 4em;
+
+    }
 
 }
 
@@ -687,17 +693,18 @@ span.greenItName {
       overflow-y: initial;
 }
 .active {
-    position: fixed;
-    background: white;
-    height: calc(100vh);
-    top: 0;
-    right: 0;
-    z-index: 4000;
-    left: 0;
-    margin: auto;
-    padding-bottom: 1em;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+      position: fixed;
+      background: white;
+      height: 100%;
+      width: 97%;
+      top: 0;
+      right: 0;
+      z-index: 4000;
+      left: 0;
+      margin: auto;
+      padding-bottom: 1em;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
 }
 #Register, #Logout, #welcome {
     display: none;
@@ -719,7 +726,7 @@ span.greenItName {
 span.greenItName {
   position: absolute;
   top: 20px;
-  left: 11%;
+  left: 4em;
 }
 a.alreadyMember {
   position: absolute;
