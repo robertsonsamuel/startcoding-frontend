@@ -9,10 +9,6 @@ ul#Login {
     left: 10%;
     position: relative;
 }
-ul#Register {
-    position: relative;
-    left: 15%;
-}
 
 .btn-round {
   background-color: white;
@@ -27,6 +23,10 @@ ul#Register {
   cursor: pointer;
   top: -20px;
   left: -5px;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: rgba(76, 175, 80, 0);
 }
 
 div.greenit-logo{
@@ -61,7 +61,7 @@ div.leaf-logo div.leaf-shadow{
   -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);
 }
 
-.\#title{
+#title{
   display:inline-block;
   font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;
   padding:0;
@@ -102,8 +102,55 @@ div#bs-example-navbar-collapse-2 {
 span.greenItName {
     position: absolute;
     top: 20px;
-    left: 7%;
+    left: 9%;
 }
+
+#registerForm {
+  position: relative;
+  left: 15%;
+  top: 15px;
+}
+
+a.alreadyMember {
+    position: relative;
+    left: 65%;
+}
+
+#userNameRegister.form-control::-webkit-input-placeholder { color: white; }
+#userNameRegister.form-control:-moz-placeholder { color: white; }
+#userNameRegister.form-control::-moz-placeholder { color: white; }
+#userNameRegister.form-control:-ms-input-placeholder { color: white; }
+#userNameRegister{ color:white; }
+
+#passwordRegister.form-control::-webkit-input-placeholder { color: white; }
+#passwordRegister.form-control:-moz-placeholder { color: white; }
+#passwordRegister.form-control::-moz-placeholder { color: white; }
+#passwordRegister.form-control:-ms-input-placeholder { color: white; }
+#passwordRegister{ color:white; }
+
+#passwordRegister2.form-control::-webkit-input-placeholder { color: white; }
+#passwordRegister2.form-control:-moz-placeholder { color: white; }
+#passwordRegister2.form-control::-moz-placeholder { color: white; }
+#passwordRegister2.form-control:-ms-input-placeholder { color: white; }
+#passwordRegister2{ color:white; }
+
+#emailRegister.form-control::-webkit-input-placeholder { color: white; }
+#emailRegister.form-control:-moz-placeholder { color: white; }
+#emailRegister.form-control::-moz-placeholder { color: white; }
+#emailRegister.form-control:-ms-input-placeholder { color: white; }
+#emailRegister{ color:white; }
+
+#userNameLogin.form-control::-webkit-input-placeholder { color: white; }
+#userNameLogin.form-control:-moz-placeholder { color: white; }
+#userNameLogin.form-control::-moz-placeholder { color: white; }
+#userNameLogin.form-control:-ms-input-placeholder { color: white; }
+#userNameLogin{ color:white; }
+
+#passwordLogin.form-control::-webkit-input-placeholder { color: white; }
+#passwordLogin.form-control:-moz-placeholder { color: white; }
+#passwordLogin.form-control::-moz-placeholder { color: white; }
+#passwordLogin.form-control:-ms-input-placeholder { color: white; }
+#passwordLogin{ color:white; }
 
 .floatingActionButton {
   position: fixed;
@@ -288,8 +335,8 @@ a.disabled {
   span.greenItName {
       position: absolute;
       top: 20px;
-      left: 38%;
-      display: none;
+      left: 42%;
+
   }
 }
 
@@ -327,6 +374,17 @@ a.disabled {
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
   }
+  ul#Login {
+      left: 0%;
+      position: relative;
+  }
+  #Register{
+    display: none;
+    left: -10%;
+    width: 100%;
+    position: relative;
+  }
+
 
 }
 
@@ -345,6 +403,11 @@ a.disabled {
         top: 20px;
         left: 38%;
     }
+    a.alreadyMember {
+        position: relative;
+        left: 136px;
+        bottom: 22px;
+    }
 }
 
 /* Landscape */
@@ -361,6 +424,11 @@ a.disabled {
         position: absolute;
         top: 20px;
         left: 38%;
+    }
+    a.alreadyMember {
+        position: relative;
+        left: 150px;
+        bottom: 22px;
     }
 
 }
@@ -471,60 +539,60 @@ span.greenItName {
 }
 
 }
+
+
+
+/* ----------iPhone 6 Plus ---------- */
+
 /* Portrait and Landscape */
 @media only screen
-  and (min-device-width: 414px)
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 3) {
-    .main {
-      position: relative;
+and (min-device-width : 414px)
+and (max-device-width : 736px) {
+
+  .main {
+    position: relative;
       height: 100%;
       margin-bottom: 0;
       overflow-y: initial;
-    }
-    .active {
-        position: fixed;
-        background: white;
-        height: calc(100vh);
-        top: 0;
-        right: 0;
-        z-index: 4000;
-        left: 0;
-        margin: auto;
-        padding-bottom: 1em;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-    }
+  }
+  .active {
+      position: fixed;
+      background: white;
+      height: calc(100vh);
+      top: 0;
+      right: 0;
+      z-index: 4000;
+      left: 0;
+      margin: auto;
+      padding-bottom: 1em;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+  }
 
 }
 
 /* Portrait */
 @media only screen
-  and (min-device-width: 414px)
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: portrait) {
+and (min-device-width : 414px)
+and (max-device-width : 736px)
+and (orientation : landscape) {
+
 
 }
 
 /* Landscape */
 @media only screen
-  and (min-device-width: 414px)
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) {
-    .main {
-      position: relative;
-      height: 100%;
-      margin-bottom: 0;
-      overflow-y: initial;
-    }
+and (min-device-width : 414px)
+and (max-device-width : 736px)
+and (orientation : portrait) {
 
-    span.greenItName {
-        position: absolute;
-        top: 20px;
-        left: 43%;
-    }
+  span.greenItName {
+    position: absolute;
+    top: 23px;
+    left: 11%;
+
+  }
+
 }
 
 /* ----------- iPad mini ----------- */
@@ -536,17 +604,17 @@ span.greenItName {
   and (-webkit-min-device-pixel-ratio: 1) {
 
     .main {
-      position: relative;
+    position: relative;
     height: 100%;
     margin-bottom: 0;
     overflow-y: initial;
   }
-  span.greenItName {
-      position: absolute;
-      top: 20px;
-      left: 7%;
-      display: none;
-  }
+span.greenItName {
+  position: absolute;
+  top: 23px;
+  left: 11%;
+
+}
   .active {
       position: fixed;
       background: white;
@@ -590,10 +658,10 @@ span.greenItName {
   and (-webkit-min-device-pixel-ratio: 2) {
 
 span.greenItName {
-    position: absolute;
-    top: 20px;
-    left: 7%;
-    display: none;
+  position: absolute;
+  top: 23px;
+  left: 11%;
+
 }
 
 .main {
@@ -615,6 +683,12 @@ span.greenItName {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
+#Register, #Logout, #welcome {
+    display: none;
+    position: relative;
+    right: 78px;
+}
+
 
 
 }
@@ -625,11 +699,15 @@ span.greenItName {
   and (max-device-width: 1024px)
   and (orientation: portrait)
   and (-webkit-min-device-pixel-ratio: 2) {
-    span.greenItName {
-    position: absolute;
-    top: 20px;
-    left: 7%;
-    display: none;
+span.greenItName {
+  position: absolute;
+  top: 20px;
+  left: 11%;
+}
+a.alreadyMember {
+  position: absolute;
+  left: 200px;
+  bottom: 33px;
 }
 
 }
@@ -641,4 +719,28 @@ span.greenItName {
   and (orientation: landscape)
   and (-webkit-min-device-pixel-ratio: 2) {
 
+}
+
+
+/* Nexus 7 (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 603px) and (max-device-width : 966px) {
+
+}
+
+/* Nexus 7 (landscape) ----------- */
+@media only screen and (min-width : 604px) and (orientation: landscape) {
+  span.greenItName {
+    position: absolute;
+    top: 20px;
+    /*left: 20%;*/
+  }
+}
+
+/* Nexus 7 (portrait) ----------- */
+@media only screen and (max-width : 603px) and (orientation: portrait) {
+  span.greenItName {
+    position: absolute;
+    top: 20px;
+    left: 42%;
+  }
 }

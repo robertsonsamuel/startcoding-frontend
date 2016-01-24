@@ -10,7 +10,7 @@ class LoginForm extends React.Component{
   }
   render() {
     return(
-      <div>
+      <div className="col-md-12">
         <form id="loginForm" className="navbar-form navbar-left" >
           <div className="form-group">
             <input id="userNameLogin" ref="username" type="text" className="form-control" placeholder="Username" />

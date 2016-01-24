@@ -92,10 +92,11 @@ class Navbar extends React.Component {
               <ul id="Login" className="nav navbar-nav">
                 <li><LoginForm login={this.login.bind(this)} /></li>
                 <li><a href="#" onClick={this.showRegister.bind(this)}>New here? <strong>Register!</strong></a></li>
+                <li><a href="https://vast-sierra-7757.herokuapp.com/forgotPassword">Forgot Password? </a></li>
               </ul>
-              <ul id="Register" className="nav navbar-nav">
+              <ul id="Register" className="nav navbar-nav navbar-left">
                 <li><RegisterForm register={this.register.bind(this)} /></li>
-                <li><a href="#" onClick={this.showLogin.bind(this)}>Already a member? <strong>Log in!</strong></a></li>
+                <li><a href="#" className="alreadyMember" onClick={this.showLogin.bind(this)}>Already a member? <strong>Log in!</strong></a></li>
               </ul>
               <ul id="Logout" className="nav navbar-nav navbar-right">
                 <li><a href="#">Hello, <span id="username"></span></a></li>
