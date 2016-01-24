@@ -6,7 +6,6 @@ let data = Symbol();
 // THINGS IN THE STORE
 // token - full token
 // me - full user info (sans pword)
-//
 
 class EventEmitter {
   constructor() {

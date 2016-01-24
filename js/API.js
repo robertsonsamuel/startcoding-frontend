@@ -1,5 +1,5 @@
-let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
-// apiUrl = 'http://localhost:3000';
+// let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+let apiUrl = 'http://localhost:3000';
 
 import {canHazToken, parseToken} from './util/authorization';
 import {store} from './util/store';
@@ -87,6 +87,16 @@ let API = {
       beforeSend: setAuthHeader
     });
   },
+  vote(commentId, vote){
+    return $.ajax({
+      url: `${apiUrl}/comments/vote/${commentId}`,
+      type: 'POST',
+      beforeSend: setAuthHeader,
+      datatype: 'json',
+      data: {vote: vote}
+    })
+    .done( (resp) => console.log("API got vote", resp));
+  }
 };
 
 //listeners

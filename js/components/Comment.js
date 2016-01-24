@@ -3,11 +3,13 @@ import RegisterForm from './RegisterForm';
 import NewComment from './NewComment';
 import LoadingSpinner from './LoadingSpinner';
 import EditComment from './EditComment';
+import Votebox from './Votebox';
 import classNames from 'classnames';
 import API from '../API';
 import {confirmDelete,genErr,pleaseLogin} from '../util/alerts';
 import {formatTime} from '../util/time';
 import {isAuthorized, parseToken} from '../util/authorization';
+import {store} from '../util/store';
 
 class Comment extends React.Component {
   constructor(props) {
@@ -29,6 +31,10 @@ class Comment extends React.Component {
     if (this.state.replying) return;
     e.preventDefault();
     this.setState({ editing: isAuthorized(this.props.user._id) });
+  }
+  discard() {
+    this.setState({ replying: false });
+    this.setState({ editing: false });
   }
   delete() {
     confirmDelete(this.deleteComment.bind(this))
@@ -58,10 +64,6 @@ class Comment extends React.Component {
     .done(resp => this.props.update())
     .fail(err => swal('Delete Failed',err.responseText,'error'));
   }
-  discard() {
-    this.setState({ replying: false });
-    this.setState({ editing: false });
-  }
   render() {
     let payload = parseToken(this.props.token);
     let changeButtons = classNames({
@@ -86,7 +88,13 @@ class Comment extends React.Component {
     }
     return (
       <div className="panel panel-default comment">
-        <div className="panel-heading"><div className="panel-title"><div className="panel-title">{this.props.user.username}</div></div></div>
+        <div className="panel-heading commentTitle">
+          <span className="panel-title commentUsername">{this.props.user.username}</span>
+          <Votebox upvotes={this.props.upvotes}
+                   downvotes={this.props.downvotes}
+                   commentId={this.props._id}
+                   userId={store.getDatum('me')._id} />
+        </div>
         <div className="panel-body">
           {this.state.updating ? <LoadingSpinner /> : []}
           {commentBody}

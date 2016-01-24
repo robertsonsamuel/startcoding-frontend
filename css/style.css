@@ -300,11 +300,9 @@ a.disabled {
   background: #E8F5E9;
 }
 .comment {
-  /*border: 1px solid grey;*/
   margin: 1em 0 0 1em;
   padding: 1em .5em 1em 1em;
 }
-
 .panel-footer {
   margin: 0 15px;
   padding: 0px;
@@ -328,6 +326,16 @@ a.disabled {
 
 .new-comment-buttons .btn {
   margin-left: 1em;
+}
+
+.commentVotebox {
+  float: right;
+}
+
+.voteBtn {
+  margin: 0 1em;
+  padding: ;
+  cursor: pointer;
 }
 
 
