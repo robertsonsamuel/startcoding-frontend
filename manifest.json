@@ -1,0 +1,13 @@
+{
+  "short_name": "Green it!",
+  "name": "Green it!",
+  "icons": [
+    {
+      "src": "./logo.png",
+      "sizes": "192x173",
+      "type": "image/png"
+    }
+  ],
+  "background":"#43A047",
+  "display": "standalone"
+}
