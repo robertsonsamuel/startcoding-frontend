@@ -102,13 +102,18 @@ div#bs-example-navbar-collapse-2 {
 span.greenItName {
     position: absolute;
     top: 20px;
-    left: 9%;
+    left: 4em;
 }
 
 #registerForm {
   position: relative;
   left: 15%;
   top: 15px;
+}
+#registerButton{
+  display: inline-block;
+  z-index: 100000;
+  position: relative;
 }
 
 a.alreadyMember {
@@ -633,13 +638,13 @@ and (orientation : portrait) {
 span.greenItName {
   position: absolute;
   top: 23px;
-  left: 11%;
+  left: 8%;
 
 }
   .active {
       position: fixed;
       background: white;
-      height: calc(100vh);
+      height: 100%;
       top: 0;
       right: 0;
       z-index: 4000;
@@ -658,6 +663,42 @@ span.greenItName {
   and (max-device-width: 1024px)
   and (orientation: portrait)
   and (-webkit-min-device-pixel-ratio: 1) {
+    .floatingActionButton {
+        position: fixed;
+        bottom: 1.7em;
+        right: 1.5em;
+        border-radius: 100%;
+        outline: none;
+        color: #FFF;
+        font-size: 36px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        cursor: pointer;
+    }
+    span.greenItName {
+      position: absolute;
+      top: 23px;
+      left: 4em;
+
+    }
+    .active {
+        position: fixed;
+        background: white;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: 4000;
+        left: 0;
+        margin: auto;
+        padding-bottom: 1em;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    ul#Login {
+        left: 5%;
+        position: relative;
+    }
 
 }
 
@@ -667,6 +708,12 @@ span.greenItName {
   and (max-device-width: 1024px)
   and (orientation: landscape)
   and (-webkit-min-device-pixel-ratio: 1) {
+
+    #greenItName{
+      position: absolute;
+        top: 20px;
+        left:8%;
+    }
 
 }
 
@@ -678,13 +725,6 @@ span.greenItName {
   and (max-device-width: 1024px)
   and (-webkit-min-device-pixel-ratio: 2) {
 
-span.greenItName {
-  position: absolute;
-  top: 23px;
-  left: 11%;
-
-}
-
 .main {
   position: relative;
       height: 100%;
@@ -692,23 +732,25 @@ span.greenItName {
       overflow-y: initial;
 }
 .active {
-    position: fixed;
-    background: white;
-    height: calc(100vh);
-    top: 0;
-    right: 0;
-    z-index: 4000;
-    left: 0;
-    margin: auto;
-    padding-bottom: 1em;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+  position: fixed;
+  background: white;
+  height: 100%;
+  width: 100vw;
+  top: 0;
+  right: 3em;
+  z-index: 4000;
+  left: 0;
+  margin: auto;
+  padding-bottom: 1em;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 #Register, #Logout, #welcome {
     display: none;
     position: relative;
     right: 78px;
 }
+
 
 
 
@@ -723,13 +765,28 @@ span.greenItName {
 span.greenItName {
   position: absolute;
   top: 20px;
-  left: 11%;
+  left: 4em;
 }
 a.alreadyMember {
   position: absolute;
   left: 200px;
   bottom: 33px;
 }
+#registerButton {
+    display: inline-block;
+    z-index: 100000;
+    position: relative;
+    top: 6px;
+}
+#forgotPassword {
+  position: relative;
+  left: 1em;
+}
+ul#Login {
+    left: 5%;
+    position: relative;
+}
+
 
 }
 
@@ -739,6 +796,12 @@ a.alreadyMember {
   and (max-device-width: 1024px)
   and (orientation: landscape)
   and (-webkit-min-device-pixel-ratio: 2) {
+
+#greenItName{
+  position: absolute;
+    top: 20px;
+    left:8%;
+}
 
 }
 
