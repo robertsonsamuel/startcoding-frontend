@@ -10,6 +10,18 @@ import {confirmDelete,genErr,pleaseLogin} from '../util/alerts';
 import {formatTime} from '../util/time';
 import {isAuthorized, parseToken} from '../util/authorization';
 import {store} from '../util/store';
+import marked from 'marked';
+
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false
+});
 
 class Comment extends React.Component {
   constructor(props) {
@@ -98,7 +110,7 @@ class Comment extends React.Component {
     let commentBody = this.state.editing ? <EditComment update={this.updateComment.bind(this)}
                                                         discard={this.discard.bind(this)}
                                                         body={this.props.body}/>
-                                         : <div>{this.props.body}</div>
+                                                      : <div dangerouslySetInnerHTML={{__html: marked(this.props.body)}} />
     let timestamp;
     if (this.props.editTime) {
       timestamp = `*edited ${formatTime(this.props.editTime)}`;
