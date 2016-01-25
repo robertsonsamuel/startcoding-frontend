@@ -6,6 +6,11 @@
       "src": "./logo.png",
       "sizes": "192x173",
       "type": "image/png"
+    },
+    {
+      "src": "./logo_large.png",
+      "sizes": "850x778",
+      "type": "image/png"
     }
   ],
   "background_color":"#43A047",
