@@ -35,12 +35,12 @@ class NewComment extends React.Component {
           <textarea id="newCommentBody" className="form-control" ref="body" rows="4">
           </textarea>
           <span className="new-comment-buttons">
-            <button className="btn btn-default" onClick={this.discard.bind(this)}>Discard</button>
-            <button className="btn btn-primary" onClick={this.post.bind(this)}>Post</button>
             <span className="markdownNotice">
               *Green it will render
               <a href="https://help.github.com/articles/markdown-basics/">markdown</a>!
-            </span>
+              </span>
+            <button className="btn btn-default" onClick={this.discard.bind(this)}>Discard</button>
+            <button className="btn btn-primary" onClick={this.post.bind(this)}>Post</button>
           </span>
         </div>
       </div>

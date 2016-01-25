@@ -59,9 +59,9 @@ class NewTopicModal extends React.Component {
                 </textarea>
               </div>
               <div className="modal-footer">
+                <span className="markdownNotice">*Green it will render <a href="https://help.github.com/articles/markdown-basics/">markdown</a>!</span>
                 <button type="button" className="btn btn-default input" data-dismiss="modal">Discard</button>
                 <button type="button" className="btn btn-primary input" onClick={this.createTopic.bind(this)}>Post</button>
-                <span className="markdownNotice">*Green it will render <a href="https://help.github.com/articles/markdown-basics/">markdown</a>!</span>
               </div>
             </div>
           </div>
