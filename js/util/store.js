@@ -12,6 +12,9 @@ let data = Symbol();
 //   greenTopics: []
 // }
 
+// EVENTS
+// 'goHome' event!
+
 
 class EventEmitter {
   constructor() {

@@ -5,7 +5,7 @@ import Topic from './Topic';
 import NewTopicModal from './NewTopicModal';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
-import {store} from '../util/store';
+import {eventEmitter, store} from '../util/store';
 
 class Main extends React.Component {
   constructor(props) {
@@ -16,10 +16,14 @@ class Main extends React.Component {
       activeTopic: false,
       loading: true
     };
+  }
+  componentWillMount() {
+    (this.getTopics.bind(this))();
     store.registerListener('me', () => {
       let greens = store.getDatum('me') ? store.getDatum('me').greenTopics : new Set();
       this.setState({ greens: greens });
     })
+    eventEmitter.registerListener('goHome', this.getTopics.bind(this))
   }
   handleTopicClick(topicId){
     this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
@@ -33,9 +37,6 @@ class Main extends React.Component {
     .always( () => {
       if (callback) callback();
     });
-  }
-  componentWillMount() {
-    (this.getTopics.bind(this))();
   }
   render() {
     let topicEls = this.state.allTopics.map((topic,i) => {

@@ -6,6 +6,7 @@ import API from '../API';
 import {store} from '../util/store';
 import init from '../util/init';
 import {parseToken} from '../util/authorization';
+import {eventEmitter} from '../util/store';
 
 function hideLoginRegisterLogoutUsername(login, register, logout, username) {
   login    ? $('#Login').hide()    : $('#Login').show();
@@ -61,6 +62,9 @@ class Navbar extends React.Component {
     store.saveDatum('token', null);
     hideLoginRegisterLogoutUsername(false, true, true, false);
   }
+  goHome() {
+    eventEmitter.emitChange('goHome');
+  }
   render() {
     return (
       <div>
@@ -73,14 +77,14 @@ class Navbar extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <div className="navbar-brand" href="#">
-                <div className="btn-round">
+              <div className="navbar-brand">
+                <div className="btn-round" onClick={this.goHome}>
                       <div className='leaf-logo'>
                         <div className='leaf-shadow'>
                         </div>
                      </div>
                   </div>
-                  <span className="greenItName">Green it!</span>
+                  <span className="greenItName"  onClick={this.goHome}>Green it!</span>
               </div>
 
 
