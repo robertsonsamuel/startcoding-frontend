@@ -9,11 +9,11 @@
     },
     {
       "src": "./logo_large.png",
-      "sizes": "850x778",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "background_color":"#43A047",
+  "background_color":"white",
   "theme_color":"#4CAF50",
   "display": "standalone"
 }
