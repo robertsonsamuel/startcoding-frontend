@@ -1,22 +1,25 @@
 import React from 'react';
 import API from '../API';
+import {store} from '../util/store';
+import classNames from 'classnames';
+import {pleaseLogin} from '../util/alerts';
 
 class Votebox extends React.Component {
   constructor(props) {
     super(props);
   }
-  handleVote(vote) {
-    API.vote(this.props.commentId, vote)
-    .done( resp => console.log("voted alright", resp))
-    .fail( err => console.log("error voting", err));
-  }
+      // up: this.props.upvotes && this.props.upvotes.indexOf(this.props.meId) !== -1,
+      // down: this.props.downvotes && this.props.downvotes.indexOf(this.props.meId) !== -1
   render() {
+    let disabled = this.props.meId === "";
+    let voteClasses = classNames("commentVotebox", { up: this.props.up }, {down: this.props.down}, {disabled: disabled});
     return (
-      <span className="commentVotebox">
+      <span className={voteClasses}>
         <span className="voteBtn glyphicon glyphicon-arrow-up"
-              onClick={this.handleVote.bind(this,"up")}></span>
+              onClick={this.props.handleVote.bind(this,"up")}></span>
+        <span className="badge">{this.props.score}</span>
         <span className="voteBtn glyphicon glyphicon-arrow-down"
-              onClick={this.handleVote.bind(this,"down")}></span>
+              onClick={this.props.handleVote.bind(this,'down')}></span>
       </span>
     )
   }

@@ -5,18 +5,30 @@ let data = Symbol();
 
 // THINGS IN THE STORE
 // token - full token
-// me - full user info (sans pword)
+// me {
+//   username: string
+//   upvotes: [] (set)
+//   downvotes: []
+//   greenTopics: []
+// }
+
 
 class EventEmitter {
   constructor() {
     this[callbacks] = {};
   }
-  registerListener(name,cb) {
+  registerListener(name, cb) {
     let theEvent = this[callbacks][name];
     this[callbacks][name] = theEvent ? theEvent.concat(cb) : [cb];
   }
+  stopListening(name, cb){
+    let theEvent = this[callbacks][name];
+    if (!theEvent) return;
+    let cbIndex = theEvent.indexOf(cb);
+    this[callbacks][name] = theEvent.splice(cbIndex,1);
+  }
   emitChange(name) {
-    console.log("emitting change", name);
+    console.log("emitting change", name, this[callbacks][name].length);
     if (!this[callbacks][name]) return;
     this[callbacks][name].forEach( cb => cb() );
   }

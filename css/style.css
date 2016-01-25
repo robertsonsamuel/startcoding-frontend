@@ -332,10 +332,23 @@ a.disabled {
   float: right;
 }
 
+.up .voteBtn:first-child{
+  color: #00E676
+}
+.down .voteBtn:nth-child(3){
+  color: purple;
+}
+
 .voteBtn {
-  margin: 0 1em;
-  padding: ;
+  color: lightgrey;
+  margin: 0 .8em;
+  padding: 0 .2em;
   cursor: pointer;
+}
+
+.disabled .voteBtn{
+  color: lightgrey;
+  cursor: default;
 }
 
 

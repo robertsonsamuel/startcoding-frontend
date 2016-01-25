@@ -59,7 +59,7 @@ let API = {
       url: `${apiUrl}/comments/${topicId}`,
       type: 'GET',
       beforeSend: setAuthHeader
-    })
+    });
   },
   postComment(parentId, body, seed) {
     let query = seed ? '?seed=true' : '';
@@ -95,7 +95,6 @@ let API = {
       datatype: 'json',
       data: {vote: vote}
     })
-    .done( (resp) => console.log("API got vote", resp));
   }
 };
 

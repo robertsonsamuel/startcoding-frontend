@@ -18,8 +18,15 @@ class Comment extends React.Component {
       replying: false,
       editing: false,
       updating: false,
-      loading: false
+      loading: false,
+      meId: store.getDatum('me') ? store.getDatum('me')._id : '',
     };
+  }
+  componentWillMount() {
+    store.registerListener('me', () => {
+      let me = store.getDatum('me');
+      this.setState({ meId: me ? me._id : "" });
+    });
   }
   reply(e) {
     if (this.state.editing) return;
@@ -59,6 +66,17 @@ class Comment extends React.Component {
     })
     .fail(err => genErr(err.responseText));
   }
+  handleVote(vote) {
+    if (this.props.meId === '') {
+      pleaseLogin();
+      return;
+    }
+    API.vote(this.props._id, vote)
+    .done( resp => {
+      this.props.update();
+    })
+    .fail( err => console.log("error voting", err));
+  }
   deleteComment(){
     API.deleteComment(this.props._id)
     .done(resp => this.props.update())
@@ -86,14 +104,16 @@ class Comment extends React.Component {
     } else {
       timestamp = this.props.timestamp ? formatTime(this.props.timestamp) : '';
     }
+    let showUpvote = this.props.upvotes && this.props.upvotes.includes(this.state.meId);
+    let showDownvote = this.props.downvotes && this.props.downvotes.includes(this.state.meId);
     return (
       <div className="panel panel-default comment">
         <div className="panel-heading commentTitle">
           <span className="panel-title commentUsername">{this.props.user.username}</span>
-          <Votebox upvotes={this.props.upvotes}
-                   downvotes={this.props.downvotes}
-                   commentId={this.props._id}
-                   userId={store.getDatum('me')._id} />
+          <Votebox score={this.props.upvotes.length - this.props.downvotes.length}
+                   up={showUpvote}
+                   down={showDownvote}
+                   handleVote={this.handleVote.bind(this)}/>
         </div>
         <div className="panel-body">
           {this.state.updating ? <LoadingSpinner /> : []}

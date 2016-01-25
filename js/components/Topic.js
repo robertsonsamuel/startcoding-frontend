@@ -31,9 +31,12 @@ class Topic extends React.Component {
     this.props.onClick();
   }
   fetchComments(callback) {
+    console.log("updated comments");
     API.getComments(this.props._id)
     .done( resp => {
-      this.setState( {allComments: resp, loading: false} );
+      this.setState( {allComments: resp, loading: false}, () => {
+        console.log("topic state has been set", resp);
+      } );
       if (callback) callback();
     })
     .fail( err => {
@@ -47,7 +50,7 @@ class Topic extends React.Component {
     this.setState({ replying: haveToken });
   }
   postComment(body) {
-    this.setState({ replying: false, loading: true });
+    this.setState({ replying: false });
     API.postComment(this.props._id, body, 'seed')
     .done(resp => (this.fetchComments.bind(this))())
     .fail(err => genErr(err.responseText));
