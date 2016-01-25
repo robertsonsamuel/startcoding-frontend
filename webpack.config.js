@@ -2,13 +2,13 @@ var webpack = require("webpack");
 var css = require("css-loader");
 
 module.exports = {
-  entry:"./js/app.js",
+  entry:"./js/app.jsx",
   output:{
     path: __dirname,
     filename: "bundle.js"
   },
   plugins: [
-     new webpack.optimize.UglifyJsPlugin({minimize: true})
+    new webpack.optimize.UglifyJsPlugin({minimize: true})
   ],
   module:{
     loaders:[{

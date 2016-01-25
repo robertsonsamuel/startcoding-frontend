@@ -1,8 +1,8 @@
 import React from 'react';
 import API from '../API';
-import LoadingSpinner from './LoadingSpinner';
-import Topic from './Topic';
-import NewTopicModal from './NewTopicModal';
+import LoadingSpinner from './LoadingSpinner.jsx';
+import Topic from './Topic.jsx';
+import NewTopicModal from './NewTopicModal.jsx';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
 import {eventEmitter, store} from '../util/store';

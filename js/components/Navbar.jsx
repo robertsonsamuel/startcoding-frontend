@@ -1,6 +1,6 @@
 import React from 'react';
-import RegisterForm from './RegisterForm';
-import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm.jsx';
+import LoginForm from './LoginForm.jsx';
 import {LoginError, RegisterError} from '../util/alerts';
 import API from '../API';
 import {store} from '../util/store';

@@ -1,13 +1,13 @@
 import React from 'react';
 import API from '../API';
-import LoadingSpinner from './LoadingSpinner';
+import LoadingSpinner from './LoadingSpinner.jsx';
 import {canHazToken} from '../util/authorization';
 import {pleaseLogin,genErr} from '../util/alerts';
 
 class NewTopicModal extends React.Component {
   constructor(props) {
     super(props);
-    this.displayName = 'NewTopicModal';
+    this.displayName = 'NewTopicModal.jsx';
     this.state = { loading: false };
   }
   newTopic(){

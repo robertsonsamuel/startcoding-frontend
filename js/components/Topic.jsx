@@ -1,8 +1,8 @@
 import React from 'react';
 import API from '../API';
-import Comment from './Comment';
-import NewComment from './NewComment';
-import LoadingSpinner from './LoadingSpinner';
+import Comment from './Comment.jsx';
+import NewComment from './NewComment.jsx';
+import LoadingSpinner from './LoadingSpinner.jsx';
 import classNames from 'classnames';
 import {genErr, pleaseLogin} from '../util/alerts';
 import {canHazToken} from '../util/authorization';

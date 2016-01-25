@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Navbar from './components/Navbar';
-import Main from './components/Main';
+import Navbar from './components/Navbar.jsx';
+import Main from './components/Main.jsx';
 import '../css/sweetalert.css';
 import '../css/google.css';
 import '../css/style.css';

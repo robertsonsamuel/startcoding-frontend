@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterForm from './RegisterForm';
+import RegisterForm from './RegisterForm.jsx';
 import {genErr} from '../util/alerts';
 
 class EditComment extends React.Component {
