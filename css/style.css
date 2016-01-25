@@ -158,7 +158,7 @@ a.alreadyMember {
 #passwordLogin{ color:white; }
 
 img{
-  width: 100%
+  max-width: 100%
 }
 
 .floatingActionButton {
