@@ -160,6 +160,9 @@ a.alreadyMember {
 img{
   max-width: 100%
 }
+img:hover{
+  width: 100%
+}
 
 .floatingActionButton {
   position: fixed;
