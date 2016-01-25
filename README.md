@@ -1,6 +1,6 @@
 # greenit-frontend
 
-A reddit like posting forum app, but more fun. When you read a post, it turns green. Have you Greenit today?
+A reddit-like forum app, but more fun. When you read a post, it turns green! Have you Greenit today?
 
 [Visit Greenit](http://paulgoblin.github.io/greenit-frontend/)
 
