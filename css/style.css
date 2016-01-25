@@ -163,6 +163,10 @@ img{
 img:hover{
   width: 100%
 }
+.markdownNotice {
+  float: left;
+  color: grey;
+}
 
 .floatingActionButton {
   position: fixed;
