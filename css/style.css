@@ -186,6 +186,7 @@ img:hover{
 }
 
 .floatingActionButton:hover {
+  width: inherit;
   background-color: #D32F2F;
 }
 
