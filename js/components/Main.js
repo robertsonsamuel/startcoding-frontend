@@ -23,7 +23,10 @@ class Main extends React.Component {
       let greens = store.getDatum('me') ? store.getDatum('me').greenTopics : new Set();
       this.setState({ greens: greens });
     })
-    eventEmitter.registerListener('goHome', this.getTopics.bind(this))
+    eventEmitter.registerListener('goHome', () => {
+      this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
+      this.getTopics.bind(this);
+    })
   }
   handleTopicClick(topicId){
     this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
