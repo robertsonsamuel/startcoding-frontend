@@ -98,7 +98,7 @@ class Comment extends React.Component {
     let commentBody = this.state.editing ? <EditComment update={this.updateComment.bind(this)}
                                                         discard={this.discard.bind(this)}
                                                         body={this.props.body}/>
-                                                      : <div dangerouslySetInnerHTML={{__html: this.props.body}} />
+                                         : <div>{this.props.body}</div>
     let timestamp;
     if (this.props.editTime) {
       timestamp = `*edited ${formatTime(this.props.editTime)}`;
