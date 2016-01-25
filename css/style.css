@@ -157,10 +157,15 @@ a.alreadyMember {
 #passwordLogin.form-control:-ms-input-placeholder { color: white; }
 #passwordLogin{ color:white; }
 
+img{
+  max-width: 100%
+}
+
 .floatingActionButton {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  width: inherit;
   border-radius:100%;
   outline:none;
   color:#FFF;

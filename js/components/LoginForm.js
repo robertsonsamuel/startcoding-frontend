@@ -16,7 +16,7 @@ class LoginForm extends React.Component{
             <input id="userNameLogin" ref="username" type="text" className="form-control" placeholder="Username" />
             <input id="passwordLogin" ref="password" type="password" className="form-control" placeholder="Password" />
           </div>
-          <button onClick={this.login.bind(this)} className="btn btn-danger">Login</button>
+          <button onClick={this.login.bind(this)} className="btn btn-danger">Log In</button>
         </form>
       </div>
     )

@@ -29,7 +29,7 @@ class EditComment extends React.Component {
           ref="editText"
           rows="4"></textarea>
         <span className="new-comment-buttons">
-          <button className="btn btn-default" onClick={this.discard.bind(this)}>Discard</button>
+          <button className="btn btn-default" onClick={this.discard.bind(this)}>Discard Changes</button>
           <button className="btn btn-primary" onClick={this.update.bind(this)}>Save Edit</button>
         </span>
       </div>
