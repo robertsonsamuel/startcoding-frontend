@@ -24,8 +24,8 @@ class Main extends React.Component {
       this.setState({ greens: greens });
     })
     eventEmitter.registerListener('goHome', () => {
-      this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
-      this.getTopics.bind(this);
+      this.setState({activeTopic: false });
+      this.getTopics();
     })
   }
   handleTopicClick(topicId){

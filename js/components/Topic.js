@@ -42,7 +42,6 @@ class Topic extends React.Component {
     this.props.onClick();
   }
   fetchComments(callback) {
-    console.log("updated comments");
     API.getComments(this.props._id)
     .done( resp => {
       this.setState( {allComments: resp, loading: false}, () => {

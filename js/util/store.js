@@ -31,7 +31,6 @@ class EventEmitter {
     this[callbacks][name] = theEvent.splice(cbIndex,1);
   }
   emitChange(name) {
-    console.log("emitting change", name, this[callbacks][name].length);
     if (!this[callbacks][name]) return;
     this[callbacks][name].forEach( cb => cb() );
   }
@@ -43,7 +42,6 @@ class Store extends EventEmitter {
     this[data] = {};
   }
   saveDatum(name, datum) {
-    console.log("saving in store", name);
     this[data][name] = datum;
     this.emitChange(name);
   }
