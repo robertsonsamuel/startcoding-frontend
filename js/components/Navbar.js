@@ -62,12 +62,14 @@ class Navbar extends React.Component {
     store.saveDatum('token', null);
     hideLoginRegisterLogoutUsername(false, true, true, false);
   }
-  goHome() {
+  goHome(e) {
+    e.preventDefault();
     eventEmitter.emitChange('goHome');
   }
   render() {
     return (
       <div>
+        <div id="goHome" onClick={this.goHome}></div>
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
             <div className="navbar-header">
@@ -78,13 +80,13 @@ class Navbar extends React.Component {
                 <span className="icon-bar"></span>
               </button>
               <div className="navbar-brand">
-                <div className="btn-round" onClick={this.goHome}>
+                <div className="btn-round">
                       <div className='leaf-logo'>
                         <div className='leaf-shadow'>
                         </div>
                      </div>
                   </div>
-                  <span className="greenItName"  onClick={this.goHome}>Green it!</span>
+                  <span className="greenItName">Green it!</span>
               </div>
 
 

@@ -160,9 +160,11 @@ a.alreadyMember {
 img{
   max-width: 100%
 }
+
 img:hover{
   width: 100%
 }
+
 .markdownNotice {
   float: left;
   color: grey;
@@ -840,4 +842,13 @@ ul#Login {
     top: 20px;
     left: 42%;
   }
+}
+
+#goHome {
+  position: fixed;
+  background: transparent;
+  z-index: 9999;
+  height: 64px;
+  width: 180px;
+  cursor: pointer;
 }
