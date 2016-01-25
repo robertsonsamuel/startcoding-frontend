@@ -674,6 +674,11 @@ span.greenItName {
         -webkit-overflow-scrolling: touch;
     }
 
+    ul#Login {
+        left: 5%;
+        position: relative;
+    }
+
 }
 
 /* Landscape */
@@ -756,6 +761,11 @@ a.alreadyMember {
   position: relative;
   left: 1em;
 }
+ul#Login {
+    left: 5%;
+    position: relative;
+}
+
 
 }
 
