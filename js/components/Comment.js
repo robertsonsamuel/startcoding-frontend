@@ -67,7 +67,8 @@ class Comment extends React.Component {
     .fail(err => genErr(err.responseText));
   }
   handleVote(vote) {
-    if (!this.props.meId) {
+    console.log("voting", this.state.me);
+    if (!this.state.meId) {
       pleaseLogin();
       return;
     }
