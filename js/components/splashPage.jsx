@@ -36,23 +36,20 @@ let catagories = [
     short: "Swift is a multi-paradigm, compiled programming language created for iOS and OS X by Apple Inc.",
     href: "#/swift",
     imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Swift_logo.svg/2000px-Swift_logo.svg.png",
-  },
-
+  }
 ];
 
 class SplashPage extends React.Component {
   render(){
     let resourcePanels = catagories.map( (catagory, i) => {
       return (
-        <div className="techContainer col-lg-10 col-lg-offset-1" key={i}>
-          <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels">
-            <div className="thumbnail">
-              <img className="techImage" src={catagory.imgSrc}  height="150px" alt="..." />
-              <div className="caption">
-                <h3>{catagory.name}</h3>
-                <p>{catagory.short}</p>
-                <p><a href={catagory.href} className="btn btn-primary" role="button">Learn about {catagory.name}</a></p>
-              </div>
+        <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels"  key={i}>
+          <div className="thumbnail">
+            <img className="techImage" src={catagory.imgSrc}  height="150px" alt="..." />
+            <div className="caption">
+              <h3>{catagory.name}</h3>
+              <p>{catagory.short}</p>
+              <p><a href={catagory.href} className="btn btn-primary" role="button">Learn about {catagory.name}</a></p>
             </div>
           </div>
         </div>
@@ -75,7 +72,9 @@ class SplashPage extends React.Component {
         </div>
         <br />
         <div className="splitSection"></div>
-        {resourcePanels}
+        <div className="techContainer col-lg-10 col-lg-offset-1">
+          {resourcePanels}
+        </div>
       </div>
     )
   }

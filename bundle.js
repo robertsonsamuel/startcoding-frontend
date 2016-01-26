@@ -97,23 +97,41 @@
 	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(_Navbar2.default, null)
-	        ),
-	        _react2.default.createElement(_splashPage2.default, null)
-	      );
+	      switch (this.props.location[0]) {
+	        case '':
+	          return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(_Navbar2.default, null)
+	            ),
+	            _react2.default.createElement(_splashPage2.default, null)
+	          );
+	        default:
+	          return _react2.default.createElement(
+	            'h1',
+	            null,
+	            this.props.location[0]
+	          );
+	      }
 	    }
 	  }]);
 	
 	  return App;
 	}(_react2.default.Component);
 	
-	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('React'));
+	// Split location into `/` separated parts, then render `Application` with it
+	
+	function handleNewHash() {
+	  var location = window.location.hash.replace(/^#\/?|\/$/g, '').split('/');
+	  _reactDom2.default.render(_react2.default.createElement(App, { location: location }), document.getElementById('React'));
+	}
+	
+	// Handle the initial route and browser navigation events
+	handleNewHash();
+	window.addEventListener('hashchange', handleNewHash, false);
 
 /***/ },
 /* 1 */
@@ -38353,36 +38371,32 @@
 	      var resourcePanels = catagories.map(function (catagory, i) {
 	        return _react2.default.createElement(
 	          "div",
-	          { className: "techContainer col-lg-10 col-lg-offset-1", key: i },
+	          { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels", key: i },
 	          _react2.default.createElement(
 	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            { className: "thumbnail" },
+	            _react2.default.createElement("img", { className: "techImage", src: catagory.imgSrc, height: "150px", alt: "..." }),
 	            _react2.default.createElement(
 	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: catagory.imgSrc, height: "150px", alt: "..." }),
+	              { className: "caption" },
 	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
+	                "h3",
+	                null,
+	                catagory.name
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                catagory.short
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
 	                _react2.default.createElement(
-	                  "h3",
-	                  null,
+	                  "a",
+	                  { href: catagory.href, className: "btn btn-primary", role: "button" },
+	                  "Learn about ",
 	                  catagory.name
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  catagory.short
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: catagory.href, className: "btn btn-primary", role: "button" },
-	                    "Learn about ",
-	                    catagory.name
-	                  )
 	                )
 	              )
 	            )
@@ -38429,7 +38443,11 @@
 	        ),
 	        _react2.default.createElement("br", null),
 	        _react2.default.createElement("div", { className: "splitSection" }),
-	        resourcePanels
+	        _react2.default.createElement(
+	          "div",
+	          { className: "techContainer col-lg-10 col-lg-offset-1" },
+	          resourcePanels
+	        )
 	      );
 	    }
 	  }]);
