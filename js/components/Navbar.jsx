@@ -81,12 +81,11 @@ class Navbar extends React.Component {
               </button>
               <div className="navbar-brand">
                 <div className="btn-round">
-                      <div className='leaf-logo'>
-                        <div className='leaf-shadow'>
-                        </div>
+                      <div className='braket-logo'>
+                          &lt;&gt;
                      </div>
                   </div>
-                  <span className="greenItName">Green it!</span>
+                  <span className="startCodingName">Start Coding</span>
               </div>
 
 

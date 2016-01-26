@@ -11,13 +11,11 @@ ul#Login {
 }
 
 .btn-round {
-  background-color: white;
-  border-radius: 999em;
+  border-radius: 1;
   width: 1.7em;
   height: 1.7em;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   line-height: 1;
-  font-size: 36px;
+  font-size: 35px;
   z-index: -1;
   position: relative;
   cursor: pointer;
@@ -29,32 +27,34 @@ ul#Login {
     border-color: rgba(76, 175, 80, 0);
 }
 
-div.greenit-logo{
+div.startcoding-logo{
   margin:3em auto;
   width:50em;
 }
 
-div.greenit-logo a{
+div.startcoding-logo a{
   text-decoration:none;
   color:#64AF67;
 }
 
-div.leaf-logo{
-  border-radius: 0 75% 0 70%;
-  background-color: #90D788;
-  width: 1.0em;
-  height: 1.0em;
+div.braket-logo {
+  border-radius: 50% 50% 50% 50%;
+  background-color: #22659C;
+  color: #42E2FF;
+  width: 1em;
+  height: 1em;
+  font-size: 1.5em;
   overflow: hidden;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);
   display: inline-block;
   vertical-align: center;
   position: absolute;
-  bottom: 13px;
-  right: 12px;
-  margin: 0 auto;
+  bottom: 4px;
+  right: 4px;
+  margin: 0px auto;
 }
 
-div.leaf-logo div.leaf-shadow{
+div.braket-logo div.leaf-shadow{
   width:6.3em;
   height:10.6em;
   background-color:#64AF67;
@@ -68,10 +68,10 @@ div.leaf-logo div.leaf-shadow{
   margin:0;
 }
 
-.greenit-logo:hover {
+.startcoding-logo:hover {
 
 }
-.greenit-logo:after {
+.startcoding-logo:after {
     content: "";
     position: absolute;
     top: 0px;
@@ -86,7 +86,7 @@ div.leaf-logo div.leaf-shadow{
     transition: none;
 
 }
-.greenit-logo:hover:after {
+.startcoding-logo:hover:after {
     width: 120%;
     background-color: rgba(255,255,255,0);
     -webkit-transition: all 0.9s ease-out;
@@ -99,10 +99,10 @@ div#bs-example-navbar-collapse-2 {
     position: relative;
     /*left: 8%;*/
 }
-span.greenItName {
+span.startCodingName {
     position: absolute;
     top: 20px;
-    left: 4em;
+    left: 3.5em;
 }
 
 #registerForm {
@@ -216,7 +216,7 @@ textarea {
 }
 
 .navbar-inverse {
-  background: #4caf50;
+  background: #03A9F4;
   color: #FFF;
   margin-bottom: 0;
   z-index: 1000;
@@ -245,9 +245,9 @@ textarea {
 }
 .main{
   position: relative;
-  height: calc(100vh - 64px);
+  /*height: calc(100vh - 64px);*/
   margin-bottom: 0;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
 }
 .displayTopic {
   overflow: hidden;
@@ -373,10 +373,10 @@ a.disabled {
 
 
 @media (max-width:768px) and (min-width:667px) {
-  span.greenItName {
+  span.startCodingName {
       position: absolute;
       top: 20px;
-      left: 42%;
+      left: 30%;
 
   }
 }
@@ -389,7 +389,7 @@ a.disabled {
   h4, .h4 {
       font-size: 15px;
   }
-  span.greenItName {
+  span.startCodingName {
       position: absolute;
       top: 20px;
       left: 38%;
@@ -439,7 +439,7 @@ a.disabled {
     /*h4, .h4 {
         font-size: 15px;
     }*/
-    span.greenItName {
+    span.startCodingName {
         position: absolute;
         top: 20px;
         left: 38%;
@@ -461,7 +461,7 @@ a.disabled {
     h4, .h4 {
         font-size: 15px;
     }
-    span.greenItName {
+    span.startCodingName {
         position: absolute;
         top: 20px;
         left: 38%;
@@ -573,7 +573,7 @@ a.disabled {
   and (max-device-width: 667px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
-span.greenItName {
+span.startCodingName {
     position: absolute;
     top: 20px;
     left: 43%;
@@ -627,7 +627,7 @@ and (min-device-width : 414px)
 and (max-device-width : 736px)
 and (orientation : portrait) {
 
-  span.greenItName {
+  span.startCodingName {
     position: absolute;
     top: 23px;
     left: 11%;
@@ -650,10 +650,10 @@ and (orientation : portrait) {
     margin-bottom: 0;
     overflow-y: initial;
   }
-span.greenItName {
+span.startCodingName {
   position: absolute;
   top: 23px;
-  left: 8%;
+  left: 7%;
 
 }
   .active {
@@ -690,7 +690,7 @@ span.greenItName {
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         cursor: pointer;
     }
-    span.greenItName {
+    span.startCodingName {
       position: absolute;
       top: 23px;
       left: 4em;
@@ -724,10 +724,10 @@ span.greenItName {
   and (orientation: landscape)
   and (-webkit-min-device-pixel-ratio: 1) {
 
-    #greenItName{
+    #startCodingName{
       position: absolute;
         top: 20px;
-        left:8%;
+        left:7%;
     }
 
 }
@@ -777,7 +777,7 @@ span.greenItName {
   and (max-device-width: 1024px)
   and (orientation: portrait)
   and (-webkit-min-device-pixel-ratio: 2) {
-span.greenItName {
+span.startCodingName {
   position: absolute;
   top: 20px;
   left: 4em;
@@ -812,10 +812,10 @@ ul#Login {
   and (orientation: landscape)
   and (-webkit-min-device-pixel-ratio: 2) {
 
-#greenItName{
+#startCodingName{
   position: absolute;
     top: 20px;
-    left:8%;
+    left:7%;
 }
 
 }
@@ -828,7 +828,7 @@ ul#Login {
 
 /* Nexus 7 (landscape) ----------- */
 @media only screen and (min-width : 604px) and (orientation: landscape) {
-  span.greenItName {
+  span.startCodingName {
     position: absolute;
     top: 20px;
     /*left: 20%;*/
@@ -837,10 +837,10 @@ ul#Login {
 
 /* Nexus 7 (portrait) ----------- */
 @media only screen and (max-width : 603px) and (orientation: portrait) {
-  span.greenItName {
+  span.startCodingName {
     position: absolute;
     top: 20px;
-    left: 42%;
+    left: 30%;
   }
 }
 
