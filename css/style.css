@@ -5,9 +5,47 @@ body {
   color: #1F4832;
   background: #fcfffc;
 }
-ul#Login {
-    left: 10%;
+
+.heroImage {
+    background: rgb(37, 208, 239);
+    height: 100vh;
+    width: 99vw;
+    left: -30px;
     position: relative;
+}
+
+.heroHead{
+  text-align: center;
+  color: #F3F3F3;
+  font-style: oblique;
+}
+.herofooter{
+  text-align: center;
+  color: #F3F3F3;
+  font-style: oblique;
+}
+.heroText{
+  text-align: center;
+}
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh;
+  /* Make it a flex container */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .btn-round {
@@ -95,6 +133,21 @@ div.braket-logo div.leaf-shadow{
     -o-transition: all 0.9s ease-out;
     transition: all 0.9s ease-out;
 }
+
+img.techImage {
+    height: 200px;
+}
+.techContainer {
+    /* margin: 40px; */
+    position: relative;
+    top: 15px;
+}
+
+/*I'm fucking dumb fix me later*/
+.resourcePanels {
+    height: 450px;
+}
+
 div#bs-example-navbar-collapse-2 {
     position: relative;
     /*left: 8%;*/
@@ -156,14 +209,6 @@ a.alreadyMember {
 #passwordLogin.form-control::-moz-placeholder { color: white; }
 #passwordLogin.form-control:-ms-input-placeholder { color: white; }
 #passwordLogin{ color:white; }
-
-img{
-  max-width: 100%
-}
-
-img:hover{
-  width: 100%
-}
 
 .markdownNotice {
   float: left;
@@ -414,10 +459,6 @@ a.disabled {
       padding-bottom: 1em;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
-  }
-  ul#Login {
-      left: 0%;
-      position: relative;
   }
   #Register{
     display: none;
@@ -710,10 +751,7 @@ span.startCodingName {
         -webkit-overflow-scrolling: touch;
     }
 
-    ul#Login {
-        left: 5%;
-        position: relative;
-    }
+
 
 }
 
@@ -797,10 +835,7 @@ a.alreadyMember {
   position: relative;
   left: 1em;
 }
-ul#Login {
-    left: 5%;
-    position: relative;
-}
+
 
 
 }

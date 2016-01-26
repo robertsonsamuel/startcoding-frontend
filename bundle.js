@@ -63,15 +63,19 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _Main = __webpack_require__(/*! ./components/Main.jsx */ 160);
+	var _Main = __webpack_require__(/*! ./components/Main.jsx */ 176);
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
-	__webpack_require__(/*! ../css/sweetalert.css */ 288);
+	var _splashPage = __webpack_require__(/*! ./components/splashPage.jsx */ 290);
 	
-	__webpack_require__(/*! ../css/google.css */ 290);
+	var _splashPage2 = _interopRequireDefault(_splashPage);
 	
-	__webpack_require__(/*! ../css/style.css */ 292);
+	__webpack_require__(/*! ../css/sweetalert.css */ 291);
+	
+	__webpack_require__(/*! ../css/google.css */ 293);
+	
+	__webpack_require__(/*! ../css/style.css */ 295);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96,12 +100,12 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Navbar2.default, null),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'container' },
-	          _react2.default.createElement(_Main2.default, null)
-	        )
+	          null,
+	          _react2.default.createElement(_Navbar2.default, null)
+	        ),
+	        _react2.default.createElement(_splashPage2.default, null)
 	      );
 	    }
 	  }]);
@@ -20199,27 +20203,27 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RegisterForm = __webpack_require__(/*! ./RegisterForm.jsx */ 171);
+	var _RegisterForm = __webpack_require__(/*! ./RegisterForm.jsx */ 160);
 	
 	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
 	
-	var _LoginForm = __webpack_require__(/*! ./LoginForm.jsx */ 294);
+	var _LoginForm = __webpack_require__(/*! ./LoginForm.jsx */ 161);
 	
 	var _LoginForm2 = _interopRequireDefault(_LoginForm);
 	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 173);
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
 	
-	var _API = __webpack_require__(/*! ../API */ 161);
+	var _API = __webpack_require__(/*! ../API */ 172);
 	
 	var _API2 = _interopRequireDefault(_API);
 	
-	var _store = __webpack_require__(/*! ../util/store */ 163);
+	var _store = __webpack_require__(/*! ../util/store */ 174);
 	
-	var _init = __webpack_require__(/*! ../util/init */ 295);
+	var _init = __webpack_require__(/*! ../util/init */ 175);
 	
 	var _init2 = _interopRequireDefault(_init);
 	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 162);
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -20360,58 +20364,20 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-2' },
-	              _react2.default.createElement('ul', { id: 'welcome', className: 'nav navbar-nav navbar-left' }),
+	              _react2.default.createElement('ul', { id: '', className: 'nav navbar-nav navbar-left' }),
 	              _react2.default.createElement(
 	                'ul',
-	                { id: 'Login', className: 'nav navbar-nav' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(_LoginForm2.default, { login: this.login.bind(this) })
-	                ),
+	                { id: '', className: 'nav navbar-nav navbar-right' },
 	                _react2.default.createElement(
 	                  'li',
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#', onClick: this.showRegister.bind(this) },
-	                    'New here? ',
+	                    { href: '#', className: '', onClick: this.showLogin.bind(this) },
 	                    _react2.default.createElement(
 	                      'strong',
 	                      null,
-	                      'Register!'
-	                    )
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { id: 'forgotPassword', href: 'https://vast-sierra-7757.herokuapp.com/forgotPassword' },
-	                    'Forgot Password? '
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'ul',
-	                { id: 'Register', className: 'nav navbar-nav navbar-left' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(_RegisterForm2.default, { register: this.register.bind(this) })
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#', className: 'alreadyMember', onClick: this.showLogin.bind(this) },
-	                    'Already a member? ',
-	                    _react2.default.createElement(
-	                      'strong',
-	                      null,
-	                      'Log in!'
+	                      'Login / Register'
 	                    )
 	                  )
 	                )
@@ -20453,1325 +20419,6 @@
 
 /***/ },
 /* 160 */
-/*!********************************!*\
-  !*** ./js/components/Main.jsx ***!
-  \********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _API = __webpack_require__(/*! ../API */ 161);
-	
-	var _API2 = _interopRequireDefault(_API);
-	
-	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 164);
-	
-	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
-	
-	var _Topic = __webpack_require__(/*! ./Topic.jsx */ 169);
-	
-	var _Topic2 = _interopRequireDefault(_Topic);
-	
-	var _NewTopicModal = __webpack_require__(/*! ./NewTopicModal.jsx */ 287);
-	
-	var _NewTopicModal2 = _interopRequireDefault(_NewTopicModal);
-	
-	var _classnames = __webpack_require__(/*! classnames */ 185);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 173);
-	
-	var _store = __webpack_require__(/*! ../util/store */ 163);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Main = function (_React$Component) {
-	  _inherits(Main, _React$Component);
-	
-	  function Main(props) {
-	    _classCallCheck(this, Main);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
-	
-	    _this.state = {
-	      allTopics: [],
-	      greens: _store.store.getDatum('me') ? _store.store.getDatum('me').greenTopics : new Set(),
-	      activeTopic: false,
-	      loading: true
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(Main, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-	
-	      this.getTopics.bind(this)();
-	      _store.store.registerListener('me', function () {
-	        var greens = _store.store.getDatum('me') ? _store.store.getDatum('me').greenTopics : new Set();
-	        _this2.setState({ greens: greens });
-	      });
-	      _store.eventEmitter.registerListener('goHome', function () {
-	        _this2.setState({ activeTopic: false });
-	        _this2.getTopics();
-	      });
-	    }
-	  }, {
-	    key: 'handleTopicClick',
-	    value: function handleTopicClick(topicId) {
-	      this.setState({ activeTopic: this.state.activeTopic === topicId ? false : topicId });
-	    }
-	  }, {
-	    key: 'getTopics',
-	    value: function getTopics(callback) {
-	      var _this3 = this;
-	
-	      _API2.default.getTopics().done(function (resp) {
-	        _this3.setState({ allTopics: resp, loading: false });
-	      }).fail(function (err) {
-	        return (0, _alerts.genErr)(err.responseText);
-	      }).always(function () {
-	        if (callback) callback();
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this4 = this;
-	
-	      var topicEls = this.state.allTopics.map(function (topic, i) {
-	        var isActive = _this4.state.activeTopic === topic._id;
-	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: isActive,
-	          isGreen: _this4.state.greens.has(topic._id),
-	          onClick: _this4.handleTopicClick.bind(_this4, topic._id),
-	          key: i }));
-	      });
-	      var mainClasses = (0, _classnames2.default)('main', 'panel', { displayTopic: this.state.activeTopic });
-	      return _react2.default.createElement(
-	        'div',
-	        { className: mainClasses },
-	        _react2.default.createElement(_NewTopicModal2.default, { topicPosted: this.getTopics.bind(this) }),
-	        this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
-	        topicEls
-	      );
-	    }
-	  }]);
-	
-	  return Main;
-	}(_react2.default.Component);
-	
-	exports.default = Main;
-
-/***/ },
-/* 161 */
-/*!*******************!*\
-  !*** ./js/API.js ***!
-  \*******************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _authorization = __webpack_require__(/*! ./util/authorization */ 162);
-	
-	var _store = __webpack_require__(/*! ./util/store */ 163);
-	
-	//let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
-	var apiUrl = 'http://localhost:3000';
-	
-	function setAuthHeader(xhr) {
-	  var token = _store.store.getDatum('token');
-	  xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	}
-	
-	var API = {
-	  register: function register(newUserInfo) {
-	    return $.post(apiUrl + '/users/register', newUserInfo);
-	  },
-	  login: function login(userInfo) {
-	    return $.post(apiUrl + '/users/login', userInfo).done(function (resp) {
-	      localStorage.setItem('token', resp);
-	      _store.store.saveDatum('token', resp);
-	    });
-	  },
-	  getMyInfo: function getMyInfo() {
-	    var token = _store.store.getDatum('token');
-	    if (!token) return;
-	    var payload = (0, _authorization.parseToken)(token);
-	    $.ajax({
-	      url: apiUrl + '/users/' + payload.id,
-	      type: 'GET',
-	      beforeSend: setAuthHeader
-	    }).done(function (resp) {
-	      resp.greenTopics = new Set(resp.greenTopics);
-	      _store.store.saveDatum('me', resp);
-	    });
-	  },
-	  getTopics: function getTopics() {
-	    return $.get(apiUrl + '/topics/');
-	  },
-	  postTopic: function postTopic(title, body) {
-	    return $.ajax({
-	      url: apiUrl + '/topics/',
-	      type: 'POST',
-	      beforeSend: setAuthHeader,
-	      datatype: 'json',
-	      data: {
-	        title: title,
-	        body: body
-	      }
-	    });
-	  },
-	  getComments: function getComments(topicId) {
-	    var me = _store.store.getDatum('me');
-	    if (me) {
-	      me.greenTopics.add(topicId);
-	      _store.store.saveDatum('me', me);
-	    };
-	    return $.ajax({
-	      url: apiUrl + '/comments/' + topicId,
-	      type: 'GET',
-	      beforeSend: setAuthHeader
-	    });
-	  },
-	  postComment: function postComment(parentId, body, seed) {
-	    var query = seed ? '?seed=true' : '';
-	    return $.ajax({
-	      url: apiUrl + '/comments/' + (parentId + query),
-	      type: 'POST',
-	      beforeSend: setAuthHeader,
-	      datatype: 'json',
-	      data: { body: body }
-	    });
-	  },
-	  updateComment: function updateComment(commentId, body) {
-	    return $.ajax({
-	      url: apiUrl + '/comments/' + commentId,
-	      type: 'PUT',
-	      beforeSend: setAuthHeader,
-	      datatype: 'json',
-	      data: { body: body }
-	    });
-	  },
-	  deleteComment: function deleteComment(commentId) {
-	    return $.ajax({
-	      url: apiUrl + '/comments/' + commentId,
-	      type: 'DELETE',
-	      beforeSend: setAuthHeader
-	    });
-	  },
-	  vote: function vote(commentId, _vote) {
-	    return $.ajax({
-	      url: apiUrl + '/comments/vote/' + commentId,
-	      type: 'POST',
-	      beforeSend: setAuthHeader,
-	      datatype: 'json',
-	      data: { vote: _vote }
-	    });
-	  }
-	};
-	
-	//listeners
-	_store.store.registerListener('token', API.getMyInfo);
-	
-	exports.default = API;
-
-/***/ },
-/* 162 */
-/*!**********************************!*\
-  !*** ./js/util/authorization.js ***!
-  \**********************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.parseToken = parseToken;
-	exports.canHazToken = canHazToken;
-	exports.isAuthorized = isAuthorized;
-	var loginMSg = 'Login or register, you sneaky fool!';
-	
-	function parseToken(token) {
-	  if (!token) return '';
-	  var payload = JSON.parse(atob(token.split('.')[1]));
-	  return payload;
-	}
-	
-	function canHazToken() {
-	  var token = localStorage.getItem('token');
-	  var payload = parseToken(token);
-	  return payload;
-	}
-	
-	function isAuthorized(userId) {
-	  var payload = canHazToken();
-	  if (payload.id !== userId) return false;
-	  return payload;
-	}
-
-/***/ },
-/* 163 */
-/*!**************************!*\
-  !*** ./js/util/store.js ***!
-  \**************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.store = exports.eventEmitter = undefined;
-	
-	var _API = __webpack_require__(/*! ../API */ 161);
-	
-	var _API2 = _interopRequireDefault(_API);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var callbacks = Symbol();
-	var data = Symbol();
-	
-	// THINGS IN THE STORE
-	// token - full token
-	// me {
-	//   username: string
-	//   upvotes: [] (set)
-	//   downvotes: []
-	//   greenTopics: []
-	// }
-	
-	// EVENTS
-	// 'goHome' event!
-	
-	var EventEmitter = function () {
-	  function EventEmitter() {
-	    _classCallCheck(this, EventEmitter);
-	
-	    this[callbacks] = {};
-	  }
-	
-	  _createClass(EventEmitter, [{
-	    key: 'registerListener',
-	    value: function registerListener(name, cb) {
-	      var theEvent = this[callbacks][name];
-	      this[callbacks][name] = theEvent ? theEvent.concat(cb) : [cb];
-	    }
-	  }, {
-	    key: 'stopListening',
-	    value: function stopListening(name, cb) {
-	      var theEvent = this[callbacks][name];
-	      if (!theEvent) return;
-	      var cbIndex = theEvent.indexOf(cb);
-	      this[callbacks][name] = theEvent.splice(cbIndex, 1);
-	    }
-	  }, {
-	    key: 'emitChange',
-	    value: function emitChange(name) {
-	      if (!this[callbacks][name]) return;
-	      this[callbacks][name].forEach(function (cb) {
-	        return cb();
-	      });
-	    }
-	  }]);
-	
-	  return EventEmitter;
-	}();
-	
-	var Store = function (_EventEmitter) {
-	  _inherits(Store, _EventEmitter);
-	
-	  function Store() {
-	    _classCallCheck(this, Store);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Store).call(this));
-	
-	    _this[data] = {};
-	    return _this;
-	  }
-	
-	  _createClass(Store, [{
-	    key: 'saveDatum',
-	    value: function saveDatum(name, datum) {
-	      this[data][name] = datum;
-	      this.emitChange(name);
-	    }
-	  }, {
-	    key: 'getDatum',
-	    value: function getDatum(name) {
-	      return this[data][name];
-	    }
-	  }]);
-	
-	  return Store;
-	}(EventEmitter);
-	
-	var eventEmitter = exports.eventEmitter = new EventEmitter();
-	var store = exports.store = new Store();
-
-/***/ },
-/* 164 */
-/*!******************************************!*\
-  !*** ./js/components/LoadingSpinner.jsx ***!
-  \******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	__webpack_require__(/*! ../../css/loadingSpinner.css */ 165);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var LoadingSpinner = function (_React$Component) {
-	  _inherits(LoadingSpinner, _React$Component);
-	
-	  function LoadingSpinner() {
-	    _classCallCheck(this, LoadingSpinner);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LoadingSpinner).apply(this, arguments));
-	  }
-	
-	  _createClass(LoadingSpinner, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'showbox' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'loader' },
-	          _react2.default.createElement(
-	            'svg',
-	            { className: 'circular', viewBox: '25 25 50 50' },
-	            _react2.default.createElement('circle', { className: 'path', cx: '50', cy: '50', r: '20', fill: 'none', strokeWidth: '2', 'stroke-miterlimit': '10' })
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return LoadingSpinner;
-	}(_react2.default.Component);
-	
-	exports.default = LoadingSpinner;
-
-/***/ },
-/* 165 */
-/*!********************************!*\
-  !*** ./css/loadingSpinner.css ***!
-  \********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./loadingSpinner.css */ 166);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 168)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./loadingSpinner.css", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./loadingSpinner.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 166 */
-/*!***********************************************!*\
-  !*** ./~/css-loader!./css/loadingSpinner.css ***!
-  \***********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 167)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "/*////////////\n// CREDITS: //\n//////////////\n\n// @elrumordelaluz - Provided scaling fix/improvement\n// @faddee - Provided fix for Edge support\n\n// from http://codepen.io/jczimm/pen/vEBpoL\n*/\n\nbody {\n  background-color: #eee;\n}\n\n.loader {\n  position: relative;\n  margin: 0px auto;\n  width: 100px;\n}\n\n.loader:before {\n  content: '';\n  display: block;\n  padding-top: 100%;\n}\n\n.circular {\n  -webkit-animation: rotate 2s linear infinite;\n  animation: rotate 2s linear infinite;\n  height: 100%;\n  -webkit-transform-origin: center center;\n  transform-origin: center center;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto;\n}\n\n.path {\n  stroke-dasharray: 1, 200;\n  stroke-dashoffset: 0;\n  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;\n  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;\n  stroke-linecap: round;\n}\n\n@-webkit-keyframes rotate {\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n@keyframes rotate {\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n@-webkit-keyframes dash {\n  0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n  }\n  50% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -35px;\n  }\n  100% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -124px;\n  }\n}\n\n@keyframes dash {\n  0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n  }\n  50% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -35px;\n  }\n  100% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -124px;\n  }\n}\n\n@-webkit-keyframes color {\n  100%,\n  0% {\n    stroke: #d62d20;\n  }\n  40% {\n    stroke: #0057e7;\n  }\n  66% {\n    stroke: #008744;\n  }\n  80%,\n  90% {\n    stroke: #ffa700;\n  }\n}\n\n@keyframes color {\n  100%,\n  0% {\n    stroke: #d62d20;\n  }\n  40% {\n    stroke: #0057e7;\n  }\n  66% {\n    stroke: #008744;\n  }\n  80%,\n  90% {\n    stroke: #ffa700;\n  }\n}\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 167 */
-/*!**************************************!*\
-  !*** ./~/css-loader/lib/css-base.js ***!
-  \**************************************/
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-	
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-	
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 168 */
-/*!*************************************!*\
-  !*** ./~/style-loader/addStyles.js ***!
-  \*************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-	
-	module.exports = function(list, options) {
-		if(true) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-	
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-	
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-	
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-	
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-	
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-	
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-	
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-	
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-	
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-	
-	function createLinkElement(options) {
-		var linkElement = document.createElement("link");
-		linkElement.rel = "stylesheet";
-		insertStyleElement(options, linkElement);
-		return linkElement;
-	}
-	
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-	
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else if(obj.sourceMap &&
-			typeof URL === "function" &&
-			typeof URL.createObjectURL === "function" &&
-			typeof URL.revokeObjectURL === "function" &&
-			typeof Blob === "function" &&
-			typeof btoa === "function") {
-			styleElement = createLinkElement(options);
-			update = updateLink.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-				if(styleElement.href)
-					URL.revokeObjectURL(styleElement.href);
-			};
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-	
-		update(obj);
-	
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-	
-	var replaceText = (function () {
-		var textStore = [];
-	
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-	
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-	
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-	
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-		var sourceMap = obj.sourceMap;
-	
-		if(media) {
-			styleElement.setAttribute("media", media)
-		}
-	
-		if(styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-	
-	function updateLink(linkElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-		var sourceMap = obj.sourceMap;
-	
-		if(sourceMap) {
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-	
-		var blob = new Blob([css], { type: "text/css" });
-	
-		var oldSrc = linkElement.href;
-	
-		linkElement.href = URL.createObjectURL(blob);
-	
-		if(oldSrc)
-			URL.revokeObjectURL(oldSrc);
-	}
-
-
-/***/ },
-/* 169 */
-/*!*********************************!*\
-  !*** ./js/components/Topic.jsx ***!
-  \*********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _API = __webpack_require__(/*! ../API */ 161);
-	
-	var _API2 = _interopRequireDefault(_API);
-	
-	var _Comment = __webpack_require__(/*! ./Comment.jsx */ 170);
-	
-	var _Comment2 = _interopRequireDefault(_Comment);
-	
-	var _NewComment = __webpack_require__(/*! ./NewComment.jsx */ 172);
-	
-	var _NewComment2 = _interopRequireDefault(_NewComment);
-	
-	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 164);
-	
-	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
-	
-	var _classnames = __webpack_require__(/*! classnames */ 185);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 173);
-	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 162);
-	
-	var _time = __webpack_require__(/*! ../util/time */ 186);
-	
-	var _store = __webpack_require__(/*! ../util/store */ 163);
-	
-	var _marked = __webpack_require__(/*! marked */ 286);
-	
-	var _marked2 = _interopRequireDefault(_marked);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	_marked2.default.setOptions({
-	  renderer: new _marked2.default.Renderer(),
-	  gfm: true,
-	  tables: true,
-	  breaks: false,
-	  pedantic: false,
-	  sanitize: true,
-	  smartLists: true,
-	  smartypants: false
-	});
-	
-	var Topic = function (_React$Component) {
-	  _inherits(Topic, _React$Component);
-	
-	  function Topic(props) {
-	    _classCallCheck(this, Topic);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Topic).call(this, props));
-	
-	    _this.state = {
-	      allComments: [],
-	      token: _store.store.getDatum("token") ? _store.store.getDatum("token") : "",
-	      replying: false,
-	      loading: true
-	    };
-	
-	    _store.store.registerListener('token', function () {
-	      _this.setState({ token: _store.store.getDatum('token') });
-	    });
-	    return _this;
-	  }
-	
-	  _createClass(Topic, [{
-	    key: 'headerClicked',
-	    value: function headerClicked() {
-	      if (!this.props.isActive) {
-	        this.fetchComments.bind(this)();
-	      }
-	      this.props.onClick();
-	    }
-	  }, {
-	    key: 'fetchComments',
-	    value: function fetchComments(callback) {
-	      var _this2 = this;
-	
-	      _API2.default.getComments(this.props._id).done(function (resp) {
-	        _this2.setState({ allComments: resp, loading: false }, function () {
-	          console.log("topic state has been set", resp);
-	        });
-	        if (callback) callback();
-	      }).fail(function (err) {
-	        console.log(err);
-	      });
-	    }
-	  }, {
-	    key: 'reply',
-	    value: function reply(e) {
-	      e.preventDefault();
-	      var haveToken = (0, _authorization.canHazToken)();
-	      if (!haveToken) return (0, _alerts.pleaseLogin)();
-	      this.setState({ replying: haveToken });
-	    }
-	  }, {
-	    key: 'postComment',
-	    value: function postComment(body) {
-	      var _this3 = this;
-	
-	      this.setState({ replying: false });
-	      _API2.default.postComment(this.props._id, body, 'seed').done(function (resp) {
-	        return _this3.fetchComments.bind(_this3)();
-	      }).fail(function (err) {
-	        return (0, _alerts.genErr)(err.responseText);
-	      });
-	    }
-	  }, {
-	    key: 'discard',
-	    value: function discard() {
-	      this.setState({ replying: false });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this4 = this;
-	
-	      var commentEls = [];
-	      var closeTopic = [];
-	      if (this.props.isActive) {
-	        closeTopic = _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeTopic' });
-	        commentEls = this.state.allComments.map(function (comment, i) {
-	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { token: _this4.state.token,
-	            update: _this4.fetchComments.bind(_this4),
-	            key: i }));
-	        });
-	      }
-	      var addedClasses = (0, _classnames2.default)('topic', {
-	        active: this.props.isActive,
-	        green: this.props.isGreen
-	      });
-	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
-	        discard: this.discard.bind(this) }) : [];
-	      return _react2.default.createElement(
-	        'div',
-	        { className: addedClasses },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { onClick: this.headerClicked.bind(this), className: 'topicHead' },
-	            _react2.default.createElement(
-	              'h4',
-	              { className: 'topicTitle' },
-	              _react2.default.createElement(
-	                'strong',
-	                null,
-	                this.props.title
-	              ),
-	              ' — ',
-	              this.props.user.username,
-	              closeTopic
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'container topicContent' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'panel-body topicBody' },
-	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.body) } })
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'topicFooter' },
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'timeStamp' },
-	                (0, _time.formatTime)(this.props.timestamp)
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { className: 'btn btn-success replyTopicButton', href: '#', onClick: this.reply.bind(this) },
-	                'reply'
-	              )
-	            ),
-	            newComment,
-	            this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
-	            commentEls
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Topic;
-	}(_react2.default.Component);
-	
-	exports.default = Topic;
-
-/***/ },
-/* 170 */
-/*!***********************************!*\
-  !*** ./js/components/Comment.jsx ***!
-  \***********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _RegisterForm = __webpack_require__(/*! ./RegisterForm.jsx */ 171);
-	
-	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
-	
-	var _NewComment = __webpack_require__(/*! ./NewComment.jsx */ 172);
-	
-	var _NewComment2 = _interopRequireDefault(_NewComment);
-	
-	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 164);
-	
-	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
-	
-	var _EditComment = __webpack_require__(/*! ./EditComment.jsx */ 183);
-	
-	var _EditComment2 = _interopRequireDefault(_EditComment);
-	
-	var _Votebox = __webpack_require__(/*! ./Votebox.jsx */ 184);
-	
-	var _Votebox2 = _interopRequireDefault(_Votebox);
-	
-	var _classnames = __webpack_require__(/*! classnames */ 185);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _API = __webpack_require__(/*! ../API */ 161);
-	
-	var _API2 = _interopRequireDefault(_API);
-	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 173);
-	
-	var _time = __webpack_require__(/*! ../util/time */ 186);
-	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 162);
-	
-	var _store = __webpack_require__(/*! ../util/store */ 163);
-	
-	var _marked = __webpack_require__(/*! marked */ 286);
-	
-	var _marked2 = _interopRequireDefault(_marked);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	_marked2.default.setOptions({
-	  renderer: new _marked2.default.Renderer(),
-	  gfm: true,
-	  tables: true,
-	  breaks: false,
-	  pedantic: false,
-	  sanitize: true,
-	  smartLists: true,
-	  smartypants: false
-	});
-	
-	var Comment = function (_React$Component) {
-	  _inherits(Comment, _React$Component);
-	
-	  function Comment(props) {
-	    _classCallCheck(this, Comment);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Comment).call(this, props));
-	
-	    _this.state = {
-	      replying: false,
-	      editing: false,
-	      updating: false,
-	      loading: false,
-	      meId: _store.store.getDatum('me') ? _store.store.getDatum('me')._id : ''
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(Comment, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-	
-	      _store.store.registerListener('me', function () {
-	        var me = _store.store.getDatum('me');
-	        _this2.setState({ meId: me ? me._id : "" });
-	      });
-	    }
-	  }, {
-	    key: 'reply',
-	    value: function reply(e) {
-	      if (this.state.editing) return;
-	      e.preventDefault();
-	      if (!this.props.token) return (0, _alerts.pleaseLogin)();
-	      this.setState({ replying: this.props.token });
-	    }
-	  }, {
-	    key: 'edit',
-	    value: function edit(e) {
-	      if (this.state.replying) return;
-	      e.preventDefault();
-	      this.setState({ editing: (0, _authorization.isAuthorized)(this.props.user._id) });
-	    }
-	  }, {
-	    key: 'discard',
-	    value: function discard() {
-	      this.setState({ replying: false });
-	      this.setState({ editing: false });
-	    }
-	  }, {
-	    key: 'delete',
-	    value: function _delete() {
-	      (0, _alerts.confirmDelete)(this.deleteComment.bind(this));
-	    }
-	  }, {
-	    key: 'postComment',
-	    value: function postComment(body) {
-	      var _this3 = this;
-	
-	      this.setState({ replying: false, loading: true });
-	      _API2.default.postComment(this.props._id, body).done(function (resp) {
-	        _this3.props.update(function () {
-	          _this3.setState({ loading: false });
-	        });
-	      }).fail(function (err) {
-	        return (0, _alerts.genErr)(err.responseText);
-	      });
-	    }
-	  }, {
-	    key: 'updateComment',
-	    value: function updateComment(update) {
-	      var _this4 = this;
-	
-	      this.setState({ editing: false, updating: true });
-	      _API2.default.updateComment(this.props._id, update).done(function (resp) {
-	        _this4.props.update(function () {
-	          _this4.setState({ updating: false });
-	        });
-	      }).fail(function (err) {
-	        return (0, _alerts.genErr)(err.responseText);
-	      });
-	    }
-	  }, {
-	    key: 'handleVote',
-	    value: function handleVote(vote) {
-	      var _this5 = this;
-	
-	      console.log("voting", this.state.me);
-	      if (!this.state.meId) {
-	        (0, _alerts.pleaseLogin)();
-	        return;
-	      }
-	      _API2.default.vote(this.props._id, vote).done(function (resp) {
-	        _this5.props.update();
-	      }).fail(function (err) {
-	        return console.log("error voting", err);
-	      });
-	    }
-	  }, {
-	    key: 'deleteComment',
-	    value: function deleteComment() {
-	      var _this6 = this;
-	
-	      _API2.default.deleteComment(this.props._id).done(function (resp) {
-	        return _this6.props.update();
-	      }).fail(function (err) {
-	        return swal('Delete Failed', err.responseText, 'error');
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this7 = this;
-	
-	      var payload = (0, _authorization.parseToken)(this.props.token);
-	      var changeButtons = (0, _classnames2.default)({
-	        disabled: payload.id != this.props.user._id || !this.props.timestamp
-	      });
-	
-	      var commentEls = this.props.children.map(function (child, i) {
-	        return _react2.default.createElement(Comment, _extends({}, child, { token: _this7.props.token, update: _this7.props.update, key: i }));
-	      });
-	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
-	        discard: this.discard.bind(this) }) : [];
-	      var commentBody = this.state.editing ? _react2.default.createElement(_EditComment2.default, { update: this.updateComment.bind(this),
-	        discard: this.discard.bind(this),
-	        body: this.props.body }) : _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.body) } });
-	      var timestamp = undefined;
-	      if (this.props.editTime) {
-	        timestamp = '*edited ' + (0, _time.formatTime)(this.props.editTime);
-	      } else {
-	        timestamp = this.props.timestamp ? (0, _time.formatTime)(this.props.timestamp) : '';
-	      }
-	      var showUpvote = this.props.upvotes && this.props.upvotes.includes(this.state.meId);
-	      var showDownvote = this.props.downvotes && this.props.downvotes.includes(this.state.meId);
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'panel panel-default comment' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-heading commentTitle' },
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'panel-title commentUsername' },
-	            this.props.user.username
-	          ),
-	          _react2.default.createElement(_Votebox2.default, { score: this.props.upvotes.length - this.props.downvotes.length,
-	            up: showUpvote,
-	            down: showDownvote,
-	            handleVote: this.handleVote.bind(this) })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          this.state.updating ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
-	          commentBody
-	        ),
-	        _react2.default.createElement(
-	          'ol',
-	          { className: 'panel-footer breadcrumb' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            timestamp
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#', className: changeButtons, onClick: this.edit.bind(this) },
-	              'edit'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#', onClick: this.reply.bind(this) },
-	              'reply'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#', className: changeButtons, onClick: this.delete.bind(this) },
-	              'delete'
-	            )
-	          )
-	        ),
-	        newComment,
-	        this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
-	        commentEls
-	      );
-	    }
-	  }]);
-	
-	  return Comment;
-	}(_react2.default.Component);
-	
-	exports.default = Comment;
-
-/***/ },
-/* 171 */
 /*!****************************************!*\
   !*** ./js/components/RegisterForm.jsx ***!
   \****************************************/
@@ -21850,13 +20497,13 @@
 	exports.default = RegisterForm;
 
 /***/ },
-/* 172 */
-/*!**************************************!*\
-  !*** ./js/components/NewComment.jsx ***!
-  \**************************************/
+/* 161 */
+/*!*************************************!*\
+  !*** ./js/components/LoginForm.jsx ***!
+  \*************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -21868,14 +20515,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RegisterForm = __webpack_require__(/*! ./RegisterForm.jsx */ 171);
-	
-	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
-	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 173);
-	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 162);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21884,95 +20523,56 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var NewComment = function (_React$Component) {
-	  _inherits(NewComment, _React$Component);
+	var LoginForm = function (_React$Component) {
+	  _inherits(LoginForm, _React$Component);
 	
-	  function NewComment(props) {
-	    _classCallCheck(this, NewComment);
+	  function LoginForm() {
+	    _classCallCheck(this, LoginForm);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewComment).call(this, props));
-	
-	    var name = (0, _authorization.canHazToken)().username;
-	    _this.state = { name: name };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LoginForm).apply(this, arguments));
 	  }
 	
-	  _createClass(NewComment, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      $('#newCommentBody').focus();
+	  _createClass(LoginForm, [{
+	    key: "login",
+	    value: function login(e) {
+	      e.preventDefault();
+	      this.props.login({
+	        username: this.refs.username.value,
+	        password: this.refs.password.value
+	      });
 	    }
 	  }, {
-	    key: 'post',
-	    value: function post() {
-	      if (this.refs.body.value) {
-	        this.props.post(this.refs.body.value);
-	      } else {
-	        (0, _alerts.genErr)('Comment cannot be blank');
-	        $('#newCommentBody').focus();
-	      }
-	    }
-	  }, {
-	    key: 'discard',
-	    value: function discard() {
-	      this.props.discard();
-	    }
-	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        { className: 'panel panel-default comment' },
+	        "div",
+	        { className: "col-md-12" },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-heading' },
+	          "form",
+	          { id: "loginForm", className: "navbar-form navbar-left" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-title' },
-	            this.state.name
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement('textarea', { id: 'newCommentBody', className: 'form-control', ref: 'body', rows: '4' }),
+	            "div",
+	            { className: "form-group" },
+	            _react2.default.createElement("input", { id: "userNameLogin", ref: "username", type: "text", className: "form-control", placeholder: "Username" }),
+	            _react2.default.createElement("input", { id: "passwordLogin", ref: "password", type: "password", className: "form-control", placeholder: "Password" })
+	          ),
 	          _react2.default.createElement(
-	            'span',
-	            { className: 'new-comment-buttons' },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'markdownNotice' },
-	              '*Green it will render ',
-	              _react2.default.createElement(
-	                'a',
-	                { href: 'https://help.github.com/articles/markdown-basics/' },
-	                'markdown'
-	              ),
-	              '!'
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              { className: 'btn btn-default', onClick: this.discard.bind(this) },
-	              'Discard'
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              { className: 'btn btn-primary', onClick: this.post.bind(this) },
-	              'Post'
-	            )
+	            "button",
+	            { onClick: this.login.bind(this), className: "btn btn-danger" },
+	            "Log In"
 	          )
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return NewComment;
+	  return LoginForm;
 	}(_react2.default.Component);
 	
-	exports.default = NewComment;
+	exports.default = LoginForm;
 
 /***/ },
-/* 173 */
+/* 162 */
 /*!***************************!*\
   !*** ./js/util/alerts.js ***!
   \***************************/
@@ -21989,7 +20589,7 @@
 	exports.genErr = genErr;
 	exports.pleaseLogin = pleaseLogin;
 	
-	var _sweetalert = __webpack_require__(/*! sweetalert */ 174);
+	var _sweetalert = __webpack_require__(/*! sweetalert */ 163);
 	
 	var _sweetalert2 = _interopRequireDefault(_sweetalert);
 	
@@ -22044,7 +20644,7 @@
 	}
 
 /***/ },
-/* 174 */
+/* 163 */
 /*!****************************************!*\
   !*** ./~/sweetalert/lib/sweetalert.js ***!
   \****************************************/
@@ -22065,35 +20665,35 @@
 	 * jQuery-like functions for manipulating the DOM
 	 */
 	
-	var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation = __webpack_require__(/*! ./modules/handle-dom */ 175);
+	var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation = __webpack_require__(/*! ./modules/handle-dom */ 164);
 	
 	/*
 	 * Handy utilities
 	 */
 	
-	var _extend$hexToRgb$isIE8$logStr$colorLuminance = __webpack_require__(/*! ./modules/utils */ 176);
+	var _extend$hexToRgb$isIE8$logStr$colorLuminance = __webpack_require__(/*! ./modules/utils */ 165);
 	
 	/*
 	 *  Handle sweetAlert's DOM elements
 	 */
 	
-	var _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition = __webpack_require__(/*! ./modules/handle-swal-dom */ 177);
+	var _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition = __webpack_require__(/*! ./modules/handle-swal-dom */ 166);
 	
 	// Handle button events and keyboard events
 	
-	var _handleButton$handleConfirm$handleCancel = __webpack_require__(/*! ./modules/handle-click */ 180);
+	var _handleButton$handleConfirm$handleCancel = __webpack_require__(/*! ./modules/handle-click */ 169);
 	
-	var _handleKeyDown = __webpack_require__(/*! ./modules/handle-key */ 181);
+	var _handleKeyDown = __webpack_require__(/*! ./modules/handle-key */ 170);
 	
 	var _handleKeyDown2 = _interopRequireWildcard(_handleKeyDown);
 	
 	// Default values
 	
-	var _defaultParams = __webpack_require__(/*! ./modules/default-params */ 178);
+	var _defaultParams = __webpack_require__(/*! ./modules/default-params */ 167);
 	
 	var _defaultParams2 = _interopRequireWildcard(_defaultParams);
 	
-	var _setParameters = __webpack_require__(/*! ./modules/set-params */ 182);
+	var _setParameters = __webpack_require__(/*! ./modules/set-params */ 171);
 	
 	var _setParameters2 = _interopRequireWildcard(_setParameters);
 	
@@ -22355,7 +20955,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 175 */
+/* 164 */
 /*!************************************************!*\
   !*** ./~/sweetalert/lib/modules/handle-dom.js ***!
   \************************************************/
@@ -22554,7 +21154,7 @@
 	exports.stopEventPropagation = stopEventPropagation;
 
 /***/ },
-/* 176 */
+/* 165 */
 /*!*******************************************!*\
   !*** ./~/sweetalert/lib/modules/utils.js ***!
   \*******************************************/
@@ -22635,7 +21235,7 @@
 	exports.colorLuminance = colorLuminance;
 
 /***/ },
-/* 177 */
+/* 166 */
 /*!*****************************************************!*\
   !*** ./~/sweetalert/lib/modules/handle-swal-dom.js ***!
   \*****************************************************/
@@ -22649,11 +21249,11 @@
 	  value: true
 	});
 	
-	var _hexToRgb = __webpack_require__(/*! ./utils */ 176);
+	var _hexToRgb = __webpack_require__(/*! ./utils */ 165);
 	
-	var _removeClass$getTopMargin$fadeIn$show$addClass = __webpack_require__(/*! ./handle-dom */ 175);
+	var _removeClass$getTopMargin$fadeIn$show$addClass = __webpack_require__(/*! ./handle-dom */ 164);
 	
-	var _defaultParams = __webpack_require__(/*! ./default-params */ 178);
+	var _defaultParams = __webpack_require__(/*! ./default-params */ 167);
 	
 	var _defaultParams2 = _interopRequireWildcard(_defaultParams);
 	
@@ -22661,7 +21261,7 @@
 	 * Add modal + overlay to DOM
 	 */
 	
-	var _injectedHTML = __webpack_require__(/*! ./injected-html */ 179);
+	var _injectedHTML = __webpack_require__(/*! ./injected-html */ 168);
 	
 	var _injectedHTML2 = _interopRequireWildcard(_injectedHTML);
 	
@@ -22810,7 +21410,7 @@
 	exports.fixVerticalPosition = fixVerticalPosition;
 
 /***/ },
-/* 178 */
+/* 167 */
 /*!****************************************************!*\
   !*** ./~/sweetalert/lib/modules/default-params.js ***!
   \****************************************************/
@@ -22850,7 +21450,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 179 */
+/* 168 */
 /*!***************************************************!*\
   !*** ./~/sweetalert/lib/modules/injected-html.js ***!
   \***************************************************/
@@ -22900,7 +21500,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 180 */
+/* 169 */
 /*!**************************************************!*\
   !*** ./~/sweetalert/lib/modules/handle-click.js ***!
   \**************************************************/
@@ -22912,11 +21512,11 @@
 	  value: true
 	});
 	
-	var _colorLuminance = __webpack_require__(/*! ./utils */ 176);
+	var _colorLuminance = __webpack_require__(/*! ./utils */ 165);
 	
-	var _getModal = __webpack_require__(/*! ./handle-swal-dom */ 177);
+	var _getModal = __webpack_require__(/*! ./handle-swal-dom */ 166);
 	
-	var _hasClass$isDescendant = __webpack_require__(/*! ./handle-dom */ 175);
+	var _hasClass$isDescendant = __webpack_require__(/*! ./handle-dom */ 164);
 	
 	/*
 	 * User clicked on "Confirm"/"OK" or "Cancel"
@@ -23043,7 +21643,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 181 */
+/* 170 */
 /*!************************************************!*\
   !*** ./~/sweetalert/lib/modules/handle-key.js ***!
   \************************************************/
@@ -23055,9 +21655,9 @@
 	  value: true
 	});
 	
-	var _stopEventPropagation$fireClick = __webpack_require__(/*! ./handle-dom */ 175);
+	var _stopEventPropagation$fireClick = __webpack_require__(/*! ./handle-dom */ 164);
 	
-	var _setFocusStyle = __webpack_require__(/*! ./handle-swal-dom */ 177);
+	var _setFocusStyle = __webpack_require__(/*! ./handle-swal-dom */ 166);
 	
 	var handleKeyDown = function handleKeyDown(event, params, modal) {
 	  var e = event || window.event;
@@ -23130,7 +21730,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 182 */
+/* 171 */
 /*!************************************************!*\
   !*** ./~/sweetalert/lib/modules/set-params.js ***!
   \************************************************/
@@ -23142,11 +21742,11 @@
 	  value: true
 	});
 	
-	var _isIE8 = __webpack_require__(/*! ./utils */ 176);
+	var _isIE8 = __webpack_require__(/*! ./utils */ 165);
 	
-	var _getModal$getInput$setFocusStyle = __webpack_require__(/*! ./handle-swal-dom */ 177);
+	var _getModal$getInput$setFocusStyle = __webpack_require__(/*! ./handle-swal-dom */ 166);
 	
-	var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide = __webpack_require__(/*! ./handle-dom */ 175);
+	var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide = __webpack_require__(/*! ./handle-dom */ 164);
 	
 	var alertTypes = ['error', 'warning', 'info', 'success', 'input', 'prompt'];
 	
@@ -23363,7 +21963,1480 @@
 	module.exports = exports['default'];
 
 /***/ },
+/* 172 */
+/*!*******************!*\
+  !*** ./js/API.js ***!
+  \*******************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _authorization = __webpack_require__(/*! ./util/authorization */ 173);
+	
+	var _store = __webpack_require__(/*! ./util/store */ 174);
+	
+	//let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+	var apiUrl = 'http://localhost:3000';
+	
+	function setAuthHeader(xhr) {
+	  var token = _store.store.getDatum('token');
+	  xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	}
+	
+	var API = {
+	  register: function register(newUserInfo) {
+	    return $.post(apiUrl + '/users/register', newUserInfo);
+	  },
+	  login: function login(userInfo) {
+	    return $.post(apiUrl + '/users/login', userInfo).done(function (resp) {
+	      localStorage.setItem('token', resp);
+	      _store.store.saveDatum('token', resp);
+	    });
+	  },
+	  getMyInfo: function getMyInfo() {
+	    var token = _store.store.getDatum('token');
+	    if (!token) return;
+	    var payload = (0, _authorization.parseToken)(token);
+	    $.ajax({
+	      url: apiUrl + '/users/' + payload.id,
+	      type: 'GET',
+	      beforeSend: setAuthHeader
+	    }).done(function (resp) {
+	      resp.greenTopics = new Set(resp.greenTopics);
+	      _store.store.saveDatum('me', resp);
+	    });
+	  },
+	  getTopics: function getTopics() {
+	    return $.get(apiUrl + '/topics/');
+	  },
+	  postTopic: function postTopic(title, body) {
+	    return $.ajax({
+	      url: apiUrl + '/topics/',
+	      type: 'POST',
+	      beforeSend: setAuthHeader,
+	      datatype: 'json',
+	      data: {
+	        title: title,
+	        body: body
+	      }
+	    });
+	  },
+	  getComments: function getComments(topicId) {
+	    var me = _store.store.getDatum('me');
+	    if (me) {
+	      me.greenTopics.add(topicId);
+	      _store.store.saveDatum('me', me);
+	    };
+	    return $.ajax({
+	      url: apiUrl + '/comments/' + topicId,
+	      type: 'GET',
+	      beforeSend: setAuthHeader
+	    });
+	  },
+	  postComment: function postComment(parentId, body, seed) {
+	    var query = seed ? '?seed=true' : '';
+	    return $.ajax({
+	      url: apiUrl + '/comments/' + (parentId + query),
+	      type: 'POST',
+	      beforeSend: setAuthHeader,
+	      datatype: 'json',
+	      data: { body: body }
+	    });
+	  },
+	  updateComment: function updateComment(commentId, body) {
+	    return $.ajax({
+	      url: apiUrl + '/comments/' + commentId,
+	      type: 'PUT',
+	      beforeSend: setAuthHeader,
+	      datatype: 'json',
+	      data: { body: body }
+	    });
+	  },
+	  deleteComment: function deleteComment(commentId) {
+	    return $.ajax({
+	      url: apiUrl + '/comments/' + commentId,
+	      type: 'DELETE',
+	      beforeSend: setAuthHeader
+	    });
+	  },
+	  vote: function vote(commentId, _vote) {
+	    return $.ajax({
+	      url: apiUrl + '/comments/vote/' + commentId,
+	      type: 'POST',
+	      beforeSend: setAuthHeader,
+	      datatype: 'json',
+	      data: { vote: _vote }
+	    });
+	  }
+	};
+	
+	//listeners
+	_store.store.registerListener('token', API.getMyInfo);
+	
+	exports.default = API;
+
+/***/ },
+/* 173 */
+/*!**********************************!*\
+  !*** ./js/util/authorization.js ***!
+  \**********************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.parseToken = parseToken;
+	exports.canHazToken = canHazToken;
+	exports.isAuthorized = isAuthorized;
+	var loginMSg = 'Login or register, you sneaky fool!';
+	
+	function parseToken(token) {
+	  if (!token) return '';
+	  var payload = JSON.parse(atob(token.split('.')[1]));
+	  return payload;
+	}
+	
+	function canHazToken() {
+	  var token = localStorage.getItem('token');
+	  var payload = parseToken(token);
+	  return payload;
+	}
+	
+	function isAuthorized(userId) {
+	  var payload = canHazToken();
+	  if (payload.id !== userId) return false;
+	  return payload;
+	}
+
+/***/ },
+/* 174 */
+/*!**************************!*\
+  !*** ./js/util/store.js ***!
+  \**************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.store = exports.eventEmitter = undefined;
+	
+	var _API = __webpack_require__(/*! ../API */ 172);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var callbacks = Symbol();
+	var data = Symbol();
+	
+	// THINGS IN THE STORE
+	// token - full token
+	// me {
+	//   username: string
+	//   upvotes: [] (set)
+	//   downvotes: []
+	//   greenTopics: []
+	// }
+	
+	// EVENTS
+	// 'goHome' event!
+	
+	var EventEmitter = function () {
+	  function EventEmitter() {
+	    _classCallCheck(this, EventEmitter);
+	
+	    this[callbacks] = {};
+	  }
+	
+	  _createClass(EventEmitter, [{
+	    key: 'registerListener',
+	    value: function registerListener(name, cb) {
+	      var theEvent = this[callbacks][name];
+	      this[callbacks][name] = theEvent ? theEvent.concat(cb) : [cb];
+	    }
+	  }, {
+	    key: 'stopListening',
+	    value: function stopListening(name, cb) {
+	      var theEvent = this[callbacks][name];
+	      if (!theEvent) return;
+	      var cbIndex = theEvent.indexOf(cb);
+	      this[callbacks][name] = theEvent.splice(cbIndex, 1);
+	    }
+	  }, {
+	    key: 'emitChange',
+	    value: function emitChange(name) {
+	      if (!this[callbacks][name]) return;
+	      this[callbacks][name].forEach(function (cb) {
+	        return cb();
+	      });
+	    }
+	  }]);
+	
+	  return EventEmitter;
+	}();
+	
+	var Store = function (_EventEmitter) {
+	  _inherits(Store, _EventEmitter);
+	
+	  function Store() {
+	    _classCallCheck(this, Store);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Store).call(this));
+	
+	    _this[data] = {};
+	    return _this;
+	  }
+	
+	  _createClass(Store, [{
+	    key: 'saveDatum',
+	    value: function saveDatum(name, datum) {
+	      this[data][name] = datum;
+	      this.emitChange(name);
+	    }
+	  }, {
+	    key: 'getDatum',
+	    value: function getDatum(name) {
+	      return this[data][name];
+	    }
+	  }]);
+	
+	  return Store;
+	}(EventEmitter);
+	
+	var eventEmitter = exports.eventEmitter = new EventEmitter();
+	var store = exports.store = new Store();
+
+/***/ },
+/* 175 */
+/*!*************************!*\
+  !*** ./js/util/init.js ***!
+  \*************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = init;
+	
+	var _store = __webpack_require__(/*! ./store */ 174);
+	
+	function init() {
+	
+	  var token = localStorage.getItem('token');
+	  var tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : false;
+	
+	  if (!tokenPayload) return false;
+	
+	  if (Date.now() > tokenPayload.exp * 1000) {
+	    localStorage.removeItem('token');
+	    return false;
+	  }
+	
+	  _store.store.saveDatum('token', token);
+	  return true;
+	}
+
+/***/ },
+/* 176 */
+/*!********************************!*\
+  !*** ./js/components/Main.jsx ***!
+  \********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _API = __webpack_require__(/*! ../API */ 172);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
+	
+	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+	
+	var _Topic = __webpack_require__(/*! ./Topic.jsx */ 182);
+	
+	var _Topic2 = _interopRequireDefault(_Topic);
+	
+	var _NewTopicModal = __webpack_require__(/*! ./NewTopicModal.jsx */ 289);
+	
+	var _NewTopicModal2 = _interopRequireDefault(_NewTopicModal);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 187);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
+	
+	var _store = __webpack_require__(/*! ../util/store */ 174);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Main = function (_React$Component) {
+	  _inherits(Main, _React$Component);
+	
+	  function Main(props) {
+	    _classCallCheck(this, Main);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
+	
+	    _this.state = {
+	      allTopics: [],
+	      greens: _store.store.getDatum('me') ? _store.store.getDatum('me').greenTopics : new Set(),
+	      activeTopic: false,
+	      loading: true
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Main, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+	
+	      this.getTopics.bind(this)();
+	      _store.store.registerListener('me', function () {
+	        var greens = _store.store.getDatum('me') ? _store.store.getDatum('me').greenTopics : new Set();
+	        _this2.setState({ greens: greens });
+	      });
+	      _store.eventEmitter.registerListener('goHome', function () {
+	        _this2.setState({ activeTopic: false });
+	        _this2.getTopics();
+	      });
+	    }
+	  }, {
+	    key: 'handleTopicClick',
+	    value: function handleTopicClick(topicId) {
+	      this.setState({ activeTopic: this.state.activeTopic === topicId ? false : topicId });
+	    }
+	  }, {
+	    key: 'getTopics',
+	    value: function getTopics(callback) {
+	      var _this3 = this;
+	
+	      _API2.default.getTopics().done(function (resp) {
+	        _this3.setState({ allTopics: resp, loading: false });
+	      }).fail(function (err) {
+	        return (0, _alerts.genErr)(err.responseText);
+	      }).always(function () {
+	        if (callback) callback();
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this4 = this;
+	
+	      var topicEls = this.state.allTopics.map(function (topic, i) {
+	        var isActive = _this4.state.activeTopic === topic._id;
+	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: isActive,
+	          isGreen: _this4.state.greens.has(topic._id),
+	          onClick: _this4.handleTopicClick.bind(_this4, topic._id),
+	          key: i }));
+	      });
+	      var mainClasses = (0, _classnames2.default)('main', 'panel', { displayTopic: this.state.activeTopic });
+	      return _react2.default.createElement(
+	        'div',
+	        { className: mainClasses },
+	        _react2.default.createElement(_NewTopicModal2.default, { topicPosted: this.getTopics.bind(this) }),
+	        this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
+	        topicEls
+	      );
+	    }
+	  }]);
+	
+	  return Main;
+	}(_react2.default.Component);
+	
+	exports.default = Main;
+
+/***/ },
+/* 177 */
+/*!******************************************!*\
+  !*** ./js/components/LoadingSpinner.jsx ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	__webpack_require__(/*! ../../css/loadingSpinner.css */ 178);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var LoadingSpinner = function (_React$Component) {
+	  _inherits(LoadingSpinner, _React$Component);
+	
+	  function LoadingSpinner() {
+	    _classCallCheck(this, LoadingSpinner);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LoadingSpinner).apply(this, arguments));
+	  }
+	
+	  _createClass(LoadingSpinner, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'showbox' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'loader' },
+	          _react2.default.createElement(
+	            'svg',
+	            { className: 'circular', viewBox: '25 25 50 50' },
+	            _react2.default.createElement('circle', { className: 'path', cx: '50', cy: '50', r: '20', fill: 'none', strokeWidth: '2', 'stroke-miterlimit': '10' })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return LoadingSpinner;
+	}(_react2.default.Component);
+	
+	exports.default = LoadingSpinner;
+
+/***/ },
+/* 178 */
+/*!********************************!*\
+  !*** ./css/loadingSpinner.css ***!
+  \********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../~/css-loader!./loadingSpinner.css */ 179);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 181)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./loadingSpinner.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./loadingSpinner.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 179 */
+/*!***********************************************!*\
+  !*** ./~/css-loader!./css/loadingSpinner.css ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 180)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "/*////////////\n// CREDITS: //\n//////////////\n\n// @elrumordelaluz - Provided scaling fix/improvement\n// @faddee - Provided fix for Edge support\n\n// from http://codepen.io/jczimm/pen/vEBpoL\n*/\n\nbody {\n  background-color: #eee;\n}\n\n.loader {\n  position: relative;\n  margin: 0px auto;\n  width: 100px;\n}\n\n.loader:before {\n  content: '';\n  display: block;\n  padding-top: 100%;\n}\n\n.circular {\n  -webkit-animation: rotate 2s linear infinite;\n  animation: rotate 2s linear infinite;\n  height: 100%;\n  -webkit-transform-origin: center center;\n  transform-origin: center center;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto;\n}\n\n.path {\n  stroke-dasharray: 1, 200;\n  stroke-dashoffset: 0;\n  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;\n  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;\n  stroke-linecap: round;\n}\n\n@-webkit-keyframes rotate {\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n@keyframes rotate {\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n@-webkit-keyframes dash {\n  0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n  }\n  50% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -35px;\n  }\n  100% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -124px;\n  }\n}\n\n@keyframes dash {\n  0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n  }\n  50% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -35px;\n  }\n  100% {\n    stroke-dasharray: 89, 200;\n    stroke-dashoffset: -124px;\n  }\n}\n\n@-webkit-keyframes color {\n  100%,\n  0% {\n    stroke: #d62d20;\n  }\n  40% {\n    stroke: #0057e7;\n  }\n  66% {\n    stroke: #008744;\n  }\n  80%,\n  90% {\n    stroke: #ffa700;\n  }\n}\n\n@keyframes color {\n  100%,\n  0% {\n    stroke: #d62d20;\n  }\n  40% {\n    stroke: #0057e7;\n  }\n  66% {\n    stroke: #008744;\n  }\n  80%,\n  90% {\n    stroke: #ffa700;\n  }\n}\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 180 */
+/*!**************************************!*\
+  !*** ./~/css-loader/lib/css-base.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 181 */
+/*!*************************************!*\
+  !*** ./~/style-loader/addStyles.js ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+	
+	module.exports = function(list, options) {
+		if(true) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+	
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+	
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+	
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+	
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+	
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+	
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+	
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+	
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+	
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+	
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+	
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+	
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+	
+		update(obj);
+	
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+	
+	var replaceText = (function () {
+		var textStore = [];
+	
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+	
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+	
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+	
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+		var sourceMap = obj.sourceMap;
+	
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+	
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+	
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+		var sourceMap = obj.sourceMap;
+	
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+	
+		var blob = new Blob([css], { type: "text/css" });
+	
+		var oldSrc = linkElement.href;
+	
+		linkElement.href = URL.createObjectURL(blob);
+	
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 182 */
+/*!*********************************!*\
+  !*** ./js/components/Topic.jsx ***!
+  \*********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _API = __webpack_require__(/*! ../API */ 172);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	var _Comment = __webpack_require__(/*! ./Comment.jsx */ 183);
+	
+	var _Comment2 = _interopRequireDefault(_Comment);
+	
+	var _NewComment = __webpack_require__(/*! ./NewComment.jsx */ 184);
+	
+	var _NewComment2 = _interopRequireDefault(_NewComment);
+	
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
+	
+	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 187);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
+	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
+	
+	var _time = __webpack_require__(/*! ../util/time */ 188);
+	
+	var _store = __webpack_require__(/*! ../util/store */ 174);
+	
+	var _marked = __webpack_require__(/*! marked */ 288);
+	
+	var _marked2 = _interopRequireDefault(_marked);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	_marked2.default.setOptions({
+	  renderer: new _marked2.default.Renderer(),
+	  gfm: true,
+	  tables: true,
+	  breaks: false,
+	  pedantic: false,
+	  sanitize: true,
+	  smartLists: true,
+	  smartypants: false
+	});
+	
+	var Topic = function (_React$Component) {
+	  _inherits(Topic, _React$Component);
+	
+	  function Topic(props) {
+	    _classCallCheck(this, Topic);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Topic).call(this, props));
+	
+	    _this.state = {
+	      allComments: [],
+	      token: _store.store.getDatum("token") ? _store.store.getDatum("token") : "",
+	      replying: false,
+	      loading: true
+	    };
+	
+	    _store.store.registerListener('token', function () {
+	      _this.setState({ token: _store.store.getDatum('token') });
+	    });
+	    return _this;
+	  }
+	
+	  _createClass(Topic, [{
+	    key: 'headerClicked',
+	    value: function headerClicked() {
+	      if (!this.props.isActive) {
+	        this.fetchComments.bind(this)();
+	      }
+	      this.props.onClick();
+	    }
+	  }, {
+	    key: 'fetchComments',
+	    value: function fetchComments(callback) {
+	      var _this2 = this;
+	
+	      _API2.default.getComments(this.props._id).done(function (resp) {
+	        _this2.setState({ allComments: resp, loading: false }, function () {
+	          console.log("topic state has been set", resp);
+	        });
+	        if (callback) callback();
+	      }).fail(function (err) {
+	        console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'reply',
+	    value: function reply(e) {
+	      e.preventDefault();
+	      var haveToken = (0, _authorization.canHazToken)();
+	      if (!haveToken) return (0, _alerts.pleaseLogin)();
+	      this.setState({ replying: haveToken });
+	    }
+	  }, {
+	    key: 'postComment',
+	    value: function postComment(body) {
+	      var _this3 = this;
+	
+	      this.setState({ replying: false });
+	      _API2.default.postComment(this.props._id, body, 'seed').done(function (resp) {
+	        return _this3.fetchComments.bind(_this3)();
+	      }).fail(function (err) {
+	        return (0, _alerts.genErr)(err.responseText);
+	      });
+	    }
+	  }, {
+	    key: 'discard',
+	    value: function discard() {
+	      this.setState({ replying: false });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this4 = this;
+	
+	      var commentEls = [];
+	      var closeTopic = [];
+	      if (this.props.isActive) {
+	        closeTopic = _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeTopic' });
+	        commentEls = this.state.allComments.map(function (comment, i) {
+	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { token: _this4.state.token,
+	            update: _this4.fetchComments.bind(_this4),
+	            key: i }));
+	        });
+	      }
+	      var addedClasses = (0, _classnames2.default)('topic', {
+	        active: this.props.isActive,
+	        green: this.props.isGreen
+	      });
+	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
+	        discard: this.discard.bind(this) }) : [];
+	      return _react2.default.createElement(
+	        'div',
+	        { className: addedClasses },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { onClick: this.headerClicked.bind(this), className: 'topicHead' },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'topicTitle' },
+	              _react2.default.createElement(
+	                'strong',
+	                null,
+	                this.props.title
+	              ),
+	              ' — ',
+	              this.props.user.username,
+	              closeTopic
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container topicContent' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'panel-body topicBody' },
+	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.body) } })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'topicFooter' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'timeStamp' },
+	                (0, _time.formatTime)(this.props.timestamp)
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'btn btn-success replyTopicButton', href: '#', onClick: this.reply.bind(this) },
+	                'reply'
+	              )
+	            ),
+	            newComment,
+	            this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
+	            commentEls
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Topic;
+	}(_react2.default.Component);
+	
+	exports.default = Topic;
+
+/***/ },
 /* 183 */
+/*!***********************************!*\
+  !*** ./js/components/Comment.jsx ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _RegisterForm = __webpack_require__(/*! ./RegisterForm.jsx */ 160);
+	
+	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
+	
+	var _NewComment = __webpack_require__(/*! ./NewComment.jsx */ 184);
+	
+	var _NewComment2 = _interopRequireDefault(_NewComment);
+	
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
+	
+	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+	
+	var _EditComment = __webpack_require__(/*! ./EditComment.jsx */ 185);
+	
+	var _EditComment2 = _interopRequireDefault(_EditComment);
+	
+	var _Votebox = __webpack_require__(/*! ./Votebox.jsx */ 186);
+	
+	var _Votebox2 = _interopRequireDefault(_Votebox);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 187);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _API = __webpack_require__(/*! ../API */ 172);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
+	
+	var _time = __webpack_require__(/*! ../util/time */ 188);
+	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
+	
+	var _store = __webpack_require__(/*! ../util/store */ 174);
+	
+	var _marked = __webpack_require__(/*! marked */ 288);
+	
+	var _marked2 = _interopRequireDefault(_marked);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	_marked2.default.setOptions({
+	  renderer: new _marked2.default.Renderer(),
+	  gfm: true,
+	  tables: true,
+	  breaks: false,
+	  pedantic: false,
+	  sanitize: true,
+	  smartLists: true,
+	  smartypants: false
+	});
+	
+	var Comment = function (_React$Component) {
+	  _inherits(Comment, _React$Component);
+	
+	  function Comment(props) {
+	    _classCallCheck(this, Comment);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Comment).call(this, props));
+	
+	    _this.state = {
+	      replying: false,
+	      editing: false,
+	      updating: false,
+	      loading: false,
+	      meId: _store.store.getDatum('me') ? _store.store.getDatum('me')._id : ''
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Comment, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+	
+	      _store.store.registerListener('me', function () {
+	        var me = _store.store.getDatum('me');
+	        _this2.setState({ meId: me ? me._id : "" });
+	      });
+	    }
+	  }, {
+	    key: 'reply',
+	    value: function reply(e) {
+	      if (this.state.editing) return;
+	      e.preventDefault();
+	      if (!this.props.token) return (0, _alerts.pleaseLogin)();
+	      this.setState({ replying: this.props.token });
+	    }
+	  }, {
+	    key: 'edit',
+	    value: function edit(e) {
+	      if (this.state.replying) return;
+	      e.preventDefault();
+	      this.setState({ editing: (0, _authorization.isAuthorized)(this.props.user._id) });
+	    }
+	  }, {
+	    key: 'discard',
+	    value: function discard() {
+	      this.setState({ replying: false });
+	      this.setState({ editing: false });
+	    }
+	  }, {
+	    key: 'delete',
+	    value: function _delete() {
+	      (0, _alerts.confirmDelete)(this.deleteComment.bind(this));
+	    }
+	  }, {
+	    key: 'postComment',
+	    value: function postComment(body) {
+	      var _this3 = this;
+	
+	      this.setState({ replying: false, loading: true });
+	      _API2.default.postComment(this.props._id, body).done(function (resp) {
+	        _this3.props.update(function () {
+	          _this3.setState({ loading: false });
+	        });
+	      }).fail(function (err) {
+	        return (0, _alerts.genErr)(err.responseText);
+	      });
+	    }
+	  }, {
+	    key: 'updateComment',
+	    value: function updateComment(update) {
+	      var _this4 = this;
+	
+	      this.setState({ editing: false, updating: true });
+	      _API2.default.updateComment(this.props._id, update).done(function (resp) {
+	        _this4.props.update(function () {
+	          _this4.setState({ updating: false });
+	        });
+	      }).fail(function (err) {
+	        return (0, _alerts.genErr)(err.responseText);
+	      });
+	    }
+	  }, {
+	    key: 'handleVote',
+	    value: function handleVote(vote) {
+	      var _this5 = this;
+	
+	      console.log("voting", this.state.me);
+	      if (!this.state.meId) {
+	        (0, _alerts.pleaseLogin)();
+	        return;
+	      }
+	      _API2.default.vote(this.props._id, vote).done(function (resp) {
+	        _this5.props.update();
+	      }).fail(function (err) {
+	        return console.log("error voting", err);
+	      });
+	    }
+	  }, {
+	    key: 'deleteComment',
+	    value: function deleteComment() {
+	      var _this6 = this;
+	
+	      _API2.default.deleteComment(this.props._id).done(function (resp) {
+	        return _this6.props.update();
+	      }).fail(function (err) {
+	        return swal('Delete Failed', err.responseText, 'error');
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this7 = this;
+	
+	      var payload = (0, _authorization.parseToken)(this.props.token);
+	      var changeButtons = (0, _classnames2.default)({
+	        disabled: payload.id != this.props.user._id || !this.props.timestamp
+	      });
+	
+	      var commentEls = this.props.children.map(function (child, i) {
+	        return _react2.default.createElement(Comment, _extends({}, child, { token: _this7.props.token, update: _this7.props.update, key: i }));
+	      });
+	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
+	        discard: this.discard.bind(this) }) : [];
+	      var commentBody = this.state.editing ? _react2.default.createElement(_EditComment2.default, { update: this.updateComment.bind(this),
+	        discard: this.discard.bind(this),
+	        body: this.props.body }) : _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.body) } });
+	      var timestamp = undefined;
+	      if (this.props.editTime) {
+	        timestamp = '*edited ' + (0, _time.formatTime)(this.props.editTime);
+	      } else {
+	        timestamp = this.props.timestamp ? (0, _time.formatTime)(this.props.timestamp) : '';
+	      }
+	      var showUpvote = this.props.upvotes && this.props.upvotes.includes(this.state.meId);
+	      var showDownvote = this.props.downvotes && this.props.downvotes.includes(this.state.meId);
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'panel panel-default comment' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-heading commentTitle' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'panel-title commentUsername' },
+	            this.props.user.username
+	          ),
+	          _react2.default.createElement(_Votebox2.default, { score: this.props.upvotes.length - this.props.downvotes.length,
+	            up: showUpvote,
+	            down: showDownvote,
+	            handleVote: this.handleVote.bind(this) })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          this.state.updating ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
+	          commentBody
+	        ),
+	        _react2.default.createElement(
+	          'ol',
+	          { className: 'panel-footer breadcrumb' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            timestamp
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#', className: changeButtons, onClick: this.edit.bind(this) },
+	              'edit'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#', onClick: this.reply.bind(this) },
+	              'reply'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#', className: changeButtons, onClick: this.delete.bind(this) },
+	              'delete'
+	            )
+	          )
+	        ),
+	        newComment,
+	        this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
+	        commentEls
+	      );
+	    }
+	  }]);
+	
+	  return Comment;
+	}(_react2.default.Component);
+	
+	exports.default = Comment;
+
+/***/ },
+/* 184 */
+/*!**************************************!*\
+  !*** ./js/components/NewComment.jsx ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _RegisterForm = __webpack_require__(/*! ./RegisterForm.jsx */ 160);
+	
+	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
+	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
+	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NewComment = function (_React$Component) {
+	  _inherits(NewComment, _React$Component);
+	
+	  function NewComment(props) {
+	    _classCallCheck(this, NewComment);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewComment).call(this, props));
+	
+	    var name = (0, _authorization.canHazToken)().username;
+	    _this.state = { name: name };
+	    return _this;
+	  }
+	
+	  _createClass(NewComment, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $('#newCommentBody').focus();
+	    }
+	  }, {
+	    key: 'post',
+	    value: function post() {
+	      if (this.refs.body.value) {
+	        this.props.post(this.refs.body.value);
+	      } else {
+	        (0, _alerts.genErr)('Comment cannot be blank');
+	        $('#newCommentBody').focus();
+	      }
+	    }
+	  }, {
+	    key: 'discard',
+	    value: function discard() {
+	      this.props.discard();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'panel panel-default comment' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-heading' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-title' },
+	            this.state.name
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement('textarea', { id: 'newCommentBody', className: 'form-control', ref: 'body', rows: '4' }),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'new-comment-buttons' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'markdownNotice' },
+	              '*Green it will render ',
+	              _react2.default.createElement(
+	                'a',
+	                { href: 'https://help.github.com/articles/markdown-basics/' },
+	                'markdown'
+	              ),
+	              '!'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'btn btn-default', onClick: this.discard.bind(this) },
+	              'Discard'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'btn btn-primary', onClick: this.post.bind(this) },
+	              'Post'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NewComment;
+	}(_react2.default.Component);
+	
+	exports.default = NewComment;
+
+/***/ },
+/* 185 */
 /*!***************************************!*\
   !*** ./js/components/EditComment.jsx ***!
   \***************************************/
@@ -23381,11 +23454,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RegisterForm = __webpack_require__(/*! ./RegisterForm.jsx */ 171);
+	var _RegisterForm = __webpack_require__(/*! ./RegisterForm.jsx */ 160);
 	
 	var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
 	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 173);
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23470,7 +23543,7 @@
 	exports.default = EditComment;
 
 /***/ },
-/* 184 */
+/* 186 */
 /*!***********************************!*\
   !*** ./js/components/Votebox.jsx ***!
   \***********************************/
@@ -23488,17 +23561,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _API = __webpack_require__(/*! ../API */ 161);
+	var _API = __webpack_require__(/*! ../API */ 172);
 	
 	var _API2 = _interopRequireDefault(_API);
 	
-	var _store = __webpack_require__(/*! ../util/store */ 163);
+	var _store = __webpack_require__(/*! ../util/store */ 174);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 185);
+	var _classnames = __webpack_require__(/*! classnames */ 187);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 173);
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23550,7 +23623,7 @@
 	exports.default = Votebox;
 
 /***/ },
-/* 185 */
+/* 187 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
   \*******************************/
@@ -23607,7 +23680,7 @@
 
 
 /***/ },
-/* 186 */
+/* 188 */
 /*!*************************!*\
   !*** ./js/util/time.js ***!
   \*************************/
@@ -23620,7 +23693,7 @@
 	});
 	exports.formatTime = formatTime;
 	
-	var _moment = __webpack_require__(/*! moment */ 187);
+	var _moment = __webpack_require__(/*! moment */ 189);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -23631,7 +23704,7 @@
 	}
 
 /***/ },
-/* 187 */
+/* 189 */
 /*!****************************!*\
   !*** ./~/moment/moment.js ***!
   \****************************/
@@ -23913,7 +23986,7 @@
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
-	                __webpack_require__(/*! ./locale */ 189)("./" + name);
+	                __webpack_require__(/*! ./locale */ 191)("./" + name);
 	                // because defineLocale currently also sets the global locale, we
 	                // want to undo that for lazy loaded locales
 	                locale_locales__getSetGlobalLocale(oldLocale);
@@ -27243,10 +27316,10 @@
 	    return _moment;
 	
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../webpack/buildin/module.js */ 188)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../webpack/buildin/module.js */ 190)(module)))
 
 /***/ },
-/* 188 */
+/* 190 */
 /*!***********************************!*\
   !*** (webpack)/buildin/module.js ***!
   \***********************************/
@@ -27265,205 +27338,205 @@
 
 
 /***/ },
-/* 189 */
+/* 191 */
 /*!**********************************!*\
   !*** ./~/moment/locale ^\.\/.*$ ***!
   \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 190,
-		"./af.js": 190,
-		"./ar": 191,
-		"./ar-ma": 192,
-		"./ar-ma.js": 192,
-		"./ar-sa": 193,
-		"./ar-sa.js": 193,
-		"./ar-tn": 194,
-		"./ar-tn.js": 194,
-		"./ar.js": 191,
-		"./az": 195,
-		"./az.js": 195,
-		"./be": 196,
-		"./be.js": 196,
-		"./bg": 197,
-		"./bg.js": 197,
-		"./bn": 198,
-		"./bn.js": 198,
-		"./bo": 199,
-		"./bo.js": 199,
-		"./br": 200,
-		"./br.js": 200,
-		"./bs": 201,
-		"./bs.js": 201,
-		"./ca": 202,
-		"./ca.js": 202,
-		"./cs": 203,
-		"./cs.js": 203,
-		"./cv": 204,
-		"./cv.js": 204,
-		"./cy": 205,
-		"./cy.js": 205,
-		"./da": 206,
-		"./da.js": 206,
-		"./de": 207,
-		"./de-at": 208,
-		"./de-at.js": 208,
-		"./de.js": 207,
-		"./dv": 209,
-		"./dv.js": 209,
-		"./el": 210,
-		"./el.js": 210,
-		"./en-au": 211,
-		"./en-au.js": 211,
-		"./en-ca": 212,
-		"./en-ca.js": 212,
-		"./en-gb": 213,
-		"./en-gb.js": 213,
-		"./en-ie": 214,
-		"./en-ie.js": 214,
-		"./en-nz": 215,
-		"./en-nz.js": 215,
-		"./eo": 216,
-		"./eo.js": 216,
-		"./es": 217,
-		"./es.js": 217,
-		"./et": 218,
-		"./et.js": 218,
-		"./eu": 219,
-		"./eu.js": 219,
-		"./fa": 220,
-		"./fa.js": 220,
-		"./fi": 221,
-		"./fi.js": 221,
-		"./fo": 222,
-		"./fo.js": 222,
-		"./fr": 223,
-		"./fr-ca": 224,
-		"./fr-ca.js": 224,
-		"./fr-ch": 225,
-		"./fr-ch.js": 225,
-		"./fr.js": 223,
-		"./fy": 226,
-		"./fy.js": 226,
-		"./gd": 227,
-		"./gd.js": 227,
-		"./gl": 228,
-		"./gl.js": 228,
-		"./he": 229,
-		"./he.js": 229,
-		"./hi": 230,
-		"./hi.js": 230,
-		"./hr": 231,
-		"./hr.js": 231,
-		"./hu": 232,
-		"./hu.js": 232,
-		"./hy-am": 233,
-		"./hy-am.js": 233,
-		"./id": 234,
-		"./id.js": 234,
-		"./is": 235,
-		"./is.js": 235,
-		"./it": 236,
-		"./it.js": 236,
-		"./ja": 237,
-		"./ja.js": 237,
-		"./jv": 238,
-		"./jv.js": 238,
-		"./ka": 239,
-		"./ka.js": 239,
-		"./kk": 240,
-		"./kk.js": 240,
-		"./km": 241,
-		"./km.js": 241,
-		"./ko": 242,
-		"./ko.js": 242,
-		"./lb": 243,
-		"./lb.js": 243,
-		"./lo": 244,
-		"./lo.js": 244,
-		"./lt": 245,
-		"./lt.js": 245,
-		"./lv": 246,
-		"./lv.js": 246,
-		"./me": 247,
-		"./me.js": 247,
-		"./mk": 248,
-		"./mk.js": 248,
-		"./ml": 249,
-		"./ml.js": 249,
-		"./mr": 250,
-		"./mr.js": 250,
-		"./ms": 251,
-		"./ms-my": 252,
-		"./ms-my.js": 252,
-		"./ms.js": 251,
-		"./my": 253,
-		"./my.js": 253,
-		"./nb": 254,
-		"./nb.js": 254,
-		"./ne": 255,
-		"./ne.js": 255,
-		"./nl": 256,
-		"./nl.js": 256,
-		"./nn": 257,
-		"./nn.js": 257,
-		"./pl": 258,
-		"./pl.js": 258,
-		"./pt": 259,
-		"./pt-br": 260,
-		"./pt-br.js": 260,
-		"./pt.js": 259,
-		"./ro": 261,
-		"./ro.js": 261,
-		"./ru": 262,
-		"./ru.js": 262,
-		"./se": 263,
-		"./se.js": 263,
-		"./si": 264,
-		"./si.js": 264,
-		"./sk": 265,
-		"./sk.js": 265,
-		"./sl": 266,
-		"./sl.js": 266,
-		"./sq": 267,
-		"./sq.js": 267,
-		"./sr": 268,
-		"./sr-cyrl": 269,
-		"./sr-cyrl.js": 269,
-		"./sr.js": 268,
-		"./sv": 270,
-		"./sv.js": 270,
-		"./sw": 271,
-		"./sw.js": 271,
-		"./ta": 272,
-		"./ta.js": 272,
-		"./te": 273,
-		"./te.js": 273,
-		"./th": 274,
-		"./th.js": 274,
-		"./tl-ph": 275,
-		"./tl-ph.js": 275,
-		"./tlh": 276,
-		"./tlh.js": 276,
-		"./tr": 277,
-		"./tr.js": 277,
-		"./tzl": 278,
-		"./tzl.js": 278,
-		"./tzm": 279,
-		"./tzm-latn": 280,
-		"./tzm-latn.js": 280,
-		"./tzm.js": 279,
-		"./uk": 281,
-		"./uk.js": 281,
-		"./uz": 282,
-		"./uz.js": 282,
-		"./vi": 283,
-		"./vi.js": 283,
-		"./zh-cn": 284,
-		"./zh-cn.js": 284,
-		"./zh-tw": 285,
-		"./zh-tw.js": 285
+		"./af": 192,
+		"./af.js": 192,
+		"./ar": 193,
+		"./ar-ma": 194,
+		"./ar-ma.js": 194,
+		"./ar-sa": 195,
+		"./ar-sa.js": 195,
+		"./ar-tn": 196,
+		"./ar-tn.js": 196,
+		"./ar.js": 193,
+		"./az": 197,
+		"./az.js": 197,
+		"./be": 198,
+		"./be.js": 198,
+		"./bg": 199,
+		"./bg.js": 199,
+		"./bn": 200,
+		"./bn.js": 200,
+		"./bo": 201,
+		"./bo.js": 201,
+		"./br": 202,
+		"./br.js": 202,
+		"./bs": 203,
+		"./bs.js": 203,
+		"./ca": 204,
+		"./ca.js": 204,
+		"./cs": 205,
+		"./cs.js": 205,
+		"./cv": 206,
+		"./cv.js": 206,
+		"./cy": 207,
+		"./cy.js": 207,
+		"./da": 208,
+		"./da.js": 208,
+		"./de": 209,
+		"./de-at": 210,
+		"./de-at.js": 210,
+		"./de.js": 209,
+		"./dv": 211,
+		"./dv.js": 211,
+		"./el": 212,
+		"./el.js": 212,
+		"./en-au": 213,
+		"./en-au.js": 213,
+		"./en-ca": 214,
+		"./en-ca.js": 214,
+		"./en-gb": 215,
+		"./en-gb.js": 215,
+		"./en-ie": 216,
+		"./en-ie.js": 216,
+		"./en-nz": 217,
+		"./en-nz.js": 217,
+		"./eo": 218,
+		"./eo.js": 218,
+		"./es": 219,
+		"./es.js": 219,
+		"./et": 220,
+		"./et.js": 220,
+		"./eu": 221,
+		"./eu.js": 221,
+		"./fa": 222,
+		"./fa.js": 222,
+		"./fi": 223,
+		"./fi.js": 223,
+		"./fo": 224,
+		"./fo.js": 224,
+		"./fr": 225,
+		"./fr-ca": 226,
+		"./fr-ca.js": 226,
+		"./fr-ch": 227,
+		"./fr-ch.js": 227,
+		"./fr.js": 225,
+		"./fy": 228,
+		"./fy.js": 228,
+		"./gd": 229,
+		"./gd.js": 229,
+		"./gl": 230,
+		"./gl.js": 230,
+		"./he": 231,
+		"./he.js": 231,
+		"./hi": 232,
+		"./hi.js": 232,
+		"./hr": 233,
+		"./hr.js": 233,
+		"./hu": 234,
+		"./hu.js": 234,
+		"./hy-am": 235,
+		"./hy-am.js": 235,
+		"./id": 236,
+		"./id.js": 236,
+		"./is": 237,
+		"./is.js": 237,
+		"./it": 238,
+		"./it.js": 238,
+		"./ja": 239,
+		"./ja.js": 239,
+		"./jv": 240,
+		"./jv.js": 240,
+		"./ka": 241,
+		"./ka.js": 241,
+		"./kk": 242,
+		"./kk.js": 242,
+		"./km": 243,
+		"./km.js": 243,
+		"./ko": 244,
+		"./ko.js": 244,
+		"./lb": 245,
+		"./lb.js": 245,
+		"./lo": 246,
+		"./lo.js": 246,
+		"./lt": 247,
+		"./lt.js": 247,
+		"./lv": 248,
+		"./lv.js": 248,
+		"./me": 249,
+		"./me.js": 249,
+		"./mk": 250,
+		"./mk.js": 250,
+		"./ml": 251,
+		"./ml.js": 251,
+		"./mr": 252,
+		"./mr.js": 252,
+		"./ms": 253,
+		"./ms-my": 254,
+		"./ms-my.js": 254,
+		"./ms.js": 253,
+		"./my": 255,
+		"./my.js": 255,
+		"./nb": 256,
+		"./nb.js": 256,
+		"./ne": 257,
+		"./ne.js": 257,
+		"./nl": 258,
+		"./nl.js": 258,
+		"./nn": 259,
+		"./nn.js": 259,
+		"./pl": 260,
+		"./pl.js": 260,
+		"./pt": 261,
+		"./pt-br": 262,
+		"./pt-br.js": 262,
+		"./pt.js": 261,
+		"./ro": 263,
+		"./ro.js": 263,
+		"./ru": 264,
+		"./ru.js": 264,
+		"./se": 265,
+		"./se.js": 265,
+		"./si": 266,
+		"./si.js": 266,
+		"./sk": 267,
+		"./sk.js": 267,
+		"./sl": 268,
+		"./sl.js": 268,
+		"./sq": 269,
+		"./sq.js": 269,
+		"./sr": 270,
+		"./sr-cyrl": 271,
+		"./sr-cyrl.js": 271,
+		"./sr.js": 270,
+		"./sv": 272,
+		"./sv.js": 272,
+		"./sw": 273,
+		"./sw.js": 273,
+		"./ta": 274,
+		"./ta.js": 274,
+		"./te": 275,
+		"./te.js": 275,
+		"./th": 276,
+		"./th.js": 276,
+		"./tl-ph": 277,
+		"./tl-ph.js": 277,
+		"./tlh": 278,
+		"./tlh.js": 278,
+		"./tr": 279,
+		"./tr.js": 279,
+		"./tzl": 280,
+		"./tzl.js": 280,
+		"./tzm": 281,
+		"./tzm-latn": 282,
+		"./tzm-latn.js": 282,
+		"./tzm.js": 281,
+		"./uk": 283,
+		"./uk.js": 283,
+		"./uz": 284,
+		"./uz.js": 284,
+		"./vi": 285,
+		"./vi.js": 285,
+		"./zh-cn": 286,
+		"./zh-cn.js": 286,
+		"./zh-tw": 287,
+		"./zh-tw.js": 287
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -27476,11 +27549,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 189;
+	webpackContext.id = 191;
 
 
 /***/ },
-/* 190 */
+/* 192 */
 /*!*******************************!*\
   !*** ./~/moment/locale/af.js ***!
   \*******************************/
@@ -27491,7 +27564,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -27560,7 +27633,7 @@
 	}));
 
 /***/ },
-/* 191 */
+/* 193 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ar.js ***!
   \*******************************/
@@ -27573,7 +27646,7 @@
 	//! Native plural forms: forabi https://github.com/forabi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -27703,7 +27776,7 @@
 	}));
 
 /***/ },
-/* 192 */
+/* 194 */
 /*!**********************************!*\
   !*** ./~/moment/locale/ar-ma.js ***!
   \**********************************/
@@ -27715,7 +27788,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -27769,7 +27842,7 @@
 	}));
 
 /***/ },
-/* 193 */
+/* 195 */
 /*!**********************************!*\
   !*** ./~/moment/locale/ar-sa.js ***!
   \**********************************/
@@ -27780,7 +27853,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -27879,7 +27952,7 @@
 	}));
 
 /***/ },
-/* 194 */
+/* 196 */
 /*!**********************************!*\
   !*** ./~/moment/locale/ar-tn.js ***!
   \**********************************/
@@ -27889,7 +27962,7 @@
 	//! locale  : Tunisian Arabic (ar-tn)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -27943,7 +28016,7 @@
 	}));
 
 /***/ },
-/* 195 */
+/* 197 */
 /*!*******************************!*\
   !*** ./~/moment/locale/az.js ***!
   \*******************************/
@@ -27954,7 +28027,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28054,7 +28127,7 @@
 	}));
 
 /***/ },
-/* 196 */
+/* 198 */
 /*!*******************************!*\
   !*** ./~/moment/locale/be.js ***!
   \*******************************/
@@ -28067,7 +28140,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28195,7 +28268,7 @@
 	}));
 
 /***/ },
-/* 197 */
+/* 199 */
 /*!*******************************!*\
   !*** ./~/moment/locale/bg.js ***!
   \*******************************/
@@ -28206,7 +28279,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28292,7 +28365,7 @@
 	}));
 
 /***/ },
-/* 198 */
+/* 200 */
 /*!*******************************!*\
   !*** ./~/moment/locale/bn.js ***!
   \*******************************/
@@ -28303,7 +28376,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28412,7 +28485,7 @@
 	}));
 
 /***/ },
-/* 199 */
+/* 201 */
 /*!*******************************!*\
   !*** ./~/moment/locale/bo.js ***!
   \*******************************/
@@ -28423,7 +28496,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28529,7 +28602,7 @@
 	}));
 
 /***/ },
-/* 200 */
+/* 202 */
 /*!*******************************!*\
   !*** ./~/moment/locale/br.js ***!
   \*******************************/
@@ -28540,7 +28613,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28643,7 +28716,7 @@
 	}));
 
 /***/ },
-/* 201 */
+/* 203 */
 /*!*******************************!*\
   !*** ./~/moment/locale/bs.js ***!
   \*******************************/
@@ -28655,7 +28728,7 @@
 	//! based on (hr) translation by Bojan Marković
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28791,7 +28864,7 @@
 	}));
 
 /***/ },
-/* 202 */
+/* 204 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ca.js ***!
   \*******************************/
@@ -28802,7 +28875,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28877,7 +28950,7 @@
 	}));
 
 /***/ },
-/* 203 */
+/* 205 */
 /*!*******************************!*\
   !*** ./~/moment/locale/cs.js ***!
   \*******************************/
@@ -28888,7 +28961,7 @@
 	//! author : petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29055,7 +29128,7 @@
 	}));
 
 /***/ },
-/* 204 */
+/* 206 */
 /*!*******************************!*\
   !*** ./~/moment/locale/cv.js ***!
   \*******************************/
@@ -29066,7 +29139,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29125,7 +29198,7 @@
 	}));
 
 /***/ },
-/* 205 */
+/* 207 */
 /*!*******************************!*\
   !*** ./~/moment/locale/cy.js ***!
   \*******************************/
@@ -29136,7 +29209,7 @@
 	//! author : Robert Allen
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29211,7 +29284,7 @@
 	}));
 
 /***/ },
-/* 206 */
+/* 208 */
 /*!*******************************!*\
   !*** ./~/moment/locale/da.js ***!
   \*******************************/
@@ -29222,7 +29295,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29278,7 +29351,7 @@
 	}));
 
 /***/ },
-/* 207 */
+/* 209 */
 /*!*******************************!*\
   !*** ./~/moment/locale/de.js ***!
   \*******************************/
@@ -29291,7 +29364,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29361,7 +29434,7 @@
 	}));
 
 /***/ },
-/* 208 */
+/* 210 */
 /*!**********************************!*\
   !*** ./~/moment/locale/de-at.js ***!
   \**********************************/
@@ -29375,7 +29448,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29445,7 +29518,7 @@
 	}));
 
 /***/ },
-/* 209 */
+/* 211 */
 /*!*******************************!*\
   !*** ./~/moment/locale/dv.js ***!
   \*******************************/
@@ -29456,7 +29529,7 @@
 	//! author : Jawish Hameed : https://github.com/jawish
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29551,7 +29624,7 @@
 	}));
 
 /***/ },
-/* 210 */
+/* 212 */
 /*!*******************************!*\
   !*** ./~/moment/locale/el.js ***!
   \*******************************/
@@ -29562,7 +29635,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29656,7 +29729,7 @@
 	}));
 
 /***/ },
-/* 211 */
+/* 213 */
 /*!**********************************!*\
   !*** ./~/moment/locale/en-au.js ***!
   \**********************************/
@@ -29666,7 +29739,7 @@
 	//! locale : australian english (en-au)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29729,7 +29802,7 @@
 	}));
 
 /***/ },
-/* 212 */
+/* 214 */
 /*!**********************************!*\
   !*** ./~/moment/locale/en-ca.js ***!
   \**********************************/
@@ -29740,7 +29813,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29799,7 +29872,7 @@
 	}));
 
 /***/ },
-/* 213 */
+/* 215 */
 /*!**********************************!*\
   !*** ./~/moment/locale/en-gb.js ***!
   \**********************************/
@@ -29810,7 +29883,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29873,7 +29946,7 @@
 	}));
 
 /***/ },
-/* 214 */
+/* 216 */
 /*!**********************************!*\
   !*** ./~/moment/locale/en-ie.js ***!
   \**********************************/
@@ -29884,7 +29957,7 @@
 	//! author : Chris Cartlidge : https://github.com/chriscartlidge
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29947,7 +30020,7 @@
 	}));
 
 /***/ },
-/* 215 */
+/* 217 */
 /*!**********************************!*\
   !*** ./~/moment/locale/en-nz.js ***!
   \**********************************/
@@ -29957,7 +30030,7 @@
 	//! locale : New Zealand english (en-nz)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30020,7 +30093,7 @@
 	}));
 
 /***/ },
-/* 216 */
+/* 218 */
 /*!*******************************!*\
   !*** ./~/moment/locale/eo.js ***!
   \*******************************/
@@ -30033,7 +30106,7 @@
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30100,7 +30173,7 @@
 	}));
 
 /***/ },
-/* 217 */
+/* 219 */
 /*!*******************************!*\
   !*** ./~/moment/locale/es.js ***!
   \*******************************/
@@ -30111,7 +30184,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30186,7 +30259,7 @@
 	}));
 
 /***/ },
-/* 218 */
+/* 220 */
 /*!*******************************!*\
   !*** ./~/moment/locale/et.js ***!
   \*******************************/
@@ -30198,7 +30271,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30273,7 +30346,7 @@
 	}));
 
 /***/ },
-/* 219 */
+/* 221 */
 /*!*******************************!*\
   !*** ./~/moment/locale/eu.js ***!
   \*******************************/
@@ -30284,7 +30357,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30344,7 +30417,7 @@
 	}));
 
 /***/ },
-/* 220 */
+/* 222 */
 /*!*******************************!*\
   !*** ./~/moment/locale/fa.js ***!
   \*******************************/
@@ -30355,7 +30428,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30456,7 +30529,7 @@
 	}));
 
 /***/ },
-/* 221 */
+/* 223 */
 /*!*******************************!*\
   !*** ./~/moment/locale/fi.js ***!
   \*******************************/
@@ -30467,7 +30540,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30570,7 +30643,7 @@
 	}));
 
 /***/ },
-/* 222 */
+/* 224 */
 /*!*******************************!*\
   !*** ./~/moment/locale/fo.js ***!
   \*******************************/
@@ -30581,7 +30654,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30637,7 +30710,7 @@
 	}));
 
 /***/ },
-/* 223 */
+/* 225 */
 /*!*******************************!*\
   !*** ./~/moment/locale/fr.js ***!
   \*******************************/
@@ -30648,7 +30721,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30706,7 +30779,7 @@
 	}));
 
 /***/ },
-/* 224 */
+/* 226 */
 /*!**********************************!*\
   !*** ./~/moment/locale/fr-ca.js ***!
   \**********************************/
@@ -30717,7 +30790,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30771,7 +30844,7 @@
 	}));
 
 /***/ },
-/* 225 */
+/* 227 */
 /*!**********************************!*\
   !*** ./~/moment/locale/fr-ch.js ***!
   \**********************************/
@@ -30782,7 +30855,7 @@
 	//! author : Gaspard Bucher : https://github.com/gaspard
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30840,7 +30913,7 @@
 	}));
 
 /***/ },
-/* 226 */
+/* 228 */
 /*!*******************************!*\
   !*** ./~/moment/locale/fy.js ***!
   \*******************************/
@@ -30851,7 +30924,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30918,7 +30991,7 @@
 	}));
 
 /***/ },
-/* 227 */
+/* 229 */
 /*!*******************************!*\
   !*** ./~/moment/locale/gd.js ***!
   \*******************************/
@@ -30929,7 +31002,7 @@
 	//! author : Jon Ashdown : https://github.com/jonashdown
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31001,7 +31074,7 @@
 	}));
 
 /***/ },
-/* 228 */
+/* 230 */
 /*!*******************************!*\
   !*** ./~/moment/locale/gl.js ***!
   \*******************************/
@@ -31012,7 +31085,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31083,7 +31156,7 @@
 	}));
 
 /***/ },
-/* 229 */
+/* 231 */
 /*!*******************************!*\
   !*** ./~/moment/locale/he.js ***!
   \*******************************/
@@ -31096,7 +31169,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31172,7 +31245,7 @@
 	}));
 
 /***/ },
-/* 230 */
+/* 232 */
 /*!*******************************!*\
   !*** ./~/moment/locale/hi.js ***!
   \*******************************/
@@ -31183,7 +31256,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31302,7 +31375,7 @@
 	}));
 
 /***/ },
-/* 231 */
+/* 233 */
 /*!*******************************!*\
   !*** ./~/moment/locale/hr.js ***!
   \*******************************/
@@ -31313,7 +31386,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31452,7 +31525,7 @@
 	}));
 
 /***/ },
-/* 232 */
+/* 234 */
 /*!*******************************!*\
   !*** ./~/moment/locale/hu.js ***!
   \*******************************/
@@ -31463,7 +31536,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31568,7 +31641,7 @@
 	}));
 
 /***/ },
-/* 233 */
+/* 235 */
 /*!**********************************!*\
   !*** ./~/moment/locale/hy-am.js ***!
   \**********************************/
@@ -31579,7 +31652,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31670,7 +31743,7 @@
 	}));
 
 /***/ },
-/* 234 */
+/* 236 */
 /*!*******************************!*\
   !*** ./~/moment/locale/id.js ***!
   \*******************************/
@@ -31682,7 +31755,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31760,7 +31833,7 @@
 	}));
 
 /***/ },
-/* 235 */
+/* 237 */
 /*!*******************************!*\
   !*** ./~/moment/locale/is.js ***!
   \*******************************/
@@ -31771,7 +31844,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31894,7 +31967,7 @@
 	}));
 
 /***/ },
-/* 236 */
+/* 238 */
 /*!*******************************!*\
   !*** ./~/moment/locale/it.js ***!
   \*******************************/
@@ -31906,7 +31979,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31971,7 +32044,7 @@
 	}));
 
 /***/ },
-/* 237 */
+/* 239 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ja.js ***!
   \*******************************/
@@ -31982,7 +32055,7 @@
 	//! author : LI Long : https://github.com/baryon
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32043,7 +32116,7 @@
 	}));
 
 /***/ },
-/* 238 */
+/* 240 */
 /*!*******************************!*\
   !*** ./~/moment/locale/jv.js ***!
   \*******************************/
@@ -32055,7 +32128,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32133,7 +32206,7 @@
 	}));
 
 /***/ },
-/* 239 */
+/* 241 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ka.js ***!
   \*******************************/
@@ -32144,7 +32217,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32229,7 +32302,7 @@
 	}));
 
 /***/ },
-/* 240 */
+/* 242 */
 /*!*******************************!*\
   !*** ./~/moment/locale/kk.js ***!
   \*******************************/
@@ -32240,7 +32313,7 @@
 	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32323,7 +32396,7 @@
 	}));
 
 /***/ },
-/* 241 */
+/* 243 */
 /*!*******************************!*\
   !*** ./~/moment/locale/km.js ***!
   \*******************************/
@@ -32334,7 +32407,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32388,7 +32461,7 @@
 	}));
 
 /***/ },
-/* 242 */
+/* 244 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ko.js ***!
   \*******************************/
@@ -32403,7 +32476,7 @@
 	//! - Jeeeyul Lee <jeeeyul@gmail.com>
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32463,7 +32536,7 @@
 	}));
 
 /***/ },
-/* 243 */
+/* 245 */
 /*!*******************************!*\
   !*** ./~/moment/locale/lb.js ***!
   \*******************************/
@@ -32474,7 +32547,7 @@
 	//! author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32604,7 +32677,7 @@
 	}));
 
 /***/ },
-/* 244 */
+/* 246 */
 /*!*******************************!*\
   !*** ./~/moment/locale/lo.js ***!
   \*******************************/
@@ -32615,7 +32688,7 @@
 	//! author : Ryan Hart : https://github.com/ryanhart2
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32680,7 +32753,7 @@
 	}));
 
 /***/ },
-/* 245 */
+/* 247 */
 /*!*******************************!*\
   !*** ./~/moment/locale/lt.js ***!
   \*******************************/
@@ -32691,7 +32764,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32802,7 +32875,7 @@
 	}));
 
 /***/ },
-/* 246 */
+/* 248 */
 /*!*******************************!*\
   !*** ./~/moment/locale/lv.js ***!
   \*******************************/
@@ -32814,7 +32887,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32905,7 +32978,7 @@
 	}));
 
 /***/ },
-/* 247 */
+/* 249 */
 /*!*******************************!*\
   !*** ./~/moment/locale/me.js ***!
   \*******************************/
@@ -32916,7 +32989,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33021,7 +33094,7 @@
 	}));
 
 /***/ },
-/* 248 */
+/* 250 */
 /*!*******************************!*\
   !*** ./~/moment/locale/mk.js ***!
   \*******************************/
@@ -33032,7 +33105,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33118,7 +33191,7 @@
 	}));
 
 /***/ },
-/* 249 */
+/* 251 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ml.js ***!
   \*******************************/
@@ -33129,7 +33202,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33196,7 +33269,7 @@
 	}));
 
 /***/ },
-/* 250 */
+/* 252 */
 /*!*******************************!*\
   !*** ./~/moment/locale/mr.js ***!
   \*******************************/
@@ -33208,7 +33281,7 @@
 	//! author : Vivek Athalye : https://github.com/vnathalye
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33361,7 +33434,7 @@
 	}));
 
 /***/ },
-/* 251 */
+/* 253 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ms.js ***!
   \*******************************/
@@ -33372,7 +33445,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33450,7 +33523,7 @@
 	}));
 
 /***/ },
-/* 252 */
+/* 254 */
 /*!**********************************!*\
   !*** ./~/moment/locale/ms-my.js ***!
   \**********************************/
@@ -33461,7 +33534,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33539,7 +33612,7 @@
 	}));
 
 /***/ },
-/* 253 */
+/* 255 */
 /*!*******************************!*\
   !*** ./~/moment/locale/my.js ***!
   \*******************************/
@@ -33550,7 +33623,7 @@
 	//! author : Squar team, mysquar.com
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33639,7 +33712,7 @@
 	}));
 
 /***/ },
-/* 254 */
+/* 256 */
 /*!*******************************!*\
   !*** ./~/moment/locale/nb.js ***!
   \*******************************/
@@ -33651,7 +33724,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33707,7 +33780,7 @@
 	}));
 
 /***/ },
-/* 255 */
+/* 257 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ne.js ***!
   \*******************************/
@@ -33718,7 +33791,7 @@
 	//! author : suvash : https://github.com/suvash
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33835,7 +33908,7 @@
 	}));
 
 /***/ },
-/* 256 */
+/* 258 */
 /*!*******************************!*\
   !*** ./~/moment/locale/nl.js ***!
   \*******************************/
@@ -33846,7 +33919,7 @@
 	//! author : Joris Röling : https://github.com/jjupiter
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33913,7 +33986,7 @@
 	}));
 
 /***/ },
-/* 257 */
+/* 259 */
 /*!*******************************!*\
   !*** ./~/moment/locale/nn.js ***!
   \*******************************/
@@ -33924,7 +33997,7 @@
 	//! author : https://github.com/mechuwind
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33980,7 +34053,7 @@
 	}));
 
 /***/ },
-/* 258 */
+/* 260 */
 /*!*******************************!*\
   !*** ./~/moment/locale/pl.js ***!
   \*******************************/
@@ -33991,7 +34064,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34092,7 +34165,7 @@
 	}));
 
 /***/ },
-/* 259 */
+/* 261 */
 /*!*******************************!*\
   !*** ./~/moment/locale/pt.js ***!
   \*******************************/
@@ -34103,7 +34176,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34163,7 +34236,7 @@
 	}));
 
 /***/ },
-/* 260 */
+/* 262 */
 /*!**********************************!*\
   !*** ./~/moment/locale/pt-br.js ***!
   \**********************************/
@@ -34174,7 +34247,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34230,7 +34303,7 @@
 	}));
 
 /***/ },
-/* 261 */
+/* 263 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ro.js ***!
   \*******************************/
@@ -34242,7 +34315,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34311,7 +34384,7 @@
 	}));
 
 /***/ },
-/* 262 */
+/* 264 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ru.js ***!
   \*******************************/
@@ -34323,7 +34396,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34484,7 +34557,7 @@
 	}));
 
 /***/ },
-/* 263 */
+/* 265 */
 /*!*******************************!*\
   !*** ./~/moment/locale/se.js ***!
   \*******************************/
@@ -34495,7 +34568,7 @@
 	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34552,7 +34625,7 @@
 	}));
 
 /***/ },
-/* 264 */
+/* 266 */
 /*!*******************************!*\
   !*** ./~/moment/locale/si.js ***!
   \*******************************/
@@ -34563,7 +34636,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34625,7 +34698,7 @@
 	}));
 
 /***/ },
-/* 265 */
+/* 267 */
 /*!*******************************!*\
   !*** ./~/moment/locale/sk.js ***!
   \*******************************/
@@ -34637,7 +34710,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34782,7 +34855,7 @@
 	}));
 
 /***/ },
-/* 266 */
+/* 268 */
 /*!*******************************!*\
   !*** ./~/moment/locale/sl.js ***!
   \*******************************/
@@ -34793,7 +34866,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34949,7 +35022,7 @@
 	}));
 
 /***/ },
-/* 267 */
+/* 269 */
 /*!*******************************!*\
   !*** ./~/moment/locale/sq.js ***!
   \*******************************/
@@ -34962,7 +35035,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd (fixes)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35025,7 +35098,7 @@
 	}));
 
 /***/ },
-/* 268 */
+/* 270 */
 /*!*******************************!*\
   !*** ./~/moment/locale/sr.js ***!
   \*******************************/
@@ -35036,7 +35109,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35140,7 +35213,7 @@
 	}));
 
 /***/ },
-/* 269 */
+/* 271 */
 /*!************************************!*\
   !*** ./~/moment/locale/sr-cyrl.js ***!
   \************************************/
@@ -35151,7 +35224,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35255,7 +35328,7 @@
 	}));
 
 /***/ },
-/* 270 */
+/* 272 */
 /*!*******************************!*\
   !*** ./~/moment/locale/sv.js ***!
   \*******************************/
@@ -35266,7 +35339,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35329,7 +35402,7 @@
 	}));
 
 /***/ },
-/* 271 */
+/* 273 */
 /*!*******************************!*\
   !*** ./~/moment/locale/sw.js ***!
   \*******************************/
@@ -35340,7 +35413,7 @@
 	//! author : Fahad Kassim : https://github.com/fadsel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35394,7 +35467,7 @@
 	}));
 
 /***/ },
-/* 272 */
+/* 274 */
 /*!*******************************!*\
   !*** ./~/moment/locale/ta.js ***!
   \*******************************/
@@ -35405,7 +35478,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35530,7 +35603,7 @@
 	}));
 
 /***/ },
-/* 273 */
+/* 275 */
 /*!*******************************!*\
   !*** ./~/moment/locale/te.js ***!
   \*******************************/
@@ -35541,7 +35614,7 @@
 	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35625,7 +35698,7 @@
 	}));
 
 /***/ },
-/* 274 */
+/* 276 */
 /*!*******************************!*\
   !*** ./~/moment/locale/th.js ***!
   \*******************************/
@@ -35636,7 +35709,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35697,7 +35770,7 @@
 	}));
 
 /***/ },
-/* 275 */
+/* 277 */
 /*!**********************************!*\
   !*** ./~/moment/locale/tl-ph.js ***!
   \**********************************/
@@ -35708,7 +35781,7 @@
 	//! author : Dan Hagman
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35766,7 +35839,7 @@
 	}));
 
 /***/ },
-/* 276 */
+/* 278 */
 /*!********************************!*\
   !*** ./~/moment/locale/tlh.js ***!
   \********************************/
@@ -35777,7 +35850,7 @@
 	//! author : Dominika Kruk : https://github.com/amaranthrose
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35892,7 +35965,7 @@
 	}));
 
 /***/ },
-/* 277 */
+/* 279 */
 /*!*******************************!*\
   !*** ./~/moment/locale/tr.js ***!
   \*******************************/
@@ -35904,7 +35977,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35989,7 +36062,7 @@
 	}));
 
 /***/ },
-/* 278 */
+/* 280 */
 /*!********************************!*\
   !*** ./~/moment/locale/tzl.js ***!
   \********************************/
@@ -36000,7 +36073,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v with the help of Iustì Canun
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36083,7 +36156,7 @@
 	}));
 
 /***/ },
-/* 279 */
+/* 281 */
 /*!********************************!*\
   !*** ./~/moment/locale/tzm.js ***!
   \********************************/
@@ -36094,7 +36167,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36148,7 +36221,7 @@
 	}));
 
 /***/ },
-/* 280 */
+/* 282 */
 /*!*************************************!*\
   !*** ./~/moment/locale/tzm-latn.js ***!
   \*************************************/
@@ -36159,7 +36232,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36213,7 +36286,7 @@
 	}));
 
 /***/ },
-/* 281 */
+/* 283 */
 /*!*******************************!*\
   !*** ./~/moment/locale/uk.js ***!
   \*******************************/
@@ -36225,7 +36298,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36366,7 +36439,7 @@
 	}));
 
 /***/ },
-/* 282 */
+/* 284 */
 /*!*******************************!*\
   !*** ./~/moment/locale/uz.js ***!
   \*******************************/
@@ -36377,7 +36450,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36431,7 +36504,7 @@
 	}));
 
 /***/ },
-/* 283 */
+/* 285 */
 /*!*******************************!*\
   !*** ./~/moment/locale/vi.js ***!
   \*******************************/
@@ -36442,7 +36515,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36504,7 +36577,7 @@
 	}));
 
 /***/ },
-/* 284 */
+/* 286 */
 /*!**********************************!*\
   !*** ./~/moment/locale/zh-cn.js ***!
   \**********************************/
@@ -36516,7 +36589,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36638,7 +36711,7 @@
 	}));
 
 /***/ },
-/* 285 */
+/* 287 */
 /*!**********************************!*\
   !*** ./~/moment/locale/zh-tw.js ***!
   \**********************************/
@@ -36649,7 +36722,7 @@
 	//! author : Ben : https://github.com/ben-lin
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(/*! ../moment */ 187)) :
+	    true ? factory(__webpack_require__(/*! ../moment */ 189)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36746,7 +36819,7 @@
 	}));
 
 /***/ },
-/* 286 */
+/* 288 */
 /*!********************************!*\
   !*** ./~/marked/lib/marked.js ***!
   \********************************/
@@ -38041,7 +38114,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 287 */
+/* 289 */
 /*!*****************************************!*\
   !*** ./js/components/NewTopicModal.jsx ***!
   \*****************************************/
@@ -38059,17 +38132,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _API = __webpack_require__(/*! ../API */ 161);
+	var _API = __webpack_require__(/*! ../API */ 172);
 	
 	var _API2 = _interopRequireDefault(_API);
 	
-	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 164);
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
 	
 	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
 	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 162);
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
 	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 173);
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38207,148 +38280,10 @@
 	exports.default = NewTopicModal;
 
 /***/ },
-/* 288 */
-/*!****************************!*\
-  !*** ./css/sweetalert.css ***!
-  \****************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./sweetalert.css */ 289);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 168)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./sweetalert.css", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./sweetalert.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 289 */
-/*!*******************************************!*\
-  !*** ./~/css-loader!./css/sweetalert.css ***!
-  \*******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 167)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "body.stop-scrolling {\n  height: 100%;\n  overflow: hidden; }\n\n.sweet-overlay {\n  background-color: black;\n  /* IE8 */\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)\";\n  /* IE8 */\n  background-color: rgba(0, 0, 0, 0.4);\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  display: none;\n  z-index: 10000; }\n\n.sweet-alert {\n  background-color: white;\n  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  width: 478px;\n  padding: 17px;\n  border-radius: 5px;\n  text-align: center;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  margin-left: -256px;\n  margin-top: -200px;\n  overflow: hidden;\n  display: none;\n  z-index: 99999; }\n  @media all and (max-width: 540px) {\n    .sweet-alert {\n      width: auto;\n      margin-left: 0;\n      margin-right: 0;\n      left: 15px;\n      right: 15px; } }\n  .sweet-alert h2 {\n    color: #575757;\n    font-size: 30px;\n    text-align: center;\n    font-weight: 600;\n    text-transform: none;\n    position: relative;\n    margin: 25px 0;\n    padding: 0;\n    line-height: 40px;\n    display: block; }\n  .sweet-alert p {\n    color: #797979;\n    font-size: 16px;\n    text-align: center;\n    font-weight: 300;\n    position: relative;\n    text-align: inherit;\n    float: none;\n    margin: 0;\n    padding: 0;\n    line-height: normal; }\n  .sweet-alert fieldset {\n    border: none;\n    position: relative; }\n  .sweet-alert .sa-error-container {\n    background-color: #f1f1f1;\n    margin-left: -17px;\n    margin-right: -17px;\n    overflow: hidden;\n    padding: 0 10px;\n    max-height: 0;\n    webkit-transition: padding 0.15s, max-height 0.15s;\n    transition: padding 0.15s, max-height 0.15s; }\n    .sweet-alert .sa-error-container.show {\n      padding: 10px 0;\n      max-height: 100px;\n      webkit-transition: padding 0.2s, max-height 0.2s;\n      transition: padding 0.25s, max-height 0.25s; }\n    .sweet-alert .sa-error-container .icon {\n      display: inline-block;\n      width: 24px;\n      height: 24px;\n      border-radius: 50%;\n      background-color: #ea7d7d;\n      color: white;\n      line-height: 24px;\n      text-align: center;\n      margin-right: 3px; }\n    .sweet-alert .sa-error-container p {\n      display: inline-block; }\n  .sweet-alert .sa-input-error {\n    position: absolute;\n    top: 29px;\n    right: 26px;\n    width: 20px;\n    height: 20px;\n    opacity: 0;\n    -webkit-transform: scale(0.5);\n    transform: scale(0.5);\n    -webkit-transform-origin: 50% 50%;\n    transform-origin: 50% 50%;\n    -webkit-transition: all 0.1s;\n    transition: all 0.1s; }\n    .sweet-alert .sa-input-error::before, .sweet-alert .sa-input-error::after {\n      content: \"\";\n      width: 20px;\n      height: 6px;\n      background-color: #f06e57;\n      border-radius: 3px;\n      position: absolute;\n      top: 50%;\n      margin-top: -4px;\n      left: 50%;\n      margin-left: -9px; }\n    .sweet-alert .sa-input-error::before {\n      -webkit-transform: rotate(-45deg);\n      transform: rotate(-45deg); }\n    .sweet-alert .sa-input-error::after {\n      -webkit-transform: rotate(45deg);\n      transform: rotate(45deg); }\n    .sweet-alert .sa-input-error.show {\n      opacity: 1;\n      -webkit-transform: scale(1);\n      transform: scale(1); }\n  .sweet-alert input {\n    width: 100%;\n    box-sizing: border-box;\n    border-radius: 3px;\n    border: 1px solid #d7d7d7;\n    height: 43px;\n    margin-top: 10px;\n    margin-bottom: 17px;\n    font-size: 18px;\n    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.06);\n    padding: 0 12px;\n    display: none;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s; }\n    .sweet-alert input:focus {\n      outline: none;\n      box-shadow: 0px 0px 3px #c4e6f5;\n      border: 1px solid #b4dbed; }\n      .sweet-alert input:focus::-moz-placeholder {\n        transition: opacity 0.3s 0.03s ease;\n        opacity: 0.5; }\n      .sweet-alert input:focus:-ms-input-placeholder {\n        transition: opacity 0.3s 0.03s ease;\n        opacity: 0.5; }\n      .sweet-alert input:focus::-webkit-input-placeholder {\n        transition: opacity 0.3s 0.03s ease;\n        opacity: 0.5; }\n    .sweet-alert input::-moz-placeholder {\n      color: #bdbdbd; }\n    .sweet-alert input:-ms-input-placeholder {\n      color: #bdbdbd; }\n    .sweet-alert input::-webkit-input-placeholder {\n      color: #bdbdbd; }\n  .sweet-alert.show-input input {\n    display: block; }\n  .sweet-alert .sa-confirm-button-container {\n    display: inline-block;\n    position: relative; }\n  .sweet-alert .la-ball-fall {\n    position: absolute;\n    left: 50%;\n    top: 50%;\n    margin-left: -27px;\n    margin-top: 4px;\n    opacity: 0;\n    visibility: hidden; }\n  .sweet-alert button {\n    background-color: #8CD4F5;\n    color: white;\n    border: none;\n    box-shadow: none;\n    font-size: 17px;\n    font-weight: 500;\n    -webkit-border-radius: 4px;\n    border-radius: 5px;\n    padding: 10px 32px;\n    margin: 26px 5px 0 5px;\n    cursor: pointer; }\n    .sweet-alert button:focus {\n      outline: none;\n      box-shadow: 0 0 2px rgba(128, 179, 235, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.05); }\n    .sweet-alert button:hover {\n      background-color: #7ecff4; }\n    .sweet-alert button:active {\n      background-color: #5dc2f1; }\n    .sweet-alert button.cancel {\n      background-color: #C1C1C1; }\n      .sweet-alert button.cancel:hover {\n        background-color: #b9b9b9; }\n      .sweet-alert button.cancel:active {\n        background-color: #a8a8a8; }\n      .sweet-alert button.cancel:focus {\n        box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important; }\n    .sweet-alert button[disabled] {\n      opacity: .6;\n      cursor: default; }\n    .sweet-alert button.confirm[disabled] {\n      color: transparent; }\n      .sweet-alert button.confirm[disabled] ~ .la-ball-fall {\n        opacity: 1;\n        visibility: visible;\n        transition-delay: 0s; }\n    .sweet-alert button::-moz-focus-inner {\n      border: 0; }\n  .sweet-alert[data-has-cancel-button=false] button {\n    box-shadow: none !important; }\n  .sweet-alert[data-has-confirm-button=false][data-has-cancel-button=false] {\n    padding-bottom: 40px; }\n  .sweet-alert .sa-icon {\n    width: 80px;\n    height: 80px;\n    border: 4px solid gray;\n    -webkit-border-radius: 40px;\n    border-radius: 40px;\n    border-radius: 50%;\n    margin: 20px auto;\n    padding: 0;\n    position: relative;\n    box-sizing: content-box; }\n    .sweet-alert .sa-icon.sa-error {\n      border-color: #F27474; }\n      .sweet-alert .sa-icon.sa-error .sa-x-mark {\n        position: relative;\n        display: block; }\n      .sweet-alert .sa-icon.sa-error .sa-line {\n        position: absolute;\n        height: 5px;\n        width: 47px;\n        background-color: #F27474;\n        display: block;\n        top: 37px;\n        border-radius: 2px; }\n        .sweet-alert .sa-icon.sa-error .sa-line.sa-left {\n          -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n          left: 17px; }\n        .sweet-alert .sa-icon.sa-error .sa-line.sa-right {\n          -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n          right: 16px; }\n    .sweet-alert .sa-icon.sa-warning {\n      border-color: #F8BB86; }\n      .sweet-alert .sa-icon.sa-warning .sa-body {\n        position: absolute;\n        width: 5px;\n        height: 47px;\n        left: 50%;\n        top: 10px;\n        -webkit-border-radius: 2px;\n        border-radius: 2px;\n        margin-left: -2px;\n        background-color: #F8BB86; }\n      .sweet-alert .sa-icon.sa-warning .sa-dot {\n        position: absolute;\n        width: 7px;\n        height: 7px;\n        -webkit-border-radius: 50%;\n        border-radius: 50%;\n        margin-left: -3px;\n        left: 50%;\n        bottom: 10px;\n        background-color: #F8BB86; }\n    .sweet-alert .sa-icon.sa-info {\n      border-color: #C9DAE1; }\n      .sweet-alert .sa-icon.sa-info::before {\n        content: \"\";\n        position: absolute;\n        width: 5px;\n        height: 29px;\n        left: 50%;\n        bottom: 17px;\n        border-radius: 2px;\n        margin-left: -2px;\n        background-color: #C9DAE1; }\n      .sweet-alert .sa-icon.sa-info::after {\n        content: \"\";\n        position: absolute;\n        width: 7px;\n        height: 7px;\n        border-radius: 50%;\n        margin-left: -3px;\n        top: 19px;\n        background-color: #C9DAE1; }\n    .sweet-alert .sa-icon.sa-success {\n      border-color: #A5DC86; }\n      .sweet-alert .sa-icon.sa-success::before, .sweet-alert .sa-icon.sa-success::after {\n        content: '';\n        -webkit-border-radius: 40px;\n        border-radius: 40px;\n        border-radius: 50%;\n        position: absolute;\n        width: 60px;\n        height: 120px;\n        background: white;\n        -webkit-transform: rotate(45deg);\n        transform: rotate(45deg); }\n      .sweet-alert .sa-icon.sa-success::before {\n        -webkit-border-radius: 120px 0 0 120px;\n        border-radius: 120px 0 0 120px;\n        top: -7px;\n        left: -33px;\n        -webkit-transform: rotate(-45deg);\n        transform: rotate(-45deg);\n        -webkit-transform-origin: 60px 60px;\n        transform-origin: 60px 60px; }\n      .sweet-alert .sa-icon.sa-success::after {\n        -webkit-border-radius: 0 120px 120px 0;\n        border-radius: 0 120px 120px 0;\n        top: -11px;\n        left: 30px;\n        -webkit-transform: rotate(-45deg);\n        transform: rotate(-45deg);\n        -webkit-transform-origin: 0px 60px;\n        transform-origin: 0px 60px; }\n      .sweet-alert .sa-icon.sa-success .sa-placeholder {\n        width: 80px;\n        height: 80px;\n        border: 4px solid rgba(165, 220, 134, 0.2);\n        -webkit-border-radius: 40px;\n        border-radius: 40px;\n        border-radius: 50%;\n        box-sizing: content-box;\n        position: absolute;\n        left: -4px;\n        top: -4px;\n        z-index: 2; }\n      .sweet-alert .sa-icon.sa-success .sa-fix {\n        width: 5px;\n        height: 90px;\n        background-color: white;\n        position: absolute;\n        left: 28px;\n        top: 8px;\n        z-index: 1;\n        -webkit-transform: rotate(-45deg);\n        transform: rotate(-45deg); }\n      .sweet-alert .sa-icon.sa-success .sa-line {\n        height: 5px;\n        background-color: #A5DC86;\n        display: block;\n        border-radius: 2px;\n        position: absolute;\n        z-index: 2; }\n        .sweet-alert .sa-icon.sa-success .sa-line.sa-tip {\n          width: 25px;\n          left: 14px;\n          top: 46px;\n          -webkit-transform: rotate(45deg);\n          transform: rotate(45deg); }\n        .sweet-alert .sa-icon.sa-success .sa-line.sa-long {\n          width: 47px;\n          right: 8px;\n          top: 38px;\n          -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg); }\n    .sweet-alert .sa-icon.sa-custom {\n      background-size: contain;\n      border-radius: 0;\n      border: none;\n      background-position: center center;\n      background-repeat: no-repeat; }\n\n/*\n * Animations\n */\n@-webkit-keyframes showSweetAlert {\n  0% {\n    transform: scale(0.7);\n    -webkit-transform: scale(0.7); }\n  45% {\n    transform: scale(1.05);\n    -webkit-transform: scale(1.05); }\n  80% {\n    transform: scale(0.95);\n    -webkit-transform: scale(0.95); }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1); } }\n\n@keyframes showSweetAlert {\n  0% {\n    transform: scale(0.7);\n    -webkit-transform: scale(0.7); }\n  45% {\n    transform: scale(1.05);\n    -webkit-transform: scale(1.05); }\n  80% {\n    transform: scale(0.95);\n    -webkit-transform: scale(0.95); }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1); } }\n\n@-webkit-keyframes hideSweetAlert {\n  0% {\n    transform: scale(1);\n    -webkit-transform: scale(1); }\n  100% {\n    transform: scale(0.5);\n    -webkit-transform: scale(0.5); } }\n\n@keyframes hideSweetAlert {\n  0% {\n    transform: scale(1);\n    -webkit-transform: scale(1); }\n  100% {\n    transform: scale(0.5);\n    -webkit-transform: scale(0.5); } }\n\n@-webkit-keyframes slideFromTop {\n  0% {\n    top: 0%; }\n  100% {\n    top: 50%; } }\n\n@keyframes slideFromTop {\n  0% {\n    top: 0%; }\n  100% {\n    top: 50%; } }\n\n@-webkit-keyframes slideToTop {\n  0% {\n    top: 50%; }\n  100% {\n    top: 0%; } }\n\n@keyframes slideToTop {\n  0% {\n    top: 50%; }\n  100% {\n    top: 0%; } }\n\n@-webkit-keyframes slideFromBottom {\n  0% {\n    top: 70%; }\n  100% {\n    top: 50%; } }\n\n@keyframes slideFromBottom {\n  0% {\n    top: 70%; }\n  100% {\n    top: 50%; } }\n\n@-webkit-keyframes slideToBottom {\n  0% {\n    top: 50%; }\n  100% {\n    top: 70%; } }\n\n@keyframes slideToBottom {\n  0% {\n    top: 50%; }\n  100% {\n    top: 70%; } }\n\n.showSweetAlert[data-animation=pop] {\n  -webkit-animation: showSweetAlert 0.3s;\n  animation: showSweetAlert 0.3s; }\n\n.showSweetAlert[data-animation=none] {\n  -webkit-animation: none;\n  animation: none; }\n\n.showSweetAlert[data-animation=slide-from-top] {\n  -webkit-animation: slideFromTop 0.3s;\n  animation: slideFromTop 0.3s; }\n\n.showSweetAlert[data-animation=slide-from-bottom] {\n  -webkit-animation: slideFromBottom 0.3s;\n  animation: slideFromBottom 0.3s; }\n\n.hideSweetAlert[data-animation=pop] {\n  -webkit-animation: hideSweetAlert 0.2s;\n  animation: hideSweetAlert 0.2s; }\n\n.hideSweetAlert[data-animation=none] {\n  -webkit-animation: none;\n  animation: none; }\n\n.hideSweetAlert[data-animation=slide-from-top] {\n  -webkit-animation: slideToTop 0.4s;\n  animation: slideToTop 0.4s; }\n\n.hideSweetAlert[data-animation=slide-from-bottom] {\n  -webkit-animation: slideToBottom 0.3s;\n  animation: slideToBottom 0.3s; }\n\n@-webkit-keyframes animateSuccessTip {\n  0% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  54% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  70% {\n    width: 50px;\n    left: -8px;\n    top: 37px; }\n  84% {\n    width: 17px;\n    left: 21px;\n    top: 48px; }\n  100% {\n    width: 25px;\n    left: 14px;\n    top: 45px; } }\n\n@keyframes animateSuccessTip {\n  0% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  54% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  70% {\n    width: 50px;\n    left: -8px;\n    top: 37px; }\n  84% {\n    width: 17px;\n    left: 21px;\n    top: 48px; }\n  100% {\n    width: 25px;\n    left: 14px;\n    top: 45px; } }\n\n@-webkit-keyframes animateSuccessLong {\n  0% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  65% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  84% {\n    width: 55px;\n    right: 0px;\n    top: 35px; }\n  100% {\n    width: 47px;\n    right: 8px;\n    top: 38px; } }\n\n@keyframes animateSuccessLong {\n  0% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  65% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  84% {\n    width: 55px;\n    right: 0px;\n    top: 35px; }\n  100% {\n    width: 47px;\n    right: 8px;\n    top: 38px; } }\n\n@-webkit-keyframes rotatePlaceholder {\n  0% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  5% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  12% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); }\n  100% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); } }\n\n@keyframes rotatePlaceholder {\n  0% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  5% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  12% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); }\n  100% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); } }\n\n.animateSuccessTip {\n  -webkit-animation: animateSuccessTip 0.75s;\n  animation: animateSuccessTip 0.75s; }\n\n.animateSuccessLong {\n  -webkit-animation: animateSuccessLong 0.75s;\n  animation: animateSuccessLong 0.75s; }\n\n.sa-icon.sa-success.animate::after {\n  -webkit-animation: rotatePlaceholder 4.25s ease-in;\n  animation: rotatePlaceholder 4.25s ease-in; }\n\n@-webkit-keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg);\n    -webkit-transform: rotateX(100deg);\n    opacity: 0; }\n  100% {\n    transform: rotateX(0deg);\n    -webkit-transform: rotateX(0deg);\n    opacity: 1; } }\n\n@keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg);\n    -webkit-transform: rotateX(100deg);\n    opacity: 0; }\n  100% {\n    transform: rotateX(0deg);\n    -webkit-transform: rotateX(0deg);\n    opacity: 1; } }\n\n.animateErrorIcon {\n  -webkit-animation: animateErrorIcon 0.5s;\n  animation: animateErrorIcon 0.5s; }\n\n@-webkit-keyframes animateXMark {\n  0% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  50% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  80% {\n    transform: scale(1.15);\n    -webkit-transform: scale(1.15);\n    margin-top: -6px; }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1);\n    margin-top: 0;\n    opacity: 1; } }\n\n@keyframes animateXMark {\n  0% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  50% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  80% {\n    transform: scale(1.15);\n    -webkit-transform: scale(1.15);\n    margin-top: -6px; }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1);\n    margin-top: 0;\n    opacity: 1; } }\n\n.animateXMark {\n  -webkit-animation: animateXMark 0.5s;\n  animation: animateXMark 0.5s; }\n\n@-webkit-keyframes pulseWarning {\n  0% {\n    border-color: #F8D486; }\n  100% {\n    border-color: #F8BB86; } }\n\n@keyframes pulseWarning {\n  0% {\n    border-color: #F8D486; }\n  100% {\n    border-color: #F8BB86; } }\n\n.pulseWarning {\n  -webkit-animation: pulseWarning 0.75s infinite alternate;\n  animation: pulseWarning 0.75s infinite alternate; }\n\n@-webkit-keyframes pulseWarningIns {\n  0% {\n    background-color: #F8D486; }\n  100% {\n    background-color: #F8BB86; } }\n\n@keyframes pulseWarningIns {\n  0% {\n    background-color: #F8D486; }\n  100% {\n    background-color: #F8BB86; } }\n\n.pulseWarningIns {\n  -webkit-animation: pulseWarningIns 0.75s infinite alternate;\n  animation: pulseWarningIns 0.75s infinite alternate; }\n\n@-webkit-keyframes rotate-loading {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n@keyframes rotate-loading {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n/* Internet Explorer 9 has some special quirks that are fixed here */\n/* The icons are not animated. */\n/* This file is automatically merged into sweet-alert.min.js through Gulp */\n/* Error icon */\n.sweet-alert .sa-icon.sa-error .sa-line.sa-left {\n  -ms-transform: rotate(45deg) \\9; }\n\n.sweet-alert .sa-icon.sa-error .sa-line.sa-right {\n  -ms-transform: rotate(-45deg) \\9; }\n\n/* Success icon */\n.sweet-alert .sa-icon.sa-success {\n  border-color: transparent\\9; }\n\n.sweet-alert .sa-icon.sa-success .sa-line.sa-tip {\n  -ms-transform: rotate(45deg) \\9; }\n\n.sweet-alert .sa-icon.sa-success .sa-line.sa-long {\n  -ms-transform: rotate(-45deg) \\9; }\n\n/*!\n * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)\n * Copyright 2015 Daniel Cardoso <@DanielCardoso>\n * Licensed under MIT\n */\n.la-ball-fall,\n.la-ball-fall > div {\n  position: relative;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n.la-ball-fall {\n  display: block;\n  font-size: 0;\n  color: #fff; }\n\n.la-ball-fall.la-dark {\n  color: #333; }\n\n.la-ball-fall > div {\n  display: inline-block;\n  float: none;\n  background-color: currentColor;\n  border: 0 solid currentColor; }\n\n.la-ball-fall {\n  width: 54px;\n  height: 18px; }\n\n.la-ball-fall > div {\n  width: 10px;\n  height: 10px;\n  margin: 4px;\n  border-radius: 100%;\n  opacity: 0;\n  -webkit-animation: ball-fall 1s ease-in-out infinite;\n  -moz-animation: ball-fall 1s ease-in-out infinite;\n  -o-animation: ball-fall 1s ease-in-out infinite;\n  animation: ball-fall 1s ease-in-out infinite; }\n\n.la-ball-fall > div:nth-child(1) {\n  -webkit-animation-delay: -200ms;\n  -moz-animation-delay: -200ms;\n  -o-animation-delay: -200ms;\n  animation-delay: -200ms; }\n\n.la-ball-fall > div:nth-child(2) {\n  -webkit-animation-delay: -100ms;\n  -moz-animation-delay: -100ms;\n  -o-animation-delay: -100ms;\n  animation-delay: -100ms; }\n\n.la-ball-fall > div:nth-child(3) {\n  -webkit-animation-delay: 0ms;\n  -moz-animation-delay: 0ms;\n  -o-animation-delay: 0ms;\n  animation-delay: 0ms; }\n\n.la-ball-fall.la-sm {\n  width: 26px;\n  height: 8px; }\n\n.la-ball-fall.la-sm > div {\n  width: 4px;\n  height: 4px;\n  margin: 2px; }\n\n.la-ball-fall.la-2x {\n  width: 108px;\n  height: 36px; }\n\n.la-ball-fall.la-2x > div {\n  width: 20px;\n  height: 20px;\n  margin: 8px; }\n\n.la-ball-fall.la-3x {\n  width: 162px;\n  height: 54px; }\n\n.la-ball-fall.la-3x > div {\n  width: 30px;\n  height: 30px;\n  margin: 12px; }\n\n/*\n * Animation\n */\n@-webkit-keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(145%);\n    transform: translateY(145%); } }\n\n@-moz-keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -moz-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -moz-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -moz-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -moz-transform: translateY(145%);\n    transform: translateY(145%); } }\n\n@-o-keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -o-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -o-transform: translateY(145%);\n    transform: translateY(145%); } }\n\n@keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateY(-145%);\n    -moz-transform: translateY(-145%);\n    -o-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(145%);\n    -moz-transform: translateY(145%);\n    -o-transform: translateY(145%);\n    transform: translateY(145%); } }\n", ""]);
-	
-	// exports
-
-
-/***/ },
 /* 290 */
-/*!************************!*\
-  !*** ./css/google.css ***!
-  \************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./google.css */ 291);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 168)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./google.css", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./google.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 291 */
-/*!***************************************!*\
-  !*** ./~/css-loader!./css/google.css ***!
-  \***************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 167)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".sweet-overlay {\n  background: rgba(10, 10, 10, 0.6); }\n\n.sweet-alert {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  padding: 24px;\n  padding-top: 64px;\n  padding-bottom: 13px;\n  text-align: right;\n  border-radius: 0;\n  box-shadow: 0 0 14px rgba(0, 0, 0, 0.24), 0 14px 28px rgba(0, 0, 0, 0.48); }\n  .sweet-alert h2 {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    height: auto;\n    font-weight: 400;\n    color: #212121;\n    margin: 20px 0;\n    font-size: 1.2em;\n    line-height: 1.25;\n    text-align: left;\n    padding: 0 24px; }\n  .sweet-alert p {\n    display: block;\n    text-align: center;\n    color: #212121;\n    font-weight: 400;\n    font-size: 14px;\n    margin: 20px 0; }\n  .sweet-alert button {\n    border-radius: 2px;\n    box-shadow: none !important;\n    background: none !important;\n    border-radius: 2px;\n    text-transform: uppercase;\n    font-size: 14px;\n    font-weight: 600;\n    padding: 8px 16px;\n    position: relative;\n    margin-top: 0; }\n    .sweet-alert button:hover, .sweet-alert button:focus {\n      background-color: #f6f6f6 !important; }\n    .sweet-alert button.confirm {\n      color: #3c80f6; }\n    .sweet-alert button.cancel {\n      color: #757575; }\n      .sweet-alert button.cancel:focus {\n        box-shadow: none !important; }\n  .sweet-alert .sa-icon:not(.sa-custom) {\n    transform: scale(0.8);\n    margin-bottom: -10px;\n    margin-top: -10px; }\n  .sweet-alert input {\n    border: none;\n    border-radius: 0;\n    border-bottom: 1px solid #c9c9c9;\n    color: #212121;\n    margin-bottom: 8px;\n    padding: 1px;\n    padding-bottom: 8px;\n    height: auto;\n    box-shadow: none;\n    font-size: 13px;\n    margin: 10px 0; }\n    .sweet-alert input:focus {\n      border: none;\n      border-bottom: 1px solid #3c80f6;\n      box-shadow: inset 0 -1px 0 #3c80f6; }\n  .sweet-alert fieldset {\n    padding: 0; }\n    .sweet-alert fieldset .sa-input-error {\n      display: none; }\n  .sweet-alert .sa-error-container {\n    display: none;\n    background: none;\n    height: auto;\n    padding: 0 24px;\n    margin: 0 -20px;\n    text-align: left; }\n    .sweet-alert .sa-error-container.show {\n      padding: 0 24px;\n      display: block; }\n      .sweet-alert .sa-error-container.show ~ fieldset input {\n        background: red;\n        border-bottom: 1px solid #d9453c;\n        box-shadow: inset 0 -1px 0 #d9453c; }\n    .sweet-alert .sa-error-container .icon {\n      display: none; }\n    .sweet-alert .sa-error-container p {\n      color: #d9453c;\n      margin-top: 0; }\n\n@-webkit-keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg), scale(0.5);\n    -webkit-transform: rotateX(100deg), scale(0.5);\n    opacity: 0; }\n\n  100% {\n    transform: rotateX(0deg), scale(0.5);\n    -webkit-transform: rotateX(0deg), scale(0.5);\n    opacity: 1; } }\n\n@keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg), scale(0.5);\n    -webkit-transform: rotateX(100deg), scale(0.5);\n    opacity: 0; }\n\n  100% {\n    transform: rotateX(0deg), scale(0.5);\n    -webkit-transform: rotateX(0deg), scale(0.5);\n    opacity: 1; } }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 292 */
-/*!***********************!*\
-  !*** ./css/style.css ***!
-  \***********************/
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./style.css */ 293);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 168)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./style.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 293 */
 /*!**************************************!*\
-  !*** ./~/css-loader!./css/style.css ***!
+  !*** ./js/components/splashPage.jsx ***!
   \**************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 167)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "$primary-color: #4caf50;\n$secondary-color: #F44336;\n\nbody {\n  color: #1F4832;\n  background: #fcfffc;\n}\nul#Login {\n    left: 10%;\n    position: relative;\n}\n\n.btn-round {\n  border-radius: 1;\n  width: 1.7em;\n  height: 1.7em;\n  line-height: 1;\n  font-size: 35px;\n  z-index: -1;\n  position: relative;\n  cursor: pointer;\n  top: -20px;\n  left: -5px;\n}\n\n.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {\n    border-color: rgba(76, 175, 80, 0);\n}\n\ndiv.startcoding-logo{\n  margin:3em auto;\n  width:50em;\n}\n\ndiv.startcoding-logo a{\n  text-decoration:none;\n  color:#64AF67;\n}\n\ndiv.braket-logo {\n  border-radius: 50% 50% 50% 50%;\n  background-color: #22659C;\n  color: #42E2FF;\n  width: 1em;\n  height: 1em;\n  font-size: 1.5em;\n  overflow: hidden;\n  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);\n  display: inline-block;\n  vertical-align: center;\n  position: absolute;\n  bottom: 4px;\n  right: 4px;\n  margin: 0px auto;\n}\n\ndiv.braket-logo div.leaf-shadow{\n  width:6.3em;\n  height:10.6em;\n  background-color:#64AF67;\n  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);\n}\n\n#title{\n  display:inline-block;\n  font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;\n  padding:0;\n  margin:0;\n}\n\n.startcoding-logo:hover {\n\n}\n.startcoding-logo:after {\n    content: \"\";\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    width: 0%;\n    height: 100%;\n    background-color: rgba(255,255,255,0.4);\n    -webkit-transition: none;\n    -moz-transition: none;\n    -ms-transition: none;\n    -o-transition: none;\n    transition: none;\n\n}\n.startcoding-logo:hover:after {\n    width: 120%;\n    background-color: rgba(255,255,255,0);\n    -webkit-transition: all 0.9s ease-out;\n    -moz-transition: all 0.9s ease-out;\n    -ms-transition: all 0.9s ease-out;\n    -o-transition: all 0.9s ease-out;\n    transition: all 0.9s ease-out;\n}\ndiv#bs-example-navbar-collapse-2 {\n    position: relative;\n    /*left: 8%;*/\n}\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 3.5em;\n}\n\n#registerForm {\n  position: relative;\n  left: 15%;\n  top: 15px;\n}\n#registerButton{\n  display: inline-block;\n  z-index: 100000;\n  position: relative;\n}\n\na.alreadyMember {\n    position: relative;\n    left: 65%;\n}\n\n#userNameRegister.form-control::-webkit-input-placeholder { color: white; }\n#userNameRegister.form-control:-moz-placeholder { color: white; }\n#userNameRegister.form-control::-moz-placeholder { color: white; }\n#userNameRegister.form-control:-ms-input-placeholder { color: white; }\n#userNameRegister{ color:white; }\n\n#passwordRegister.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister.form-control:-moz-placeholder { color: white; }\n#passwordRegister.form-control::-moz-placeholder { color: white; }\n#passwordRegister.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister{ color:white; }\n\n#passwordRegister2.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister2.form-control:-moz-placeholder { color: white; }\n#passwordRegister2.form-control::-moz-placeholder { color: white; }\n#passwordRegister2.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister2{ color:white; }\n\n#emailRegister.form-control::-webkit-input-placeholder { color: white; }\n#emailRegister.form-control:-moz-placeholder { color: white; }\n#emailRegister.form-control::-moz-placeholder { color: white; }\n#emailRegister.form-control:-ms-input-placeholder { color: white; }\n#emailRegister{ color:white; }\n\n#userNameLogin.form-control::-webkit-input-placeholder { color: white; }\n#userNameLogin.form-control:-moz-placeholder { color: white; }\n#userNameLogin.form-control::-moz-placeholder { color: white; }\n#userNameLogin.form-control:-ms-input-placeholder { color: white; }\n#userNameLogin{ color:white; }\n\n#passwordLogin.form-control::-webkit-input-placeholder { color: white; }\n#passwordLogin.form-control:-moz-placeholder { color: white; }\n#passwordLogin.form-control::-moz-placeholder { color: white; }\n#passwordLogin.form-control:-ms-input-placeholder { color: white; }\n#passwordLogin{ color:white; }\n\nimg{\n  max-width: 100%\n}\n\nimg:hover{\n  width: 100%\n}\n\n.markdownNotice {\n  float: left;\n  color: grey;\n}\n\n.floatingActionButton {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: inherit;\n  border-radius:100%;\n  outline:none;\n  color:#FFF;\n  font-size:36px;\n  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  cursor: pointer;\n}\n\n.floatingActionButton span {\n  position: absolute;\n  -ms-transform: translate(-10px, -32px);\n  -webkit-transform: translate(-10px, -32px);\n  transform: translate(-10px, -32px);\n}\n\n.floatingActionButton:hover {\n  width: inherit;\n  background-color: #D32F2F;\n}\n\n.newTopicTitle {\n  margin-bottom: 1em;\n}\n\n.spinnerContainer {\n  position: absolute;\n  top: calc(50% - 50px);\n  left: calc(50% - 50px);\n}\n\ntextarea {\n  padding: 0.5em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 100%;\n  border: 1px solid lightgrey !important;\n}\n\n.navbar-inverse {\n  background: #03A9F4;\n  color: #FFF;\n  margin-bottom: 0;\n  z-index: 1000;\n}\n\n.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {\n    color: #FFF !important;\n}\n\n.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {\n    color: peachpuff;\n}\n\n#Register, #Logout, #welcome {\n  display: none;\n}\n\n#newTopicModal {\n  z-index: 2000;\n  position: fixed;\n  top: 15%;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n.main{\n  position: relative;\n  /*height: calc(100vh - 64px);*/\n  margin-bottom: 0;\n  /*overflow-y: scroll;*/\n}\n.displayTopic {\n  overflow: hidden;\n}\n\n.active {\n    position: fixed;\n    background: white;\n    height: calc(100vh - 64px);\n    bottom: 0;\n    right: 0;\n    z-index: 4000;\n    left: 0;\n    margin: auto;\n    padding-bottom: 1em;\n    overflow-y: scroll;\n}\n\na.disabled {\n    pointer-events: none;\n    color: lightgrey;\n}\n.topicContent {\n  display: none;\n}\n.active .topicContent {\n  display: block;\n}\n.topicTitle {\n  margin: 0px;\n  padding: 0.5em 1em;\n  text-align: center;\n}\n.panel-body.topicBody {\n  white-space: pre-line;\n  border-left: 26px solid green;\n  border-top: 2px solid green;\n  border-bottom: 2px solid green;\n  border-right: 2px solid green;\n  background: rgba(213, 232, 204, 0.22);\n  padding: 50px;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n\n.topicHead:hover{\n  background-color: #F5F5F5;\n  cursor: pointer;\n}\n\n.active .topicHead {\n  background-color: #F5F5F5;\n}\n\n.closeTopic {\n  display: none;\n}\n.active .closeTopic {\n  display: inline;\n  float: right;\n  color: #4caf50;\n}\n.replyTopicButton {\n    float: right;\n}\n.topicFooter {\n    padding: 20px;\n}\n.green .topicTitle {\n  background: #E8F5E9;\n}\n.comment {\n  margin: 1em 0 0 1em;\n  padding: 1em .5em 1em 1em;\n}\n.panel-footer {\n  margin: 0 15px;\n  padding: 0px;\n  border-top: 1px solid #4caf50;\n  background: white;\n  font-style: italic;\n}\n\n.breadcrumb {\n  text-align: right;\n}\n\n.breadcrumb > span{\n  float: left;\n  color: gray;\n}\n\n.new-comment-buttons {\n  float: right;\n}\n\n.new-comment-buttons .btn {\n  margin-left: 1em;\n}\n\n.commentVotebox {\n  float: right;\n}\n\n.up .voteBtn:first-child{\n  color: #00E676\n}\n.down .voteBtn:nth-child(3){\n  color: purple;\n}\n\n.voteBtn {\n  color: lightgrey;\n  margin: 0 .8em;\n  padding: 0 .2em;\n  cursor: pointer;\n}\n\n.disabled .voteBtn{\n  color: lightgrey;\n  cursor: default;\n}\n\n\n@media (max-width:768px) and (min-width:667px) {\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 30%;\n\n  }\n}\n\n/* ----------- iPhone 4 and 4S ----------- */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n  h4, .h4 {\n      font-size: 15px;\n  }\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 38%;\n  }\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n\n  }\n\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  ul#Login {\n      left: 0%;\n      position: relative;\n  }\n  #Register{\n    display: none;\n    left: -10%;\n    width: 100%;\n    position: relative;\n  }\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    /*h4, .h4 {\n        font-size: 15px;\n    }*/\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 136px;\n        bottom: 22px;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n    h4, .h4 {\n        font-size: 15px;\n    }\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 150px;\n        bottom: 22px;\n    }\n\n}\n\n/* ----------- iPhone 5 and 5S ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n    .main {\n      position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      /*overflow-y: initial;*/\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: calc(100vh);\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    main {\n      position: relative;\n        height: 100%;\n        margin-bottom: 0;\n        overflow-y: initial;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n}\n\n/* ----------- iPhone 6 ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 43%;\n}\n\n}\n\n\n\n/* ----------iPhone 6 Plus ---------- */\n\n/* Portrait and Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : landscape) {\n\n\n}\n\n/* Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : portrait) {\n\n  span.startCodingName {\n    position: absolute;\n    top: 23px;\n    left: 11%;\n\n  }\n\n}\n\n/* ----------- iPad mini ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    .main {\n    position: relative;\n    height: 100%;\n    margin-bottom: 0;\n    overflow-y: initial;\n  }\nspan.startCodingName {\n  position: absolute;\n  top: 23px;\n  left: 7%;\n\n}\n  .active {\n      position: fixed;\n      background: white;\n      height: 100%;\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 1) {\n    .floatingActionButton {\n        position: fixed;\n        bottom: 1.7em;\n        right: 1.5em;\n        border-radius: 100%;\n        outline: none;\n        color: #FFF;\n        font-size: 36px;\n        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n        -webkit-tap-highlight-color: rgba(0,0,0,0);\n        cursor: pointer;\n    }\n    span.startCodingName {\n      position: absolute;\n      top: 23px;\n      left: 4em;\n\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: 100%;\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n    ul#Login {\n        left: 5%;\n        position: relative;\n    }\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    #startCodingName{\n      position: absolute;\n        top: 20px;\n        left:7%;\n    }\n\n}\n\n\n/* ----------- iPad 3 and 4 ----------- */\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n.main {\n  position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n}\n.active {\n  position: fixed;\n  background: white;\n  height: 100%;\n  width: 100vw;\n  top: 0;\n  right: 3em;\n  z-index: 4000;\n  left: 0;\n  margin: auto;\n  padding-bottom: 1em;\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n}\n#Register, #Logout, #welcome {\n    display: none;\n    position: relative;\n    right: 78px;\n}\n\n\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 2) {\nspan.startCodingName {\n  position: absolute;\n  top: 20px;\n  left: 4em;\n}\na.alreadyMember {\n  position: absolute;\n  left: 200px;\n  bottom: 33px;\n}\n#registerButton {\n    display: inline-block;\n    z-index: 100000;\n    position: relative;\n    top: 6px;\n}\n#forgotPassword {\n  position: relative;\n  left: 1em;\n}\nul#Login {\n    left: 5%;\n    position: relative;\n}\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n#startCodingName{\n  position: absolute;\n    top: 20px;\n    left:7%;\n}\n\n}\n\n\n/* Nexus 7 (portrait and landscape) ----------- */\n@media only screen and (min-device-width : 603px) and (max-device-width : 966px) {\n\n}\n\n/* Nexus 7 (landscape) ----------- */\n@media only screen and (min-width : 604px) and (orientation: landscape) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    /*left: 20%;*/\n  }\n}\n\n/* Nexus 7 (portrait) ----------- */\n@media only screen and (max-width : 603px) and (orientation: portrait) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 30%;\n  }\n}\n\n#goHome {\n  position: fixed;\n  background: transparent;\n  z-index: 9999;\n  height: 64px;\n  width: 180px;\n  cursor: pointer;\n}\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 294 */
-/*!*************************************!*\
-  !*** ./js/components/LoginForm.jsx ***!
-  \*************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38371,85 +38306,400 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var LoginForm = function (_React$Component) {
-	  _inherits(LoginForm, _React$Component);
+	var SplashPage = function (_React$Component) {
+	  _inherits(SplashPage, _React$Component);
 	
-	  function LoginForm() {
-	    _classCallCheck(this, LoginForm);
+	  function SplashPage() {
+	    _classCallCheck(this, SplashPage);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LoginForm).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SplashPage).apply(this, arguments));
 	  }
 	
-	  _createClass(LoginForm, [{
-	    key: "login",
-	    value: function login(e) {
-	      e.preventDefault();
-	      this.props.login({
-	        username: this.refs.username.value,
-	        password: this.refs.password.value
-	      });
-	    }
-	  }, {
+	  _createClass(SplashPage, [{
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "col-md-12" },
+	        { className: "container-fluid" },
 	        _react2.default.createElement(
-	          "form",
-	          { id: "loginForm", className: "navbar-form navbar-left" },
+	          "div",
+	          { clasName: "row" },
 	          _react2.default.createElement(
 	            "div",
-	            { className: "form-group" },
-	            _react2.default.createElement("input", { id: "userNameLogin", ref: "username", type: "text", className: "form-control", placeholder: "Username" }),
-	            _react2.default.createElement("input", { id: "passwordLogin", ref: "password", type: "password", className: "form-control", placeholder: "Password" })
+	            { className: "col-xs-12 col-sm-12 col-md-12 col-lg-12" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "heroImage vertical-center" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "col-xs-12 col-sm-6 col-md-12 col-lg-12" },
+	                _react2.default.createElement(
+	                  "div",
+	                  { className: "heroText" },
+	                  _react2.default.createElement(
+	                    "h1",
+	                    { className: "heroHead" },
+	                    "Start Coding Now!"
+	                  ),
+	                  _react2.default.createElement(
+	                    "h3",
+	                    { className: "herofooter" },
+	                    "The easiest and best way to discover and save coding resources. "
+	                  ),
+	                  _react2.default.createElement(
+	                    "button",
+	                    { className: "btn btn-primary heroButton" },
+	                    "Get Started Now"
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement("div", { className: "splitSection" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "techContainer" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: "https://coderdojo.com/wp-content/uploads/2015/03/Ruby.png", height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  "Discover Ruby"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language."
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "btn btn-primary", role: "button" },
+	                    "Learn about Ruby"
+	                  )
+	                )
+	              )
+	            )
 	          ),
 	          _react2.default.createElement(
-	            "button",
-	            { onClick: this.login.bind(this), className: "btn btn-danger" },
-	            "Log In"
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: "http://www.w3devcampus.com/wp-content/uploads/logoAndOther/logo_JavaScript.png", height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  "Discover JavaScript"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. "
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "btn btn-primary", role: "button" },
+	                    "Learn about JavaScript "
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: "http://www.html5rocks.com/static/demos/svgmobile_fundamentals/images/html5-2048x1536.png", height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  "Discover HTML"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "HyperText Markup Language, commonly referred to as HTML, is the standard language used to create web pages."
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "btn btn-primary", role: "button" },
+	                    "Learn about HTML "
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: "https://coderdojo.com/wp-content/uploads/2015/03/Ruby.png", height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  "Discover Ruby"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language."
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "btn btn-primary", role: "button" },
+	                    "Learn about Ruby"
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: "http://www.w3devcampus.com/wp-content/uploads/logoAndOther/logo_JavaScript.png", height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  "Discover JavaScript"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. "
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "btn btn-primary", role: "button" },
+	                    "Learn about JavaScript "
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: "http://www.html5rocks.com/static/demos/svgmobile_fundamentals/images/html5-2048x1536.png", height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  "Discover HTML"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "HyperText Markup Language, commonly referred to as HTML, is the standard language used to create web pages."
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "btn btn-primary", role: "button" },
+	                    "Learn about HTML "
+	                  )
+	                )
+	              )
+	            )
 	          )
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return LoginForm;
+	  return SplashPage;
 	}(_react2.default.Component);
 	
-	exports.default = LoginForm;
+	exports.default = SplashPage;
+
+/***/ },
+/* 291 */
+/*!****************************!*\
+  !*** ./css/sweetalert.css ***!
+  \****************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../~/css-loader!./sweetalert.css */ 292);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 181)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./sweetalert.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./sweetalert.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 292 */
+/*!*******************************************!*\
+  !*** ./~/css-loader!./css/sweetalert.css ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 180)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "body.stop-scrolling {\n  height: 100%;\n  overflow: hidden; }\n\n.sweet-overlay {\n  background-color: black;\n  /* IE8 */\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)\";\n  /* IE8 */\n  background-color: rgba(0, 0, 0, 0.4);\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  display: none;\n  z-index: 10000; }\n\n.sweet-alert {\n  background-color: white;\n  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  width: 478px;\n  padding: 17px;\n  border-radius: 5px;\n  text-align: center;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  margin-left: -256px;\n  margin-top: -200px;\n  overflow: hidden;\n  display: none;\n  z-index: 99999; }\n  @media all and (max-width: 540px) {\n    .sweet-alert {\n      width: auto;\n      margin-left: 0;\n      margin-right: 0;\n      left: 15px;\n      right: 15px; } }\n  .sweet-alert h2 {\n    color: #575757;\n    font-size: 30px;\n    text-align: center;\n    font-weight: 600;\n    text-transform: none;\n    position: relative;\n    margin: 25px 0;\n    padding: 0;\n    line-height: 40px;\n    display: block; }\n  .sweet-alert p {\n    color: #797979;\n    font-size: 16px;\n    text-align: center;\n    font-weight: 300;\n    position: relative;\n    text-align: inherit;\n    float: none;\n    margin: 0;\n    padding: 0;\n    line-height: normal; }\n  .sweet-alert fieldset {\n    border: none;\n    position: relative; }\n  .sweet-alert .sa-error-container {\n    background-color: #f1f1f1;\n    margin-left: -17px;\n    margin-right: -17px;\n    overflow: hidden;\n    padding: 0 10px;\n    max-height: 0;\n    webkit-transition: padding 0.15s, max-height 0.15s;\n    transition: padding 0.15s, max-height 0.15s; }\n    .sweet-alert .sa-error-container.show {\n      padding: 10px 0;\n      max-height: 100px;\n      webkit-transition: padding 0.2s, max-height 0.2s;\n      transition: padding 0.25s, max-height 0.25s; }\n    .sweet-alert .sa-error-container .icon {\n      display: inline-block;\n      width: 24px;\n      height: 24px;\n      border-radius: 50%;\n      background-color: #ea7d7d;\n      color: white;\n      line-height: 24px;\n      text-align: center;\n      margin-right: 3px; }\n    .sweet-alert .sa-error-container p {\n      display: inline-block; }\n  .sweet-alert .sa-input-error {\n    position: absolute;\n    top: 29px;\n    right: 26px;\n    width: 20px;\n    height: 20px;\n    opacity: 0;\n    -webkit-transform: scale(0.5);\n    transform: scale(0.5);\n    -webkit-transform-origin: 50% 50%;\n    transform-origin: 50% 50%;\n    -webkit-transition: all 0.1s;\n    transition: all 0.1s; }\n    .sweet-alert .sa-input-error::before, .sweet-alert .sa-input-error::after {\n      content: \"\";\n      width: 20px;\n      height: 6px;\n      background-color: #f06e57;\n      border-radius: 3px;\n      position: absolute;\n      top: 50%;\n      margin-top: -4px;\n      left: 50%;\n      margin-left: -9px; }\n    .sweet-alert .sa-input-error::before {\n      -webkit-transform: rotate(-45deg);\n      transform: rotate(-45deg); }\n    .sweet-alert .sa-input-error::after {\n      -webkit-transform: rotate(45deg);\n      transform: rotate(45deg); }\n    .sweet-alert .sa-input-error.show {\n      opacity: 1;\n      -webkit-transform: scale(1);\n      transform: scale(1); }\n  .sweet-alert input {\n    width: 100%;\n    box-sizing: border-box;\n    border-radius: 3px;\n    border: 1px solid #d7d7d7;\n    height: 43px;\n    margin-top: 10px;\n    margin-bottom: 17px;\n    font-size: 18px;\n    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.06);\n    padding: 0 12px;\n    display: none;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s; }\n    .sweet-alert input:focus {\n      outline: none;\n      box-shadow: 0px 0px 3px #c4e6f5;\n      border: 1px solid #b4dbed; }\n      .sweet-alert input:focus::-moz-placeholder {\n        transition: opacity 0.3s 0.03s ease;\n        opacity: 0.5; }\n      .sweet-alert input:focus:-ms-input-placeholder {\n        transition: opacity 0.3s 0.03s ease;\n        opacity: 0.5; }\n      .sweet-alert input:focus::-webkit-input-placeholder {\n        transition: opacity 0.3s 0.03s ease;\n        opacity: 0.5; }\n    .sweet-alert input::-moz-placeholder {\n      color: #bdbdbd; }\n    .sweet-alert input:-ms-input-placeholder {\n      color: #bdbdbd; }\n    .sweet-alert input::-webkit-input-placeholder {\n      color: #bdbdbd; }\n  .sweet-alert.show-input input {\n    display: block; }\n  .sweet-alert .sa-confirm-button-container {\n    display: inline-block;\n    position: relative; }\n  .sweet-alert .la-ball-fall {\n    position: absolute;\n    left: 50%;\n    top: 50%;\n    margin-left: -27px;\n    margin-top: 4px;\n    opacity: 0;\n    visibility: hidden; }\n  .sweet-alert button {\n    background-color: #8CD4F5;\n    color: white;\n    border: none;\n    box-shadow: none;\n    font-size: 17px;\n    font-weight: 500;\n    -webkit-border-radius: 4px;\n    border-radius: 5px;\n    padding: 10px 32px;\n    margin: 26px 5px 0 5px;\n    cursor: pointer; }\n    .sweet-alert button:focus {\n      outline: none;\n      box-shadow: 0 0 2px rgba(128, 179, 235, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.05); }\n    .sweet-alert button:hover {\n      background-color: #7ecff4; }\n    .sweet-alert button:active {\n      background-color: #5dc2f1; }\n    .sweet-alert button.cancel {\n      background-color: #C1C1C1; }\n      .sweet-alert button.cancel:hover {\n        background-color: #b9b9b9; }\n      .sweet-alert button.cancel:active {\n        background-color: #a8a8a8; }\n      .sweet-alert button.cancel:focus {\n        box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important; }\n    .sweet-alert button[disabled] {\n      opacity: .6;\n      cursor: default; }\n    .sweet-alert button.confirm[disabled] {\n      color: transparent; }\n      .sweet-alert button.confirm[disabled] ~ .la-ball-fall {\n        opacity: 1;\n        visibility: visible;\n        transition-delay: 0s; }\n    .sweet-alert button::-moz-focus-inner {\n      border: 0; }\n  .sweet-alert[data-has-cancel-button=false] button {\n    box-shadow: none !important; }\n  .sweet-alert[data-has-confirm-button=false][data-has-cancel-button=false] {\n    padding-bottom: 40px; }\n  .sweet-alert .sa-icon {\n    width: 80px;\n    height: 80px;\n    border: 4px solid gray;\n    -webkit-border-radius: 40px;\n    border-radius: 40px;\n    border-radius: 50%;\n    margin: 20px auto;\n    padding: 0;\n    position: relative;\n    box-sizing: content-box; }\n    .sweet-alert .sa-icon.sa-error {\n      border-color: #F27474; }\n      .sweet-alert .sa-icon.sa-error .sa-x-mark {\n        position: relative;\n        display: block; }\n      .sweet-alert .sa-icon.sa-error .sa-line {\n        position: absolute;\n        height: 5px;\n        width: 47px;\n        background-color: #F27474;\n        display: block;\n        top: 37px;\n        border-radius: 2px; }\n        .sweet-alert .sa-icon.sa-error .sa-line.sa-left {\n          -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n          left: 17px; }\n        .sweet-alert .sa-icon.sa-error .sa-line.sa-right {\n          -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n          right: 16px; }\n    .sweet-alert .sa-icon.sa-warning {\n      border-color: #F8BB86; }\n      .sweet-alert .sa-icon.sa-warning .sa-body {\n        position: absolute;\n        width: 5px;\n        height: 47px;\n        left: 50%;\n        top: 10px;\n        -webkit-border-radius: 2px;\n        border-radius: 2px;\n        margin-left: -2px;\n        background-color: #F8BB86; }\n      .sweet-alert .sa-icon.sa-warning .sa-dot {\n        position: absolute;\n        width: 7px;\n        height: 7px;\n        -webkit-border-radius: 50%;\n        border-radius: 50%;\n        margin-left: -3px;\n        left: 50%;\n        bottom: 10px;\n        background-color: #F8BB86; }\n    .sweet-alert .sa-icon.sa-info {\n      border-color: #C9DAE1; }\n      .sweet-alert .sa-icon.sa-info::before {\n        content: \"\";\n        position: absolute;\n        width: 5px;\n        height: 29px;\n        left: 50%;\n        bottom: 17px;\n        border-radius: 2px;\n        margin-left: -2px;\n        background-color: #C9DAE1; }\n      .sweet-alert .sa-icon.sa-info::after {\n        content: \"\";\n        position: absolute;\n        width: 7px;\n        height: 7px;\n        border-radius: 50%;\n        margin-left: -3px;\n        top: 19px;\n        background-color: #C9DAE1; }\n    .sweet-alert .sa-icon.sa-success {\n      border-color: #A5DC86; }\n      .sweet-alert .sa-icon.sa-success::before, .sweet-alert .sa-icon.sa-success::after {\n        content: '';\n        -webkit-border-radius: 40px;\n        border-radius: 40px;\n        border-radius: 50%;\n        position: absolute;\n        width: 60px;\n        height: 120px;\n        background: white;\n        -webkit-transform: rotate(45deg);\n        transform: rotate(45deg); }\n      .sweet-alert .sa-icon.sa-success::before {\n        -webkit-border-radius: 120px 0 0 120px;\n        border-radius: 120px 0 0 120px;\n        top: -7px;\n        left: -33px;\n        -webkit-transform: rotate(-45deg);\n        transform: rotate(-45deg);\n        -webkit-transform-origin: 60px 60px;\n        transform-origin: 60px 60px; }\n      .sweet-alert .sa-icon.sa-success::after {\n        -webkit-border-radius: 0 120px 120px 0;\n        border-radius: 0 120px 120px 0;\n        top: -11px;\n        left: 30px;\n        -webkit-transform: rotate(-45deg);\n        transform: rotate(-45deg);\n        -webkit-transform-origin: 0px 60px;\n        transform-origin: 0px 60px; }\n      .sweet-alert .sa-icon.sa-success .sa-placeholder {\n        width: 80px;\n        height: 80px;\n        border: 4px solid rgba(165, 220, 134, 0.2);\n        -webkit-border-radius: 40px;\n        border-radius: 40px;\n        border-radius: 50%;\n        box-sizing: content-box;\n        position: absolute;\n        left: -4px;\n        top: -4px;\n        z-index: 2; }\n      .sweet-alert .sa-icon.sa-success .sa-fix {\n        width: 5px;\n        height: 90px;\n        background-color: white;\n        position: absolute;\n        left: 28px;\n        top: 8px;\n        z-index: 1;\n        -webkit-transform: rotate(-45deg);\n        transform: rotate(-45deg); }\n      .sweet-alert .sa-icon.sa-success .sa-line {\n        height: 5px;\n        background-color: #A5DC86;\n        display: block;\n        border-radius: 2px;\n        position: absolute;\n        z-index: 2; }\n        .sweet-alert .sa-icon.sa-success .sa-line.sa-tip {\n          width: 25px;\n          left: 14px;\n          top: 46px;\n          -webkit-transform: rotate(45deg);\n          transform: rotate(45deg); }\n        .sweet-alert .sa-icon.sa-success .sa-line.sa-long {\n          width: 47px;\n          right: 8px;\n          top: 38px;\n          -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg); }\n    .sweet-alert .sa-icon.sa-custom {\n      background-size: contain;\n      border-radius: 0;\n      border: none;\n      background-position: center center;\n      background-repeat: no-repeat; }\n\n/*\n * Animations\n */\n@-webkit-keyframes showSweetAlert {\n  0% {\n    transform: scale(0.7);\n    -webkit-transform: scale(0.7); }\n  45% {\n    transform: scale(1.05);\n    -webkit-transform: scale(1.05); }\n  80% {\n    transform: scale(0.95);\n    -webkit-transform: scale(0.95); }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1); } }\n\n@keyframes showSweetAlert {\n  0% {\n    transform: scale(0.7);\n    -webkit-transform: scale(0.7); }\n  45% {\n    transform: scale(1.05);\n    -webkit-transform: scale(1.05); }\n  80% {\n    transform: scale(0.95);\n    -webkit-transform: scale(0.95); }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1); } }\n\n@-webkit-keyframes hideSweetAlert {\n  0% {\n    transform: scale(1);\n    -webkit-transform: scale(1); }\n  100% {\n    transform: scale(0.5);\n    -webkit-transform: scale(0.5); } }\n\n@keyframes hideSweetAlert {\n  0% {\n    transform: scale(1);\n    -webkit-transform: scale(1); }\n  100% {\n    transform: scale(0.5);\n    -webkit-transform: scale(0.5); } }\n\n@-webkit-keyframes slideFromTop {\n  0% {\n    top: 0%; }\n  100% {\n    top: 50%; } }\n\n@keyframes slideFromTop {\n  0% {\n    top: 0%; }\n  100% {\n    top: 50%; } }\n\n@-webkit-keyframes slideToTop {\n  0% {\n    top: 50%; }\n  100% {\n    top: 0%; } }\n\n@keyframes slideToTop {\n  0% {\n    top: 50%; }\n  100% {\n    top: 0%; } }\n\n@-webkit-keyframes slideFromBottom {\n  0% {\n    top: 70%; }\n  100% {\n    top: 50%; } }\n\n@keyframes slideFromBottom {\n  0% {\n    top: 70%; }\n  100% {\n    top: 50%; } }\n\n@-webkit-keyframes slideToBottom {\n  0% {\n    top: 50%; }\n  100% {\n    top: 70%; } }\n\n@keyframes slideToBottom {\n  0% {\n    top: 50%; }\n  100% {\n    top: 70%; } }\n\n.showSweetAlert[data-animation=pop] {\n  -webkit-animation: showSweetAlert 0.3s;\n  animation: showSweetAlert 0.3s; }\n\n.showSweetAlert[data-animation=none] {\n  -webkit-animation: none;\n  animation: none; }\n\n.showSweetAlert[data-animation=slide-from-top] {\n  -webkit-animation: slideFromTop 0.3s;\n  animation: slideFromTop 0.3s; }\n\n.showSweetAlert[data-animation=slide-from-bottom] {\n  -webkit-animation: slideFromBottom 0.3s;\n  animation: slideFromBottom 0.3s; }\n\n.hideSweetAlert[data-animation=pop] {\n  -webkit-animation: hideSweetAlert 0.2s;\n  animation: hideSweetAlert 0.2s; }\n\n.hideSweetAlert[data-animation=none] {\n  -webkit-animation: none;\n  animation: none; }\n\n.hideSweetAlert[data-animation=slide-from-top] {\n  -webkit-animation: slideToTop 0.4s;\n  animation: slideToTop 0.4s; }\n\n.hideSweetAlert[data-animation=slide-from-bottom] {\n  -webkit-animation: slideToBottom 0.3s;\n  animation: slideToBottom 0.3s; }\n\n@-webkit-keyframes animateSuccessTip {\n  0% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  54% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  70% {\n    width: 50px;\n    left: -8px;\n    top: 37px; }\n  84% {\n    width: 17px;\n    left: 21px;\n    top: 48px; }\n  100% {\n    width: 25px;\n    left: 14px;\n    top: 45px; } }\n\n@keyframes animateSuccessTip {\n  0% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  54% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  70% {\n    width: 50px;\n    left: -8px;\n    top: 37px; }\n  84% {\n    width: 17px;\n    left: 21px;\n    top: 48px; }\n  100% {\n    width: 25px;\n    left: 14px;\n    top: 45px; } }\n\n@-webkit-keyframes animateSuccessLong {\n  0% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  65% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  84% {\n    width: 55px;\n    right: 0px;\n    top: 35px; }\n  100% {\n    width: 47px;\n    right: 8px;\n    top: 38px; } }\n\n@keyframes animateSuccessLong {\n  0% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  65% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  84% {\n    width: 55px;\n    right: 0px;\n    top: 35px; }\n  100% {\n    width: 47px;\n    right: 8px;\n    top: 38px; } }\n\n@-webkit-keyframes rotatePlaceholder {\n  0% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  5% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  12% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); }\n  100% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); } }\n\n@keyframes rotatePlaceholder {\n  0% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  5% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  12% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); }\n  100% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); } }\n\n.animateSuccessTip {\n  -webkit-animation: animateSuccessTip 0.75s;\n  animation: animateSuccessTip 0.75s; }\n\n.animateSuccessLong {\n  -webkit-animation: animateSuccessLong 0.75s;\n  animation: animateSuccessLong 0.75s; }\n\n.sa-icon.sa-success.animate::after {\n  -webkit-animation: rotatePlaceholder 4.25s ease-in;\n  animation: rotatePlaceholder 4.25s ease-in; }\n\n@-webkit-keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg);\n    -webkit-transform: rotateX(100deg);\n    opacity: 0; }\n  100% {\n    transform: rotateX(0deg);\n    -webkit-transform: rotateX(0deg);\n    opacity: 1; } }\n\n@keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg);\n    -webkit-transform: rotateX(100deg);\n    opacity: 0; }\n  100% {\n    transform: rotateX(0deg);\n    -webkit-transform: rotateX(0deg);\n    opacity: 1; } }\n\n.animateErrorIcon {\n  -webkit-animation: animateErrorIcon 0.5s;\n  animation: animateErrorIcon 0.5s; }\n\n@-webkit-keyframes animateXMark {\n  0% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  50% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  80% {\n    transform: scale(1.15);\n    -webkit-transform: scale(1.15);\n    margin-top: -6px; }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1);\n    margin-top: 0;\n    opacity: 1; } }\n\n@keyframes animateXMark {\n  0% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  50% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  80% {\n    transform: scale(1.15);\n    -webkit-transform: scale(1.15);\n    margin-top: -6px; }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1);\n    margin-top: 0;\n    opacity: 1; } }\n\n.animateXMark {\n  -webkit-animation: animateXMark 0.5s;\n  animation: animateXMark 0.5s; }\n\n@-webkit-keyframes pulseWarning {\n  0% {\n    border-color: #F8D486; }\n  100% {\n    border-color: #F8BB86; } }\n\n@keyframes pulseWarning {\n  0% {\n    border-color: #F8D486; }\n  100% {\n    border-color: #F8BB86; } }\n\n.pulseWarning {\n  -webkit-animation: pulseWarning 0.75s infinite alternate;\n  animation: pulseWarning 0.75s infinite alternate; }\n\n@-webkit-keyframes pulseWarningIns {\n  0% {\n    background-color: #F8D486; }\n  100% {\n    background-color: #F8BB86; } }\n\n@keyframes pulseWarningIns {\n  0% {\n    background-color: #F8D486; }\n  100% {\n    background-color: #F8BB86; } }\n\n.pulseWarningIns {\n  -webkit-animation: pulseWarningIns 0.75s infinite alternate;\n  animation: pulseWarningIns 0.75s infinite alternate; }\n\n@-webkit-keyframes rotate-loading {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n@keyframes rotate-loading {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n/* Internet Explorer 9 has some special quirks that are fixed here */\n/* The icons are not animated. */\n/* This file is automatically merged into sweet-alert.min.js through Gulp */\n/* Error icon */\n.sweet-alert .sa-icon.sa-error .sa-line.sa-left {\n  -ms-transform: rotate(45deg) \\9; }\n\n.sweet-alert .sa-icon.sa-error .sa-line.sa-right {\n  -ms-transform: rotate(-45deg) \\9; }\n\n/* Success icon */\n.sweet-alert .sa-icon.sa-success {\n  border-color: transparent\\9; }\n\n.sweet-alert .sa-icon.sa-success .sa-line.sa-tip {\n  -ms-transform: rotate(45deg) \\9; }\n\n.sweet-alert .sa-icon.sa-success .sa-line.sa-long {\n  -ms-transform: rotate(-45deg) \\9; }\n\n/*!\n * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)\n * Copyright 2015 Daniel Cardoso <@DanielCardoso>\n * Licensed under MIT\n */\n.la-ball-fall,\n.la-ball-fall > div {\n  position: relative;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n.la-ball-fall {\n  display: block;\n  font-size: 0;\n  color: #fff; }\n\n.la-ball-fall.la-dark {\n  color: #333; }\n\n.la-ball-fall > div {\n  display: inline-block;\n  float: none;\n  background-color: currentColor;\n  border: 0 solid currentColor; }\n\n.la-ball-fall {\n  width: 54px;\n  height: 18px; }\n\n.la-ball-fall > div {\n  width: 10px;\n  height: 10px;\n  margin: 4px;\n  border-radius: 100%;\n  opacity: 0;\n  -webkit-animation: ball-fall 1s ease-in-out infinite;\n  -moz-animation: ball-fall 1s ease-in-out infinite;\n  -o-animation: ball-fall 1s ease-in-out infinite;\n  animation: ball-fall 1s ease-in-out infinite; }\n\n.la-ball-fall > div:nth-child(1) {\n  -webkit-animation-delay: -200ms;\n  -moz-animation-delay: -200ms;\n  -o-animation-delay: -200ms;\n  animation-delay: -200ms; }\n\n.la-ball-fall > div:nth-child(2) {\n  -webkit-animation-delay: -100ms;\n  -moz-animation-delay: -100ms;\n  -o-animation-delay: -100ms;\n  animation-delay: -100ms; }\n\n.la-ball-fall > div:nth-child(3) {\n  -webkit-animation-delay: 0ms;\n  -moz-animation-delay: 0ms;\n  -o-animation-delay: 0ms;\n  animation-delay: 0ms; }\n\n.la-ball-fall.la-sm {\n  width: 26px;\n  height: 8px; }\n\n.la-ball-fall.la-sm > div {\n  width: 4px;\n  height: 4px;\n  margin: 2px; }\n\n.la-ball-fall.la-2x {\n  width: 108px;\n  height: 36px; }\n\n.la-ball-fall.la-2x > div {\n  width: 20px;\n  height: 20px;\n  margin: 8px; }\n\n.la-ball-fall.la-3x {\n  width: 162px;\n  height: 54px; }\n\n.la-ball-fall.la-3x > div {\n  width: 30px;\n  height: 30px;\n  margin: 12px; }\n\n/*\n * Animation\n */\n@-webkit-keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(145%);\n    transform: translateY(145%); } }\n\n@-moz-keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -moz-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -moz-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -moz-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -moz-transform: translateY(145%);\n    transform: translateY(145%); } }\n\n@-o-keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -o-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -o-transform: translateY(145%);\n    transform: translateY(145%); } }\n\n@keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateY(-145%);\n    -moz-transform: translateY(-145%);\n    -o-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(145%);\n    -moz-transform: translateY(145%);\n    -o-transform: translateY(145%);\n    transform: translateY(145%); } }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 293 */
+/*!************************!*\
+  !*** ./css/google.css ***!
+  \************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../~/css-loader!./google.css */ 294);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 181)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./google.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./google.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 294 */
+/*!***************************************!*\
+  !*** ./~/css-loader!./css/google.css ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 180)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".sweet-overlay {\n  background: rgba(10, 10, 10, 0.6); }\n\n.sweet-alert {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  padding: 24px;\n  padding-top: 64px;\n  padding-bottom: 13px;\n  text-align: right;\n  border-radius: 0;\n  box-shadow: 0 0 14px rgba(0, 0, 0, 0.24), 0 14px 28px rgba(0, 0, 0, 0.48); }\n  .sweet-alert h2 {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    height: auto;\n    font-weight: 400;\n    color: #212121;\n    margin: 20px 0;\n    font-size: 1.2em;\n    line-height: 1.25;\n    text-align: left;\n    padding: 0 24px; }\n  .sweet-alert p {\n    display: block;\n    text-align: center;\n    color: #212121;\n    font-weight: 400;\n    font-size: 14px;\n    margin: 20px 0; }\n  .sweet-alert button {\n    border-radius: 2px;\n    box-shadow: none !important;\n    background: none !important;\n    border-radius: 2px;\n    text-transform: uppercase;\n    font-size: 14px;\n    font-weight: 600;\n    padding: 8px 16px;\n    position: relative;\n    margin-top: 0; }\n    .sweet-alert button:hover, .sweet-alert button:focus {\n      background-color: #f6f6f6 !important; }\n    .sweet-alert button.confirm {\n      color: #3c80f6; }\n    .sweet-alert button.cancel {\n      color: #757575; }\n      .sweet-alert button.cancel:focus {\n        box-shadow: none !important; }\n  .sweet-alert .sa-icon:not(.sa-custom) {\n    transform: scale(0.8);\n    margin-bottom: -10px;\n    margin-top: -10px; }\n  .sweet-alert input {\n    border: none;\n    border-radius: 0;\n    border-bottom: 1px solid #c9c9c9;\n    color: #212121;\n    margin-bottom: 8px;\n    padding: 1px;\n    padding-bottom: 8px;\n    height: auto;\n    box-shadow: none;\n    font-size: 13px;\n    margin: 10px 0; }\n    .sweet-alert input:focus {\n      border: none;\n      border-bottom: 1px solid #3c80f6;\n      box-shadow: inset 0 -1px 0 #3c80f6; }\n  .sweet-alert fieldset {\n    padding: 0; }\n    .sweet-alert fieldset .sa-input-error {\n      display: none; }\n  .sweet-alert .sa-error-container {\n    display: none;\n    background: none;\n    height: auto;\n    padding: 0 24px;\n    margin: 0 -20px;\n    text-align: left; }\n    .sweet-alert .sa-error-container.show {\n      padding: 0 24px;\n      display: block; }\n      .sweet-alert .sa-error-container.show ~ fieldset input {\n        background: red;\n        border-bottom: 1px solid #d9453c;\n        box-shadow: inset 0 -1px 0 #d9453c; }\n    .sweet-alert .sa-error-container .icon {\n      display: none; }\n    .sweet-alert .sa-error-container p {\n      color: #d9453c;\n      margin-top: 0; }\n\n@-webkit-keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg), scale(0.5);\n    -webkit-transform: rotateX(100deg), scale(0.5);\n    opacity: 0; }\n\n  100% {\n    transform: rotateX(0deg), scale(0.5);\n    -webkit-transform: rotateX(0deg), scale(0.5);\n    opacity: 1; } }\n\n@keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg), scale(0.5);\n    -webkit-transform: rotateX(100deg), scale(0.5);\n    opacity: 0; }\n\n  100% {\n    transform: rotateX(0deg), scale(0.5);\n    -webkit-transform: rotateX(0deg), scale(0.5);\n    opacity: 1; } }\n", ""]);
+	
+	// exports
+
 
 /***/ },
 /* 295 */
-/*!*************************!*\
-  !*** ./js/util/init.js ***!
-  \*************************/
+/*!***********************!*\
+  !*** ./css/style.css ***!
+  \***********************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = init;
-	
-	var _store = __webpack_require__(/*! ./store */ 163);
-	
-	function init() {
-	
-	  var token = localStorage.getItem('token');
-	  var tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : false;
-	
-	  if (!tokenPayload) return false;
-	
-	  if (Date.now() > tokenPayload.exp * 1000) {
-	    localStorage.removeItem('token');
-	    return false;
-	  }
-	
-	  _store.store.saveDatum('token', token);
-	  return true;
+	// load the styles
+	var content = __webpack_require__(/*! !./../~/css-loader!./style.css */ 296);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 181)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./style.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
 	}
+
+/***/ },
+/* 296 */
+/*!**************************************!*\
+  !*** ./~/css-loader!./css/style.css ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 180)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "$primary-color: #4caf50;\n$secondary-color: #F44336;\n\nbody {\n  color: #1F4832;\n  background: #fcfffc;\n}\n\n.heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 99vw;\n    left: -30px;\n    position: relative;\n}\n\n.heroHead{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.herofooter{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.heroText{\n  text-align: center;\n}\n.vertical-center {\n  min-height: 100%;\n  min-height: 100vh;\n  /* Make it a flex container */\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -moz-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n}\n\n.btn-round {\n  border-radius: 1;\n  width: 1.7em;\n  height: 1.7em;\n  line-height: 1;\n  font-size: 35px;\n  z-index: -1;\n  position: relative;\n  cursor: pointer;\n  top: -20px;\n  left: -5px;\n}\n\n.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {\n    border-color: rgba(76, 175, 80, 0);\n}\n\ndiv.startcoding-logo{\n  margin:3em auto;\n  width:50em;\n}\n\ndiv.startcoding-logo a{\n  text-decoration:none;\n  color:#64AF67;\n}\n\ndiv.braket-logo {\n  border-radius: 50% 50% 50% 50%;\n  background-color: #22659C;\n  color: #42E2FF;\n  width: 1em;\n  height: 1em;\n  font-size: 1.5em;\n  overflow: hidden;\n  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);\n  display: inline-block;\n  vertical-align: center;\n  position: absolute;\n  bottom: 4px;\n  right: 4px;\n  margin: 0px auto;\n}\n\ndiv.braket-logo div.leaf-shadow{\n  width:6.3em;\n  height:10.6em;\n  background-color:#64AF67;\n  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);\n}\n\n#title{\n  display:inline-block;\n  font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;\n  padding:0;\n  margin:0;\n}\n\n.startcoding-logo:hover {\n\n}\n.startcoding-logo:after {\n    content: \"\";\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    width: 0%;\n    height: 100%;\n    background-color: rgba(255,255,255,0.4);\n    -webkit-transition: none;\n    -moz-transition: none;\n    -ms-transition: none;\n    -o-transition: none;\n    transition: none;\n\n}\n.startcoding-logo:hover:after {\n    width: 120%;\n    background-color: rgba(255,255,255,0);\n    -webkit-transition: all 0.9s ease-out;\n    -moz-transition: all 0.9s ease-out;\n    -ms-transition: all 0.9s ease-out;\n    -o-transition: all 0.9s ease-out;\n    transition: all 0.9s ease-out;\n}\n\nimg.techImage {\n    height: 200px;\n}\n.techContainer {\n    /* margin: 40px; */\n    position: relative;\n    top: 15px;\n}\n\n/*I'm fucking dumb fix me later*/\n.resourcePanels {\n    height: 450px;\n}\n\ndiv#bs-example-navbar-collapse-2 {\n    position: relative;\n    /*left: 8%;*/\n}\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 3.5em;\n}\n\n#registerForm {\n  position: relative;\n  left: 15%;\n  top: 15px;\n}\n#registerButton{\n  display: inline-block;\n  z-index: 100000;\n  position: relative;\n}\n\na.alreadyMember {\n    position: relative;\n    left: 65%;\n}\n\n#userNameRegister.form-control::-webkit-input-placeholder { color: white; }\n#userNameRegister.form-control:-moz-placeholder { color: white; }\n#userNameRegister.form-control::-moz-placeholder { color: white; }\n#userNameRegister.form-control:-ms-input-placeholder { color: white; }\n#userNameRegister{ color:white; }\n\n#passwordRegister.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister.form-control:-moz-placeholder { color: white; }\n#passwordRegister.form-control::-moz-placeholder { color: white; }\n#passwordRegister.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister{ color:white; }\n\n#passwordRegister2.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister2.form-control:-moz-placeholder { color: white; }\n#passwordRegister2.form-control::-moz-placeholder { color: white; }\n#passwordRegister2.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister2{ color:white; }\n\n#emailRegister.form-control::-webkit-input-placeholder { color: white; }\n#emailRegister.form-control:-moz-placeholder { color: white; }\n#emailRegister.form-control::-moz-placeholder { color: white; }\n#emailRegister.form-control:-ms-input-placeholder { color: white; }\n#emailRegister{ color:white; }\n\n#userNameLogin.form-control::-webkit-input-placeholder { color: white; }\n#userNameLogin.form-control:-moz-placeholder { color: white; }\n#userNameLogin.form-control::-moz-placeholder { color: white; }\n#userNameLogin.form-control:-ms-input-placeholder { color: white; }\n#userNameLogin{ color:white; }\n\n#passwordLogin.form-control::-webkit-input-placeholder { color: white; }\n#passwordLogin.form-control:-moz-placeholder { color: white; }\n#passwordLogin.form-control::-moz-placeholder { color: white; }\n#passwordLogin.form-control:-ms-input-placeholder { color: white; }\n#passwordLogin{ color:white; }\n\n.markdownNotice {\n  float: left;\n  color: grey;\n}\n\n.floatingActionButton {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: inherit;\n  border-radius:100%;\n  outline:none;\n  color:#FFF;\n  font-size:36px;\n  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  cursor: pointer;\n}\n\n.floatingActionButton span {\n  position: absolute;\n  -ms-transform: translate(-10px, -32px);\n  -webkit-transform: translate(-10px, -32px);\n  transform: translate(-10px, -32px);\n}\n\n.floatingActionButton:hover {\n  width: inherit;\n  background-color: #D32F2F;\n}\n\n.newTopicTitle {\n  margin-bottom: 1em;\n}\n\n.spinnerContainer {\n  position: absolute;\n  top: calc(50% - 50px);\n  left: calc(50% - 50px);\n}\n\ntextarea {\n  padding: 0.5em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 100%;\n  border: 1px solid lightgrey !important;\n}\n\n.navbar-inverse {\n  background: #03A9F4;\n  color: #FFF;\n  margin-bottom: 0;\n  z-index: 1000;\n}\n\n.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {\n    color: #FFF !important;\n}\n\n.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {\n    color: peachpuff;\n}\n\n#Register, #Logout, #welcome {\n  display: none;\n}\n\n#newTopicModal {\n  z-index: 2000;\n  position: fixed;\n  top: 15%;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n.main{\n  position: relative;\n  /*height: calc(100vh - 64px);*/\n  margin-bottom: 0;\n  /*overflow-y: scroll;*/\n}\n.displayTopic {\n  overflow: hidden;\n}\n\n.active {\n    position: fixed;\n    background: white;\n    height: calc(100vh - 64px);\n    bottom: 0;\n    right: 0;\n    z-index: 4000;\n    left: 0;\n    margin: auto;\n    padding-bottom: 1em;\n    overflow-y: scroll;\n}\n\na.disabled {\n    pointer-events: none;\n    color: lightgrey;\n}\n.topicContent {\n  display: none;\n}\n.active .topicContent {\n  display: block;\n}\n.topicTitle {\n  margin: 0px;\n  padding: 0.5em 1em;\n  text-align: center;\n}\n.panel-body.topicBody {\n  white-space: pre-line;\n  border-left: 26px solid green;\n  border-top: 2px solid green;\n  border-bottom: 2px solid green;\n  border-right: 2px solid green;\n  background: rgba(213, 232, 204, 0.22);\n  padding: 50px;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n\n.topicHead:hover{\n  background-color: #F5F5F5;\n  cursor: pointer;\n}\n\n.active .topicHead {\n  background-color: #F5F5F5;\n}\n\n.closeTopic {\n  display: none;\n}\n.active .closeTopic {\n  display: inline;\n  float: right;\n  color: #4caf50;\n}\n.replyTopicButton {\n    float: right;\n}\n.topicFooter {\n    padding: 20px;\n}\n.green .topicTitle {\n  background: #E8F5E9;\n}\n.comment {\n  margin: 1em 0 0 1em;\n  padding: 1em .5em 1em 1em;\n}\n.panel-footer {\n  margin: 0 15px;\n  padding: 0px;\n  border-top: 1px solid #4caf50;\n  background: white;\n  font-style: italic;\n}\n\n.breadcrumb {\n  text-align: right;\n}\n\n.breadcrumb > span{\n  float: left;\n  color: gray;\n}\n\n.new-comment-buttons {\n  float: right;\n}\n\n.new-comment-buttons .btn {\n  margin-left: 1em;\n}\n\n.commentVotebox {\n  float: right;\n}\n\n.up .voteBtn:first-child{\n  color: #00E676\n}\n.down .voteBtn:nth-child(3){\n  color: purple;\n}\n\n.voteBtn {\n  color: lightgrey;\n  margin: 0 .8em;\n  padding: 0 .2em;\n  cursor: pointer;\n}\n\n.disabled .voteBtn{\n  color: lightgrey;\n  cursor: default;\n}\n\n\n@media (max-width:768px) and (min-width:667px) {\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 30%;\n\n  }\n}\n\n/* ----------- iPhone 4 and 4S ----------- */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n  h4, .h4 {\n      font-size: 15px;\n  }\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 38%;\n  }\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n\n  }\n\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  #Register{\n    display: none;\n    left: -10%;\n    width: 100%;\n    position: relative;\n  }\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    /*h4, .h4 {\n        font-size: 15px;\n    }*/\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 136px;\n        bottom: 22px;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n    h4, .h4 {\n        font-size: 15px;\n    }\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 150px;\n        bottom: 22px;\n    }\n\n}\n\n/* ----------- iPhone 5 and 5S ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n    .main {\n      position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      /*overflow-y: initial;*/\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: calc(100vh);\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    main {\n      position: relative;\n        height: 100%;\n        margin-bottom: 0;\n        overflow-y: initial;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n}\n\n/* ----------- iPhone 6 ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 43%;\n}\n\n}\n\n\n\n/* ----------iPhone 6 Plus ---------- */\n\n/* Portrait and Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : landscape) {\n\n\n}\n\n/* Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : portrait) {\n\n  span.startCodingName {\n    position: absolute;\n    top: 23px;\n    left: 11%;\n\n  }\n\n}\n\n/* ----------- iPad mini ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    .main {\n    position: relative;\n    height: 100%;\n    margin-bottom: 0;\n    overflow-y: initial;\n  }\nspan.startCodingName {\n  position: absolute;\n  top: 23px;\n  left: 7%;\n\n}\n  .active {\n      position: fixed;\n      background: white;\n      height: 100%;\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 1) {\n    .floatingActionButton {\n        position: fixed;\n        bottom: 1.7em;\n        right: 1.5em;\n        border-radius: 100%;\n        outline: none;\n        color: #FFF;\n        font-size: 36px;\n        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n        -webkit-tap-highlight-color: rgba(0,0,0,0);\n        cursor: pointer;\n    }\n    span.startCodingName {\n      position: absolute;\n      top: 23px;\n      left: 4em;\n\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: 100%;\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    #startCodingName{\n      position: absolute;\n        top: 20px;\n        left:7%;\n    }\n\n}\n\n\n/* ----------- iPad 3 and 4 ----------- */\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n.main {\n  position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n}\n.active {\n  position: fixed;\n  background: white;\n  height: 100%;\n  width: 100vw;\n  top: 0;\n  right: 3em;\n  z-index: 4000;\n  left: 0;\n  margin: auto;\n  padding-bottom: 1em;\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n}\n#Register, #Logout, #welcome {\n    display: none;\n    position: relative;\n    right: 78px;\n}\n\n\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 2) {\nspan.startCodingName {\n  position: absolute;\n  top: 20px;\n  left: 4em;\n}\na.alreadyMember {\n  position: absolute;\n  left: 200px;\n  bottom: 33px;\n}\n#registerButton {\n    display: inline-block;\n    z-index: 100000;\n    position: relative;\n    top: 6px;\n}\n#forgotPassword {\n  position: relative;\n  left: 1em;\n}\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n#startCodingName{\n  position: absolute;\n    top: 20px;\n    left:7%;\n}\n\n}\n\n\n/* Nexus 7 (portrait and landscape) ----------- */\n@media only screen and (min-device-width : 603px) and (max-device-width : 966px) {\n\n}\n\n/* Nexus 7 (landscape) ----------- */\n@media only screen and (min-width : 604px) and (orientation: landscape) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    /*left: 20%;*/\n  }\n}\n\n/* Nexus 7 (portrait) ----------- */\n@media only screen and (max-width : 603px) and (orientation: portrait) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 30%;\n  }\n}\n\n#goHome {\n  position: fixed;\n  background: transparent;\n  z-index: 9999;\n  height: 64px;\n  width: 180px;\n  cursor: pointer;\n}\n", ""]);
+	
+	// exports
+
 
 /***/ }
 /******/ ]);
