@@ -1,6 +1,7 @@
 import React from 'react';
 import RegisterForm from './RegisterForm.jsx';
 import LoginForm from './LoginForm.jsx';
+import LoginModal from './LoginModal.jsx';
 import {LoginError, RegisterError} from '../util/alerts';
 import API from '../API';
 import {store} from '../util/store';
@@ -69,6 +70,8 @@ class Navbar extends React.Component {
   render() {
     return (
       <div>
+        <LoginModal />
+
         <div id="goHome" onClick={this.goHome}></div>
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
@@ -95,7 +98,11 @@ class Navbar extends React.Component {
               <ul id="" className="nav navbar-nav navbar-left">
               </ul>
               <ul id="" className="nav navbar-nav navbar-right">
-                <li><a href="#" className="" onClick={this.showLogin.bind(this)}><strong>Login / Register</strong></a></li>
+                <li>
+                  <a href="#" data-toggle="modal" data-target="#LoginModal">
+                    <strong>Login / Register</strong>
+                  </a>
+                </li>
               </ul>
               <ul id="Logout" className="nav navbar-nav navbar-right">
                 <li><a href="#">Hello, <span id="username"></span></a></li>
