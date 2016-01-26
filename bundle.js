@@ -38360,7 +38360,7 @@
 	        _react2.default.createElement("div", { className: "splitSection" }),
 	        _react2.default.createElement(
 	          "div",
-	          { className: "techContainer" },
+	          { className: "techContainer col-lg-10 col-lg-offset-1" },
 	          _react2.default.createElement(
 	            "div",
 	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
@@ -38374,7 +38374,7 @@
 	                _react2.default.createElement(
 	                  "h3",
 	                  null,
-	                  "Discover Ruby"
+	                  "Ruby"
 	                ),
 	                _react2.default.createElement(
 	                  "p",
@@ -38406,7 +38406,7 @@
 	                _react2.default.createElement(
 	                  "h3",
 	                  null,
-	                  "Discover JavaScript"
+	                  "JavaScript"
 	                ),
 	                _react2.default.createElement(
 	                  "p",
@@ -38438,108 +38438,12 @@
 	                _react2.default.createElement(
 	                  "h3",
 	                  null,
-	                  "Discover HTML"
+	                  "HTML"
 	                ),
 	                _react2.default.createElement(
 	                  "p",
 	                  null,
-	                  "HyperText Markup Language, commonly referred to as HTML, is the standard language used to create web pages."
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn btn-primary", role: "button" },
-	                    "Learn about HTML "
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: "https://coderdojo.com/wp-content/uploads/2015/03/Ruby.png", height: "150px", alt: "..." }),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
-	                _react2.default.createElement(
-	                  "h3",
-	                  null,
-	                  "Discover Ruby"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language."
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn btn-primary", role: "button" },
-	                    "Learn about Ruby"
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: "http://www.w3devcampus.com/wp-content/uploads/logoAndOther/logo_JavaScript.png", height: "150px", alt: "..." }),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
-	                _react2.default.createElement(
-	                  "h3",
-	                  null,
-	                  "Discover JavaScript"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. "
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn btn-primary", role: "button" },
-	                    "Learn about JavaScript "
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: "http://www.html5rocks.com/static/demos/svgmobile_fundamentals/images/html5-2048x1536.png", height: "150px", alt: "..." }),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
-	                _react2.default.createElement(
-	                  "h3",
-	                  null,
-	                  "Discover HTML"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "HyperText Markup Language, commonly referred to as HTML, is the standard language used to create web pages."
+	                  "HyperText Markup Language (HTML), is the language used to create web pages."
 	                ),
 	                _react2.default.createElement(
 	                  "p",
@@ -38548,6 +38452,102 @@
 	                    "a",
 	                    { href: "#", className: "btn btn-primary", role: "button" },
 	                    "Learn about HTML "
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png", height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  "Python"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "Python is a widely used general-purpose, high-level programming language."
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "btn btn-primary", role: "button" },
+	                    "Learn about Python"
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: "https://blog.golang.org/gopher/gopher.png", height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  "Go"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "Go also commonly referred to as golang, is a open source programming language developed at Google."
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "btn btn-primary", role: "button" },
+	                    "Learn about Go "
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Swift_logo.svg/2000px-Swift_logo.svg.png", height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  "Swift"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "Swift is a multi-paradigm, compiled programming language created for iOS and OS X by Apple Inc."
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "btn btn-primary", role: "button" },
+	                    "Learn about Swift "
 	                  )
 	                )
 	              )
@@ -38696,7 +38696,7 @@
 	
 	
 	// module
-	exports.push([module.id, "$primary-color: #4caf50;\n$secondary-color: #F44336;\n\nbody {\n  color: #1F4832;\n  background: #fcfffc;\n}\n\n.heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 99vw;\n    left: -30px;\n    position: relative;\n}\n\n.heroHead{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.herofooter{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.heroText{\n  text-align: center;\n}\n.vertical-center {\n  min-height: 100%;\n  min-height: 100vh;\n  /* Make it a flex container */\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -moz-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n}\n\n.btn-round {\n  border-radius: 1;\n  width: 1.7em;\n  height: 1.7em;\n  line-height: 1;\n  font-size: 35px;\n  z-index: -1;\n  position: relative;\n  cursor: pointer;\n  top: -20px;\n  left: -5px;\n}\n\n.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {\n    border-color: rgba(76, 175, 80, 0);\n}\n\ndiv.startcoding-logo{\n  margin:3em auto;\n  width:50em;\n}\n\ndiv.startcoding-logo a{\n  text-decoration:none;\n  color:#64AF67;\n}\n\ndiv.braket-logo {\n  border-radius: 50% 50% 50% 50%;\n  background-color: #22659C;\n  color: #42E2FF;\n  width: 1em;\n  height: 1em;\n  font-size: 1.5em;\n  overflow: hidden;\n  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);\n  display: inline-block;\n  vertical-align: center;\n  position: absolute;\n  bottom: 4px;\n  right: 4px;\n  margin: 0px auto;\n}\n\ndiv.braket-logo div.leaf-shadow{\n  width:6.3em;\n  height:10.6em;\n  background-color:#64AF67;\n  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);\n}\n\n#title{\n  display:inline-block;\n  font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;\n  padding:0;\n  margin:0;\n}\n\n.startcoding-logo:hover {\n\n}\n.startcoding-logo:after {\n    content: \"\";\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    width: 0%;\n    height: 100%;\n    background-color: rgba(255,255,255,0.4);\n    -webkit-transition: none;\n    -moz-transition: none;\n    -ms-transition: none;\n    -o-transition: none;\n    transition: none;\n\n}\n.startcoding-logo:hover:after {\n    width: 120%;\n    background-color: rgba(255,255,255,0);\n    -webkit-transition: all 0.9s ease-out;\n    -moz-transition: all 0.9s ease-out;\n    -ms-transition: all 0.9s ease-out;\n    -o-transition: all 0.9s ease-out;\n    transition: all 0.9s ease-out;\n}\n\nimg.techImage {\n    height: 200px;\n}\n.techContainer {\n    /* margin: 40px; */\n    position: relative;\n    top: 15px;\n}\n\n/*I'm fucking dumb fix me later*/\n.resourcePanels {\n    height: 450px;\n}\n\ndiv#bs-example-navbar-collapse-2 {\n    position: relative;\n    /*left: 8%;*/\n}\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 3.5em;\n}\n\n#registerForm {\n  position: relative;\n  left: 15%;\n  top: 15px;\n}\n#registerButton{\n  display: inline-block;\n  z-index: 100000;\n  position: relative;\n}\n\na.alreadyMember {\n    position: relative;\n    left: 65%;\n}\n\n#userNameRegister.form-control::-webkit-input-placeholder { color: white; }\n#userNameRegister.form-control:-moz-placeholder { color: white; }\n#userNameRegister.form-control::-moz-placeholder { color: white; }\n#userNameRegister.form-control:-ms-input-placeholder { color: white; }\n#userNameRegister{ color:white; }\n\n#passwordRegister.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister.form-control:-moz-placeholder { color: white; }\n#passwordRegister.form-control::-moz-placeholder { color: white; }\n#passwordRegister.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister{ color:white; }\n\n#passwordRegister2.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister2.form-control:-moz-placeholder { color: white; }\n#passwordRegister2.form-control::-moz-placeholder { color: white; }\n#passwordRegister2.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister2{ color:white; }\n\n#emailRegister.form-control::-webkit-input-placeholder { color: white; }\n#emailRegister.form-control:-moz-placeholder { color: white; }\n#emailRegister.form-control::-moz-placeholder { color: white; }\n#emailRegister.form-control:-ms-input-placeholder { color: white; }\n#emailRegister{ color:white; }\n\n#userNameLogin.form-control::-webkit-input-placeholder { color: white; }\n#userNameLogin.form-control:-moz-placeholder { color: white; }\n#userNameLogin.form-control::-moz-placeholder { color: white; }\n#userNameLogin.form-control:-ms-input-placeholder { color: white; }\n#userNameLogin{ color:white; }\n\n#passwordLogin.form-control::-webkit-input-placeholder { color: white; }\n#passwordLogin.form-control:-moz-placeholder { color: white; }\n#passwordLogin.form-control::-moz-placeholder { color: white; }\n#passwordLogin.form-control:-ms-input-placeholder { color: white; }\n#passwordLogin{ color:white; }\n\n.markdownNotice {\n  float: left;\n  color: grey;\n}\n\n.floatingActionButton {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: inherit;\n  border-radius:100%;\n  outline:none;\n  color:#FFF;\n  font-size:36px;\n  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  cursor: pointer;\n}\n\n.floatingActionButton span {\n  position: absolute;\n  -ms-transform: translate(-10px, -32px);\n  -webkit-transform: translate(-10px, -32px);\n  transform: translate(-10px, -32px);\n}\n\n.floatingActionButton:hover {\n  width: inherit;\n  background-color: #D32F2F;\n}\n\n.newTopicTitle {\n  margin-bottom: 1em;\n}\n\n.spinnerContainer {\n  position: absolute;\n  top: calc(50% - 50px);\n  left: calc(50% - 50px);\n}\n\ntextarea {\n  padding: 0.5em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 100%;\n  border: 1px solid lightgrey !important;\n}\n\n.navbar-inverse {\n  background: #03A9F4;\n  color: #FFF;\n  margin-bottom: 0;\n  z-index: 1000;\n}\n\n.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {\n    color: #FFF !important;\n}\n\n.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {\n    color: peachpuff;\n}\n\n#Register, #Logout, #welcome {\n  display: none;\n}\n\n#newTopicModal {\n  z-index: 2000;\n  position: fixed;\n  top: 15%;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n.main{\n  position: relative;\n  /*height: calc(100vh - 64px);*/\n  margin-bottom: 0;\n  /*overflow-y: scroll;*/\n}\n.displayTopic {\n  overflow: hidden;\n}\n\n.active {\n    position: fixed;\n    background: white;\n    height: calc(100vh - 64px);\n    bottom: 0;\n    right: 0;\n    z-index: 4000;\n    left: 0;\n    margin: auto;\n    padding-bottom: 1em;\n    overflow-y: scroll;\n}\n\na.disabled {\n    pointer-events: none;\n    color: lightgrey;\n}\n.topicContent {\n  display: none;\n}\n.active .topicContent {\n  display: block;\n}\n.topicTitle {\n  margin: 0px;\n  padding: 0.5em 1em;\n  text-align: center;\n}\n.panel-body.topicBody {\n  white-space: pre-line;\n  border-left: 26px solid green;\n  border-top: 2px solid green;\n  border-bottom: 2px solid green;\n  border-right: 2px solid green;\n  background: rgba(213, 232, 204, 0.22);\n  padding: 50px;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n\n.topicHead:hover{\n  background-color: #F5F5F5;\n  cursor: pointer;\n}\n\n.active .topicHead {\n  background-color: #F5F5F5;\n}\n\n.closeTopic {\n  display: none;\n}\n.active .closeTopic {\n  display: inline;\n  float: right;\n  color: #4caf50;\n}\n.replyTopicButton {\n    float: right;\n}\n.topicFooter {\n    padding: 20px;\n}\n.green .topicTitle {\n  background: #E8F5E9;\n}\n.comment {\n  margin: 1em 0 0 1em;\n  padding: 1em .5em 1em 1em;\n}\n.panel-footer {\n  margin: 0 15px;\n  padding: 0px;\n  border-top: 1px solid #4caf50;\n  background: white;\n  font-style: italic;\n}\n\n.breadcrumb {\n  text-align: right;\n}\n\n.breadcrumb > span{\n  float: left;\n  color: gray;\n}\n\n.new-comment-buttons {\n  float: right;\n}\n\n.new-comment-buttons .btn {\n  margin-left: 1em;\n}\n\n.commentVotebox {\n  float: right;\n}\n\n.up .voteBtn:first-child{\n  color: #00E676\n}\n.down .voteBtn:nth-child(3){\n  color: purple;\n}\n\n.voteBtn {\n  color: lightgrey;\n  margin: 0 .8em;\n  padding: 0 .2em;\n  cursor: pointer;\n}\n\n.disabled .voteBtn{\n  color: lightgrey;\n  cursor: default;\n}\n\n\n@media (max-width:768px) and (min-width:667px) {\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 30%;\n\n  }\n}\n\n/* ----------- iPhone 4 and 4S ----------- */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n  h4, .h4 {\n      font-size: 15px;\n  }\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 38%;\n  }\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n\n  }\n\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  #Register{\n    display: none;\n    left: -10%;\n    width: 100%;\n    position: relative;\n  }\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    /*h4, .h4 {\n        font-size: 15px;\n    }*/\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 136px;\n        bottom: 22px;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n    h4, .h4 {\n        font-size: 15px;\n    }\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 150px;\n        bottom: 22px;\n    }\n\n}\n\n/* ----------- iPhone 5 and 5S ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n    .main {\n      position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      /*overflow-y: initial;*/\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: calc(100vh);\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    main {\n      position: relative;\n        height: 100%;\n        margin-bottom: 0;\n        overflow-y: initial;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n}\n\n/* ----------- iPhone 6 ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 43%;\n}\n\n}\n\n\n\n/* ----------iPhone 6 Plus ---------- */\n\n/* Portrait and Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : landscape) {\n\n\n}\n\n/* Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : portrait) {\n\n  span.startCodingName {\n    position: absolute;\n    top: 23px;\n    left: 11%;\n\n  }\n\n}\n\n/* ----------- iPad mini ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    .main {\n    position: relative;\n    height: 100%;\n    margin-bottom: 0;\n    overflow-y: initial;\n  }\nspan.startCodingName {\n  position: absolute;\n  top: 23px;\n  left: 7%;\n\n}\n  .active {\n      position: fixed;\n      background: white;\n      height: 100%;\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 1) {\n    .floatingActionButton {\n        position: fixed;\n        bottom: 1.7em;\n        right: 1.5em;\n        border-radius: 100%;\n        outline: none;\n        color: #FFF;\n        font-size: 36px;\n        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n        -webkit-tap-highlight-color: rgba(0,0,0,0);\n        cursor: pointer;\n    }\n    span.startCodingName {\n      position: absolute;\n      top: 23px;\n      left: 4em;\n\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: 100%;\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    #startCodingName{\n      position: absolute;\n        top: 20px;\n        left:7%;\n    }\n\n}\n\n\n/* ----------- iPad 3 and 4 ----------- */\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n.main {\n  position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n}\n.active {\n  position: fixed;\n  background: white;\n  height: 100%;\n  width: 100vw;\n  top: 0;\n  right: 3em;\n  z-index: 4000;\n  left: 0;\n  margin: auto;\n  padding-bottom: 1em;\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n}\n#Register, #Logout, #welcome {\n    display: none;\n    position: relative;\n    right: 78px;\n}\n\n\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 2) {\nspan.startCodingName {\n  position: absolute;\n  top: 20px;\n  left: 4em;\n}\na.alreadyMember {\n  position: absolute;\n  left: 200px;\n  bottom: 33px;\n}\n#registerButton {\n    display: inline-block;\n    z-index: 100000;\n    position: relative;\n    top: 6px;\n}\n#forgotPassword {\n  position: relative;\n  left: 1em;\n}\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n#startCodingName{\n  position: absolute;\n    top: 20px;\n    left:7%;\n}\n\n}\n\n\n/* Nexus 7 (portrait and landscape) ----------- */\n@media only screen and (min-device-width : 603px) and (max-device-width : 966px) {\n\n}\n\n/* Nexus 7 (landscape) ----------- */\n@media only screen and (min-width : 604px) and (orientation: landscape) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    /*left: 20%;*/\n  }\n}\n\n/* Nexus 7 (portrait) ----------- */\n@media only screen and (max-width : 603px) and (orientation: portrait) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 30%;\n  }\n}\n\n#goHome {\n  position: fixed;\n  background: transparent;\n  z-index: 9999;\n  height: 64px;\n  width: 180px;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, "$primary-color: #4caf50;\n$secondary-color: #F44336;\n\nbody {\n  color: #1F4832;\n  background: #fcfffc;\n}\n\n.heroImage {\n    background: rgb(37, 208, 239);\n    height: 49vh;\n    width: 99vw;\n    left: -30px;\n    position: relative;\n}\n\n.heroHead{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.herofooter{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.heroText{\n  text-align: center;\n}\n.vertical-center {\n  min-height: 100%;\n  min-height: 49vh;\n  /* Make it a flex container */\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -moz-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n}\n\n.btn-round {\n  border-radius: 1;\n  width: 1.7em;\n  height: 1.7em;\n  line-height: 1;\n  font-size: 35px;\n  z-index: -1;\n  position: relative;\n  cursor: pointer;\n  top: -20px;\n  left: -5px;\n}\n\n.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {\n    border-color: rgba(76, 175, 80, 0);\n}\n\ndiv.startcoding-logo{\n  margin:3em auto;\n  width:50em;\n}\n\ndiv.startcoding-logo a{\n  text-decoration:none;\n  color:#64AF67;\n}\n\ndiv.braket-logo {\n  border-radius: 50% 50% 50% 50%;\n  background-color: #22659C;\n  color: #42E2FF;\n  width: 1em;\n  height: 1em;\n  font-size: 1.5em;\n  overflow: hidden;\n  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);\n  display: inline-block;\n  vertical-align: center;\n  position: absolute;\n  bottom: 4px;\n  right: 4px;\n  margin: 0px auto;\n}\n\ndiv.braket-logo div.leaf-shadow{\n  width:6.3em;\n  height:10.6em;\n  background-color:#64AF67;\n  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);\n}\n\n#title{\n  display:inline-block;\n  font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;\n  padding:0;\n  margin:0;\n}\n\n.startcoding-logo:hover {\n\n}\n.startcoding-logo:after {\n    content: \"\";\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    width: 0%;\n    height: 100%;\n    background-color: rgba(255,255,255,0.4);\n    -webkit-transition: none;\n    -moz-transition: none;\n    -ms-transition: none;\n    -o-transition: none;\n    transition: none;\n\n}\n.startcoding-logo:hover:after {\n    width: 120%;\n    background-color: rgba(255,255,255,0);\n    -webkit-transition: all 0.9s ease-out;\n    -moz-transition: all 0.9s ease-out;\n    -ms-transition: all 0.9s ease-out;\n    -o-transition: all 0.9s ease-out;\n    transition: all 0.9s ease-out;\n}\n\nimg.techImage {\n    height: 200px;\n}\n.techContainer {\n    /* margin: 40px; */\n    position: relative;\n    top: 15px;\n}\n\ndiv#bs-example-navbar-collapse-2 {\n    position: relative;\n    /*left: 8%;*/\n}\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 3.5em;\n}\n\n#registerForm {\n  position: relative;\n  left: 15%;\n  top: 15px;\n}\n#registerButton{\n  display: inline-block;\n  z-index: 100000;\n  position: relative;\n}\n\na.alreadyMember {\n    position: relative;\n    left: 65%;\n}\n\n#userNameRegister.form-control::-webkit-input-placeholder { color: white; }\n#userNameRegister.form-control:-moz-placeholder { color: white; }\n#userNameRegister.form-control::-moz-placeholder { color: white; }\n#userNameRegister.form-control:-ms-input-placeholder { color: white; }\n#userNameRegister{ color:white; }\n\n#passwordRegister.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister.form-control:-moz-placeholder { color: white; }\n#passwordRegister.form-control::-moz-placeholder { color: white; }\n#passwordRegister.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister{ color:white; }\n\n#passwordRegister2.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister2.form-control:-moz-placeholder { color: white; }\n#passwordRegister2.form-control::-moz-placeholder { color: white; }\n#passwordRegister2.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister2{ color:white; }\n\n#emailRegister.form-control::-webkit-input-placeholder { color: white; }\n#emailRegister.form-control:-moz-placeholder { color: white; }\n#emailRegister.form-control::-moz-placeholder { color: white; }\n#emailRegister.form-control:-ms-input-placeholder { color: white; }\n#emailRegister{ color:white; }\n\n#userNameLogin.form-control::-webkit-input-placeholder { color: white; }\n#userNameLogin.form-control:-moz-placeholder { color: white; }\n#userNameLogin.form-control::-moz-placeholder { color: white; }\n#userNameLogin.form-control:-ms-input-placeholder { color: white; }\n#userNameLogin{ color:white; }\n\n#passwordLogin.form-control::-webkit-input-placeholder { color: white; }\n#passwordLogin.form-control:-moz-placeholder { color: white; }\n#passwordLogin.form-control::-moz-placeholder { color: white; }\n#passwordLogin.form-control:-ms-input-placeholder { color: white; }\n#passwordLogin{ color:white; }\n\n.markdownNotice {\n  float: left;\n  color: grey;\n}\n\n.floatingActionButton {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: inherit;\n  border-radius:100%;\n  outline:none;\n  color:#FFF;\n  font-size:36px;\n  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  cursor: pointer;\n}\n\n.floatingActionButton span {\n  position: absolute;\n  -ms-transform: translate(-10px, -32px);\n  -webkit-transform: translate(-10px, -32px);\n  transform: translate(-10px, -32px);\n}\n\n.floatingActionButton:hover {\n  width: inherit;\n  background-color: #D32F2F;\n}\n\n.newTopicTitle {\n  margin-bottom: 1em;\n}\n\n.spinnerContainer {\n  position: absolute;\n  top: calc(50% - 50px);\n  left: calc(50% - 50px);\n}\n\ntextarea {\n  padding: 0.5em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 100%;\n  border: 1px solid lightgrey !important;\n}\n\n.navbar-inverse {\n  background: #03A9F4;\n  color: #FFF;\n  margin-bottom: 0;\n  z-index: 1000;\n}\n\n.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {\n    color: #FFF !important;\n}\n\n.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {\n    color: peachpuff;\n}\n\n#Register, #Logout, #welcome {\n  display: none;\n}\n\n#newTopicModal {\n  z-index: 2000;\n  position: fixed;\n  top: 15%;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n.main{\n  position: relative;\n  /*height: calc(100vh - 64px);*/\n  margin-bottom: 0;\n  /*overflow-y: scroll;*/\n}\n.displayTopic {\n  overflow: hidden;\n}\n\n.active {\n    position: fixed;\n    background: white;\n    height: calc(100vh - 64px);\n    bottom: 0;\n    right: 0;\n    z-index: 4000;\n    left: 0;\n    margin: auto;\n    padding-bottom: 1em;\n    overflow-y: scroll;\n}\n\na.disabled {\n    pointer-events: none;\n    color: lightgrey;\n}\n.topicContent {\n  display: none;\n}\n.active .topicContent {\n  display: block;\n}\n.topicTitle {\n  margin: 0px;\n  padding: 0.5em 1em;\n  text-align: center;\n}\n.panel-body.topicBody {\n  white-space: pre-line;\n  border-left: 26px solid green;\n  border-top: 2px solid green;\n  border-bottom: 2px solid green;\n  border-right: 2px solid green;\n  background: rgba(213, 232, 204, 0.22);\n  padding: 50px;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n\n.topicHead:hover{\n  background-color: #F5F5F5;\n  cursor: pointer;\n}\n\n.active .topicHead {\n  background-color: #F5F5F5;\n}\n\n.closeTopic {\n  display: none;\n}\n.active .closeTopic {\n  display: inline;\n  float: right;\n  color: #4caf50;\n}\n.replyTopicButton {\n    float: right;\n}\n.topicFooter {\n    padding: 20px;\n}\n.green .topicTitle {\n  background: #E8F5E9;\n}\n.comment {\n  margin: 1em 0 0 1em;\n  padding: 1em .5em 1em 1em;\n}\n.panel-footer {\n  margin: 0 15px;\n  padding: 0px;\n  border-top: 1px solid #4caf50;\n  background: white;\n  font-style: italic;\n}\n\n.breadcrumb {\n  text-align: right;\n}\n\n.breadcrumb > span{\n  float: left;\n  color: gray;\n}\n\n.new-comment-buttons {\n  float: right;\n}\n\n.new-comment-buttons .btn {\n  margin-left: 1em;\n}\n\n.commentVotebox {\n  float: right;\n}\n\n.up .voteBtn:first-child{\n  color: #00E676\n}\n.down .voteBtn:nth-child(3){\n  color: purple;\n}\n\n.voteBtn {\n  color: lightgrey;\n  margin: 0 .8em;\n  padding: 0 .2em;\n  cursor: pointer;\n}\n\n.disabled .voteBtn{\n  color: lightgrey;\n  cursor: default;\n}\n\n\n@media (max-width:768px) and (min-width:667px) {\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 30%;\n\n  }\n}\n\n/* ----------- iPhone 4 and 4S ----------- */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n  h4, .h4 {\n      font-size: 15px;\n  }\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 38%;\n  }\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n\n  }\n\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  #Register{\n    display: none;\n    left: -10%;\n    width: 100%;\n    position: relative;\n  }\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    /*h4, .h4 {\n        font-size: 15px;\n    }*/\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 136px;\n        bottom: 22px;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n    h4, .h4 {\n        font-size: 15px;\n    }\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 150px;\n        bottom: 22px;\n    }\n\n}\n\n/* ----------- iPhone 5 and 5S ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n    .main {\n      position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      /*overflow-y: initial;*/\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: calc(100vh);\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    main {\n      position: relative;\n        height: 100%;\n        margin-bottom: 0;\n        overflow-y: initial;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n}\n\n/* ----------- iPhone 6 ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 43%;\n}\n\n}\n\n\n\n/* ----------iPhone 6 Plus ---------- */\n\n/* Portrait and Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : landscape) {\n\n\n}\n\n/* Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : portrait) {\n\n  span.startCodingName {\n    position: absolute;\n    top: 23px;\n    left: 11%;\n\n  }\n\n}\n\n/* ----------- iPad mini ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    .main {\n    position: relative;\n    height: 100%;\n    margin-bottom: 0;\n    overflow-y: initial;\n  }\nspan.startCodingName {\n  position: absolute;\n  top: 23px;\n  left: 7%;\n\n}\n  .active {\n      position: fixed;\n      background: white;\n      height: 100%;\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 1) {\n    .floatingActionButton {\n        position: fixed;\n        bottom: 1.7em;\n        right: 1.5em;\n        border-radius: 100%;\n        outline: none;\n        color: #FFF;\n        font-size: 36px;\n        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n        -webkit-tap-highlight-color: rgba(0,0,0,0);\n        cursor: pointer;\n    }\n    span.startCodingName {\n      position: absolute;\n      top: 23px;\n      left: 4em;\n\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: 100%;\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    #startCodingName{\n      position: absolute;\n        top: 20px;\n        left:7%;\n    }\n\n}\n\n\n/* ----------- iPad 3 and 4 ----------- */\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n.main {\n  position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n}\n.active {\n  position: fixed;\n  background: white;\n  height: 100%;\n  width: 100vw;\n  top: 0;\n  right: 3em;\n  z-index: 4000;\n  left: 0;\n  margin: auto;\n  padding-bottom: 1em;\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n}\n#Register, #Logout, #welcome {\n    display: none;\n    position: relative;\n    right: 78px;\n}\n\n\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 2) {\nspan.startCodingName {\n  position: absolute;\n  top: 20px;\n  left: 4em;\n}\na.alreadyMember {\n  position: absolute;\n  left: 200px;\n  bottom: 33px;\n}\n#registerButton {\n    display: inline-block;\n    z-index: 100000;\n    position: relative;\n    top: 6px;\n}\n#forgotPassword {\n  position: relative;\n  left: 1em;\n}\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n#startCodingName{\n  position: absolute;\n    top: 20px;\n    left:7%;\n}\n\n}\n\n\n/* Nexus 7 (portrait and landscape) ----------- */\n@media only screen and (min-device-width : 603px) and (max-device-width : 966px) {\n\n}\n\n/* Nexus 7 (landscape) ----------- */\n@media only screen and (min-width : 604px) and (orientation: landscape) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    /*left: 20%;*/\n  }\n}\n\n/* Nexus 7 (portrait) ----------- */\n@media only screen and (max-width : 603px) and (orientation: portrait) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 30%;\n  }\n}\n\n#goHome {\n  position: fixed;\n  background: transparent;\n  z-index: 9999;\n  height: 64px;\n  width: 180px;\n  cursor: pointer;\n}\n", ""]);
 	
 	// exports
 

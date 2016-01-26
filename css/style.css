@@ -8,7 +8,7 @@ body {
 
 .heroImage {
     background: rgb(37, 208, 239);
-    height: 100vh;
+    height: 49vh;
     width: 99vw;
     left: -30px;
     position: relative;
@@ -29,7 +29,7 @@ body {
 }
 .vertical-center {
   min-height: 100%;
-  min-height: 100vh;
+  min-height: 49vh;
   /* Make it a flex container */
   display: -webkit-box;
   display: -moz-box;
@@ -141,11 +141,6 @@ img.techImage {
     /* margin: 40px; */
     position: relative;
     top: 15px;
-}
-
-/*I'm fucking dumb fix me later*/
-.resourcePanels {
-    height: 450px;
 }
 
 div#bs-example-navbar-collapse-2 {
