@@ -22021,7 +22021,6 @@
 	      type: 'GET',
 	      beforeSend: setAuthHeader
 	    }).done(function (resp) {
-	      resp.greenResources = new Set(resp.greenResources);
 	      _store.store.saveDatum('me', resp);
 	    });
 	  },
@@ -22041,11 +22040,6 @@
 	    });
 	  },
 	  getComments: function getComments(resourceId) {
-	    var me = _store.store.getDatum('me');
-	    if (me) {
-	      me.greenResources.add(resourceId);
-	      _store.store.saveDatum('me', me);
-	    };
 	    return $.ajax({
 	      url: apiUrl + '/comments/' + resourceId,
 	      type: 'GET',
@@ -22166,7 +22160,6 @@
 	//   username: string
 	//   upvotes: [] (set)
 	//   downvotes: []
-	//   greenResources: []
 	// }
 	
 	// EVENTS
@@ -22332,7 +22325,6 @@
 	
 	    _this.state = {
 	      allResources: [],
-	      greens: _store.store.getDatum('me') ? _store.store.getDatum('me').greenResources : new Set(),
 	      activeResource: false,
 	      loading: true
 	    };
@@ -22345,10 +22337,6 @@
 	      var _this2 = this;
 	
 	      this.getResources.bind(this)();
-	      _store.store.registerListener('me', function () {
-	        var greens = _store.store.getDatum('me') ? _store.store.getDatum('me').greenResources : new Set();
-	        _this2.setState({ greens: greens });
-	      });
 	      _store.eventEmitter.registerListener('goHome', function () {
 	        _this2.setState({ activeResource: false });
 	        _this2.getResources();
@@ -22380,7 +22368,6 @@
 	      var resourceEls = this.state.allResources.map(function (resource, i) {
 	        var isActive = _this4.state.activeResource === resource._id;
 	        return _react2.default.createElement(_Resource2.default, _extends({}, resource, { isActive: isActive,
-	          isGreen: _this4.state.greens.has(resource._id),
 	          onClick: _this4.handleResourceClick.bind(_this4, resource._id),
 	          key: i }));
 	      });
@@ -22985,8 +22972,7 @@
 	        });
 	      }
 	      var addedClasses = (0, _classnames2.default)('resource', {
-	        active: this.props.isActive,
-	        green: this.props.isGreen
+	        active: this.props.isActive
 	      });
 	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
 	        discard: this.discard.bind(this) }) : [];
@@ -23426,7 +23412,7 @@
 	            _react2.default.createElement(
 	              'span',
 	              { className: 'markdownNotice' },
-	              '*Green it will render ',
+	              '*Your post will render ',
 	              _react2.default.createElement(
 	                'a',
 	                { href: 'https://help.github.com/articles/markdown-basics/' },
@@ -23534,7 +23520,7 @@
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'markdownNotice' },
-	            '*Green it will render ',
+	            '*Your post will render ',
 	            _react2.default.createElement(
 	              'a',
 	              { href: 'https://help.github.com/articles/markdown-basics/' },
@@ -38268,7 +38254,7 @@
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'markdownNotice' },
-	                  '*Green it will render ',
+	                  '*Your post will render ',
 	                  _react2.default.createElement(
 	                    'a',
 	                    { href: 'https://help.github.com/articles/markdown-basics/' },
