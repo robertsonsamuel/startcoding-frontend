@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
-
+import { Router, Route, IndexRoute, Link, IndexLink, hashHistory } from 'react-router'
+import createHistory from 'history/lib/createHashHistory';
 import Navbar from './components/Navbar.jsx';
 // import Main from './components/Main.jsx';
 import '../css/sweetalert.css';
 import '../css/google.css';
 import '../css/style.css';
+
+var history = createHistory({
+  queryKey: false
+});
 
 class App extends React.Component {
   render() {
@@ -19,7 +23,6 @@ class App extends React.Component {
     )
   }
 }
-
 
 class Landing extends React.Component {
   render() {
@@ -36,7 +39,6 @@ class Landing extends React.Component {
   }
 }
 
-
 class Main extends React.Component {
   render() {
     return (
@@ -50,11 +52,8 @@ class Main extends React.Component {
   }
 }
 
-
-
-
 ReactDOM.render((
-  <Router history={browserHistory}>
+  <Router history={history}>
     <Route path="/" component={App}>
 
       <IndexRoute component={Landing}/>
@@ -63,10 +62,4 @@ ReactDOM.render((
     
     </Route>
   </Router>
-), document.getElementById('React'))
-
-
-      // <Route path="users" component={Users}>
-      //   <IndexRoute component={UsersIndex}/>
-      //   <Route path=":id" component={User}/>
-      // </Route>
+), document.getElementById('React'));
