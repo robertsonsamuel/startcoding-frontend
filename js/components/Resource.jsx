@@ -21,7 +21,7 @@ marked.setOptions({
   smartypants: false
 });
 
-class Topic extends React.Component {
+class Resource extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,7 +45,7 @@ class Topic extends React.Component {
     API.getComments(this.props._id)
     .done( resp => {
       this.setState( {allComments: resp, loading: false}, () => {
-        console.log("topic state has been set", resp);
+        console.log("resource state has been set", resp);
       } );
       if (callback) callback();
     })
@@ -70,16 +70,16 @@ class Topic extends React.Component {
   }
   render() {
     let commentEls = [];
-    let closeTopic = [];
+    let closeResource = [];
     if (this.props.isActive) {
-      closeTopic = <span className="glyphicon glyphicon-remove closeTopic" />;
+      closeResource = <span className="glyphicon glyphicon-remove closeResource" />;
       commentEls = this.state.allComments.map( (comment, i) => {
         return <Comment {...comment} token={this.state.token}
                                      update={this.fetchComments.bind(this)}
                                      key={i} />
       });
     }
-    let addedClasses = classNames('topic', {
+    let addedClasses = classNames('resource', {
         active: this.props.isActive,
         green: this.props.isGreen
       });
@@ -89,19 +89,19 @@ class Topic extends React.Component {
     return (
       <div className={addedClasses}>
         <div>
-          <div onClick={this.headerClicked.bind(this)} className="topicHead">
-            <h4 className="topicTitle">
+          <div onClick={this.headerClicked.bind(this)} className="resourceHead">
+            <h4 className="resourceTitle">
               <strong>{this.props.title}</strong> &mdash; {this.props.user.username}
-              {closeTopic}
+              {closeResource}
             </h4>
           </div>
-          <div className="container topicContent">
-            <div className="panel-body topicBody">
+          <div className="container resourceContent">
+            <div className="panel-body resourceBody">
               <div dangerouslySetInnerHTML={{__html: marked(this.props.body)}} />
             </div>
-            <div className="topicFooter">
+            <div className="resourceFooter">
               <span className="timeStamp">{formatTime(this.props.timestamp)}</span>
-              <button className="btn btn-success replyTopicButton" href="#" onClick={this.reply.bind(this)}>reply</button>
+              <button className="btn btn-success replyResourceButton" href="#" onClick={this.reply.bind(this)}>reply</button>
             </div>
             {newComment}
             {this.state.loading ? <LoadingSpinner /> : []}
@@ -113,4 +113,4 @@ class Topic extends React.Component {
   }
 }
 
-export default Topic;
+export default Resource;

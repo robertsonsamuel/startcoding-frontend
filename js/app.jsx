@@ -13,15 +13,16 @@ class App extends React.Component {
       case '':
         return (
           <div>
-            <div>
-              <Navbar/>
-            </div>
+            <Navbar/>
             <SplashPage/>
           </div>
         )
       default:
         return (
-          <h1>{this.props.location[0]}</h1>
+          <div>
+            <Navbar/>
+            <Main catagory={this.props.location[0]}></Main>
+          </div>
         )
     }
   }

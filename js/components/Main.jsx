@@ -1,8 +1,8 @@
 import React from 'react';
 import API from '../API';
 import LoadingSpinner from './LoadingSpinner.jsx';
-import Topic from './Topic.jsx';
-import NewTopicModal from './NewTopicModal.jsx';
+import Resource from './Resource.jsx';
+import NewResourceModal from './NewResourceModal.jsx';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
 import {eventEmitter, store} from '../util/store';
@@ -11,30 +11,30 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allTopics: [],
-      greens: store.getDatum('me') ? store.getDatum('me').greenTopics : new Set(),
-      activeTopic: false,
+      allResources: [],
+      greens: store.getDatum('me') ? store.getDatum('me').greenResources : new Set(),
+      activeResource: false,
       loading: true
     };
   }
   componentWillMount() {
-    (this.getTopics.bind(this))();
+    (this.getResources.bind(this))();
     store.registerListener('me', () => {
-      let greens = store.getDatum('me') ? store.getDatum('me').greenTopics : new Set();
+      let greens = store.getDatum('me') ? store.getDatum('me').greenResources : new Set();
       this.setState({ greens: greens });
     })
     eventEmitter.registerListener('goHome', () => {
-      this.setState({activeTopic: false });
-      this.getTopics();
+      this.setState({activeResource: false });
+      this.getResources();
     })
   }
-  handleTopicClick(topicId){
-    this.setState({activeTopic:this.state.activeTopic === topicId ? false : topicId});
+  handleResourceClick(resourceId){
+    this.setState({activeResource:this.state.activeResource === resourceId ? false : resourceId});
   }
-  getTopics(callback){
-    API.getTopics()
+  getResources(callback){
+    API.getResources()
     .done( resp => {
-      this.setState( {allTopics: resp, loading: false} );
+      this.setState( {allResources: resp, loading: false} );
     })
     .fail( err => genErr(err.responseText))
     .always( () => {
@@ -42,19 +42,20 @@ class Main extends React.Component {
     });
   }
   render() {
-    let topicEls = this.state.allTopics.map((topic,i) => {
-      let isActive = this.state.activeTopic === topic._id;
-      return <Topic {...topic} isActive={isActive}
-                               isGreen={this.state.greens.has(topic._id)}
-                               onClick={this.handleTopicClick.bind(this,topic._id)}
+    let resourceEls = this.state.allResources.map((resource,i) => {
+      let isActive = this.state.activeResource === resource._id;
+      return <Resource {...resource} isActive={isActive}
+                               isGreen={this.state.greens.has(resource._id)}
+                               onClick={this.handleResourceClick.bind(this,resource._id)}
                                key={i}/>
     });
-    let mainClasses = classNames('main', 'panel', {displayTopic : this.state.activeTopic})
+    let mainClasses = classNames('main', 'panel', {displayResource : this.state.activeResource})
     return (
       <div className={mainClasses}>
-        <NewTopicModal topicPosted={this.getTopics.bind(this)} />
+        <h1>{this.props.catagory}</h1>
+        <NewResourceModal resourcePosted={this.getResources.bind(this)} />
         {this.state.loading ? <LoadingSpinner /> : []}
-        {topicEls}
+        {resourceEls}
       </div>
     )
   }

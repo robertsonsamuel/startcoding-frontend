@@ -102,18 +102,15 @@
 	          return _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement(
-	              'div',
-	              null,
-	              _react2.default.createElement(_Navbar2.default, null)
-	            ),
+	            _react2.default.createElement(_Navbar2.default, null),
 	            _react2.default.createElement(_splashPage2.default, null)
 	          );
 	        default:
 	          return _react2.default.createElement(
-	            'h1',
+	            'div',
 	            null,
-	            this.props.location[0]
+	            _react2.default.createElement(_Navbar2.default, null),
+	            _react2.default.createElement(_Main2.default, { catagory: this.props.location[0] })
 	          );
 	      }
 	    }
@@ -22024,16 +22021,16 @@
 	      type: 'GET',
 	      beforeSend: setAuthHeader
 	    }).done(function (resp) {
-	      resp.greenTopics = new Set(resp.greenTopics);
+	      resp.greenResources = new Set(resp.greenResources);
 	      _store.store.saveDatum('me', resp);
 	    });
 	  },
-	  getTopics: function getTopics() {
-	    return $.get(apiUrl + '/topics/');
+	  getResources: function getResources() {
+	    return $.get(apiUrl + '/resources/');
 	  },
-	  postTopic: function postTopic(title, body) {
+	  postResource: function postResource(title, body) {
 	    return $.ajax({
-	      url: apiUrl + '/topics/',
+	      url: apiUrl + '/resources/',
 	      type: 'POST',
 	      beforeSend: setAuthHeader,
 	      datatype: 'json',
@@ -22043,14 +22040,14 @@
 	      }
 	    });
 	  },
-	  getComments: function getComments(topicId) {
+	  getComments: function getComments(resourceId) {
 	    var me = _store.store.getDatum('me');
 	    if (me) {
-	      me.greenTopics.add(topicId);
+	      me.greenResources.add(resourceId);
 	      _store.store.saveDatum('me', me);
 	    };
 	    return $.ajax({
-	      url: apiUrl + '/comments/' + topicId,
+	      url: apiUrl + '/comments/' + resourceId,
 	      type: 'GET',
 	      beforeSend: setAuthHeader
 	    });
@@ -22169,7 +22166,7 @@
 	//   username: string
 	//   upvotes: [] (set)
 	//   downvotes: []
-	//   greenTopics: []
+	//   greenResources: []
 	// }
 	
 	// EVENTS
@@ -22301,13 +22298,13 @@
 	
 	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
 	
-	var _Topic = __webpack_require__(/*! ./Topic.jsx */ 182);
+	var _Resource = __webpack_require__(/*! ./Resource.jsx */ 298);
 	
-	var _Topic2 = _interopRequireDefault(_Topic);
+	var _Resource2 = _interopRequireDefault(_Resource);
 	
-	var _NewTopicModal = __webpack_require__(/*! ./NewTopicModal.jsx */ 289);
+	var _NewResourceModal = __webpack_require__(/*! ./NewResourceModal.jsx */ 297);
 	
-	var _NewTopicModal2 = _interopRequireDefault(_NewTopicModal);
+	var _NewResourceModal2 = _interopRequireDefault(_NewResourceModal);
 	
 	var _classnames = __webpack_require__(/*! classnames */ 187);
 	
@@ -22334,9 +22331,9 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
 	
 	    _this.state = {
-	      allTopics: [],
-	      greens: _store.store.getDatum('me') ? _store.store.getDatum('me').greenTopics : new Set(),
-	      activeTopic: false,
+	      allResources: [],
+	      greens: _store.store.getDatum('me') ? _store.store.getDatum('me').greenResources : new Set(),
+	      activeResource: false,
 	      loading: true
 	    };
 	    return _this;
@@ -22347,28 +22344,28 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 	
-	      this.getTopics.bind(this)();
+	      this.getResources.bind(this)();
 	      _store.store.registerListener('me', function () {
-	        var greens = _store.store.getDatum('me') ? _store.store.getDatum('me').greenTopics : new Set();
+	        var greens = _store.store.getDatum('me') ? _store.store.getDatum('me').greenResources : new Set();
 	        _this2.setState({ greens: greens });
 	      });
 	      _store.eventEmitter.registerListener('goHome', function () {
-	        _this2.setState({ activeTopic: false });
-	        _this2.getTopics();
+	        _this2.setState({ activeResource: false });
+	        _this2.getResources();
 	      });
 	    }
 	  }, {
-	    key: 'handleTopicClick',
-	    value: function handleTopicClick(topicId) {
-	      this.setState({ activeTopic: this.state.activeTopic === topicId ? false : topicId });
+	    key: 'handleResourceClick',
+	    value: function handleResourceClick(resourceId) {
+	      this.setState({ activeResource: this.state.activeResource === resourceId ? false : resourceId });
 	    }
 	  }, {
-	    key: 'getTopics',
-	    value: function getTopics(callback) {
+	    key: 'getResources',
+	    value: function getResources(callback) {
 	      var _this3 = this;
 	
-	      _API2.default.getTopics().done(function (resp) {
-	        _this3.setState({ allTopics: resp, loading: false });
+	      _API2.default.getResources().done(function (resp) {
+	        _this3.setState({ allResources: resp, loading: false });
 	      }).fail(function (err) {
 	        return (0, _alerts.genErr)(err.responseText);
 	      }).always(function () {
@@ -22380,20 +22377,25 @@
 	    value: function render() {
 	      var _this4 = this;
 	
-	      var topicEls = this.state.allTopics.map(function (topic, i) {
-	        var isActive = _this4.state.activeTopic === topic._id;
-	        return _react2.default.createElement(_Topic2.default, _extends({}, topic, { isActive: isActive,
-	          isGreen: _this4.state.greens.has(topic._id),
-	          onClick: _this4.handleTopicClick.bind(_this4, topic._id),
+	      var resourceEls = this.state.allResources.map(function (resource, i) {
+	        var isActive = _this4.state.activeResource === resource._id;
+	        return _react2.default.createElement(_Resource2.default, _extends({}, resource, { isActive: isActive,
+	          isGreen: _this4.state.greens.has(resource._id),
+	          onClick: _this4.handleResourceClick.bind(_this4, resource._id),
 	          key: i }));
 	      });
-	      var mainClasses = (0, _classnames2.default)('main', 'panel', { displayTopic: this.state.activeTopic });
+	      var mainClasses = (0, _classnames2.default)('main', 'panel', { displayResource: this.state.activeResource });
 	      return _react2.default.createElement(
 	        'div',
 	        { className: mainClasses },
-	        _react2.default.createElement(_NewTopicModal2.default, { topicPosted: this.getTopics.bind(this) }),
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          this.props.catagory
+	        ),
+	        _react2.default.createElement(_NewResourceModal2.default, { resourcePosted: this.getResources.bind(this) }),
 	        this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
-	        topicEls
+	        resourceEls
 	      );
 	    }
 	  }]);
@@ -22828,225 +22830,7 @@
 
 
 /***/ },
-/* 182 */
-/*!*********************************!*\
-  !*** ./js/components/Topic.jsx ***!
-  \*********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _API = __webpack_require__(/*! ../API */ 172);
-	
-	var _API2 = _interopRequireDefault(_API);
-	
-	var _Comment = __webpack_require__(/*! ./Comment.jsx */ 183);
-	
-	var _Comment2 = _interopRequireDefault(_Comment);
-	
-	var _NewComment = __webpack_require__(/*! ./NewComment.jsx */ 184);
-	
-	var _NewComment2 = _interopRequireDefault(_NewComment);
-	
-	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
-	
-	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
-	
-	var _classnames = __webpack_require__(/*! classnames */ 187);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
-	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
-	
-	var _time = __webpack_require__(/*! ../util/time */ 188);
-	
-	var _store = __webpack_require__(/*! ../util/store */ 174);
-	
-	var _marked = __webpack_require__(/*! marked */ 288);
-	
-	var _marked2 = _interopRequireDefault(_marked);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	_marked2.default.setOptions({
-	  renderer: new _marked2.default.Renderer(),
-	  gfm: true,
-	  tables: true,
-	  breaks: false,
-	  pedantic: false,
-	  sanitize: true,
-	  smartLists: true,
-	  smartypants: false
-	});
-	
-	var Topic = function (_React$Component) {
-	  _inherits(Topic, _React$Component);
-	
-	  function Topic(props) {
-	    _classCallCheck(this, Topic);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Topic).call(this, props));
-	
-	    _this.state = {
-	      allComments: [],
-	      token: _store.store.getDatum("token") ? _store.store.getDatum("token") : "",
-	      replying: false,
-	      loading: true
-	    };
-	
-	    _store.store.registerListener('token', function () {
-	      _this.setState({ token: _store.store.getDatum('token') });
-	    });
-	    return _this;
-	  }
-	
-	  _createClass(Topic, [{
-	    key: 'headerClicked',
-	    value: function headerClicked() {
-	      if (!this.props.isActive) {
-	        this.fetchComments.bind(this)();
-	      }
-	      this.props.onClick();
-	    }
-	  }, {
-	    key: 'fetchComments',
-	    value: function fetchComments(callback) {
-	      var _this2 = this;
-	
-	      _API2.default.getComments(this.props._id).done(function (resp) {
-	        _this2.setState({ allComments: resp, loading: false }, function () {
-	          console.log("topic state has been set", resp);
-	        });
-	        if (callback) callback();
-	      }).fail(function (err) {
-	        console.log(err);
-	      });
-	    }
-	  }, {
-	    key: 'reply',
-	    value: function reply(e) {
-	      e.preventDefault();
-	      var haveToken = (0, _authorization.canHazToken)();
-	      if (!haveToken) return (0, _alerts.pleaseLogin)();
-	      this.setState({ replying: haveToken });
-	    }
-	  }, {
-	    key: 'postComment',
-	    value: function postComment(body) {
-	      var _this3 = this;
-	
-	      this.setState({ replying: false });
-	      _API2.default.postComment(this.props._id, body, 'seed').done(function (resp) {
-	        return _this3.fetchComments.bind(_this3)();
-	      }).fail(function (err) {
-	        return (0, _alerts.genErr)(err.responseText);
-	      });
-	    }
-	  }, {
-	    key: 'discard',
-	    value: function discard() {
-	      this.setState({ replying: false });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this4 = this;
-	
-	      var commentEls = [];
-	      var closeTopic = [];
-	      if (this.props.isActive) {
-	        closeTopic = _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeTopic' });
-	        commentEls = this.state.allComments.map(function (comment, i) {
-	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { token: _this4.state.token,
-	            update: _this4.fetchComments.bind(_this4),
-	            key: i }));
-	        });
-	      }
-	      var addedClasses = (0, _classnames2.default)('topic', {
-	        active: this.props.isActive,
-	        green: this.props.isGreen
-	      });
-	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
-	        discard: this.discard.bind(this) }) : [];
-	      return _react2.default.createElement(
-	        'div',
-	        { className: addedClasses },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { onClick: this.headerClicked.bind(this), className: 'topicHead' },
-	            _react2.default.createElement(
-	              'h4',
-	              { className: 'topicTitle' },
-	              _react2.default.createElement(
-	                'strong',
-	                null,
-	                this.props.title
-	              ),
-	              ' — ',
-	              this.props.user.username,
-	              closeTopic
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'container topicContent' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'panel-body topicBody' },
-	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.body) } })
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'topicFooter' },
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'timeStamp' },
-	                (0, _time.formatTime)(this.props.timestamp)
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { className: 'btn btn-success replyTopicButton', href: '#', onClick: this.reply.bind(this) },
-	                'reply'
-	              )
-	            ),
-	            newComment,
-	            this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
-	            commentEls
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Topic;
-	}(_react2.default.Component);
-	
-	exports.default = Topic;
-
-/***/ },
+/* 182 */,
 /* 183 */
 /*!***********************************!*\
   !*** ./js/components/Comment.jsx ***!
@@ -38132,172 +37916,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 289 */
-/*!*****************************************!*\
-  !*** ./js/components/NewTopicModal.jsx ***!
-  \*****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _API = __webpack_require__(/*! ../API */ 172);
-	
-	var _API2 = _interopRequireDefault(_API);
-	
-	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
-	
-	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
-	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
-	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var NewTopicModal = function (_React$Component) {
-	  _inherits(NewTopicModal, _React$Component);
-	
-	  function NewTopicModal(props) {
-	    _classCallCheck(this, NewTopicModal);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewTopicModal).call(this, props));
-	
-	    _this.displayName = 'NewTopicModal.jsx';
-	    _this.state = { loading: false };
-	    return _this;
-	  }
-	
-	  _createClass(NewTopicModal, [{
-	    key: 'newTopic',
-	    value: function newTopic() {
-	      if (!(0, _authorization.canHazToken)()) return (0, _alerts.pleaseLogin)();
-	      $('#newTopicModal').modal('show');
-	    }
-	  }, {
-	    key: 'createTopic',
-	    value: function createTopic() {
-	      var _this2 = this;
-	
-	      var title = this.refs.title.value;
-	      var body = this.refs.body.value;
-	      if (title.length === 0 || body.length === 0) {
-	        return (0, _alerts.genErr)('Title and Body both required!');
-	      }
-	      $('#newTopicModal .input').prop('disabled', true); // disable inputs
-	      this.setState({ loading: true });
-	      _API2.default.postTopic(title, body).done(function () {
-	        $('#newTopicModal').modal('hide');
-	        _this2.refs.title.value = '';
-	        _this2.refs.body.value = '';
-	        _this2.props.topicPosted(function () {
-	          $('#newTopicModal .input').prop('disabled', false);
-	        });
-	      }).fail(function (err) {
-	        $('#newTopicModal .input').prop('disabled', false);
-	        (0, _alerts.genErr)(err.responseText);
-	      }).always(function () {
-	        return _this2.setState({ loading: false });
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement('img', { src: './img/fab.png', id: 'actionButon', className: 'floatingActionButton', onClick: this.newTopic.bind(this), 'data-target': '#newTopicModal' }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'modal fade', id: 'newTopicModal' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'modal-dialog', role: 'document' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'modal-content' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'modal-header' },
-	                _react2.default.createElement(
-	                  'button',
-	                  { type: 'button', className: 'close', 'data-dismiss': 'modal' },
-	                  _react2.default.createElement(
-	                    'span',
-	                    { 'aria-hidden': 'true' },
-	                    '×'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'h4',
-	                  { className: 'modal-title', id: 'topicModalLabel' },
-	                  'Create a new topic.'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'modal-body' },
-	                _react2.default.createElement('input', { type: 'text', ref: 'title', className: 'newTopicTitle input', placeholder: 'Title', required: true }),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'spinnerContainer' },
-	                  this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : []
-	                ),
-	                _react2.default.createElement('textarea', { id: 'newTitleBody', placeholder: '...', className: 'form-control input', ref: 'body', rows: '5', required: true })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'modal-footer' },
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'markdownNotice' },
-	                  '*Green it will render ',
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: 'https://help.github.com/articles/markdown-basics/' },
-	                    'markdown'
-	                  ),
-	                  '!'
-	                ),
-	                _react2.default.createElement(
-	                  'button',
-	                  { type: 'button', className: 'btn btn-default input', 'data-dismiss': 'modal' },
-	                  'Discard'
-	                ),
-	                _react2.default.createElement(
-	                  'button',
-	                  { type: 'button', className: 'btn btn-primary input', onClick: this.createTopic.bind(this) },
-	                  'Post'
-	                )
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return NewTopicModal;
-	}(_react2.default.Component);
-	
-	exports.default = NewTopicModal;
-
-/***/ },
+/* 289 */,
 /* 290 */
 /*!**************************************!*\
   !*** ./js/components/splashPage.jsx ***!
@@ -38590,10 +38209,395 @@
 	
 	
 	// module
-	exports.push([module.id, "$primary-color: #4caf50;\n$secondary-color: #F44336;\n\nbody {\n  color: #1F4832;\n  background: #fcfffc;\n}\n\n.heroImage {\n    background: rgb(37, 208, 239);\n    height: 49vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n.heroHead{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.herofooter{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.heroText{\n  text-align: center;\n}\n.vertical-center {\n  min-height: 100%;\n  min-height: 49vh;\n  /* Make it a flex container */\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -moz-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n}\n\n.btn-round {\n  border-radius: 1;\n  width: 1.7em;\n  height: 1.7em;\n  line-height: 1;\n  font-size: 35px;\n  z-index: -1;\n  position: relative;\n  cursor: pointer;\n  top: -20px;\n  left: -5px;\n}\n\n.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {\n    border-color: rgba(76, 175, 80, 0);\n}\n\ndiv.startcoding-logo{\n  margin:3em auto;\n  width:50em;\n}\n\ndiv.startcoding-logo a{\n  text-decoration:none;\n  color:#64AF67;\n}\n\ndiv.braket-logo {\n  border-radius: 50% 50% 50% 50%;\n  background-color: #22659C;\n  color: #42E2FF;\n  width: 1em;\n  height: 1em;\n  font-size: 1.5em;\n  overflow: hidden;\n  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);\n  display: inline-block;\n  vertical-align: center;\n  position: absolute;\n  bottom: 4px;\n  right: 4px;\n  margin: 0px auto;\n}\n\ndiv.braket-logo div.leaf-shadow{\n  width:6.3em;\n  height:10.6em;\n  background-color:#64AF67;\n  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);\n}\n\n#title{\n  display:inline-block;\n  font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;\n  padding:0;\n  margin:0;\n}\n\n.startcoding-logo:hover {\n\n}\n.startcoding-logo:after {\n    content: \"\";\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    width: 0%;\n    height: 100%;\n    background-color: rgba(255,255,255,0.4);\n    -webkit-transition: none;\n    -moz-transition: none;\n    -ms-transition: none;\n    -o-transition: none;\n    transition: none;\n\n}\n.startcoding-logo:hover:after {\n    width: 120%;\n    background-color: rgba(255,255,255,0);\n    -webkit-transition: all 0.9s ease-out;\n    -moz-transition: all 0.9s ease-out;\n    -ms-transition: all 0.9s ease-out;\n    -o-transition: all 0.9s ease-out;\n    transition: all 0.9s ease-out;\n}\n\nimg.techImage {\n    height: 200px;\n}\n.techContainer {\n    /* margin: 40px; */\n    position: relative;\n    top: 15px;\n}\n.resourcePanels{\n  text-align: center;\n}\n\ndiv#bs-example-navbar-collapse-2 {\n    position: relative;\n    /*left: 8%;*/\n}\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 3.5em;\n}\n\n#registerForm {\n  position: relative;\n  left: 15%;\n  top: 15px;\n}\n#registerButton{\n  display: inline-block;\n  z-index: 100000;\n  position: relative;\n}\n\na.alreadyMember {\n    position: relative;\n    left: 65%;\n}\n\n#userNameRegister.form-control::-webkit-input-placeholder { color: white; }\n#userNameRegister.form-control:-moz-placeholder { color: white; }\n#userNameRegister.form-control::-moz-placeholder { color: white; }\n#userNameRegister.form-control:-ms-input-placeholder { color: white; }\n#userNameRegister{ color:white; }\n\n#passwordRegister.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister.form-control:-moz-placeholder { color: white; }\n#passwordRegister.form-control::-moz-placeholder { color: white; }\n#passwordRegister.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister{ color:white; }\n\n#passwordRegister2.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister2.form-control:-moz-placeholder { color: white; }\n#passwordRegister2.form-control::-moz-placeholder { color: white; }\n#passwordRegister2.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister2{ color:white; }\n\n#emailRegister.form-control::-webkit-input-placeholder { color: white; }\n#emailRegister.form-control:-moz-placeholder { color: white; }\n#emailRegister.form-control::-moz-placeholder { color: white; }\n#emailRegister.form-control:-ms-input-placeholder { color: white; }\n#emailRegister{ color:white; }\n\n#userNameLogin.form-control::-webkit-input-placeholder { color: white; }\n#userNameLogin.form-control:-moz-placeholder { color: white; }\n#userNameLogin.form-control::-moz-placeholder { color: white; }\n#userNameLogin.form-control:-ms-input-placeholder { color: white; }\n#userNameLogin{ color:white; }\n\n#passwordLogin.form-control::-webkit-input-placeholder { color: white; }\n#passwordLogin.form-control:-moz-placeholder { color: white; }\n#passwordLogin.form-control::-moz-placeholder { color: white; }\n#passwordLogin.form-control:-ms-input-placeholder { color: white; }\n#passwordLogin{ color:white; }\n\n.markdownNotice {\n  float: left;\n  color: grey;\n}\n\n.floatingActionButton {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: inherit;\n  border-radius:100%;\n  outline:none;\n  color:#FFF;\n  font-size:36px;\n  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  cursor: pointer;\n}\n\n.floatingActionButton span {\n  position: absolute;\n  -ms-transform: translate(-10px, -32px);\n  -webkit-transform: translate(-10px, -32px);\n  transform: translate(-10px, -32px);\n}\n\n.floatingActionButton:hover {\n  width: inherit;\n  background-color: #D32F2F;\n}\n\n.newTopicTitle {\n  margin-bottom: 1em;\n}\n\n.spinnerContainer {\n  position: absolute;\n  top: calc(50% - 50px);\n  left: calc(50% - 50px);\n}\n\ntextarea {\n  padding: 0.5em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 100%;\n  border: 1px solid lightgrey !important;\n}\n\n.navbar-inverse {\n  background: #03A9F4;\n  color: #FFF;\n  margin-bottom: 0;\n  z-index: 1000;\n}\n\n.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {\n    color: #FFF !important;\n}\n\n.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {\n    color: peachpuff;\n}\n\n#Register, #Logout, #welcome {\n  display: none;\n}\n\n#newTopicModal {\n  z-index: 2000;\n  position: fixed;\n  top: 15%;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n.main{\n  position: relative;\n  /*height: calc(100vh - 64px);*/\n  margin-bottom: 0;\n  /*overflow-y: scroll;*/\n}\n.displayTopic {\n  overflow: hidden;\n}\n\n.active {\n    position: fixed;\n    background: white;\n    height: calc(100vh - 64px);\n    bottom: 0;\n    right: 0;\n    z-index: 4000;\n    left: 0;\n    margin: auto;\n    padding-bottom: 1em;\n    overflow-y: scroll;\n}\n\na.disabled {\n    pointer-events: none;\n    color: lightgrey;\n}\n.topicContent {\n  display: none;\n}\n.active .topicContent {\n  display: block;\n}\n.topicTitle {\n  margin: 0px;\n  padding: 0.5em 1em;\n  text-align: center;\n}\n.panel-body.topicBody {\n  white-space: pre-line;\n  border-left: 26px solid green;\n  border-top: 2px solid green;\n  border-bottom: 2px solid green;\n  border-right: 2px solid green;\n  background: rgba(213, 232, 204, 0.22);\n  padding: 50px;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n\n.topicHead:hover{\n  background-color: #F5F5F5;\n  cursor: pointer;\n}\n\n.active .topicHead {\n  background-color: #F5F5F5;\n}\n\n.closeTopic {\n  display: none;\n}\n.active .closeTopic {\n  display: inline;\n  float: right;\n  color: #4caf50;\n}\n.replyTopicButton {\n    float: right;\n}\n.topicFooter {\n    padding: 20px;\n}\n.green .topicTitle {\n  background: #E8F5E9;\n}\n.comment {\n  margin: 1em 0 0 1em;\n  padding: 1em .5em 1em 1em;\n}\n.panel-footer {\n  margin: 0 15px;\n  padding: 0px;\n  border-top: 1px solid #4caf50;\n  background: white;\n  font-style: italic;\n}\n\n.breadcrumb {\n  text-align: right;\n}\n\n.breadcrumb > span{\n  float: left;\n  color: gray;\n}\n\n.new-comment-buttons {\n  float: right;\n}\n\n.new-comment-buttons .btn {\n  margin-left: 1em;\n}\n\n.commentVotebox {\n  float: right;\n}\n\n.up .voteBtn:first-child{\n  color: #00E676\n}\n.down .voteBtn:nth-child(3){\n  color: purple;\n}\n\n.voteBtn {\n  color: lightgrey;\n  margin: 0 .8em;\n  padding: 0 .2em;\n  cursor: pointer;\n}\n\n.disabled .voteBtn{\n  color: lightgrey;\n  cursor: default;\n}\n\n\n@media (max-width:768px) and (min-width:667px) {\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 30%;\n\n  }\n}\n\n/* ----------- iPhone 4 and 4S ----------- */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n  h4, .h4 {\n      font-size: 15px;\n  }\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 38%;\n  }\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n\n  }\n\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  #Register{\n    display: none;\n    left: -10%;\n    width: 100%;\n    position: relative;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    /*h4, .h4 {\n        font-size: 15px;\n    }*/\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 136px;\n        bottom: 22px;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n    h4, .h4 {\n        font-size: 15px;\n    }\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 150px;\n        bottom: 22px;\n    }\n\n}\n\n/* ----------- iPhone 5 and 5S ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n    .main {\n      position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      /*overflow-y: initial;*/\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: calc(100vh);\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n    .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    main {\n      position: relative;\n        height: 100%;\n        margin-bottom: 0;\n        overflow-y: initial;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n}\n\n/* ----------- iPhone 6 ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 43%;\n}\n\n}\n\n\n\n/* ----------iPhone 6 Plus ---------- */\n\n/* Portrait and Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : landscape) {\n\n\n}\n\n/* Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : portrait) {\n\n  span.startCodingName {\n    position: absolute;\n    top: 23px;\n    left: 11%;\n\n  }\n\n}\n\n/* ----------- iPad mini ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    .main {\n    position: relative;\n    height: 100%;\n    margin-bottom: 0;\n    overflow-y: initial;\n  }\nspan.startCodingName {\n  position: absolute;\n  top: 23px;\n  left: 7%;\n\n}\n  .active {\n      position: fixed;\n      background: white;\n      height: 100%;\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 1) {\n    .floatingActionButton {\n        position: fixed;\n        bottom: 1.7em;\n        right: 1.5em;\n        border-radius: 100%;\n        outline: none;\n        color: #FFF;\n        font-size: 36px;\n        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n        -webkit-tap-highlight-color: rgba(0,0,0,0);\n        cursor: pointer;\n    }\n    span.startCodingName {\n      position: absolute;\n      top: 23px;\n      left: 4em;\n\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: 100%;\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    #startCodingName{\n      position: absolute;\n        top: 20px;\n        left:7%;\n    }\n\n}\n\n\n/* ----------- iPad 3 and 4 ----------- */\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n.main {\n  position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n}\n.active {\n  position: fixed;\n  background: white;\n  height: 100%;\n  width: 100vw;\n  top: 0;\n  right: 3em;\n  z-index: 4000;\n  left: 0;\n  margin: auto;\n  padding-bottom: 1em;\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n}\n#Register, #Logout, #welcome {\n    display: none;\n    position: relative;\n    right: 78px;\n}\n\n\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 2) {\nspan.startCodingName {\n  position: absolute;\n  top: 20px;\n  left: 4em;\n}\na.alreadyMember {\n  position: absolute;\n  left: 200px;\n  bottom: 33px;\n}\n#registerButton {\n    display: inline-block;\n    z-index: 100000;\n    position: relative;\n    top: 6px;\n}\n#forgotPassword {\n  position: relative;\n  left: 1em;\n}\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n#startCodingName{\n  position: absolute;\n    top: 20px;\n    left:7%;\n}\n\n}\n\n\n/* Nexus 7 (portrait and landscape) ----------- */\n@media only screen and (min-device-width : 603px) and (max-device-width : 966px) {\n\n}\n\n/* Nexus 7 (landscape) ----------- */\n@media only screen and (min-width : 604px) and (orientation: landscape) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    /*left: 20%;*/\n  }\n}\n\n/* Nexus 7 (portrait) ----------- */\n@media only screen and (max-width : 603px) and (orientation: portrait) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 30%;\n  }\n}\n\n#goHome {\n  position: fixed;\n  background: transparent;\n  z-index: 9999;\n  height: 64px;\n  width: 180px;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, "$primary-color: #4caf50;\n$secondary-color: #F44336;\n\nbody {\n  color: #1F4832;\n  background: #fcfffc;\n}\n\n.heroImage {\n    background: rgb(37, 208, 239);\n    height: 49vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n.heroHead{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.herofooter{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.heroText{\n  text-align: center;\n}\n.vertical-center {\n  min-height: 100%;\n  min-height: 49vh;\n  /* Make it a flex container */\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -moz-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n}\n\n.btn-round {\n  border-radius: 1;\n  width: 1.7em;\n  height: 1.7em;\n  line-height: 1;\n  font-size: 35px;\n  z-index: -1;\n  position: relative;\n  cursor: pointer;\n  top: -20px;\n  left: -5px;\n}\n\n.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {\n    border-color: rgba(76, 175, 80, 0);\n}\n\ndiv.startcoding-logo{\n  margin:3em auto;\n  width:50em;\n}\n\ndiv.startcoding-logo a{\n  text-decoration:none;\n  color:#64AF67;\n}\n\ndiv.braket-logo {\n  border-radius: 50% 50% 50% 50%;\n  background-color: #22659C;\n  color: #42E2FF;\n  width: 1em;\n  height: 1em;\n  font-size: 1.5em;\n  overflow: hidden;\n  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);\n  display: inline-block;\n  vertical-align: center;\n  position: absolute;\n  bottom: 4px;\n  right: 4px;\n  margin: 0px auto;\n}\n\ndiv.braket-logo div.leaf-shadow{\n  width:6.3em;\n  height:10.6em;\n  background-color:#64AF67;\n  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);\n}\n\n#title{\n  display:inline-block;\n  font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;\n  padding:0;\n  margin:0;\n}\n\n.startcoding-logo:hover {\n\n}\n.startcoding-logo:after {\n    content: \"\";\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    width: 0%;\n    height: 100%;\n    background-color: rgba(255,255,255,0.4);\n    -webkit-transition: none;\n    -moz-transition: none;\n    -ms-transition: none;\n    -o-transition: none;\n    transition: none;\n\n}\n.startcoding-logo:hover:after {\n    width: 120%;\n    background-color: rgba(255,255,255,0);\n    -webkit-transition: all 0.9s ease-out;\n    -moz-transition: all 0.9s ease-out;\n    -ms-transition: all 0.9s ease-out;\n    -o-transition: all 0.9s ease-out;\n    transition: all 0.9s ease-out;\n}\n\nimg.techImage {\n    height: 200px;\n}\n.techContainer {\n    /* margin: 40px; */\n    position: relative;\n    top: 15px;\n}\n.resourcePanels{\n  text-align: center;\n}\n\ndiv#bs-example-navbar-collapse-2 {\n    position: relative;\n    /*left: 8%;*/\n}\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 3.5em;\n}\n\n#registerForm {\n  position: relative;\n  left: 15%;\n  top: 15px;\n}\n#registerButton{\n  display: inline-block;\n  z-index: 100000;\n  position: relative;\n}\n\na.alreadyMember {\n    position: relative;\n    left: 65%;\n}\n\n#userNameRegister.form-control::-webkit-input-placeholder { color: white; }\n#userNameRegister.form-control:-moz-placeholder { color: white; }\n#userNameRegister.form-control::-moz-placeholder { color: white; }\n#userNameRegister.form-control:-ms-input-placeholder { color: white; }\n#userNameRegister{ color:white; }\n\n#passwordRegister.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister.form-control:-moz-placeholder { color: white; }\n#passwordRegister.form-control::-moz-placeholder { color: white; }\n#passwordRegister.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister{ color:white; }\n\n#passwordRegister2.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister2.form-control:-moz-placeholder { color: white; }\n#passwordRegister2.form-control::-moz-placeholder { color: white; }\n#passwordRegister2.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister2{ color:white; }\n\n#emailRegister.form-control::-webkit-input-placeholder { color: white; }\n#emailRegister.form-control:-moz-placeholder { color: white; }\n#emailRegister.form-control::-moz-placeholder { color: white; }\n#emailRegister.form-control:-ms-input-placeholder { color: white; }\n#emailRegister{ color:white; }\n\n#userNameLogin.form-control::-webkit-input-placeholder { color: white; }\n#userNameLogin.form-control:-moz-placeholder { color: white; }\n#userNameLogin.form-control::-moz-placeholder { color: white; }\n#userNameLogin.form-control:-ms-input-placeholder { color: white; }\n#userNameLogin{ color:white; }\n\n#passwordLogin.form-control::-webkit-input-placeholder { color: white; }\n#passwordLogin.form-control:-moz-placeholder { color: white; }\n#passwordLogin.form-control::-moz-placeholder { color: white; }\n#passwordLogin.form-control:-ms-input-placeholder { color: white; }\n#passwordLogin{ color:white; }\n\n.markdownNotice {\n  float: left;\n  color: grey;\n}\n\n.floatingActionButton {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: inherit;\n  border-radius:100%;\n  outline:none;\n  color:#FFF;\n  font-size:36px;\n  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  cursor: pointer;\n}\n\n.floatingActionButton span {\n  position: absolute;\n  -ms-transform: translate(-10px, -32px);\n  -webkit-transform: translate(-10px, -32px);\n  transform: translate(-10px, -32px);\n}\n\n.floatingActionButton:hover {\n  width: inherit;\n  background-color: #D32F2F;\n}\n\n.newResourceTitle {\n  margin-bottom: 1em;\n}\n\n.spinnerContainer {\n  position: absolute;\n  top: calc(50% - 50px);\n  left: calc(50% - 50px);\n}\n\ntextarea {\n  padding: 0.5em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 100%;\n  border: 1px solid lightgrey !important;\n}\n\n.navbar-inverse {\n  background: #03A9F4;\n  color: #FFF;\n  margin-bottom: 0;\n  z-index: 1000;\n}\n\n.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {\n    color: #FFF !important;\n}\n\n.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {\n    color: peachpuff;\n}\n\n#Register, #Logout, #welcome {\n  display: none;\n}\n\n#newResourceModal {\n  z-index: 2000;\n  position: fixed;\n  top: 15%;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n.main{\n  position: relative;\n  /*height: calc(100vh - 64px);*/\n  margin-bottom: 0;\n  /*overflow-y: scroll;*/\n}\n.displayResource {\n  overflow: hidden;\n}\n\n.active {\n    position: fixed;\n    background: white;\n    height: calc(100vh - 64px);\n    bottom: 0;\n    right: 0;\n    z-index: 4000;\n    left: 0;\n    margin: auto;\n    padding-bottom: 1em;\n    overflow-y: scroll;\n}\n\na.disabled {\n    pointer-events: none;\n    color: lightgrey;\n}\n.resourceContent {\n  display: none;\n}\n.active .resourceContent {\n  display: block;\n}\n.resourceTitle {\n  margin: 0px;\n  padding: 0.5em 1em;\n  text-align: center;\n}\n.panel-body.resourceBody {\n  white-space: pre-line;\n  border-left: 26px solid green;\n  border-top: 2px solid green;\n  border-bottom: 2px solid green;\n  border-right: 2px solid green;\n  background: rgba(213, 232, 204, 0.22);\n  padding: 50px;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n\n.resourceHead:hover{\n  background-color: #F5F5F5;\n  cursor: pointer;\n}\n\n.active .resourceHead {\n  background-color: #F5F5F5;\n}\n\n.closeResource {\n  display: none;\n}\n.active .closeResource {\n  display: inline;\n  float: right;\n  color: #4caf50;\n}\n.replyResourceButton {\n    float: right;\n}\n.resourceFooter {\n    padding: 20px;\n}\n.green .resourceTitle {\n  background: #E8F5E9;\n}\n.comment {\n  margin: 1em 0 0 1em;\n  padding: 1em .5em 1em 1em;\n}\n.panel-footer {\n  margin: 0 15px;\n  padding: 0px;\n  border-top: 1px solid #4caf50;\n  background: white;\n  font-style: italic;\n}\n\n.breadcrumb {\n  text-align: right;\n}\n\n.breadcrumb > span{\n  float: left;\n  color: gray;\n}\n\n.new-comment-buttons {\n  float: right;\n}\n\n.new-comment-buttons .btn {\n  margin-left: 1em;\n}\n\n.commentVotebox {\n  float: right;\n}\n\n.up .voteBtn:first-child{\n  color: #00E676\n}\n.down .voteBtn:nth-child(3){\n  color: purple;\n}\n\n.voteBtn {\n  color: lightgrey;\n  margin: 0 .8em;\n  padding: 0 .2em;\n  cursor: pointer;\n}\n\n.disabled .voteBtn{\n  color: lightgrey;\n  cursor: default;\n}\n\n\n@media (max-width:768px) and (min-width:667px) {\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 30%;\n\n  }\n}\n\n/* ----------- iPhone 4 and 4S ----------- */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n  h4, .h4 {\n      font-size: 15px;\n  }\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 38%;\n  }\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n\n  }\n\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  #Register{\n    display: none;\n    left: -10%;\n    width: 100%;\n    position: relative;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    /*h4, .h4 {\n        font-size: 15px;\n    }*/\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 136px;\n        bottom: 22px;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n    h4, .h4 {\n        font-size: 15px;\n    }\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 150px;\n        bottom: 22px;\n    }\n\n}\n\n/* ----------- iPhone 5 and 5S ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n    .main {\n      position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      /*overflow-y: initial;*/\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: calc(100vh);\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n    .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    main {\n      position: relative;\n        height: 100%;\n        margin-bottom: 0;\n        overflow-y: initial;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n}\n\n/* ----------- iPhone 6 ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 43%;\n}\n\n}\n\n\n\n/* ----------iPhone 6 Plus ---------- */\n\n/* Portrait and Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : landscape) {\n\n\n}\n\n/* Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : portrait) {\n\n  span.startCodingName {\n    position: absolute;\n    top: 23px;\n    left: 11%;\n\n  }\n\n}\n\n/* ----------- iPad mini ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    .main {\n    position: relative;\n    height: 100%;\n    margin-bottom: 0;\n    overflow-y: initial;\n  }\nspan.startCodingName {\n  position: absolute;\n  top: 23px;\n  left: 7%;\n\n}\n  .active {\n      position: fixed;\n      background: white;\n      height: 100%;\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 1) {\n    .floatingActionButton {\n        position: fixed;\n        bottom: 1.7em;\n        right: 1.5em;\n        border-radius: 100%;\n        outline: none;\n        color: #FFF;\n        font-size: 36px;\n        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n        -webkit-tap-highlight-color: rgba(0,0,0,0);\n        cursor: pointer;\n    }\n    span.startCodingName {\n      position: absolute;\n      top: 23px;\n      left: 4em;\n\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: 100%;\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    #startCodingName{\n      position: absolute;\n        top: 20px;\n        left:7%;\n    }\n\n}\n\n\n/* ----------- iPad 3 and 4 ----------- */\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n.main {\n  position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n}\n.active {\n  position: fixed;\n  background: white;\n  height: 100%;\n  width: 100vw;\n  top: 0;\n  right: 3em;\n  z-index: 4000;\n  left: 0;\n  margin: auto;\n  padding-bottom: 1em;\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n}\n#Register, #Logout, #welcome {\n    display: none;\n    position: relative;\n    right: 78px;\n}\n\n\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 2) {\nspan.startCodingName {\n  position: absolute;\n  top: 20px;\n  left: 4em;\n}\na.alreadyMember {\n  position: absolute;\n  left: 200px;\n  bottom: 33px;\n}\n#registerButton {\n    display: inline-block;\n    z-index: 100000;\n    position: relative;\n    top: 6px;\n}\n#forgotPassword {\n  position: relative;\n  left: 1em;\n}\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n#startCodingName{\n  position: absolute;\n    top: 20px;\n    left:7%;\n}\n\n}\n\n\n/* Nexus 7 (portrait and landscape) ----------- */\n@media only screen and (min-device-width : 603px) and (max-device-width : 966px) {\n\n}\n\n/* Nexus 7 (landscape) ----------- */\n@media only screen and (min-width : 604px) and (orientation: landscape) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    /*left: 20%;*/\n  }\n}\n\n/* Nexus 7 (portrait) ----------- */\n@media only screen and (max-width : 603px) and (orientation: portrait) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 30%;\n  }\n}\n\n#goHome {\n  position: fixed;\n  background: transparent;\n  z-index: 9999;\n  height: 64px;\n  width: 180px;\n  cursor: pointer;\n}\n", ""]);
 	
 	// exports
 
+
+/***/ },
+/* 297 */
+/*!********************************************!*\
+  !*** ./js/components/NewResourceModal.jsx ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _API = __webpack_require__(/*! ../API */ 172);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
+	
+	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
+	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NewTopicModal = function (_React$Component) {
+	  _inherits(NewTopicModal, _React$Component);
+	
+	  function NewTopicModal(props) {
+	    _classCallCheck(this, NewTopicModal);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewTopicModal).call(this, props));
+	
+	    _this.displayName = 'NewTopicModal.jsx';
+	    _this.state = { loading: false };
+	    return _this;
+	  }
+	
+	  _createClass(NewTopicModal, [{
+	    key: 'newTopic',
+	    value: function newTopic() {
+	      if (!(0, _authorization.canHazToken)()) return (0, _alerts.pleaseLogin)();
+	      $('#newTopicModal').modal('show');
+	    }
+	  }, {
+	    key: 'createTopic',
+	    value: function createTopic() {
+	      var _this2 = this;
+	
+	      var title = this.refs.title.value;
+	      var body = this.refs.body.value;
+	      if (title.length === 0 || body.length === 0) {
+	        return (0, _alerts.genErr)('Title and Body both required!');
+	      }
+	      $('#newTopicModal .input').prop('disabled', true); // disable inputs
+	      this.setState({ loading: true });
+	      _API2.default.postTopic(title, body).done(function () {
+	        $('#newTopicModal').modal('hide');
+	        _this2.refs.title.value = '';
+	        _this2.refs.body.value = '';
+	        _this2.props.resourcePosted(function () {
+	          $('#newTopicModal .input').prop('disabled', false);
+	        });
+	      }).fail(function (err) {
+	        $('#newTopicModal .input').prop('disabled', false);
+	        (0, _alerts.genErr)(err.responseText);
+	      }).always(function () {
+	        return _this2.setState({ loading: false });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('img', { src: './img/fab.png', id: 'actionButon', className: 'floatingActionButton', onClick: this.newTopic.bind(this), 'data-target': '#newTopicModal' }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'modal fade', id: 'newTopicModal' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-dialog', role: 'document' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-content' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-header' },
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'close', 'data-dismiss': 'modal' },
+	                  _react2.default.createElement(
+	                    'span',
+	                    { 'aria-hidden': 'true' },
+	                    '×'
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'h4',
+	                  { className: 'modal-title', id: 'resourceModalLabel' },
+	                  'Create a new resource.'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-body' },
+	                _react2.default.createElement('input', { type: 'text', ref: 'title', className: 'newTopicTitle input', placeholder: 'Title', required: true }),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'spinnerContainer' },
+	                  this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : []
+	                ),
+	                _react2.default.createElement('textarea', { id: 'newTitleBody', placeholder: '...', className: 'form-control input', ref: 'body', rows: '5', required: true })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-footer' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'markdownNotice' },
+	                  '*Green it will render ',
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: 'https://help.github.com/articles/markdown-basics/' },
+	                    'markdown'
+	                  ),
+	                  '!'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'btn btn-default input', 'data-dismiss': 'modal' },
+	                  'Discard'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'btn btn-primary input', onClick: this.createTopic.bind(this) },
+	                  'Post'
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NewTopicModal;
+	}(_react2.default.Component);
+	
+	exports.default = NewTopicModal;
+
+/***/ },
+/* 298 */
+/*!************************************!*\
+  !*** ./js/components/Resource.jsx ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _API = __webpack_require__(/*! ../API */ 172);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	var _Comment = __webpack_require__(/*! ./Comment.jsx */ 183);
+	
+	var _Comment2 = _interopRequireDefault(_Comment);
+	
+	var _NewComment = __webpack_require__(/*! ./NewComment.jsx */ 184);
+	
+	var _NewComment2 = _interopRequireDefault(_NewComment);
+	
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
+	
+	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 187);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
+	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
+	
+	var _time = __webpack_require__(/*! ../util/time */ 188);
+	
+	var _store = __webpack_require__(/*! ../util/store */ 174);
+	
+	var _marked = __webpack_require__(/*! marked */ 288);
+	
+	var _marked2 = _interopRequireDefault(_marked);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	_marked2.default.setOptions({
+	  renderer: new _marked2.default.Renderer(),
+	  gfm: true,
+	  tables: true,
+	  breaks: false,
+	  pedantic: false,
+	  sanitize: true,
+	  smartLists: true,
+	  smartypants: false
+	});
+	
+	var Resource = function (_React$Component) {
+	  _inherits(Resource, _React$Component);
+	
+	  function Resource(props) {
+	    _classCallCheck(this, Resource);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Resource).call(this, props));
+	
+	    _this.state = {
+	      allComments: [],
+	      token: _store.store.getDatum("token") ? _store.store.getDatum("token") : "",
+	      replying: false,
+	      loading: true
+	    };
+	
+	    _store.store.registerListener('token', function () {
+	      _this.setState({ token: _store.store.getDatum('token') });
+	    });
+	    return _this;
+	  }
+	
+	  _createClass(Resource, [{
+	    key: 'headerClicked',
+	    value: function headerClicked() {
+	      if (!this.props.isActive) {
+	        this.fetchComments.bind(this)();
+	      }
+	      this.props.onClick();
+	    }
+	  }, {
+	    key: 'fetchComments',
+	    value: function fetchComments(callback) {
+	      var _this2 = this;
+	
+	      _API2.default.getComments(this.props._id).done(function (resp) {
+	        _this2.setState({ allComments: resp, loading: false }, function () {
+	          console.log("resource state has been set", resp);
+	        });
+	        if (callback) callback();
+	      }).fail(function (err) {
+	        console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'reply',
+	    value: function reply(e) {
+	      e.preventDefault();
+	      var haveToken = (0, _authorization.canHazToken)();
+	      if (!haveToken) return (0, _alerts.pleaseLogin)();
+	      this.setState({ replying: haveToken });
+	    }
+	  }, {
+	    key: 'postComment',
+	    value: function postComment(body) {
+	      var _this3 = this;
+	
+	      this.setState({ replying: false });
+	      _API2.default.postComment(this.props._id, body, 'seed').done(function (resp) {
+	        return _this3.fetchComments.bind(_this3)();
+	      }).fail(function (err) {
+	        return (0, _alerts.genErr)(err.responseText);
+	      });
+	    }
+	  }, {
+	    key: 'discard',
+	    value: function discard() {
+	      this.setState({ replying: false });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this4 = this;
+	
+	      var commentEls = [];
+	      var closeResource = [];
+	      if (this.props.isActive) {
+	        closeResource = _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeResource' });
+	        commentEls = this.state.allComments.map(function (comment, i) {
+	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { token: _this4.state.token,
+	            update: _this4.fetchComments.bind(_this4),
+	            key: i }));
+	        });
+	      }
+	      var addedClasses = (0, _classnames2.default)('resource', {
+	        active: this.props.isActive,
+	        green: this.props.isGreen
+	      });
+	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
+	        discard: this.discard.bind(this) }) : [];
+	      return _react2.default.createElement(
+	        'div',
+	        { className: addedClasses },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { onClick: this.headerClicked.bind(this), className: 'resourceHead' },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'resourceTitle' },
+	              _react2.default.createElement(
+	                'strong',
+	                null,
+	                this.props.title
+	              ),
+	              ' — ',
+	              this.props.user.username,
+	              closeResource
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container resourceContent' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'panel-body resourceBody' },
+	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.body) } })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'resourceFooter' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'timeStamp' },
+	                (0, _time.formatTime)(this.props.timestamp)
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'btn btn-success replyResourceButton', href: '#', onClick: this.reply.bind(this) },
+	                'reply'
+	              )
+	            ),
+	            newComment,
+	            this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
+	            commentEls
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Resource;
+	}(_react2.default.Component);
+	
+	exports.default = Resource;
 
 /***/ }
 /******/ ]);

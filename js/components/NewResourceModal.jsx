@@ -27,7 +27,7 @@ class NewTopicModal extends React.Component {
       $('#newTopicModal').modal('hide');
       this.refs.title.value = '';
       this.refs.body.value = '';
-      this.props.topicPosted(() => {
+      this.props.resourcePosted(() => {
         $('#newTopicModal .input').prop('disabled', false);
       });
     })
@@ -48,7 +48,7 @@ class NewTopicModal extends React.Component {
             <div className="modal-content">
               <div className="modal-header">
                 <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                <h4 className="modal-title" id="topicModalLabel">Create a new topic.</h4>
+                <h4 className="modal-title" id="resourceModalLabel">Create a new resource.</h4>
               </div>
               <div className="modal-body">
                 <input type="text" ref="title" className="newTopicTitle input" placeholder="Title" required />
