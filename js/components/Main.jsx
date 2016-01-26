@@ -12,17 +12,12 @@ class Main extends React.Component {
     super(props);
     this.state = {
       allResources: [],
-      greens: store.getDatum('me') ? store.getDatum('me').greenResources : new Set(),
       activeResource: false,
       loading: true
     };
   }
   componentWillMount() {
     (this.getResources.bind(this))();
-    store.registerListener('me', () => {
-      let greens = store.getDatum('me') ? store.getDatum('me').greenResources : new Set();
-      this.setState({ greens: greens });
-    })
     eventEmitter.registerListener('goHome', () => {
       this.setState({activeResource: false });
       this.getResources();
@@ -45,7 +40,6 @@ class Main extends React.Component {
     let resourceEls = this.state.allResources.map((resource,i) => {
       let isActive = this.state.activeResource === resource._id;
       return <Resource {...resource} isActive={isActive}
-                               isGreen={this.state.greens.has(resource._id)}
                                onClick={this.handleResourceClick.bind(this,resource._id)}
                                key={i}/>
     });

@@ -81,7 +81,6 @@ class Resource extends React.Component {
     }
     let addedClasses = classNames('resource', {
         active: this.props.isActive,
-        green: this.props.isGreen
       });
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
                                                        discard={this.discard.bind(this)} />

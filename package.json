@@ -1,5 +1,5 @@
 {
-  "name": "greenit-frontend",
+  "name": "starcoding-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paulgoblin/greenit-frontend.git"
+    "url": "git+https://github.com/paulgoblin/startcoding-frontend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/paulgoblin/greenit-frontend/issues"
+    "url": "https://github.com/paulgoblin/startcoding-frontend/issues"
   },
-  "homepage": "https://github.com/paulgoblin/greenit-frontend#readme",
+  "homepage": "https://github.com/paulgoblin/startcoding-frontend#readme",
   "devDependencies": {
     "babel": "^6.3.26",
     "babel-cli": "^6.4.0",

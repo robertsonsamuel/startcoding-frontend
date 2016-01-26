@@ -9,7 +9,6 @@ let data = Symbol();
 //   username: string
 //   upvotes: [] (set)
 //   downvotes: []
-//   greenResources: []
 // }
 
 // EVENTS
