@@ -9,15 +9,31 @@ import '../css/style.css';
 
 class App extends React.Component {
   render() {
-    return (
-      <div>
-        <div>
-          <Navbar/>
-        </div>
-          <SplashPage/>
-      </div>
-    )
+    switch (this.props.location[0]) {
+      case '':
+        return (
+          <div>
+            <Navbar/>
+            <SplashPage/>
+          </div>
+        )
+      default:
+        return (
+          <div>
+            <Navbar/>
+            <Main catagory={this.props.location[0]}></Main>
+          </div>
+        )
+    }
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('React'));
+// Split location into `/` separated parts, then render `Application` with it
+function handleNewHash() {
+  var location = window.location.hash.replace(/^#\/?|\/$/g, '').split('/');
+  ReactDOM.render(<App location={location} />, document.getElementById('React'));
+}
+
+// Handle the initial route and browser navigation events
+handleNewHash()
+window.addEventListener('hashchange', handleNewHash, false);
