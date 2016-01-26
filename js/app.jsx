@@ -25,12 +25,18 @@ class App extends React.Component {
 }
 
 class Landing extends React.Component {
+  goToUrl() {
+    history.push(this.refs.url.value)
+  }
   render() {
+    let path = this.refs.url ? '/' + this.refs.url.value : "/poop";
     return (
       <div>
         <h1>Landing Page</h1>
         <ul>
-          <li><Link to="/all">All</Link></li>
+        <input ref="url"/>
+        <button onClick={this.goToUrl.bind(this)}>Go here</button>
+          <li><Link to={path}>All</Link></li>
           <li><Link to="/js">JS</Link></li>
           <li><Link to="/html">HTML</Link></li>
         </ul>
