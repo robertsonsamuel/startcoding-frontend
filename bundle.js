@@ -38306,6 +38306,38 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var catagories = [{
+	  name: "Ruby",
+	  short: "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language.",
+	  href: "#/ruby",
+	  imgSrc: "https://coderdojo.com/wp-content/uploads/2015/03/Ruby.png"
+	}, {
+	  name: "JavaScript",
+	  short: "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. ",
+	  href: "#/javascript",
+	  imgSrc: "http://www.w3devcampus.com/wp-content/uploads/logoAndOther/logo_JavaScript.png"
+	}, {
+	  name: "HTML",
+	  short: "HyperText Markup Language (HTML), is the language used to create web pages.",
+	  href: "#/html",
+	  imgSrc: "http://www.html5rocks.com/static/demos/svgmobile_fundamentals/images/html5-2048x1536.png"
+	}, {
+	  name: "Python",
+	  short: "Python is a widely used general-purpose, high-level programming language.",
+	  href: "#/python",
+	  imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
+	}, {
+	  name: "Go",
+	  short: "Go also commonly referred to as golang, is a open source programming language developed at Google.",
+	  href: "#/go",
+	  imgSrc: "https://blog.golang.org/gopher/gopher.png"
+	}, {
+	  name: "Swift",
+	  short: "Swift is a multi-paradigm, compiled programming language created for iOS and OS X by Apple Inc.",
+	  href: "#/swift",
+	  imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Swift_logo.svg/2000px-Swift_logo.svg.png"
+	}];
+	
 	var SplashPage = function (_React$Component) {
 	  _inherits(SplashPage, _React$Component);
 	
@@ -38318,6 +38350,45 @@
 	  _createClass(SplashPage, [{
 	    key: "render",
 	    value: function render() {
+	      var resourcePanels = catagories.map(function (catagory, i) {
+	        return _react2.default.createElement(
+	          "div",
+	          { className: "techContainer col-lg-10 col-lg-offset-1", key: i },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "thumbnail" },
+	              _react2.default.createElement("img", { className: "techImage", src: catagory.imgSrc, height: "150px", alt: "..." }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "caption" },
+	                _react2.default.createElement(
+	                  "h3",
+	                  null,
+	                  catagory.name
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  catagory.short
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  _react2.default.createElement(
+	                    "a",
+	                    { href: catagory.href, className: "btn btn-primary", role: "button" },
+	                    "Learn about ",
+	                    catagory.name
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        );
+	      });
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "container-fluid" },
@@ -38358,202 +38429,7 @@
 	        ),
 	        _react2.default.createElement("br", null),
 	        _react2.default.createElement("div", { className: "splitSection" }),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "techContainer col-lg-10 col-lg-offset-1" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: "https://coderdojo.com/wp-content/uploads/2015/03/Ruby.png", height: "150px", alt: "..." }),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
-	                _react2.default.createElement(
-	                  "h3",
-	                  null,
-	                  "Ruby"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language."
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn btn-primary", role: "button" },
-	                    "Learn about Ruby"
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: "http://www.w3devcampus.com/wp-content/uploads/logoAndOther/logo_JavaScript.png", height: "150px", alt: "..." }),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
-	                _react2.default.createElement(
-	                  "h3",
-	                  null,
-	                  "JavaScript"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. "
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn btn-primary", role: "button" },
-	                    "Learn about JavaScript "
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: "http://www.html5rocks.com/static/demos/svgmobile_fundamentals/images/html5-2048x1536.png", height: "150px", alt: "..." }),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
-	                _react2.default.createElement(
-	                  "h3",
-	                  null,
-	                  "HTML"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "HyperText Markup Language (HTML), is the language used to create web pages."
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn btn-primary", role: "button" },
-	                    "Learn about HTML "
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png", height: "150px", alt: "..." }),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
-	                _react2.default.createElement(
-	                  "h3",
-	                  null,
-	                  "Python"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "Python is a widely used general-purpose, high-level programming language."
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn btn-primary", role: "button" },
-	                    "Learn about Python"
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: "https://blog.golang.org/gopher/gopher.png", height: "150px", alt: "..." }),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
-	                _react2.default.createElement(
-	                  "h3",
-	                  null,
-	                  "Go"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "Go also commonly referred to as golang, is a open source programming language developed at Google."
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn btn-primary", role: "button" },
-	                    "Learn about Go "
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "thumbnail" },
-	              _react2.default.createElement("img", { className: "techImage", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Swift_logo.svg/2000px-Swift_logo.svg.png", height: "150px", alt: "..." }),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "caption" },
-	                _react2.default.createElement(
-	                  "h3",
-	                  null,
-	                  "Swift"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "Swift is a multi-paradigm, compiled programming language created for iOS and OS X by Apple Inc."
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn btn-primary", role: "button" },
-	                    "Learn about Swift "
-	                  )
-	                )
-	              )
-	            )
-	          )
-	        )
+	        resourcePanels
 	      );
 	    }
 	  }]);
