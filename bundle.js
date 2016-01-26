@@ -21994,8 +21994,8 @@
 	
 	var _store = __webpack_require__(/*! ./util/store */ 174);
 	
-	//let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
-	var apiUrl = 'http://localhost:3000';
+	var apiUrl = 'https://protected-river-69772.herokuapp.com';
+	// let apiUrl = 'http://localhost:3000';
 	
 	function setAuthHeader(xhr) {
 	  var token = _store.store.getDatum('token');
@@ -22298,11 +22298,11 @@
 	
 	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
 	
-	var _Resource = __webpack_require__(/*! ./Resource.jsx */ 298);
+	var _Resource = __webpack_require__(/*! ./Resource.jsx */ 182);
 	
 	var _Resource2 = _interopRequireDefault(_Resource);
 	
-	var _NewResourceModal = __webpack_require__(/*! ./NewResourceModal.jsx */ 297);
+	var _NewResourceModal = __webpack_require__(/*! ./NewResourceModal.jsx */ 289);
 	
 	var _NewResourceModal2 = _interopRequireDefault(_NewResourceModal);
 	
@@ -22830,7 +22830,225 @@
 
 
 /***/ },
-/* 182 */,
+/* 182 */
+/*!************************************!*\
+  !*** ./js/components/Resource.jsx ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _API = __webpack_require__(/*! ../API */ 172);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	var _Comment = __webpack_require__(/*! ./Comment.jsx */ 183);
+	
+	var _Comment2 = _interopRequireDefault(_Comment);
+	
+	var _NewComment = __webpack_require__(/*! ./NewComment.jsx */ 184);
+	
+	var _NewComment2 = _interopRequireDefault(_NewComment);
+	
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
+	
+	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 187);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
+	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
+	
+	var _time = __webpack_require__(/*! ../util/time */ 188);
+	
+	var _store = __webpack_require__(/*! ../util/store */ 174);
+	
+	var _marked = __webpack_require__(/*! marked */ 288);
+	
+	var _marked2 = _interopRequireDefault(_marked);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	_marked2.default.setOptions({
+	  renderer: new _marked2.default.Renderer(),
+	  gfm: true,
+	  tables: true,
+	  breaks: false,
+	  pedantic: false,
+	  sanitize: true,
+	  smartLists: true,
+	  smartypants: false
+	});
+	
+	var Resource = function (_React$Component) {
+	  _inherits(Resource, _React$Component);
+	
+	  function Resource(props) {
+	    _classCallCheck(this, Resource);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Resource).call(this, props));
+	
+	    _this.state = {
+	      allComments: [],
+	      token: _store.store.getDatum("token") ? _store.store.getDatum("token") : "",
+	      replying: false,
+	      loading: true
+	    };
+	
+	    _store.store.registerListener('token', function () {
+	      _this.setState({ token: _store.store.getDatum('token') });
+	    });
+	    return _this;
+	  }
+	
+	  _createClass(Resource, [{
+	    key: 'headerClicked',
+	    value: function headerClicked() {
+	      if (!this.props.isActive) {
+	        this.fetchComments.bind(this)();
+	      }
+	      this.props.onClick();
+	    }
+	  }, {
+	    key: 'fetchComments',
+	    value: function fetchComments(callback) {
+	      var _this2 = this;
+	
+	      _API2.default.getComments(this.props._id).done(function (resp) {
+	        _this2.setState({ allComments: resp, loading: false }, function () {
+	          console.log("resource state has been set", resp);
+	        });
+	        if (callback) callback();
+	      }).fail(function (err) {
+	        console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'reply',
+	    value: function reply(e) {
+	      e.preventDefault();
+	      var haveToken = (0, _authorization.canHazToken)();
+	      if (!haveToken) return (0, _alerts.pleaseLogin)();
+	      this.setState({ replying: haveToken });
+	    }
+	  }, {
+	    key: 'postComment',
+	    value: function postComment(body) {
+	      var _this3 = this;
+	
+	      this.setState({ replying: false });
+	      _API2.default.postComment(this.props._id, body, 'seed').done(function (resp) {
+	        return _this3.fetchComments.bind(_this3)();
+	      }).fail(function (err) {
+	        return (0, _alerts.genErr)(err.responseText);
+	      });
+	    }
+	  }, {
+	    key: 'discard',
+	    value: function discard() {
+	      this.setState({ replying: false });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this4 = this;
+	
+	      var commentEls = [];
+	      var closeResource = [];
+	      if (this.props.isActive) {
+	        closeResource = _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeResource' });
+	        commentEls = this.state.allComments.map(function (comment, i) {
+	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { token: _this4.state.token,
+	            update: _this4.fetchComments.bind(_this4),
+	            key: i }));
+	        });
+	      }
+	      var addedClasses = (0, _classnames2.default)('resource', {
+	        active: this.props.isActive,
+	        green: this.props.isGreen
+	      });
+	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
+	        discard: this.discard.bind(this) }) : [];
+	      return _react2.default.createElement(
+	        'div',
+	        { className: addedClasses },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { onClick: this.headerClicked.bind(this), className: 'resourceHead' },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'resourceTitle' },
+	              _react2.default.createElement(
+	                'strong',
+	                null,
+	                this.props.title
+	              ),
+	              ' — ',
+	              this.props.user.username,
+	              closeResource
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container resourceContent' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'panel-body resourceBody' },
+	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.body) } })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'resourceFooter' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'timeStamp' },
+	                (0, _time.formatTime)(this.props.timestamp)
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'btn btn-success replyResourceButton', href: '#', onClick: this.reply.bind(this) },
+	                'reply'
+	              )
+	            ),
+	            newComment,
+	            this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
+	            commentEls
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Resource;
+	}(_react2.default.Component);
+	
+	exports.default = Resource;
+
+/***/ },
 /* 183 */
 /*!***********************************!*\
   !*** ./js/components/Comment.jsx ***!
@@ -37916,7 +38134,172 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 289 */,
+/* 289 */
+/*!********************************************!*\
+  !*** ./js/components/NewResourceModal.jsx ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _API = __webpack_require__(/*! ../API */ 172);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
+	
+	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
+	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NewResourceModal = function (_React$Component) {
+	  _inherits(NewResourceModal, _React$Component);
+	
+	  function NewResourceModal(props) {
+	    _classCallCheck(this, NewResourceModal);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewResourceModal).call(this, props));
+	
+	    _this.displayName = 'NewResourceModal.jsx';
+	    _this.state = { loading: false };
+	    return _this;
+	  }
+	
+	  _createClass(NewResourceModal, [{
+	    key: 'newResource',
+	    value: function newResource() {
+	      if (!(0, _authorization.canHazToken)()) return (0, _alerts.pleaseLogin)();
+	      $('#newResourceModal').modal('show');
+	    }
+	  }, {
+	    key: 'createResource',
+	    value: function createResource() {
+	      var _this2 = this;
+	
+	      var title = this.refs.title.value;
+	      var body = this.refs.body.value;
+	      if (title.length === 0 || body.length === 0) {
+	        return (0, _alerts.genErr)('Title and Body both required!');
+	      }
+	      $('#newResourceModal .input').prop('disabled', true); // disable inputs
+	      this.setState({ loading: true });
+	      _API2.default.postResource(title, body).done(function () {
+	        $('#newResourceModal').modal('hide');
+	        _this2.refs.title.value = '';
+	        _this2.refs.body.value = '';
+	        _this2.props.resourcePosted(function () {
+	          $('#newResourceModal .input').prop('disabled', false);
+	        });
+	      }).fail(function (err) {
+	        $('#newResourceModal .input').prop('disabled', false);
+	        (0, _alerts.genErr)(err.responseText);
+	      }).always(function () {
+	        return _this2.setState({ loading: false });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('img', { src: './img/fab.png', id: 'actionButon', className: 'floatingActionButton', onClick: this.newResource.bind(this), 'data-target': '#newResourceModal' }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'modal fade', id: 'newResourceModal' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-dialog', role: 'document' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-content' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-header' },
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'close', 'data-dismiss': 'modal' },
+	                  _react2.default.createElement(
+	                    'span',
+	                    { 'aria-hidden': 'true' },
+	                    '×'
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'h4',
+	                  { className: 'modal-title', id: 'resourceModalLabel' },
+	                  'Create a new resource.'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-body' },
+	                _react2.default.createElement('input', { type: 'text', ref: 'title', className: 'newResourceTitle input', placeholder: 'Title', required: true }),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'spinnerContainer' },
+	                  this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : []
+	                ),
+	                _react2.default.createElement('textarea', { id: 'newTitleBody', placeholder: '...', className: 'form-control input', ref: 'body', rows: '5', required: true })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'modal-footer' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'markdownNotice' },
+	                  '*Green it will render ',
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: 'https://help.github.com/articles/markdown-basics/' },
+	                    'markdown'
+	                  ),
+	                  '!'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'btn btn-default input', 'data-dismiss': 'modal' },
+	                  'Discard'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button', className: 'btn btn-primary input', onClick: this.createResource.bind(this) },
+	                  'Post'
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NewResourceModal;
+	}(_react2.default.Component);
+	
+	exports.default = NewResourceModal;
+
+/***/ },
 /* 290 */
 /*!**************************************!*\
   !*** ./js/components/splashPage.jsx ***!
@@ -38213,391 +38596,6 @@
 	
 	// exports
 
-
-/***/ },
-/* 297 */
-/*!********************************************!*\
-  !*** ./js/components/NewResourceModal.jsx ***!
-  \********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _API = __webpack_require__(/*! ../API */ 172);
-	
-	var _API2 = _interopRequireDefault(_API);
-	
-	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
-	
-	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
-	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
-	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var NewTopicModal = function (_React$Component) {
-	  _inherits(NewTopicModal, _React$Component);
-	
-	  function NewTopicModal(props) {
-	    _classCallCheck(this, NewTopicModal);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewTopicModal).call(this, props));
-	
-	    _this.displayName = 'NewTopicModal.jsx';
-	    _this.state = { loading: false };
-	    return _this;
-	  }
-	
-	  _createClass(NewTopicModal, [{
-	    key: 'newTopic',
-	    value: function newTopic() {
-	      if (!(0, _authorization.canHazToken)()) return (0, _alerts.pleaseLogin)();
-	      $('#newTopicModal').modal('show');
-	    }
-	  }, {
-	    key: 'createTopic',
-	    value: function createTopic() {
-	      var _this2 = this;
-	
-	      var title = this.refs.title.value;
-	      var body = this.refs.body.value;
-	      if (title.length === 0 || body.length === 0) {
-	        return (0, _alerts.genErr)('Title and Body both required!');
-	      }
-	      $('#newTopicModal .input').prop('disabled', true); // disable inputs
-	      this.setState({ loading: true });
-	      _API2.default.postTopic(title, body).done(function () {
-	        $('#newTopicModal').modal('hide');
-	        _this2.refs.title.value = '';
-	        _this2.refs.body.value = '';
-	        _this2.props.resourcePosted(function () {
-	          $('#newTopicModal .input').prop('disabled', false);
-	        });
-	      }).fail(function (err) {
-	        $('#newTopicModal .input').prop('disabled', false);
-	        (0, _alerts.genErr)(err.responseText);
-	      }).always(function () {
-	        return _this2.setState({ loading: false });
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement('img', { src: './img/fab.png', id: 'actionButon', className: 'floatingActionButton', onClick: this.newTopic.bind(this), 'data-target': '#newTopicModal' }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'modal fade', id: 'newTopicModal' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'modal-dialog', role: 'document' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'modal-content' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'modal-header' },
-	                _react2.default.createElement(
-	                  'button',
-	                  { type: 'button', className: 'close', 'data-dismiss': 'modal' },
-	                  _react2.default.createElement(
-	                    'span',
-	                    { 'aria-hidden': 'true' },
-	                    '×'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'h4',
-	                  { className: 'modal-title', id: 'resourceModalLabel' },
-	                  'Create a new resource.'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'modal-body' },
-	                _react2.default.createElement('input', { type: 'text', ref: 'title', className: 'newTopicTitle input', placeholder: 'Title', required: true }),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'spinnerContainer' },
-	                  this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : []
-	                ),
-	                _react2.default.createElement('textarea', { id: 'newTitleBody', placeholder: '...', className: 'form-control input', ref: 'body', rows: '5', required: true })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'modal-footer' },
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'markdownNotice' },
-	                  '*Green it will render ',
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: 'https://help.github.com/articles/markdown-basics/' },
-	                    'markdown'
-	                  ),
-	                  '!'
-	                ),
-	                _react2.default.createElement(
-	                  'button',
-	                  { type: 'button', className: 'btn btn-default input', 'data-dismiss': 'modal' },
-	                  'Discard'
-	                ),
-	                _react2.default.createElement(
-	                  'button',
-	                  { type: 'button', className: 'btn btn-primary input', onClick: this.createTopic.bind(this) },
-	                  'Post'
-	                )
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return NewTopicModal;
-	}(_react2.default.Component);
-	
-	exports.default = NewTopicModal;
-
-/***/ },
-/* 298 */
-/*!************************************!*\
-  !*** ./js/components/Resource.jsx ***!
-  \************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _API = __webpack_require__(/*! ../API */ 172);
-	
-	var _API2 = _interopRequireDefault(_API);
-	
-	var _Comment = __webpack_require__(/*! ./Comment.jsx */ 183);
-	
-	var _Comment2 = _interopRequireDefault(_Comment);
-	
-	var _NewComment = __webpack_require__(/*! ./NewComment.jsx */ 184);
-	
-	var _NewComment2 = _interopRequireDefault(_NewComment);
-	
-	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 177);
-	
-	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
-	
-	var _classnames = __webpack_require__(/*! classnames */ 187);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _alerts = __webpack_require__(/*! ../util/alerts */ 162);
-	
-	var _authorization = __webpack_require__(/*! ../util/authorization */ 173);
-	
-	var _time = __webpack_require__(/*! ../util/time */ 188);
-	
-	var _store = __webpack_require__(/*! ../util/store */ 174);
-	
-	var _marked = __webpack_require__(/*! marked */ 288);
-	
-	var _marked2 = _interopRequireDefault(_marked);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	_marked2.default.setOptions({
-	  renderer: new _marked2.default.Renderer(),
-	  gfm: true,
-	  tables: true,
-	  breaks: false,
-	  pedantic: false,
-	  sanitize: true,
-	  smartLists: true,
-	  smartypants: false
-	});
-	
-	var Resource = function (_React$Component) {
-	  _inherits(Resource, _React$Component);
-	
-	  function Resource(props) {
-	    _classCallCheck(this, Resource);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Resource).call(this, props));
-	
-	    _this.state = {
-	      allComments: [],
-	      token: _store.store.getDatum("token") ? _store.store.getDatum("token") : "",
-	      replying: false,
-	      loading: true
-	    };
-	
-	    _store.store.registerListener('token', function () {
-	      _this.setState({ token: _store.store.getDatum('token') });
-	    });
-	    return _this;
-	  }
-	
-	  _createClass(Resource, [{
-	    key: 'headerClicked',
-	    value: function headerClicked() {
-	      if (!this.props.isActive) {
-	        this.fetchComments.bind(this)();
-	      }
-	      this.props.onClick();
-	    }
-	  }, {
-	    key: 'fetchComments',
-	    value: function fetchComments(callback) {
-	      var _this2 = this;
-	
-	      _API2.default.getComments(this.props._id).done(function (resp) {
-	        _this2.setState({ allComments: resp, loading: false }, function () {
-	          console.log("resource state has been set", resp);
-	        });
-	        if (callback) callback();
-	      }).fail(function (err) {
-	        console.log(err);
-	      });
-	    }
-	  }, {
-	    key: 'reply',
-	    value: function reply(e) {
-	      e.preventDefault();
-	      var haveToken = (0, _authorization.canHazToken)();
-	      if (!haveToken) return (0, _alerts.pleaseLogin)();
-	      this.setState({ replying: haveToken });
-	    }
-	  }, {
-	    key: 'postComment',
-	    value: function postComment(body) {
-	      var _this3 = this;
-	
-	      this.setState({ replying: false });
-	      _API2.default.postComment(this.props._id, body, 'seed').done(function (resp) {
-	        return _this3.fetchComments.bind(_this3)();
-	      }).fail(function (err) {
-	        return (0, _alerts.genErr)(err.responseText);
-	      });
-	    }
-	  }, {
-	    key: 'discard',
-	    value: function discard() {
-	      this.setState({ replying: false });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this4 = this;
-	
-	      var commentEls = [];
-	      var closeResource = [];
-	      if (this.props.isActive) {
-	        closeResource = _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeResource' });
-	        commentEls = this.state.allComments.map(function (comment, i) {
-	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { token: _this4.state.token,
-	            update: _this4.fetchComments.bind(_this4),
-	            key: i }));
-	        });
-	      }
-	      var addedClasses = (0, _classnames2.default)('resource', {
-	        active: this.props.isActive,
-	        green: this.props.isGreen
-	      });
-	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
-	        discard: this.discard.bind(this) }) : [];
-	      return _react2.default.createElement(
-	        'div',
-	        { className: addedClasses },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { onClick: this.headerClicked.bind(this), className: 'resourceHead' },
-	            _react2.default.createElement(
-	              'h4',
-	              { className: 'resourceTitle' },
-	              _react2.default.createElement(
-	                'strong',
-	                null,
-	                this.props.title
-	              ),
-	              ' — ',
-	              this.props.user.username,
-	              closeResource
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'container resourceContent' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'panel-body resourceBody' },
-	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.body) } })
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'resourceFooter' },
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'timeStamp' },
-	                (0, _time.formatTime)(this.props.timestamp)
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { className: 'btn btn-success replyResourceButton', href: '#', onClick: this.reply.bind(this) },
-	                'reply'
-	              )
-	            ),
-	            newComment,
-	            this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
-	            commentEls
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Resource;
-	}(_react2.default.Component);
-	
-	exports.default = Resource;
 
 /***/ }
 /******/ ]);
