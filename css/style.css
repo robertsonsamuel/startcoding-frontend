@@ -196,7 +196,7 @@ img:hover{
   background-color: #D32F2F;
 }
 
-.newTopicTitle {
+.newResourceTitle {
   margin-bottom: 1em;
 }
 
@@ -234,7 +234,7 @@ textarea {
   display: none;
 }
 
-#newTopicModal {
+#newResourceModal {
   z-index: 2000;
   position: fixed;
   top: 15%;
@@ -249,7 +249,7 @@ textarea {
   margin-bottom: 0;
   overflow-y: scroll;
 }
-.displayTopic {
+.displayResource {
   overflow: hidden;
 }
 
@@ -270,18 +270,18 @@ a.disabled {
     pointer-events: none;
     color: lightgrey;
 }
-.topicContent {
+.resourceContent {
   display: none;
 }
-.active .topicContent {
+.active .resourceContent {
   display: block;
 }
-.topicTitle {
+.resourceTitle {
   margin: 0px;
   padding: 0.5em 1em;
   text-align: center;
 }
-.panel-body.topicBody {
+.panel-body.resourceBody {
   white-space: pre-line;
   border-left: 26px solid green;
   border-top: 2px solid green;
@@ -293,30 +293,30 @@ a.disabled {
   margin-top: 10px;
 }
 
-.topicHead:hover{
+.resourceHead:hover{
   background-color: #F5F5F5;
   cursor: pointer;
 }
 
-.active .topicHead {
+.active .resourceHead {
   background-color: #F5F5F5;
 }
 
-.closeTopic {
+.closeResource {
   display: none;
 }
-.active .closeTopic {
+.active .closeResource {
   display: inline;
   float: right;
   color: #4caf50;
 }
-.replyTopicButton {
+.replyResourceButton {
     float: right;
 }
-.topicFooter {
+.resourceFooter {
     padding: 20px;
 }
-.green .topicTitle {
+.green .resourceTitle {
   background: #E8F5E9;
 }
 .comment {

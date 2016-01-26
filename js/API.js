@@ -1,4 +1,4 @@
-let apiUrl = 'https://vast-sierra-7757.herokuapp.com';
+let apiUrl = 'https://protected-river-69772.herokuapp.com';
 // let apiUrl = 'http://localhost:3000';
 
 import {canHazToken, parseToken} from './util/authorization';
@@ -30,16 +30,16 @@ let API = {
       beforeSend: setAuthHeader
     })
     .done( resp => {
-      resp.greenTopics = new Set(resp.greenTopics);
+      resp.greenResources = new Set(resp.greenResources);
       store.saveDatum('me', resp);
     })
   },
-  getTopics() {
-    return $.get(`${apiUrl}/topics/`);
+  getResources() {
+    return $.get(`${apiUrl}/resources/`);
   },
-  postTopic(title, body) {
+  postResource(title, body) {
     return $.ajax({
-      url: `${apiUrl}/topics/`,
+      url: `${apiUrl}/resources/`,
       type: 'POST',
       beforeSend: setAuthHeader,
       datatype: 'json',
@@ -49,14 +49,14 @@ let API = {
       }
     });
   },
-  getComments(topicId) {
+  getComments(resourceId) {
     let me = store.getDatum('me');
     if (me) {
-      me.greenTopics.add(topicId);
+      me.greenResources.add(resourceId);
       store.saveDatum('me', me);
     };
     return $.ajax({
-      url: `${apiUrl}/comments/${topicId}`,
+      url: `${apiUrl}/comments/${resourceId}`,
       type: 'GET',
       beforeSend: setAuthHeader
     });
