@@ -40,6 +40,9 @@ class Navbar extends React.Component {
   showLogin() {
     hideLoginRegisterLogoutUsername(false, true, true, false);
   }
+  toProfile(){
+
+  }
   logout() {
     localStorage.removeItem('token');
     store.saveDatum('me', null);

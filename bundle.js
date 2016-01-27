@@ -20299,6 +20299,9 @@
 	      hideLoginRegisterLogoutUsername(false, true, true, false);
 	    }
 	  }, {
+	    key: 'toProfile',
+	    value: function toProfile() {}
+	  }, {
 	    key: 'logout',
 	    value: function logout() {
 	      localStorage.removeItem('token');
