@@ -67,15 +67,15 @@
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
-	var _splashPage = __webpack_require__(/*! ./components/splashPage.jsx */ 291);
+	var _splashPage = __webpack_require__(/*! ./components/splashPage.jsx */ 294);
 	
 	var _splashPage2 = _interopRequireDefault(_splashPage);
 	
-	__webpack_require__(/*! ../css/sweetalert.css */ 292);
+	__webpack_require__(/*! ../css/sweetalert.css */ 295);
 	
-	__webpack_require__(/*! ../css/google.css */ 294);
+	__webpack_require__(/*! ../css/google.css */ 297);
 	
-	__webpack_require__(/*! ../css/style.css */ 296);
+	__webpack_require__(/*! ../css/style.css */ 299);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -20664,7 +20664,8 @@
 	      }).fail(function (err) {
 	        return (0, _alerts.LoginError)(err.responseText);
 	      }).always(function () {
-	        return _this2.setState({ loading: false });
+	        _this2.setState({ loading: false });
+	        $('#loginRegisterForms').show();
 	      });
 	    }
 	  }, {
@@ -20694,7 +20695,8 @@
 	      }).fail(function (err) {
 	        return (0, _alerts.RegisterError)(err.responseText);
 	      }).always(function () {
-	        return _this3.setState({ loading: false });
+	        _this3.setState({ loading: false });
+	        $('#loginRegisterForms').show();
 	      });
 	    }
 	  }, {
@@ -38356,7 +38358,7 @@
 	
 	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
 	
-	var _CategoryDropdown = __webpack_require__(/*! ./CategoryDropdown.jsx */ 300);
+	var _CategoryDropdown = __webpack_require__(/*! ./CategoryDropdown.jsx */ 291);
 	
 	var _CategoryDropdown2 = _interopRequireDefault(_CategoryDropdown);
 	
@@ -38364,7 +38366,7 @@
 	
 	var _alerts = __webpack_require__(/*! ../util/alerts */ 171);
 	
-	__webpack_require__(/*! ../../css/newResourceModal.css */ 298);
+	__webpack_require__(/*! ../../css/newResourceModal.css */ 292);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38547,6 +38549,122 @@
 
 /***/ },
 /* 291 */
+/*!********************************************!*\
+  !*** ./js/components/CategoryDropdown.jsx ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var CategoryDropdown = function (_React$Component) {
+	  _inherits(CategoryDropdown, _React$Component);
+	
+	  function CategoryDropdown(props) {
+	    _classCallCheck(this, CategoryDropdown);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CategoryDropdown).call(this, props));
+	
+	    _this.state = {
+	      categoriesArrary: ['javascript', 'python', 'go', 'ruby', 'html', 'css', 'general'],
+	      defaultSelector: window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0]
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(CategoryDropdown, [{
+	    key: 'render',
+	    value: function render() {
+	
+	      var categories = this.state.categoriesArrary.map(function (category, i) {
+	        return _react2.default.createElement(
+	          'option',
+	          { key: i, value: category },
+	          category
+	        );
+	      });
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'select',
+	          { value: this.state.defaultSelector, onChange: this.props.selectCategory, className: 'form-control' },
+	          categories
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return CategoryDropdown;
+	}(_react2.default.Component);
+	
+	exports.default = CategoryDropdown;
+
+/***/ },
+/* 292 */
+/*!**********************************!*\
+  !*** ./css/newResourceModal.css ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../~/css-loader!./newResourceModal.css */ 293);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./newResourceModal.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./newResourceModal.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 293 */
+/*!*************************************************!*\
+  !*** ./~/css-loader!./css/newResourceModal.css ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 169)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".newResourceTitle{\n  width: 100%;\n}\n.newResourceLink{\n  width: 100%;\n}\n.categorySelected{\n  width: 100%;\n  display: inline-block;\n}\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 294 */
 /*!**************************************!*\
   !*** ./js/components/splashPage.jsx ***!
   \**************************************/
@@ -38706,7 +38824,7 @@
 	exports.default = SplashPage;
 
 /***/ },
-/* 292 */
+/* 295 */
 /*!****************************!*\
   !*** ./css/sweetalert.css ***!
   \****************************/
@@ -38715,7 +38833,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./sweetalert.css */ 293);
+	var content = __webpack_require__(/*! !./../~/css-loader!./sweetalert.css */ 296);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
@@ -38735,7 +38853,7 @@
 	}
 
 /***/ },
-/* 293 */
+/* 296 */
 /*!*******************************************!*\
   !*** ./~/css-loader!./css/sweetalert.css ***!
   \*******************************************/
@@ -38752,7 +38870,7 @@
 
 
 /***/ },
-/* 294 */
+/* 297 */
 /*!************************!*\
   !*** ./css/google.css ***!
   \************************/
@@ -38761,7 +38879,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./google.css */ 295);
+	var content = __webpack_require__(/*! !./../~/css-loader!./google.css */ 298);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
@@ -38781,7 +38899,7 @@
 	}
 
 /***/ },
-/* 295 */
+/* 298 */
 /*!***************************************!*\
   !*** ./~/css-loader!./css/google.css ***!
   \***************************************/
@@ -38798,7 +38916,7 @@
 
 
 /***/ },
-/* 296 */
+/* 299 */
 /*!***********************!*\
   !*** ./css/style.css ***!
   \***********************/
@@ -38807,7 +38925,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./style.css */ 297);
+	var content = __webpack_require__(/*! !./../~/css-loader!./style.css */ 300);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
@@ -38827,7 +38945,7 @@
 	}
 
 /***/ },
-/* 297 */
+/* 300 */
 /*!**************************************!*\
   !*** ./~/css-loader!./css/style.css ***!
   \**************************************/
@@ -38842,122 +38960,6 @@
 	
 	// exports
 
-
-/***/ },
-/* 298 */
-/*!**********************************!*\
-  !*** ./css/newResourceModal.css ***!
-  \**********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./newResourceModal.css */ 299);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./newResourceModal.css", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./newResourceModal.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 299 */
-/*!*************************************************!*\
-  !*** ./~/css-loader!./css/newResourceModal.css ***!
-  \*************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 169)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".newResourceTitle{\n  width: 100%;\n}\n.newResourceLink{\n  width: 100%;\n}\n.categorySelected{\n  width: 100%;\n  display: inline-block;\n}\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 300 */
-/*!********************************************!*\
-  !*** ./js/components/CategoryDropdown.jsx ***!
-  \********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var CategoryDropdown = function (_React$Component) {
-	  _inherits(CategoryDropdown, _React$Component);
-	
-	  function CategoryDropdown(props) {
-	    _classCallCheck(this, CategoryDropdown);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CategoryDropdown).call(this, props));
-	
-	    _this.state = {
-	      categoriesArrary: ['javascript', 'python', 'go', 'ruby', 'html', 'css', 'general'],
-	      defaultSelector: window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0]
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(CategoryDropdown, [{
-	    key: 'render',
-	    value: function render() {
-	
-	      var categories = this.state.categoriesArrary.map(function (category, i) {
-	        return _react2.default.createElement(
-	          'option',
-	          { key: i, value: category },
-	          category
-	        );
-	      });
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'select',
-	          { value: this.state.defaultSelector, onChange: this.props.selectCategory, className: 'form-control' },
-	          categories
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return CategoryDropdown;
-	}(_react2.default.Component);
-	
-	exports.default = CategoryDropdown;
 
 /***/ }
 /******/ ]);

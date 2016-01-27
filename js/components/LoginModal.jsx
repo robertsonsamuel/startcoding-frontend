@@ -12,7 +12,7 @@ class LoginModal extends React.Component {
     this.displayName = 'LoginModal.jsx';
     this.state = { loading: false };
   }
-  
+
   resetModalAfterSuccess() {
     this.refs.loginUsername.value = '';
     this.refs.loginPassword.value = '';
@@ -45,7 +45,10 @@ class LoginModal extends React.Component {
       store.saveDatum('token', token);
     })
     .fail(err => LoginError(err.responseText))
-    .always(() => this.setState({ loading: false }));
+    .always(() => {
+      this.setState({ loading: false })
+      $('#loginRegisterForms').show();
+    });
   }
 
   register(e) {
@@ -71,7 +74,10 @@ class LoginModal extends React.Component {
       store.saveDatum('token', token);
     })
     .fail(err => RegisterError(err.responseText))
-    .always(() => this.setState({ loading: false }));
+    .always(() => {
+      this.setState({ loading: false })
+      $('#loginRegisterForms').show();
+    });
   }
 
   render() {
@@ -108,7 +114,7 @@ class LoginModal extends React.Component {
                   </form>
                 </div>
               </div>
-            
+
             </div>
           </div>
         </div>
