@@ -1,28 +1,37 @@
 import React from 'react';
 import API from '../API';
 import LoadingSpinner from './LoadingSpinner.jsx';
+import CategoryDropdown from './CategoryDropdown.jsx';
 import {canHazToken} from '../util/authorization';
 import {pleaseLogin,genErr} from '../util/alerts';
+import '../../css/newResourceModal.css';
 
 class NewResourceModal extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = 'NewResourceModal.jsx';
-    this.state = { loading: false };
+    this.state = { loading: false, selectedValue: 'JavaScript' };
   }
   newResource(){
     if(!canHazToken()) return pleaseLogin();
     $('#newResourceModal').modal('show');
   }
+  selectCategory(e){
+    e.preventDefault();
+    console.log(e.target.value);
+    this.setState({selectedValue: e.target.value});
+  }
   createResource(){
     let title = this.refs.title.value;
     let body = this.refs.body.value;
-    if(title.length === 0 || body.length === 0){
+    let aLink = this.refs.aLink.value;
+    let category = this.state.selectedValue;
+    if(title.length === 0 || body.length === 0 || aLink.length === 0){
       return genErr('Title and Body both required!')
     }
     $('#newResourceModal .input').prop('disabled', true); // disable inputs
     this.setState({ loading: true });
-    API.postResource(title, body)
+    API.postResource(title, body, aLink, category)
     .done(() =>{
       $('#newResourceModal').modal('hide');
       this.refs.title.value = '';
@@ -41,8 +50,6 @@ class NewResourceModal extends React.Component {
     return (
       <div>
         <img src="./img/fab.png" id="actionButon" className="floatingActionButton" onClick={this.newResource.bind(this)}  data-target="#newResourceModal" />
-
-
         <div className="modal fade" id="newResourceModal">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -51,12 +58,32 @@ class NewResourceModal extends React.Component {
                 <h4 className="modal-title" id="resourceModalLabel">Create a new resource.</h4>
               </div>
               <div className="modal-body">
-                <input type="text" ref="title" className="newResourceTitle input" placeholder="Title" required />
+                <div className="row">
+                  <div className="col-sm-12 col-md-12 col-lg-12">
+                    <input type="text" ref="title" className="newResourceTitle input" placeholder="Title" required />
+                    <br/>
+                    <input type="text" ref="aLink" className="newResourceLink input" placeholder="Link or URL" required />
+                    <br/>
+                  </div>
+                </div>
                 <div className="spinnerContainer">
                   {this.state.loading ? <LoadingSpinner /> : []}
                 </div>
-                <textarea id="newTitleBody" placeholder="..." className="form-control input" ref="body" rows="5" required >
-                </textarea>
+                <br/>
+                <div className="row">
+                  <div className="col-sm-12 col-md-12 col-lg-12">
+                    <textarea id="newTitleBody" placeholder="..." className="form-control input" ref="body" rows="5" required >
+                    </textarea>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-6 col-md-6">
+                    <label htmlFor="categoryDropdown">Select a category:</label>
+                    <CategoryDropdown selectCategory={this.selectCategory.bind(this)} />
+                  </div>
+                  <div className="col-sm-6 col-md-6">
+                  </div>
+                </div>
               </div>
               <div className="modal-footer">
                 <span className="markdownNotice">*Your post will render <a href="https://help.github.com/articles/markdown-basics/">markdown</a>!</span>

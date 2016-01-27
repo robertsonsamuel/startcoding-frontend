@@ -36,7 +36,7 @@ let API = {
   getResources() {
     return $.get(`${apiUrl}/resources/`);
   },
-  postResource(title, body) {
+  postResource(title, body, aLink, category) {
     return $.ajax({
       url: `${apiUrl}/resources/`,
       type: 'POST',
@@ -44,7 +44,9 @@ let API = {
       datatype: 'json',
       data: {
         title: title,
-        body: body
+        body: body,
+        link: aLink,
+        category: category
       }
     });
   },
