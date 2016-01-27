@@ -1,12 +1,12 @@
 {
-  "name": "greenit-frontend",
+  "name": "starcoding-frontend",
   "description": "An awesome react reddit clone",
   "main": "webpack.config.js",
   "authors": [
     "Samuel Robertson <samuel.robertson93@gmail.com>"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/paulgoblin/greenit-frontend",
+  "homepage": "https://github.com/paulgoblin/starcoding-frontend",
   "moduleType": [],
   "ignore": [
     "**/.*",

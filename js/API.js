@@ -30,7 +30,6 @@ let API = {
       beforeSend: setAuthHeader
     })
     .done( resp => {
-      resp.greenResources = new Set(resp.greenResources);
       store.saveDatum('me', resp);
     })
   },
@@ -50,11 +49,6 @@ let API = {
     });
   },
   getComments(resourceId) {
-    let me = store.getDatum('me');
-    if (me) {
-      me.greenResources.add(resourceId);
-      store.saveDatum('me', me);
-    };
     return $.ajax({
       url: `${apiUrl}/comments/${resourceId}`,
       type: 'GET',

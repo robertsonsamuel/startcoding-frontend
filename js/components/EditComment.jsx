@@ -29,7 +29,7 @@ class EditComment extends React.Component {
           ref="editText"
           rows="4"></textarea>
         <span className="new-comment-buttons">
-          <span className="markdownNotice">*Green it will render <a href="https://help.github.com/articles/markdown-basics/">markdown</a>!</span>
+          <span className="markdownNotice">*Your post will render <a href="https://help.github.com/articles/markdown-basics/">markdown</a>!</span>
           <button className="btn btn-default" onClick={this.discard.bind(this)}>Discard Changes</button>
           <button className="btn btn-primary" onClick={this.update.bind(this)}>Save Edit</button>
         </span>
