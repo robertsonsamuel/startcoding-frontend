@@ -31,6 +31,7 @@ class Navbar extends React.Component {
   componentDidMount() {
     if (init()) {
       hideLoginRegisterLogoutUsername(true, true, false, true);
+      $('#loginRegister').hide();
     }
   }
   showRegister() {
@@ -39,29 +40,12 @@ class Navbar extends React.Component {
   showLogin() {
     hideLoginRegisterLogoutUsername(false, true, true, false);
   }
-  login(userInfo) {
-    API.login(userInfo)
-    .done(token => {
-      clearInput();
-      hideLoginRegisterLogoutUsername(true, true, false, true);
-    })
-    .fail(err => LoginError(err.responseText));
-  }
-  register(newUserInfo) {
-    API.register(newUserInfo)
-    .done(token => {
-      clearInput();
-      localStorage.setItem('token', token);
-      store.saveDatum('token', token);
-      hideLoginRegisterLogoutUsername(true, true, false, true);
-    })
-    .fail(err => RegisterError(err.responseText));
-  }
   logout() {
     localStorage.removeItem('token');
     store.saveDatum('me', null);
     store.saveDatum('token', null);
     hideLoginRegisterLogoutUsername(false, true, true, false);
+    $('#loginRegister').show();
   }
   goHome(e) {
     e.preventDefault();
@@ -90,14 +74,12 @@ class Navbar extends React.Component {
                   </div>
                   <span className="startCodingName">Start Coding</span>
               </div>
-
-
             </div>
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
               <ul id="" className="nav navbar-nav navbar-left">
               </ul>
-              <ul id="" className="nav navbar-nav navbar-right">
+              <ul id="loginRegister" className="nav navbar-nav navbar-right">
                 <li>
                   <a href="#" data-toggle="modal" data-target="#LoginModal">
                     <strong>Login / Register</strong>
