@@ -41,15 +41,15 @@ let catagories = [
 
 class SplashPage extends React.Component {
   render(){
-    let resourcePanels = catagories.map( (catagory, i) => {
+    let resourcePanels = catagories.map( (category, i) => {
       return (
         <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels"  key={i}>
           <div className="thumbnail">
-            <img className="techImage" src={catagory.imgSrc}  height="150px" alt="..." />
+            <img className="techImage" src={category.imgSrc}  height="150px" alt="..." />
             <div className="caption">
-              <h3>{catagory.name}</h3>
-              <p>{catagory.short}</p>
-              <p><a href={catagory.href} className="btn btn-primary" role="button">Learn about {catagory.name}</a></p>
+              <h3>{category.name}</h3>
+              <p>{category.short}</p>
+              <p><a href={category.href} className="btn btn-primary" role="button">Learn about {category.name}</a></p>
             </div>
           </div>
         </div>

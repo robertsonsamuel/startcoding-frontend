@@ -24,6 +24,7 @@ class LoginModal extends React.Component {
     $('#Logout').show();
     $('#LoginModal').modal('hide');
     let payload = parseToken(store.getDatum('token'));
+    console.log('payload', payload);
     $('#username').text(payload.username);
     $('#welcome').show();
     setTimeout(() => $('#loginRegisterForms').show(), 1000);
@@ -40,9 +41,10 @@ class LoginModal extends React.Component {
       password: this.refs.loginPassword.value
     })
     .done(token => {
-      (this.resetModalAfterSuccess.bind(this))();
       localStorage.setItem('token', token);
       store.saveDatum('token', token);
+      
+      (this.resetModalAfterSuccess.bind(this))();
     })
     .fail(err => LoginError(err.responseText))
     .always(() => {
@@ -69,9 +71,9 @@ class LoginModal extends React.Component {
       password2: this.refs.registerPassword2.value
     })
     .done(token => {
-      (this.resetModalAfterSuccess.bind(this))();
       localStorage.setItem('token', token);
       store.saveDatum('token', token);
+      (this.resetModalAfterSuccess.bind(this))();
     })
     .fail(err => RegisterError(err.responseText))
     .always(() => {
@@ -97,20 +99,20 @@ class LoginModal extends React.Component {
               <div className="row" id="loginRegisterForms">
                 <div className="col-xs-12 col-sm-6">
                   <h1>Login</h1>
-                  <form>
+                  <form onSubmit={this.login.bind(this)}>
                     <input ref="loginUsername" type="text" placeholder="Username" required/><br/>
                     <input ref="loginPassword" type="password" placeholder="Password" required/><br/>
-                    <button onClick={this.login.bind(this)} type="submit" className="form-control btn btn-primary">Log In</button>
+                    <button type="submit" className="form-control btn btn-primary">Log In</button>
                   </form>
                 </div>
                 <div className="col-xs-12 col-sm-6">
                   <h1>Register</h1>
-                  <form>
+                  <form onSubmit={this.register.bind(this)}>
                     <input ref="registerUsername" type="text" placeholder="Username" required/><br/>
                     <input ref="registerEmail" type="email" placeholder="Email" required/><br/>
                     <input ref="registerPassword" type="password" placeholder="Password" required/><br/>
                     <input ref="registerPassword2" type="password" placeholder="Retype Password" required/><br/>
-                    <button onClick={this.register.bind(this)} type="submit" className="form-control btn btn-primary">Register</button>
+                    <button type="submit" className="form-control btn btn-primary">Register</button>
                   </form>
                 </div>
               </div>

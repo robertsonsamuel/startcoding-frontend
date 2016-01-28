@@ -21,7 +21,7 @@ class App extends React.Component {
         return (
           <div>
             <Navbar/>
-            <Main catagory={this.props.location[0]}></Main>
+            <Main category={this.props.location[0]}></Main>
           </div>
         )
     }

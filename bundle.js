@@ -110,7 +110,7 @@
 	            'div',
 	            null,
 	            _react2.default.createElement(_Navbar2.default, null),
-	            _react2.default.createElement(_Main2.default, { catagory: this.props.location[0] })
+	            _react2.default.createElement(_Main2.default, { category: this.props.location[0] })
 	          );
 	      }
 	    }
@@ -20641,6 +20641,7 @@
 	      $('#Logout').show();
 	      $('#LoginModal').modal('hide');
 	      var payload = (0, _authorization.parseToken)(_store.store.getDatum('token'));
+	      console.log('payload', payload);
 	      $('#username').text(payload.username);
 	      $('#welcome').show();
 	      setTimeout(function () {
@@ -20661,9 +20662,10 @@
 	        username: this.refs.loginUsername.value,
 	        password: this.refs.loginPassword.value
 	      }).done(function (token) {
-	        _this2.resetModalAfterSuccess.bind(_this2)();
 	        localStorage.setItem('token', token);
 	        _store.store.saveDatum('token', token);
+	
+	        _this2.resetModalAfterSuccess.bind(_this2)();
 	      }).fail(function (err) {
 	        return (0, _alerts.LoginError)(err.responseText);
 	      }).always(function () {
@@ -20692,9 +20694,9 @@
 	        password: this.refs.registerPassword.value,
 	        password2: this.refs.registerPassword2.value
 	      }).done(function (token) {
-	        _this3.resetModalAfterSuccess.bind(_this3)();
 	        localStorage.setItem('token', token);
 	        _store.store.saveDatum('token', token);
+	        _this3.resetModalAfterSuccess.bind(_this3)();
 	      }).fail(function (err) {
 	        return (0, _alerts.RegisterError)(err.responseText);
 	      }).always(function () {
@@ -20748,14 +20750,14 @@
 	                  ),
 	                  _react2.default.createElement(
 	                    'form',
-	                    null,
+	                    { onSubmit: this.login.bind(this) },
 	                    _react2.default.createElement('input', { ref: 'loginUsername', type: 'text', placeholder: 'Username', required: true }),
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement('input', { ref: 'loginPassword', type: 'password', placeholder: 'Password', required: true }),
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement(
 	                      'button',
-	                      { onClick: this.login.bind(this), type: 'submit', className: 'form-control btn btn-primary' },
+	                      { type: 'submit', className: 'form-control btn btn-primary' },
 	                      'Log In'
 	                    )
 	                  )
@@ -20770,7 +20772,7 @@
 	                  ),
 	                  _react2.default.createElement(
 	                    'form',
-	                    null,
+	                    { onSubmit: this.register.bind(this) },
 	                    _react2.default.createElement('input', { ref: 'registerUsername', type: 'text', placeholder: 'Username', required: true }),
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement('input', { ref: 'registerEmail', type: 'email', placeholder: 'Email', required: true }),
@@ -20781,7 +20783,7 @@
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement(
 	                      'button',
-	                      { onClick: this.register.bind(this), type: 'submit', className: 'form-control btn btn-primary' },
+	                      { type: 'submit', className: 'form-control btn btn-primary' },
 	                      'Register'
 	                    )
 	                  )
@@ -20816,8 +20818,8 @@
 	
 	var _store = __webpack_require__(/*! ./util/store */ 165);
 	
-	var apiUrl = 'https://protected-river-69772.herokuapp.com';
-	// let apiUrl = 'http://localhost:3000';
+	//let apiUrl = 'https://protected-river-69772.herokuapp.com';
+	var apiUrl = 'http://localhost:3000';
 	
 	function setAuthHeader(xhr) {
 	  var token = _store.store.getDatum('token');
@@ -20846,8 +20848,8 @@
 	      _store.store.saveDatum('me', resp);
 	    });
 	  },
-	  getResources: function getResources() {
-	    return $.get(apiUrl + '/resources/');
+	  getResources: function getResources(category) {
+	    return $.get(apiUrl + '/resources/' + category);
 	  },
 	  postResource: function postResource(title, body, aLink, category) {
 	    return $.ajax({
@@ -22975,11 +22977,26 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 	
+	      console.log('componentWillMount', this.props.category);
 	      this.getResources.bind(this)();
 	      _store.eventEmitter.registerListener('goHome', function () {
 	        _this2.setState({ activeResource: false });
 	        _this2.getResources();
 	      });
+	    }
+	  }, {
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      console.log('should component update', nextProps);
+	      console.log('should component update thisprops', this.props.category);
+	      var currentResources = JSON.stringify(this.state.allResources);
+	      return nextProps.category !== this.props.category || nextState.loading !== this.state.loading;
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate() {
+	      console.log('componentWillUpdatee');
+	      this.getResources.bind(this)();
 	    }
 	  }, {
 	    key: 'handleResourceClick',
@@ -22991,7 +23008,8 @@
 	    value: function getResources(callback) {
 	      var _this3 = this;
 	
-	      _API2.default.getResources().done(function (resp) {
+	      console.log("getting resources", this.props.category);
+	      _API2.default.getResources(this.props.category).done(function (resp) {
 	        _this3.setState({ allResources: resp, loading: false });
 	      }).fail(function (err) {
 	        return (0, _alerts.genErr)(err.responseText);
@@ -23017,7 +23035,7 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          this.props.catagory
+	          this.props.category
 	        ),
 	        _react2.default.createElement(_NewResourceModal2.default, { resourcePosted: this.getResources.bind(this) }),
 	        this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
@@ -38737,35 +38755,35 @@
 	  _createClass(SplashPage, [{
 	    key: "render",
 	    value: function render() {
-	      var resourcePanels = catagories.map(function (catagory, i) {
+	      var resourcePanels = catagories.map(function (category, i) {
 	        return _react2.default.createElement(
 	          "div",
 	          { className: "col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels", key: i },
 	          _react2.default.createElement(
 	            "div",
 	            { className: "thumbnail" },
-	            _react2.default.createElement("img", { className: "techImage", src: catagory.imgSrc, height: "150px", alt: "..." }),
+	            _react2.default.createElement("img", { className: "techImage", src: category.imgSrc, height: "150px", alt: "..." }),
 	            _react2.default.createElement(
 	              "div",
 	              { className: "caption" },
 	              _react2.default.createElement(
 	                "h3",
 	                null,
-	                catagory.name
+	                category.name
 	              ),
 	              _react2.default.createElement(
 	                "p",
 	                null,
-	                catagory.short
+	                category.short
 	              ),
 	              _react2.default.createElement(
 	                "p",
 	                null,
 	                _react2.default.createElement(
 	                  "a",
-	                  { href: catagory.href, className: "btn btn-primary", role: "button" },
+	                  { href: category.href, className: "btn btn-primary", role: "button" },
 	                  "Learn about ",
-	                  catagory.name
+	                  category.name
 	                )
 	              )
 	            )

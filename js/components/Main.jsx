@@ -17,17 +17,29 @@ class Main extends React.Component {
     };
   }
   componentWillMount() {
+    console.log('componentWillMount',this.props.category);
     (this.getResources.bind(this))();
     eventEmitter.registerListener('goHome', () => {
       this.setState({activeResource: false });
       this.getResources();
     })
   }
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('should component update', nextProps);
+    console.log('should component update thisprops', this.props.category);
+    let currentResources = JSON.stringify(this.state.allResources);
+    return (nextProps.category !== this.props.category) || (nextState.loading !== this.state.loading);
+  }
+  componentWillUpdate(){
+    console.log('componentWillUpdatee');
+    (this.getResources.bind(this))();
+  }
   handleResourceClick(resourceId){
     this.setState({activeResource:this.state.activeResource === resourceId ? false : resourceId});
   }
   getResources(callback){
-    API.getResources()
+    console.log("getting resources", this.props.category);
+    API.getResources(this.props.category)
     .done( resp => {
       this.setState( {allResources: resp, loading: false} );
     })
@@ -46,7 +58,7 @@ class Main extends React.Component {
     let mainClasses = classNames('main', 'panel', {displayResource : this.state.activeResource})
     return (
       <div className={mainClasses}>
-        <h1>{this.props.catagory}</h1>
+        <h1>{this.props.category}</h1>
         <NewResourceModal resourcePosted={this.getResources.bind(this)} />
         {this.state.loading ? <LoadingSpinner /> : []}
         {resourceEls}
