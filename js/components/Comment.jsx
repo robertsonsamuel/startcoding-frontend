@@ -34,30 +34,36 @@ class Comment extends React.Component {
       meId: store.getDatum('me') ? store.getDatum('me')._id : '',
     };
   }
+
   componentWillMount() {
     store.registerListener('me', () => {
       let me = store.getDatum('me');
       this.setState({ meId: me ? me._id : "" });
     });
   }
+
   reply(e) {
     if (this.state.editing) return;
     e.preventDefault();
     if(!this.props.token) return pleaseLogin();
     this.setState({ replying: this.props.token });
   }
+
   edit(e){
     if (this.state.replying) return;
     e.preventDefault();
     this.setState({ editing: isAuthorized(this.props.user._id) });
   }
+
   discard() {
     this.setState({ replying: false });
     this.setState({ editing: false });
   }
+
   delete() {
     confirmDelete(this.deleteComment.bind(this))
   }
+
   postComment(body) {
     this.setState({ replying: false, loading: true });
     API.postComment(this.props._id, body)
@@ -68,6 +74,7 @@ class Comment extends React.Component {
     })
     .fail(err => genErr(err.responseText));
   }
+
   updateComment(update) {
     this.setState({ editing: false, updating: true });
     API.updateComment(this.props._id, update)
@@ -78,6 +85,7 @@ class Comment extends React.Component {
     })
     .fail(err => genErr(err.responseText));
   }
+
   handleVote(vote) {
     console.log("voting", this.state.me);
     if (!this.state.meId) {
@@ -90,11 +98,13 @@ class Comment extends React.Component {
     })
     .fail( err => console.log("error voting", err));
   }
+
   deleteComment(){
     API.deleteComment(this.props._id)
     .done(resp => this.props.update())
     .fail(err => swal('Delete Failed',err.responseText,'error'));
   }
+  
   render() {
     let payload = parseToken(this.props.token);
     let changeButtons = classNames({

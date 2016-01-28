@@ -313,9 +313,6 @@ a.disabled {
     pointer-events: none;
     color: lightgrey;
 }
-.resourceContent {
-  display: none;
-}
 .active .resourceContent {
   display: block;
 }

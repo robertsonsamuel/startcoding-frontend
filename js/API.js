@@ -33,8 +33,14 @@ let API = {
       store.saveDatum('me', resp);
     })
   },
+  getResourceById(id) {
+    return $.get(`${apiUrl}/resources/one/${id}`);
+  },
   getResources(category) {
-    return $.get(`${apiUrl}/resources/${category}`);
+    return $.get(`${apiUrl}/resources/${category}`)
+    .done((data) => {
+      store.saveDatum('resources', data);
+    });
   },
   postResource(title, body, aLink, category) {
     return $.ajax({

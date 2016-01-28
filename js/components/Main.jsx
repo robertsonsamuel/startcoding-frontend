@@ -1,7 +1,7 @@
 import React from 'react';
 import API from '../API';
 import LoadingSpinner from './LoadingSpinner.jsx';
-import Resource from './Resource.jsx';
+import ResourceCard from './ResourceCard.jsx';
 import NewResourceModal from './NewResourceModal.jsx';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
@@ -51,9 +51,10 @@ class Main extends React.Component {
   render() {
     let resourceEls = this.state.allResources.map((resource,i) => {
       let isActive = this.state.activeResource === resource._id;
-      return <Resource {...resource} isActive={isActive}
-                               onClick={this.handleResourceClick.bind(this,resource._id)}
-                               key={i}/>
+      return <ResourceCard {...resource}
+                           isActive={isActive}
+                           onClick={this.handleResourceClick.bind(this,resource._id)}
+                           key={i}/>
     });
     let mainClasses = classNames('main', 'panel', {displayResource : this.state.activeResource})
     return (

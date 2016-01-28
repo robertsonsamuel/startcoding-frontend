@@ -79,34 +79,23 @@ class Resource extends React.Component {
                                      key={i} />
       });
     }
-    let addedClasses = classNames('resource', {
-        active: this.props.isActive,
-      });
+    let addedClasses = classNames('resource');
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
                                                        discard={this.discard.bind(this)} />
                                          : [];
     return (
       <div className={addedClasses}>
-        <div>
-          <div onClick={this.headerClicked.bind(this)} className="resourceHead">
-            <h4 className="resourceTitle">
-              <strong>{this.props.title}</strong> &mdash; {this.props.user.username}
-              {closeResource}
-            </h4>
-          </div>
-          <div className="container resourceContent">
-            <div className="panel-body resourceBody">
-              <div dangerouslySetInnerHTML={{__html: marked(this.props.body)}} />
-            </div>
-            <div className="resourceFooter">
-              <span className="timeStamp">{formatTime(this.props.timestamp)}</span>
-              <button className="btn btn-success replyResourceButton" href="#" onClick={this.reply.bind(this)}>reply</button>
-            </div>
-            {newComment}
-            {this.state.loading ? <LoadingSpinner /> : []}
-            {commentEls}
-          </div>
+
+        <div onClick={this.headerClicked.bind(this)} className="resourceHead">
+          <h4 className="resourceTitle">
+            <strong>
+              <a href={this.props.link}>{this.props.title}</a>
+            </strong>
+            {closeResource}
+          </h4>
+          <span className="timeStamp">{formatTime(this.props.timestamp)}</span>
         </div>
+
       </div>
     )
   }

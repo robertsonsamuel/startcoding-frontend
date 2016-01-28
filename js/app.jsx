@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Navbar from './components/Navbar.jsx';
 import Main from './components/Main.jsx';
 import SplashPage from './components/splashPage.jsx';
+import ResourcePage from './components/ResourcePage.jsx';
 import '../css/sweetalert.css';
 import '../css/google.css';
 import '../css/style.css';
@@ -15,6 +16,13 @@ class App extends React.Component {
           <div>
             <Navbar/>
             <SplashPage/>
+          </div>
+        )
+      case 'resource':
+        return (
+          <div>
+            <Navbar/>
+            <ResourcePage resourceId={this.props.location[1]} />
           </div>
         )
       default:
