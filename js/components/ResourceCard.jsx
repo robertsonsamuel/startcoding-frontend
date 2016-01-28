@@ -93,7 +93,12 @@ class Resource extends React.Component {
             </strong>
             {closeResource}
           </h4>
-          <span className="timeStamp">{formatTime(this.props.timestamp)}</span>
+          <ol className="breadcrumb">
+            <li className=""><span className="timeStamp">{formatTime(this.props.timestamp)}</span></li>
+            <li><a href="#">Discussions</a></li>
+            <li><a href="#">Save</a></li>
+          </ol>
+
         </div>
 
       </div>

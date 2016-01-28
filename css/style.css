@@ -243,6 +243,10 @@ a.alreadyMember {
   margin-bottom: 1em;
 }
 
+h4.resourceTitle {
+    margin-bottom: 0;
+}
+
 .spinnerContainer {
   position: absolute;
   top: calc(50% - 50px);
@@ -316,10 +320,6 @@ a.disabled {
 .active .resourceContent {
   display: block;
 }
-.resourceTitle {
-  margin: 0px;
-  padding: 0.5em 1em;
-}
 .panel-body.resourceBody {
   white-space: pre-line;
   border-left: 26px solid green;
@@ -369,11 +369,9 @@ a.disabled {
   background: white;
   font-style: italic;
 }
-
 .breadcrumb {
-  text-align: right;
+    padding: 0;
 }
-
 .breadcrumb > span{
   float: left;
   color: gray;
