@@ -10,22 +10,21 @@ class NewResourceModal extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = 'NewResourceModal.jsx';
-    this.state = { loading: false, selectedValue: 'JavaScript' };
+    this.state = { loading: false, selectedValue: this.props.initialCategory };
   }
   newResource(){
     if(!canHazToken()) return pleaseLogin();
     $('#newResourceModal').modal('show');
   }
-  selectCategory(e){
-    e.preventDefault();
-    console.log(e.target.value);
-    this.setState({selectedValue: e.target.value});
+  selectCategory(category){
+    this.setState({selectedValue: category});
   }
   createResource(){
     let title = this.refs.title.value;
     let body = this.refs.body.value;
     let aLink = this.refs.aLink.value;
     let category = this.state.selectedValue;
+    console.log(category);
     if(title.length === 0 || body.length === 0 || aLink.length === 0){
       return genErr('Title and Body both required!')
     }
@@ -79,7 +78,7 @@ class NewResourceModal extends React.Component {
                 <div className="row">
                   <div className="col-sm-6 col-md-6">
                     <label htmlFor="categoryDropdown">Select a category:</label>
-                    <CategoryDropdown selectCategory={this.selectCategory.bind(this)} />
+                    <CategoryDropdown initialCategory={this.props.initialCategory} selectCategory={this.selectCategory.bind(this)} />
                   </div>
                   <div className="col-sm-6 col-md-6">
                   </div>

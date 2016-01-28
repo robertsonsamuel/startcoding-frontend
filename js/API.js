@@ -1,5 +1,5 @@
-//let apiUrl = 'https://protected-river-69772.herokuapp.com';
- let apiUrl = 'http://localhost:3000';
+let apiUrl = 'https://protected-river-69772.herokuapp.com';
+//let apiUrl = 'http://localhost:3000';
 
 import {canHazToken, parseToken} from './util/authorization';
 import {store} from './util/store';

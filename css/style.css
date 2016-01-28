@@ -319,7 +319,6 @@ a.disabled {
 .resourceTitle {
   margin: 0px;
   padding: 0.5em 1em;
-  text-align: center;
 }
 .panel-body.resourceBody {
   white-space: pre-line;

@@ -5,8 +5,10 @@ import '../../css/FilterBar.css';
 class FilterBar extends React.Component {
   render(){
     return(
-      <div className="row">
-        <div className="filterBarContainer"></div>
+      <div>
+        <div className="filterBarContainer">
+          <h1>I'm filter bar!</h1>
+        </div>
       </div>
 
     )

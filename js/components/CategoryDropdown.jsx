@@ -5,8 +5,13 @@ class CategoryDropdown extends React.Component {
     super(props)
     this.state = {
       categoriesArrary: ['javascript', 'python', 'go', 'ruby','html','css', 'general' ],
-      defaultSelector: window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0]
+      selectedValue: this.props.initialCategory
     };
+  }
+
+  selectCategory(e){
+    this.setState({selectedValue: e.target.value});
+    this.props.selectCategory(e.target.value);
   }
 
   render(){
@@ -18,7 +23,7 @@ class CategoryDropdown extends React.Component {
     })
     return(
       <div>
-        <select value={this.state.defaultSelector} onChange={this.props.selectCategory} className="form-control">
+        <select value={this.state.selectedValue} onChange={this.selectCategory.bind(this)} className="form-control">
           {categories}
         </select>
       </div>

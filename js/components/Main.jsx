@@ -2,6 +2,7 @@ import React from 'react';
 import API from '../API';
 import LoadingSpinner from './LoadingSpinner.jsx';
 import ResourceCard from './ResourceCard.jsx';
+import FilterBar from './FilterBar.jsx';
 import NewResourceModal from './NewResourceModal.jsx';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
@@ -59,10 +60,16 @@ class Main extends React.Component {
     let mainClasses = classNames('main', 'panel', {displayResource : this.state.activeResource})
     return (
       <div className={mainClasses}>
-        <h1>{this.props.category}</h1>
-        <NewResourceModal resourcePosted={this.getResources.bind(this)} />
-        {this.state.loading ? <LoadingSpinner /> : []}
-        {resourceEls}
+        <div className="row">
+          <div className="col-sm-12 col-md-4 col-lg-4">
+            <FilterBar />
+          </div>
+          <div className="col-sm-12 col-md-8 col-lg-8">
+            {this.state.loading ? <LoadingSpinner /> : []}
+            {resourceEls}
+          </div>
+        </div>
+        <NewResourceModal initialCategory={this.props.category} resourcePosted={this.getResources.bind(this)} />
       </div>
     )
   }
