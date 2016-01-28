@@ -41,9 +41,6 @@ class LoginModal extends React.Component {
       password: this.refs.loginPassword.value
     })
     .done(token => {
-      localStorage.setItem('token', token);
-      store.saveDatum('token', token);
-      
       (this.resetModalAfterSuccess.bind(this))();
     })
     .fail(err => LoginError(err.responseText))
@@ -71,8 +68,6 @@ class LoginModal extends React.Component {
       password2: this.refs.registerPassword2.value
     })
     .done(token => {
-      localStorage.setItem('token', token);
-      store.saveDatum('token', token);
       (this.resetModalAfterSuccess.bind(this))();
     })
     .fail(err => RegisterError(err.responseText))
