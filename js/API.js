@@ -30,6 +30,8 @@ let API = {
       beforeSend: setAuthHeader
     })
     .done( resp => {
+      resp.upvotes = new Set(resp.upvotes);
+      resp.downvotes = new Set(resp.downvotes);
       store.saveDatum('me', resp);
     })
   },

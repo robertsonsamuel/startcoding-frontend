@@ -31,15 +31,15 @@ class Comment extends React.Component {
       editing: false,
       updating: false,
       loading: false,
-      me: store.getDatum('me') || { upvotes:[], downvotes:[] },
+      me: store.getDatum('me'),
     };
   }
 
   componentWillMount() {
     store.registerListener('me', () => {
       let me = store.getDatum('me');
-      console.log('this is me!',me);
-      this.setState({ meId: me ? me._id : "" });
+      console.log('me!',me);
+      this.setState({ me: me });
     });
   }
 
@@ -88,16 +88,36 @@ class Comment extends React.Component {
   }
 
   handleVote(vote) {
-    console.log("voting", this.state.me);
-    if (!this.state.meId) {
+    console.log("voting");
+
+    if (!this.state.me._id) {
       pleaseLogin();
       return;
     }
+
+    let id = this.props._id;
+    let me = this.state.me;
+
+    if (vote === 'up') {
+      //handle upvotes set, toggle upvote
+      me.upvotes.has(id) ? me.upvotes.delete(id) : me.upvotes.add(id);
+      //handle downvotes set, remove downvote if one exists
+      me.downvotes.delete(id);
+    } else if (vote === 'down') {
+      //handle downvotes set, toggle downvotes
+      me.downvotes.has(id) ? me.downvotes.delete(id) : me.downvotes.add(id);
+      //handle upvotes set, remove upvote if one exists
+      me.upvotes.delete(id);
+    }
+
+    store.saveDatum('me', me)
+
     API.vote(this.props._id, vote)
     .done( resp => {
-      this.props.update();
+      //this.props.update();
     })
     .fail( err => console.log("error voting", err));
+
   }
 
   deleteComment(){
@@ -128,9 +148,8 @@ class Comment extends React.Component {
     } else {
       timestamp = this.props.timestamp ? formatTime(this.props.timestamp) : '';
     }
-    let showUpvote = this.state.me.upvotes.includes(this.props._id);
-    let showDownvote = this.state.me.downvotes.includes(this.props._id);
-
+    let showUpvote = this.state.me ? this.state.me.upvotes.has(this.props._id) : false;
+    let showDownvote = this.state.me ? this.state.me.downvotes.has(this.props._id) : false;
 
     return (
       <div className="panel panel-default comment">
