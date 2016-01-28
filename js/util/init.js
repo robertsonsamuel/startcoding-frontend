@@ -12,6 +12,7 @@ export default function init() {
     return false;
   }
 
+  window.location.hash = '#/all'
   store.saveDatum('token', token);
   return true;
 
