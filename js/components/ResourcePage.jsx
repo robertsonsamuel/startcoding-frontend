@@ -43,7 +43,8 @@ class ResourcePage extends React.Component {
       console.log('got data', data)
       this.setState({
         resourceInfo: data.resource,
-        allComments: data.comments
+        allComments: data.comments,
+        loading: false
       });
     })
     .fail(err => console.log(err));
@@ -67,7 +68,7 @@ class ResourcePage extends React.Component {
 
   postComment(body) {
     this.setState({ replying: false });
-    API.postComment(this.props._id, body, 'seed')
+    API.postComment(this.state.resourceInfo._id, body, 'seed')
     .done(resp => (this.fetchComments.bind(this))())
     .fail(err => genErr(err.responseText));
   }
@@ -78,7 +79,7 @@ class ResourcePage extends React.Component {
 
   render() {
     let commentEls = [];
-    
+
     commentEls = this.state.allComments.map( (comment, i) => {
       return <Comment {...comment} token={this.state.token}
                                    update={this.fetchComments.bind(this)}

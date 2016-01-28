@@ -31,13 +31,14 @@ class Comment extends React.Component {
       editing: false,
       updating: false,
       loading: false,
-      meId: store.getDatum('me') ? store.getDatum('me')._id : '',
+      me: store.getDatum('me') || { upvotes:[], downvotes:[] },
     };
   }
 
   componentWillMount() {
     store.registerListener('me', () => {
       let me = store.getDatum('me');
+      console.log('this is me!',me);
       this.setState({ meId: me ? me._id : "" });
     });
   }
@@ -104,7 +105,7 @@ class Comment extends React.Component {
     .done(resp => this.props.update())
     .fail(err => swal('Delete Failed',err.responseText,'error'));
   }
-  
+
   render() {
     let payload = parseToken(this.props.token);
     let changeButtons = classNames({
@@ -127,13 +128,15 @@ class Comment extends React.Component {
     } else {
       timestamp = this.props.timestamp ? formatTime(this.props.timestamp) : '';
     }
-    let showUpvote = this.props.upvotes && this.props.upvotes.includes(this.state.meId);
-    let showDownvote = this.props.downvotes && this.props.downvotes.includes(this.state.meId);
+    let showUpvote = this.state.me.upvotes.includes(this.props._id);
+    let showDownvote = this.state.me.downvotes.includes(this.props._id);
+
+
     return (
       <div className="panel panel-default comment">
         <div className="panel-heading commentTitle">
           <span className="panel-title commentUsername">{this.props.user.username}</span>
-          <Votebox score={this.props.upvotes.length - this.props.downvotes.length}
+          <Votebox score={this.props.upvotes - this.props.downvotes}
                    up={showUpvote}
                    down={showDownvote}
                    handleVote={this.handleVote.bind(this)}/>
