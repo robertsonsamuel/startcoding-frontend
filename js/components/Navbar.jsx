@@ -41,7 +41,7 @@ class Navbar extends React.Component {
     hideLoginRegisterLogoutUsername(false, true, true, false);
   }
   toProfile(){
-
+    console.log("going to profile!!");
   }
   logout() {
     localStorage.removeItem('token');
@@ -52,6 +52,7 @@ class Navbar extends React.Component {
   }
   goHome(e) {
     e.preventDefault();
+    window.location.hash = '#/all'
     eventEmitter.emitChange('goHome');
   }
   render() {
