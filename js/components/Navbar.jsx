@@ -64,7 +64,6 @@ class Navbar extends React.Component {
     return (
       <div>
         <LoginModal />
-
         <div id="goMain" onClick={this.goMain}></div>
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
@@ -96,8 +95,8 @@ class Navbar extends React.Component {
                 </li>
               </ul>
               <ul id="Logout" className="nav navbar-nav navbar-right">
-                <li><a id="userBtn" onClick={this.goUser.bind(this)}><span id="username"></span></a></li>
-                <li><a id="logoutBtn" onClick={this.logout.bind(this)}>Logout</a></li>
+                <li><a href='' id="userBtn" onClick={this.goUser.bind(this)}><span id="username"></span></a></li>
+                <li><a href='' id="logoutBtn" onClick={this.logout.bind(this)}>Logout</a></li>
               </ul>
             </div>
           </div>

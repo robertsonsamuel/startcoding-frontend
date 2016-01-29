@@ -25,21 +25,13 @@ class Main extends React.Component {
       this.getResources();
     })
   }
-  shouldComponentUpdate(nextProps, nextState){
-    console.log('should component update', nextProps);
-    console.log('should component update thisprops', this.props.category);
-    let currentResources = JSON.stringify(this.state.allResources);
-    return (nextProps.category !== this.props.category) || (nextState.loading !== this.state.loading);
-  }
-  componentWillUpdate(){
-    console.log('componentWillUpdatee');
-    (this.getResources.bind(this))();
+  componentDidUpdate(prevProps){
+    if (prevProps.category !== this.props.category) (this.getResources.bind(this))();
   }
   handleResourceClick(resourceId){
     this.setState({activeResource:this.state.activeResource === resourceId ? false : resourceId});
   }
   getResources(callback){
-    console.log("getting resources", this.props.category);
     API.getResources(this.props.category)
     .done( resp => {
       this.setState( {allResources: resp, loading: false} );

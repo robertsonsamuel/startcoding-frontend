@@ -15,7 +15,7 @@ class Resource extends React.Component {
     super(props);
     this.state = {
       token: store.getDatum("token") ? store.getDatum("token") : "",
-      me: store.getDatum('me'),
+      me: store.getDatum('me') || '',
       score: this.props.upvotes - this.props.downvotes
     };
 
@@ -31,14 +31,12 @@ class Resource extends React.Component {
   }
   saveResource(e){
     e.preventDefault();
-    if (!this.state.me) {
-      pleaseLogin();
-      return;
-    }
-    let id = this.props._id
+    if (!this.state.me) return pleaseLogin();
+    let resourceId = this.props._id
     let meId = this.state.me._id
-    console.log('resourceId', id);
-    console.log('user id', meId);
+    API.saveResource(meId, resourceId)
+    // console.log('resourceId', id);
+    // console.log('user id', meId);
   }
   handleVote(vote) {
 
@@ -91,7 +89,10 @@ class Resource extends React.Component {
   render() {
     let showUpvote = this.state.me ? this.state.me.upvotes.has(this.props._id) : false;
     let showDownvote = this.state.me ? this.state.me.downvotes.has(this.props._id) : false;
-    console.log(showDownvote, showUpvote);
+    let saveButtonText = "save";
+    if (this.state.me) {
+      saveButtonText = (this.state.me.savedResources.has(this.props._id)) ? "unsave" : "save";
+    }
     return (
       <div className="resource">
 
@@ -107,7 +108,9 @@ class Resource extends React.Component {
           <ol className="breadcrumb resourceBreadCrumb">
             <li className=""><span className="timeStamp">{formatTime(this.props.timestamp)}</span></li>
             <li><a href={`/#/resource/${this.props._id}`}>Discussions</a></li>
-            <li><a href="#" onClick={this.saveResource.bind(this)}>Save</a></li>
+            <li>
+              <a href='' onClick={this.saveResource.bind(this)}>{saveButtonText}</a>
+            </li>
           </ol>
         </div>
 
