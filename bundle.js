@@ -23070,7 +23070,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-sm-12 col-md-4 col-lg-4' },
-	            _react2.default.createElement(_FilterBar2.default, null)
+	            _react2.default.createElement(_FilterBar2.default, { initialCategory: this.props.category })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -38432,6 +38432,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _CategoryDropdown = __webpack_require__(/*! ./CategoryDropdown.jsx */ 294);
+	
+	var _CategoryDropdown2 = _interopRequireDefault(_CategoryDropdown);
+	
 	__webpack_require__(/*! ../../css/FilterBar.css */ 291);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -38445,10 +38449,13 @@
 	var FilterBar = function (_React$Component) {
 	  _inherits(FilterBar, _React$Component);
 	
-	  function FilterBar() {
+	  function FilterBar(props) {
 	    _classCallCheck(this, FilterBar);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FilterBar).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FilterBar).call(this, props));
+	
+	    _this.state = { selectedValue: _this.props.initialCategory };
+	    return _this;
 	  }
 	
 	  _createClass(FilterBar, [{
@@ -38461,10 +38468,11 @@
 	          'div',
 	          { className: 'filterBarContainer' },
 	          _react2.default.createElement(
-	            'h1',
+	            'h3',
 	            null,
-	            'I\'m filter bar!'
-	          )
+	            this.props.initialCategory
+	          ),
+	          _react2.default.createElement(_CategoryDropdown2.default, { initialCategory: this.props.initialCategory })
 	        )
 	      );
 	    }
@@ -38773,13 +38781,18 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CategoryDropdown).call(this, props));
 	
 	    _this.state = {
-	      categoriesArrary: ['javascript', 'python', 'go', 'ruby', 'html', 'css', 'general'],
+	      categoriesArrary: ['Javascript', 'python', 'go', 'ruby', 'html', 'css', 'general'],
 	      selectedValue: _this.props.initialCategory
 	    };
 	    return _this;
 	  }
 	
 	  _createClass(CategoryDropdown, [{
+	    key: 'changeState',
+	    value: function changeState() {
+	      console.log('changed');
+	    }
+	  }, {
 	    key: 'selectCategory',
 	    value: function selectCategory(e) {
 	      this.setState({ selectedValue: e.target.value });

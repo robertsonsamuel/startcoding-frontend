@@ -62,7 +62,7 @@ class Main extends React.Component {
       <div className={mainClasses}>
         <div className="row">
           <div className="col-sm-12 col-md-4 col-lg-4">
-            <FilterBar />
+            <FilterBar initialCategory={this.props.category}  />
           </div>
           <div className="col-sm-12 col-md-8 col-lg-8">
             {this.state.loading ? <LoadingSpinner /> : []}
