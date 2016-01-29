@@ -43,10 +43,11 @@ let API = {
   getResourceById(id) {
     return $.get(`${apiUrl}/resources/one/${id}`);
   },
-  getResources(category) {
-    return $.get(`${apiUrl}/resources/${category}`)
+  getResources(category, tags) {
+    let query = tags && tags.length ? `?tags=${tags.join()}` : '';
+    return $.get(`${apiUrl}/resources/${category + query}`)
     .done((data) => {
-      store.saveDatum('resources', data);
+      store.saveDatum('resources', data.resources);
     });
   },
   postResourceVote(resourceId, vote){

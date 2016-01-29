@@ -22,7 +22,7 @@ class Main extends React.Component {
     (this.getResources.bind(this))();
     eventEmitter.registerListener('goMain', () => {
       this.setState({activeResource: false });
-      this.getResources();
+      (this.getResources.bind(this))();
     })
   }
   componentDidUpdate(prevProps){
@@ -34,7 +34,7 @@ class Main extends React.Component {
   getResources(callback){
     API.getResources(this.props.category)
     .done( resp => {
-      this.setState( {allResources: resp, loading: false} );
+      this.setState( {allResources: resp.resources, loading: false} );
     })
     .fail( err => genErr(err.responseText))
     .always( () => {
