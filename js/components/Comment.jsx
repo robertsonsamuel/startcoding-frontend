@@ -31,6 +31,7 @@ class Comment extends React.Component {
       editing: false,
       updating: false,
       loading: false,
+      score: this.props.upvotes - this.props.downvotes,
       me: store.getDatum('me'),
     };
   }
@@ -88,7 +89,6 @@ class Comment extends React.Component {
   }
 
   handleVote(vote) {
-    console.log("voting");
 
     if (!this.state.me._id) {
       pleaseLogin();
@@ -100,20 +100,37 @@ class Comment extends React.Component {
 
     if (vote === 'up') {
       //handle upvotes set, toggle upvote
-      me.upvotes.has(id) ? me.upvotes.delete(id) : me.upvotes.add(id);
+      if (me.upvotes.has(id)) {
+        me.upvotes.delete(id);
+        this.state.score = this.state.score - 1;
+      } else {
+        me.upvotes.add(id);
+        this.state.score = this.state.score + 1;
+      }
+
       //handle downvotes set, remove downvote if one exists
-      me.downvotes.delete(id);
+      if(me.downvotes.delete(id)) this.state.score = this.state.score + 1;
+
     } else if (vote === 'down') {
+
       //handle downvotes set, toggle downvotes
-      me.downvotes.has(id) ? me.downvotes.delete(id) : me.downvotes.add(id);
+      if(me.downvotes.has(id)) {
+        me.downvotes.delete(id)
+        this.state.score = this.state.score + 1;
+      } else {
+         me.downvotes.add(id);
+        this.state.score = this.state.score - 1;
+      }
       //handle upvotes set, remove upvote if one exists
-      me.upvotes.delete(id);
+      if(me.upvotes.delete(id)) this.state.score = this.state.score - 1;
     }
+
 
     store.saveDatum('me', me)
 
     API.vote(this.props._id, vote)
     .done( resp => {
+      console.log('sent!');
       //this.props.update();
     })
     .fail( err => console.log("error voting", err));
@@ -155,7 +172,7 @@ class Comment extends React.Component {
       <div className="panel panel-default comment">
         <div className="panel-heading commentTitle">
           <span className="panel-title commentUsername">{this.props.user.username}</span>
-          <Votebox score={this.props.upvotes - this.props.downvotes}
+          <Votebox score={this.state.score}
                    up={showUpvote}
                    down={showDownvote}
                    handleVote={this.handleVote.bind(this)}/>
