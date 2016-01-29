@@ -1,4 +1,5 @@
 import {store} from './store';
+import API from '../API'
 
 export default function init() {
 
@@ -13,6 +14,8 @@ export default function init() {
   }
 
   store.saveDatum('token', token);
+  API.getMyInfo();
+  window.location.hash = '#/all'
   return true;
 
 }

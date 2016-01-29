@@ -11,7 +11,11 @@ function setAuthHeader(xhr) {
 
 let API = {
   register(newUserInfo) {
-    return $.post(`${apiUrl}/users/register`, newUserInfo);
+    return $.post(`${apiUrl}/users/register`, newUserInfo)
+    .done( resp => {
+      localStorage.setItem('token', resp);
+      store.saveDatum('token', resp);
+    });;
   },
   login(userInfo) {
     return $.post(`${apiUrl}/users/login`, userInfo)

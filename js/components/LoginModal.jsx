@@ -41,10 +41,8 @@ class LoginModal extends React.Component {
       password: this.refs.loginPassword.value
     })
     .done(token => {
-      localStorage.setItem('token', token);
-      store.saveDatum('token', token);
-      
       (this.resetModalAfterSuccess.bind(this))();
+      window.location.hash = '#/all';
     })
     .fail(err => LoginError(err.responseText))
     .always(() => {
@@ -71,8 +69,7 @@ class LoginModal extends React.Component {
       password2: this.refs.registerPassword2.value
     })
     .done(token => {
-      localStorage.setItem('token', token);
-      store.saveDatum('token', token);
+      window.location.hash = '#/all';
       (this.resetModalAfterSuccess.bind(this))();
     })
     .fail(err => RegisterError(err.responseText))

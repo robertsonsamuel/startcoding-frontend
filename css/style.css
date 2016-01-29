@@ -176,6 +176,14 @@ a.alreadyMember {
     left: 65%;
 }
 
+#userBtn {
+  margin: 0 1em;
+  font-size: 18px;
+  font-weight: bold;
+}
+#logoutBtn {
+}
+
 #userNameRegister.form-control::-webkit-input-placeholder { color: white; }
 #userNameRegister.form-control:-moz-placeholder { color: white; }
 #userNameRegister.form-control::-moz-placeholder { color: white; }
@@ -903,7 +911,7 @@ a.alreadyMember {
   }
 }
 
-#goHome {
+#goMain {
   position: fixed;
   background: transparent;
   z-index: 9999;
