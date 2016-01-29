@@ -34,6 +34,7 @@ let API = {
       beforeSend: setAuthHeader
     })
     .done( resp => {
+      console.log("saving me", resp);
       store.saveDatum('me', resp);
     })
   },

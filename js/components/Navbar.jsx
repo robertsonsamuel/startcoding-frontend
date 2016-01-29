@@ -50,17 +50,22 @@ class Navbar extends React.Component {
     hideLoginRegisterLogoutUsername(false, true, true, false);
     $('#loginRegister').show();
   }
-  goHome(e) {
+  goMain(e) {
     e.preventDefault();
     window.location.hash = '#/all'
-    eventEmitter.emitChange('goHome');
+    eventEmitter.emitChange('goMain');
+  }
+  goUser(e) {
+    e.preventDefault();
+    window.location.hash = '#/user/' + (store.getDatum('me') ? store.getDatum('me')._id : '')
+    eventEmitter.emitChange('goUser');
   }
   render() {
     return (
       <div>
         <LoginModal />
 
-        <div id="goHome" onClick={this.goHome}></div>
+        <div id="goMain" onClick={this.goMain}></div>
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
             <div className="navbar-header">
@@ -91,8 +96,8 @@ class Navbar extends React.Component {
                 </li>
               </ul>
               <ul id="Logout" className="nav navbar-nav navbar-right">
-                <li><a href="#">Hello, <span id="username"></span></a></li>
-                <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
+                <li><a id="userBtn" onClick={this.goUser.bind(this)}><span id="username"></span></a></li>
+                <li><a id="logoutBtn" onClick={this.logout.bind(this)}>Logout</a></li>
               </ul>
             </div>
           </div>

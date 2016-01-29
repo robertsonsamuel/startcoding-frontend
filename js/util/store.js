@@ -12,7 +12,7 @@ let data = Symbol();
 // }
 
 // EVENTS
-// 'goHome' event!
+// 'goMain' event!
 
 
 class EventEmitter {
