@@ -35,6 +35,7 @@ class NewResourceModal extends React.Component {
       $('#newResourceModal').modal('hide');
       this.refs.title.value = '';
       this.refs.body.value = '';
+      this.refs.aLink.value = '';
       this.props.resourcePosted(() => {
         $('#newResourceModal .input').prop('disabled', false);
       });

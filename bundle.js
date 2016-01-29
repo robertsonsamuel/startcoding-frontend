@@ -38609,6 +38609,7 @@
 	        $('#newResourceModal').modal('hide');
 	        _this2.refs.title.value = '';
 	        _this2.refs.body.value = '';
+	        _this2.refs.aLink.value = '';
 	        _this2.props.resourcePosted(function () {
 	          $('#newResourceModal .input').prop('disabled', false);
 	        });
