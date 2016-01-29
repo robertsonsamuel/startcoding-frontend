@@ -29,6 +29,17 @@ class Resource extends React.Component {
       this.setState({me: me})
     })
   }
+  saveResource(e){
+    e.preventDefault();
+    if (!this.state.me) {
+      pleaseLogin();
+      return;
+    }
+    let id = this.props._id
+    let meId = this.state.me._id
+    console.log('resourceId', id);
+    console.log('user id', meId);
+  }
   handleVote(vote) {
 
     if (!this.state.me) {
@@ -96,7 +107,7 @@ class Resource extends React.Component {
           <ol className="breadcrumb resourceBreadCrumb">
             <li className=""><span className="timeStamp">{formatTime(this.props.timestamp)}</span></li>
             <li><a href={`/#/resource/${this.props._id}`}>Discussions</a></li>
-            <li><a href="#">Save</a></li>
+            <li><a href="#" onClick={this.saveResource.bind(this)}>Save</a></li>
           </ol>
         </div>
 
