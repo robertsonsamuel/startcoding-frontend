@@ -61,6 +61,10 @@ body {
   left: -5px;
 }
 
+.breadcrumb.resourceBreadCrumb{
+  background: white;
+}
+
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
     border-color: rgba(76, 175, 80, 0);
 }
@@ -333,8 +337,7 @@ a.disabled {
 }
 
 .resourceHead:hover{
-  background-color: #F5F5F5;
-  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .active .resourceHead {

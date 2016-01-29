@@ -67,15 +67,19 @@
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
-	var _splashPage = __webpack_require__(/*! ./components/splashPage.jsx */ 294);
+	var _splashPage = __webpack_require__(/*! ./components/splashPage.jsx */ 297);
 	
 	var _splashPage2 = _interopRequireDefault(_splashPage);
 	
-	__webpack_require__(/*! ../css/sweetalert.css */ 295);
+	var _ResourcePage = __webpack_require__(/*! ./components/ResourcePage.jsx */ 298);
 	
-	__webpack_require__(/*! ../css/google.css */ 297);
+	var _ResourcePage2 = _interopRequireDefault(_ResourcePage);
 	
-	__webpack_require__(/*! ../css/style.css */ 299);
+	__webpack_require__(/*! ../css/sweetalert.css */ 299);
+	
+	__webpack_require__(/*! ../css/google.css */ 301);
+	
+	__webpack_require__(/*! ../css/style.css */ 303);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -104,6 +108,13 @@
 	            null,
 	            _react2.default.createElement(_Navbar2.default, null),
 	            _react2.default.createElement(_splashPage2.default, null)
+	          );
+	        case 'resource':
+	          return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(_Navbar2.default, null),
+	            _react2.default.createElement(_ResourcePage2.default, { resourceId: this.props.location[1] })
 	          );
 	        default:
 	          return _react2.default.createElement(
@@ -20845,11 +20856,27 @@
 	      type: 'GET',
 	      beforeSend: setAuthHeader
 	    }).done(function (resp) {
+	      resp.upvotes = new Set(resp.upvotes);
+	      resp.downvotes = new Set(resp.downvotes);
 	      _store.store.saveDatum('me', resp);
 	    });
 	  },
+	  getResourceById: function getResourceById(id) {
+	    return $.get(apiUrl + '/resources/one/' + id);
+	  },
 	  getResources: function getResources(category) {
-	    return $.get(apiUrl + '/resources/' + category);
+	    return $.get(apiUrl + '/resources/' + category).done(function (data) {
+	      _store.store.saveDatum('resources', data);
+	    });
+	  },
+	  postResourceVote: function postResourceVote(resourceId, vote) {
+	    return $.ajax({
+	      url: apiUrl + '/resources/vote/' + resourceId,
+	      type: 'POST',
+	      beforeSend: setAuthHeader,
+	      datatype: 'json',
+	      data: { vote: vote }
+	    });
 	  },
 	  postResource: function postResource(title, body, aLink, category) {
 	    return $.ajax({
@@ -22932,11 +22959,15 @@
 	
 	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
 	
-	var _Resource = __webpack_require__(/*! ./Resource.jsx */ 183);
+	var _ResourceCard = __webpack_require__(/*! ./ResourceCard.jsx */ 183);
 	
-	var _Resource2 = _interopRequireDefault(_Resource);
+	var _ResourceCard2 = _interopRequireDefault(_ResourceCard);
 	
-	var _NewResourceModal = __webpack_require__(/*! ./NewResourceModal.jsx */ 290);
+	var _FilterBar = __webpack_require__(/*! ./FilterBar.jsx */ 290);
+	
+	var _FilterBar2 = _interopRequireDefault(_FilterBar);
+	
+	var _NewResourceModal = __webpack_require__(/*! ./NewResourceModal.jsx */ 293);
 	
 	var _NewResourceModal2 = _interopRequireDefault(_NewResourceModal);
 	
@@ -23024,7 +23055,8 @@
 	
 	      var resourceEls = this.state.allResources.map(function (resource, i) {
 	        var isActive = _this4.state.activeResource === resource._id;
-	        return _react2.default.createElement(_Resource2.default, _extends({}, resource, { isActive: isActive,
+	        return _react2.default.createElement(_ResourceCard2.default, _extends({}, resource, {
+	          isActive: isActive,
 	          onClick: _this4.handleResourceClick.bind(_this4, resource._id),
 	          key: i }));
 	      });
@@ -23033,13 +23065,21 @@
 	        'div',
 	        { className: mainClasses },
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          this.props.category
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-sm-12 col-md-4 col-lg-4' },
+	            _react2.default.createElement(_FilterBar2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-sm-12 col-md-8 col-lg-8' },
+	            this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
+	            resourceEls
+	          )
 	        ),
-	        _react2.default.createElement(_NewResourceModal2.default, { resourcePosted: this.getResources.bind(this) }),
-	        this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
-	        resourceEls
+	        _react2.default.createElement(_NewResourceModal2.default, { initialCategory: this.props.category, resourcePosted: this.getResources.bind(this) })
 	      );
 	    }
 	  }]);
@@ -23051,14 +23091,12 @@
 
 /***/ },
 /* 183 */
-/*!************************************!*\
-  !*** ./js/components/Resource.jsx ***!
-  \************************************/
+/*!****************************************!*\
+  !*** ./js/components/ResourceCard.jsx ***!
+  \****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -23090,6 +23128,10 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
+	var _Votebox = __webpack_require__(/*! ./Votebox.jsx */ 187);
+	
+	var _Votebox2 = _interopRequireDefault(_Votebox);
+	
 	var _alerts = __webpack_require__(/*! ../util/alerts */ 171);
 	
 	var _authorization = __webpack_require__(/*! ../util/authorization */ 164);
@@ -23098,10 +23140,6 @@
 	
 	var _store = __webpack_require__(/*! ../util/store */ 165);
 	
-	var _marked = __webpack_require__(/*! marked */ 289);
-	
-	var _marked2 = _interopRequireDefault(_marked);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23109,17 +23147,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	_marked2.default.setOptions({
-	  renderer: new _marked2.default.Renderer(),
-	  gfm: true,
-	  tables: true,
-	  breaks: false,
-	  pedantic: false,
-	  sanitize: true,
-	  smartLists: true,
-	  smartypants: false
-	});
 	
 	var Resource = function (_React$Component) {
 	  _inherits(Resource, _React$Component);
@@ -23130,10 +23157,9 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Resource).call(this, props));
 	
 	    _this.state = {
-	      allComments: [],
 	      token: _store.store.getDatum("token") ? _store.store.getDatum("token") : "",
-	      replying: false,
-	      loading: true
+	      me: _store.store.getDatum('me'),
+	      score: _this.props.upvotes - _this.props.downvotes
 	    };
 	
 	    _store.store.registerListener('token', function () {
@@ -23143,119 +23169,121 @@
 	  }
 	
 	  _createClass(Resource, [{
-	    key: 'headerClicked',
-	    value: function headerClicked() {
-	      if (!this.props.isActive) {
-	        this.fetchComments.bind(this)();
-	      }
-	      this.props.onClick();
-	    }
-	  }, {
-	    key: 'fetchComments',
-	    value: function fetchComments(callback) {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
 	      var _this2 = this;
 	
-	      _API2.default.getComments(this.props._id).done(function (resp) {
-	        _this2.setState({ allComments: resp, loading: false }, function () {
-	          console.log("resource state has been set", resp);
-	        });
-	        if (callback) callback();
-	      }).fail(function (err) {
-	        console.log(err);
+	      _store.store.registerListener('me', function () {
+	        var me = _store.store.getDatum('me');
+	        _this2.setState({ me: me });
 	      });
 	    }
 	  }, {
-	    key: 'reply',
-	    value: function reply(e) {
-	      e.preventDefault();
-	      var haveToken = (0, _authorization.canHazToken)();
-	      if (!haveToken) return (0, _alerts.pleaseLogin)();
-	      this.setState({ replying: haveToken });
-	    }
-	  }, {
-	    key: 'postComment',
-	    value: function postComment(body) {
-	      var _this3 = this;
+	    key: 'handleVote',
+	    value: function handleVote(vote) {
 	
-	      this.setState({ replying: false });
-	      _API2.default.postComment(this.props._id, body, 'seed').done(function (resp) {
-	        return _this3.fetchComments.bind(_this3)();
+	      if (!this.state.me) {
+	        (0, _alerts.pleaseLogin)();
+	        return;
+	      }
+	
+	      var id = this.props._id;
+	      var me = this.state.me;
+	
+	      if (vote === 'up') {
+	        //handle upvotes set, toggle upvote
+	        if (me.upvotes.has(id)) {
+	          me.upvotes.delete(id);
+	          this.state.score = this.state.score - 1;
+	        } else {
+	          me.upvotes.add(id);
+	          this.state.score = this.state.score + 1;
+	        }
+	
+	        //handle downvotes set, remove downvote if one exists
+	        if (me.downvotes.delete(id)) this.state.score = this.state.score + 1;
+	      } else if (vote === 'down') {
+	
+	        //handle downvotes set, toggle downvotes
+	        if (me.downvotes.has(id)) {
+	          me.downvotes.delete(id);
+	          this.state.score = this.state.score + 1;
+	        } else {
+	          me.downvotes.add(id);
+	          this.state.score = this.state.score - 1;
+	        }
+	        //handle upvotes set, remove upvote if one exists
+	        if (me.upvotes.delete(id)) this.state.score = this.state.score - 1;
+	      }
+	
+	      _store.store.saveDatum('me', me);
+	
+	      _API2.default.postResourceVote(id, vote).done(function (resp) {
+	        //this.props.update();
 	      }).fail(function (err) {
-	        return (0, _alerts.genErr)(err.responseText);
+	        return console.log("error voting", err);
 	      });
-	    }
-	  }, {
-	    key: 'discard',
-	    value: function discard() {
-	      this.setState({ replying: false });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
-	
-	      var commentEls = [];
-	      var closeResource = [];
-	      if (this.props.isActive) {
-	        closeResource = _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove closeResource' });
-	        commentEls = this.state.allComments.map(function (comment, i) {
-	          return _react2.default.createElement(_Comment2.default, _extends({}, comment, { token: _this4.state.token,
-	            update: _this4.fetchComments.bind(_this4),
-	            key: i }));
-	        });
-	      }
-	      var addedClasses = (0, _classnames2.default)('resource', {
-	        active: this.props.isActive
-	      });
-	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
-	        discard: this.discard.bind(this) }) : [];
+	      var showUpvote = this.state.me ? this.state.me.upvotes.has(this.props._id) : false;
+	      var showDownvote = this.state.me ? this.state.me.downvotes.has(this.props._id) : false;
+	      console.log(showDownvote, showUpvote);
 	      return _react2.default.createElement(
 	        'div',
-	        { className: addedClasses },
+	        { className: 'resource' },
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'resourceHead' },
 	          _react2.default.createElement(
 	            'div',
-	            { onClick: this.headerClicked.bind(this), className: 'resourceHead' },
+	            { className: 'panel-heading' },
 	            _react2.default.createElement(
 	              'h4',
 	              { className: 'resourceTitle' },
 	              _react2.default.createElement(
 	                'strong',
 	                null,
-	                this.props.title
-	              ),
-	              ' — ',
-	              this.props.user.username,
-	              closeResource
-	            )
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: this.props.link },
+	                  this.props.title
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(_Votebox2.default, { score: this.state.score, up: showUpvote, down: showDownvote, handleVote: this.handleVote.bind(this) })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'container resourceContent' },
+	            'ol',
+	            { className: 'breadcrumb resourceBreadCrumb' },
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'panel-body resourceBody' },
-	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.body) } })
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'resourceFooter' },
+	              'li',
+	              { className: '' },
 	              _react2.default.createElement(
 	                'span',
 	                { className: 'timeStamp' },
 	                (0, _time.formatTime)(this.props.timestamp)
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { className: 'btn btn-success replyResourceButton', href: '#', onClick: this.reply.bind(this) },
-	                'reply'
 	              )
 	            ),
-	            newComment,
-	            this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
-	            commentEls
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'a',
+	                { href: '/#/resource/' + this.props._id },
+	                'Discussions'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Save'
+	              )
+	            )
 	          )
 	        )
 	      );
@@ -23360,7 +23388,8 @@
 	      editing: false,
 	      updating: false,
 	      loading: false,
-	      meId: _store.store.getDatum('me') ? _store.store.getDatum('me')._id : ''
+	      score: _this.props.upvotes - _this.props.downvotes,
+	      me: _store.store.getDatum('me')
 	    };
 	    return _this;
 	  }
@@ -23372,7 +23401,7 @@
 	
 	      _store.store.registerListener('me', function () {
 	        var me = _store.store.getDatum('me');
-	        _this2.setState({ meId: me ? me._id : "" });
+	        _this2.setState({ me: me });
 	      });
 	    }
 	  }, {
@@ -23432,15 +23461,46 @@
 	  }, {
 	    key: 'handleVote',
 	    value: function handleVote(vote) {
-	      var _this5 = this;
 	
-	      console.log("voting", this.state.me);
-	      if (!this.state.meId) {
+	      if (!this.state.me._id) {
 	        (0, _alerts.pleaseLogin)();
 	        return;
 	      }
+	
+	      var id = this.props._id;
+	      var me = this.state.me;
+	
+	      if (vote === 'up') {
+	        //handle upvotes set, toggle upvote
+	        if (me.upvotes.has(id)) {
+	          me.upvotes.delete(id);
+	          this.state.score = this.state.score - 1;
+	        } else {
+	          me.upvotes.add(id);
+	          this.state.score = this.state.score + 1;
+	        }
+	
+	        //handle downvotes set, remove downvote if one exists
+	        if (me.downvotes.delete(id)) this.state.score = this.state.score + 1;
+	      } else if (vote === 'down') {
+	
+	        //handle downvotes set, toggle downvotes
+	        if (me.downvotes.has(id)) {
+	          me.downvotes.delete(id);
+	          this.state.score = this.state.score + 1;
+	        } else {
+	          me.downvotes.add(id);
+	          this.state.score = this.state.score - 1;
+	        }
+	        //handle upvotes set, remove upvote if one exists
+	        if (me.upvotes.delete(id)) this.state.score = this.state.score - 1;
+	      }
+	
+	      _store.store.saveDatum('me', me);
+	
 	      _API2.default.vote(this.props._id, vote).done(function (resp) {
-	        _this5.props.update();
+	
+	        //this.props.update();
 	      }).fail(function (err) {
 	        return console.log("error voting", err);
 	      });
@@ -23448,10 +23508,10 @@
 	  }, {
 	    key: 'deleteComment',
 	    value: function deleteComment() {
-	      var _this6 = this;
+	      var _this5 = this;
 	
 	      _API2.default.deleteComment(this.props._id).done(function (resp) {
-	        return _this6.props.update();
+	        return _this5.props.update();
 	      }).fail(function (err) {
 	        return swal('Delete Failed', err.responseText, 'error');
 	      });
@@ -23459,7 +23519,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this7 = this;
+	      var _this6 = this;
 	
 	      var payload = (0, _authorization.parseToken)(this.props.token);
 	      var changeButtons = (0, _classnames2.default)({
@@ -23467,7 +23527,7 @@
 	      });
 	
 	      var commentEls = this.props.children.map(function (child, i) {
-	        return _react2.default.createElement(Comment, _extends({}, child, { token: _this7.props.token, update: _this7.props.update, key: i }));
+	        return _react2.default.createElement(Comment, _extends({}, child, { token: _this6.props.token, update: _this6.props.update, key: i }));
 	      });
 	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
 	        discard: this.discard.bind(this) }) : [];
@@ -23480,8 +23540,9 @@
 	      } else {
 	        timestamp = this.props.timestamp ? (0, _time.formatTime)(this.props.timestamp) : '';
 	      }
-	      var showUpvote = this.props.upvotes && this.props.upvotes.includes(this.state.meId);
-	      var showDownvote = this.props.downvotes && this.props.downvotes.includes(this.state.meId);
+	      var showUpvote = this.state.me ? this.state.me.upvotes.has(this.props._id) : false;
+	      var showDownvote = this.state.me ? this.state.me.downvotes.has(this.props._id) : false;
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'panel panel-default comment' },
@@ -23493,7 +23554,7 @@
 	            { className: 'panel-title commentUsername' },
 	            this.props.user.username
 	          ),
-	          _react2.default.createElement(_Votebox2.default, { score: this.props.upvotes.length - this.props.downvotes.length,
+	          _react2.default.createElement(_Votebox2.default, { score: this.state.score,
 	            up: showUpvote,
 	            down: showDownvote,
 	            handleVote: this.handleVote.bind(this) })
@@ -38354,6 +38415,114 @@
 
 /***/ },
 /* 290 */
+/*!*************************************!*\
+  !*** ./js/components/FilterBar.jsx ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	__webpack_require__(/*! ../../css/FilterBar.css */ 291);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var FilterBar = function (_React$Component) {
+	  _inherits(FilterBar, _React$Component);
+	
+	  function FilterBar() {
+	    _classCallCheck(this, FilterBar);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FilterBar).apply(this, arguments));
+	  }
+	
+	  _createClass(FilterBar, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'filterBarContainer' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'I\'m filter bar!'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return FilterBar;
+	}(_react2.default.Component);
+	
+	exports.default = FilterBar;
+
+/***/ },
+/* 291 */
+/*!***************************!*\
+  !*** ./css/FilterBar.css ***!
+  \***************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../~/css-loader!./FilterBar.css */ 292);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./FilterBar.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./FilterBar.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 292 */
+/*!******************************************!*\
+  !*** ./~/css-loader!./css/FilterBar.css ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../~/css-loader/lib/css-base.js */ 169)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".filterBarContainer{\n  border: 1px solid red;\n  height: 800px;\n}\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 293 */
 /*!********************************************!*\
   !*** ./js/components/NewResourceModal.jsx ***!
   \********************************************/
@@ -38379,7 +38548,7 @@
 	
 	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
 	
-	var _CategoryDropdown = __webpack_require__(/*! ./CategoryDropdown.jsx */ 291);
+	var _CategoryDropdown = __webpack_require__(/*! ./CategoryDropdown.jsx */ 294);
 	
 	var _CategoryDropdown2 = _interopRequireDefault(_CategoryDropdown);
 	
@@ -38387,7 +38556,7 @@
 	
 	var _alerts = __webpack_require__(/*! ../util/alerts */ 171);
 	
-	__webpack_require__(/*! ../../css/newResourceModal.css */ 292);
+	__webpack_require__(/*! ../../css/newResourceModal.css */ 295);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38406,7 +38575,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewResourceModal).call(this, props));
 	
 	    _this.displayName = 'NewResourceModal.jsx';
-	    _this.state = { loading: false, selectedValue: 'JavaScript' };
+	    _this.state = { loading: false, selectedValue: _this.props.initialCategory };
 	    return _this;
 	  }
 	
@@ -38418,10 +38587,8 @@
 	    }
 	  }, {
 	    key: 'selectCategory',
-	    value: function selectCategory(e) {
-	      e.preventDefault();
-	      console.log(e.target.value);
-	      this.setState({ selectedValue: e.target.value });
+	    value: function selectCategory(category) {
+	      this.setState({ selectedValue: category });
 	    }
 	  }, {
 	    key: 'createResource',
@@ -38432,6 +38599,7 @@
 	      var body = this.refs.body.value;
 	      var aLink = this.refs.aLink.value;
 	      var category = this.state.selectedValue;
+	      console.log(category);
 	      if (title.length === 0 || body.length === 0 || aLink.length === 0) {
 	        return (0, _alerts.genErr)('Title and Body both required!');
 	      }
@@ -38526,7 +38694,7 @@
 	                      { htmlFor: 'categoryDropdown' },
 	                      'Select a category:'
 	                    ),
-	                    _react2.default.createElement(_CategoryDropdown2.default, { selectCategory: this.selectCategory.bind(this) })
+	                    _react2.default.createElement(_CategoryDropdown2.default, { initialCategory: this.props.initialCategory, selectCategory: this.selectCategory.bind(this) })
 	                  ),
 	                  _react2.default.createElement('div', { className: 'col-sm-6 col-md-6' })
 	                )
@@ -38569,7 +38737,7 @@
 	exports.default = NewResourceModal;
 
 /***/ },
-/* 291 */
+/* 294 */
 /*!********************************************!*\
   !*** ./js/components/CategoryDropdown.jsx ***!
   \********************************************/
@@ -38605,12 +38773,18 @@
 	
 	    _this.state = {
 	      categoriesArrary: ['javascript', 'python', 'go', 'ruby', 'html', 'css', 'general'],
-	      defaultSelector: window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0]
+	      selectedValue: _this.props.initialCategory
 	    };
 	    return _this;
 	  }
 	
 	  _createClass(CategoryDropdown, [{
+	    key: 'selectCategory',
+	    value: function selectCategory(e) {
+	      this.setState({ selectedValue: e.target.value });
+	      this.props.selectCategory(e.target.value);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	
@@ -38626,7 +38800,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'select',
-	          { value: this.state.defaultSelector, onChange: this.props.selectCategory, className: 'form-control' },
+	          { value: this.state.selectedValue, onChange: this.selectCategory.bind(this), className: 'form-control' },
 	          categories
 	        )
 	      );
@@ -38639,7 +38813,7 @@
 	exports.default = CategoryDropdown;
 
 /***/ },
-/* 292 */
+/* 295 */
 /*!**********************************!*\
   !*** ./css/newResourceModal.css ***!
   \**********************************/
@@ -38648,7 +38822,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./newResourceModal.css */ 293);
+	var content = __webpack_require__(/*! !./../~/css-loader!./newResourceModal.css */ 296);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
@@ -38668,7 +38842,7 @@
 	}
 
 /***/ },
-/* 293 */
+/* 296 */
 /*!*************************************************!*\
   !*** ./~/css-loader!./css/newResourceModal.css ***!
   \*************************************************/
@@ -38685,7 +38859,7 @@
 
 
 /***/ },
-/* 294 */
+/* 297 */
 /*!**************************************!*\
   !*** ./js/components/splashPage.jsx ***!
   \**************************************/
@@ -38845,7 +39019,230 @@
 	exports.default = SplashPage;
 
 /***/ },
-/* 295 */
+/* 298 */
+/*!****************************************!*\
+  !*** ./js/components/ResourcePage.jsx ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _API = __webpack_require__(/*! ../API */ 163);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	var _Comment = __webpack_require__(/*! ./Comment.jsx */ 184);
+	
+	var _Comment2 = _interopRequireDefault(_Comment);
+	
+	var _NewComment = __webpack_require__(/*! ./NewComment.jsx */ 185);
+	
+	var _NewComment2 = _interopRequireDefault(_NewComment);
+	
+	var _LoadingSpinner = __webpack_require__(/*! ./LoadingSpinner.jsx */ 166);
+	
+	var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 188);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _alerts = __webpack_require__(/*! ../util/alerts */ 171);
+	
+	var _authorization = __webpack_require__(/*! ../util/authorization */ 164);
+	
+	var _time = __webpack_require__(/*! ../util/time */ 189);
+	
+	var _store = __webpack_require__(/*! ../util/store */ 165);
+	
+	var _marked = __webpack_require__(/*! marked */ 289);
+	
+	var _marked2 = _interopRequireDefault(_marked);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	_marked2.default.setOptions({
+	  renderer: new _marked2.default.Renderer(),
+	  gfm: true,
+	  tables: true,
+	  breaks: false,
+	  pedantic: false,
+	  sanitize: true,
+	  smartLists: true,
+	  smartypants: false
+	});
+	
+	var ResourcePage = function (_React$Component) {
+	  _inherits(ResourcePage, _React$Component);
+	
+	  function ResourcePage(props) {
+	    _classCallCheck(this, ResourcePage);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ResourcePage).call(this, props));
+	
+	    _this.state = {
+	      resourceInfo: {},
+	      allComments: [],
+	      token: _store.store.getDatum("token") ? _store.store.getDatum("token") : "",
+	      replying: false,
+	      loading: true
+	    };
+	
+	    _store.store.registerListener('token', function () {
+	      _this.setState({ token: _store.store.getDatum('token') });
+	    });
+	    return _this;
+	  }
+	
+	  _createClass(ResourcePage, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+	
+	      _API2.default.getResourceById(this.props.resourceId).done(function (data) {
+	        console.log('got data', data);
+	        _this2.setState({
+	          resourceInfo: data.resource,
+	          allComments: data.comments,
+	          loading: false
+	        });
+	      }).fail(function (err) {
+	        return console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'fetchComments',
+	    value: function fetchComments(callback) {
+	      var _this3 = this;
+	
+	      _API2.default.getComments(this.props.resourceId).done(function (resp) {
+	        _this3.setState({ allComments: resp, loading: false });
+	        if (callback) callback();
+	      }).fail(function (err) {
+	        return console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'reply',
+	    value: function reply(e) {
+	      e.preventDefault();
+	      var haveToken = (0, _authorization.canHazToken)();
+	      if (!haveToken) return (0, _alerts.pleaseLogin)();
+	      this.setState({ replying: haveToken });
+	    }
+	  }, {
+	    key: 'postComment',
+	    value: function postComment(body) {
+	      var _this4 = this;
+	
+	      this.setState({ replying: false });
+	      _API2.default.postComment(this.state.resourceInfo._id, body, 'seed').done(function (resp) {
+	        return _this4.fetchComments.bind(_this4)();
+	      }).fail(function (err) {
+	        return (0, _alerts.genErr)(err.responseText);
+	      });
+	    }
+	  }, {
+	    key: 'discard',
+	    value: function discard() {
+	      this.setState({ replying: false });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this5 = this;
+	
+	      var commentEls = [];
+	
+	      commentEls = this.state.allComments.map(function (comment, i) {
+	        return _react2.default.createElement(_Comment2.default, _extends({}, comment, { token: _this5.state.token,
+	          update: _this5.fetchComments.bind(_this5),
+	          key: i }));
+	      });
+	
+	      var addedClasses = (0, _classnames2.default)('resource', 'active');
+	
+	      var newComment = this.state.replying ? _react2.default.createElement(_NewComment2.default, { post: this.postComment.bind(this),
+	        discard: this.discard.bind(this) }) : [];
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'resourceHead' },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'resourceTitle' },
+	              _react2.default.createElement(
+	                'strong',
+	                null,
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: this.state.resourceInfo.link },
+	                  this.state.resourceInfo.title
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container resourceContent' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'panel-body resourceBody' },
+	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.state.resourceInfo.body || '') } })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'resourceFooter' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'timeStamp' },
+	                (0, _time.formatTime)(this.state.resourceInfo.timestamp)
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'btn btn-success replyResourceButton', href: '#', onClick: this.reply.bind(this) },
+	                'reply'
+	              )
+	            ),
+	            newComment,
+	            this.state.loading ? _react2.default.createElement(_LoadingSpinner2.default, null) : [],
+	            commentEls
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ResourcePage;
+	}(_react2.default.Component);
+	
+	exports.default = ResourcePage;
+
+/***/ },
+/* 299 */
 /*!****************************!*\
   !*** ./css/sweetalert.css ***!
   \****************************/
@@ -38854,7 +39251,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./sweetalert.css */ 296);
+	var content = __webpack_require__(/*! !./../~/css-loader!./sweetalert.css */ 300);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
@@ -38874,7 +39271,7 @@
 	}
 
 /***/ },
-/* 296 */
+/* 300 */
 /*!*******************************************!*\
   !*** ./~/css-loader!./css/sweetalert.css ***!
   \*******************************************/
@@ -38891,7 +39288,7 @@
 
 
 /***/ },
-/* 297 */
+/* 301 */
 /*!************************!*\
   !*** ./css/google.css ***!
   \************************/
@@ -38900,7 +39297,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./google.css */ 298);
+	var content = __webpack_require__(/*! !./../~/css-loader!./google.css */ 302);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
@@ -38920,7 +39317,7 @@
 	}
 
 /***/ },
-/* 298 */
+/* 302 */
 /*!***************************************!*\
   !*** ./~/css-loader!./css/google.css ***!
   \***************************************/
@@ -38937,7 +39334,7 @@
 
 
 /***/ },
-/* 299 */
+/* 303 */
 /*!***********************!*\
   !*** ./css/style.css ***!
   \***********************/
@@ -38946,7 +39343,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../~/css-loader!./style.css */ 300);
+	var content = __webpack_require__(/*! !./../~/css-loader!./style.css */ 304);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../~/style-loader/addStyles.js */ 170)(content, {});
@@ -38966,7 +39363,7 @@
 	}
 
 /***/ },
-/* 300 */
+/* 304 */
 /*!**************************************!*\
   !*** ./~/css-loader!./css/style.css ***!
   \**************************************/
@@ -38977,7 +39374,7 @@
 	
 	
 	// module
-	exports.push([module.id, "$primary-color: #4caf50;\n$secondary-color: #F44336;\n\nbody {\n  color: #1F4832;\n  background: #fcfffc;\n}\n\n.heroImage {\n    background: rgb(37, 208, 239);\n    height: 49vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n.heroHead{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.herofooter{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.heroText{\n  text-align: center;\n}\n.vertical-center {\n  min-height: 100%;\n  min-height: 49vh;\n  /* Make it a flex container */\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -moz-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n}\n\n.btn-round {\n  border-radius: 1;\n  width: 1.7em;\n  height: 1.7em;\n  line-height: 1;\n  font-size: 35px;\n  z-index: -1;\n  position: relative;\n  cursor: pointer;\n  top: -20px;\n  left: -5px;\n}\n\n.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {\n    border-color: rgba(76, 175, 80, 0);\n}\n\ndiv.startcoding-logo{\n  margin:3em auto;\n  width:50em;\n}\n\ndiv.startcoding-logo a{\n  text-decoration:none;\n  color:#64AF67;\n}\n\ndiv.braket-logo {\n  border-radius: 50% 50% 50% 50%;\n  background-color: #22659C;\n  color: #42E2FF;\n  width: 1em;\n  height: 1em;\n  font-size: 1.5em;\n  overflow: hidden;\n  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);\n  display: inline-block;\n  vertical-align: center;\n  position: absolute;\n  bottom: 4px;\n  right: 4px;\n  margin: 0px auto;\n}\n\ndiv.braket-logo div.leaf-shadow{\n  width:6.3em;\n  height:10.6em;\n  background-color:#64AF67;\n  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);\n}\n\n#title{\n  display:inline-block;\n  font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;\n  padding:0;\n  margin:0;\n}\n\n.startcoding-logo:hover {\n\n}\n.startcoding-logo:after {\n    content: \"\";\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    width: 0%;\n    height: 100%;\n    background-color: rgba(255,255,255,0.4);\n    -webkit-transition: none;\n    -moz-transition: none;\n    -ms-transition: none;\n    -o-transition: none;\n    transition: none;\n\n}\n.startcoding-logo:hover:after {\n    width: 120%;\n    background-color: rgba(255,255,255,0);\n    -webkit-transition: all 0.9s ease-out;\n    -moz-transition: all 0.9s ease-out;\n    -ms-transition: all 0.9s ease-out;\n    -o-transition: all 0.9s ease-out;\n    transition: all 0.9s ease-out;\n}\n\nimg.techImage {\n    height: 200px;\n}\n.techContainer {\n    /* margin: 40px; */\n    position: relative;\n    top: 15px;\n}\n.resourcePanels{\n  text-align: center;\n}\n\ndiv#bs-example-navbar-collapse-2 {\n    position: relative;\n    /*left: 8%;*/\n}\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 3.5em;\n}\n\n#registerForm {\n  position: relative;\n  left: 15%;\n  top: 15px;\n}\n#registerButton{\n  display: inline-block;\n  z-index: 100000;\n  position: relative;\n}\n\na.alreadyMember {\n    position: relative;\n    left: 65%;\n}\n\n#userNameRegister.form-control::-webkit-input-placeholder { color: white; }\n#userNameRegister.form-control:-moz-placeholder { color: white; }\n#userNameRegister.form-control::-moz-placeholder { color: white; }\n#userNameRegister.form-control:-ms-input-placeholder { color: white; }\n#userNameRegister{ color:white; }\n\n#passwordRegister.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister.form-control:-moz-placeholder { color: white; }\n#passwordRegister.form-control::-moz-placeholder { color: white; }\n#passwordRegister.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister{ color:white; }\n\n#passwordRegister2.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister2.form-control:-moz-placeholder { color: white; }\n#passwordRegister2.form-control::-moz-placeholder { color: white; }\n#passwordRegister2.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister2{ color:white; }\n\n#emailRegister.form-control::-webkit-input-placeholder { color: white; }\n#emailRegister.form-control:-moz-placeholder { color: white; }\n#emailRegister.form-control::-moz-placeholder { color: white; }\n#emailRegister.form-control:-ms-input-placeholder { color: white; }\n#emailRegister{ color:white; }\n\n#userNameLogin.form-control::-webkit-input-placeholder { color: white; }\n#userNameLogin.form-control:-moz-placeholder { color: white; }\n#userNameLogin.form-control::-moz-placeholder { color: white; }\n#userNameLogin.form-control:-ms-input-placeholder { color: white; }\n#userNameLogin{ color:white; }\n\n#passwordLogin.form-control::-webkit-input-placeholder { color: white; }\n#passwordLogin.form-control:-moz-placeholder { color: white; }\n#passwordLogin.form-control::-moz-placeholder { color: white; }\n#passwordLogin.form-control:-ms-input-placeholder { color: white; }\n#passwordLogin{ color:white; }\n\n.markdownNotice {\n  float: left;\n  color: grey;\n}\n\n.floatingActionButton {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: inherit;\n  border-radius:100%;\n  outline:none;\n  color:#FFF;\n  font-size:36px;\n  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  cursor: pointer;\n}\n\n.floatingActionButton span {\n  position: absolute;\n  -ms-transform: translate(-10px, -32px);\n  -webkit-transform: translate(-10px, -32px);\n  transform: translate(-10px, -32px);\n}\n\n.floatingActionButton:hover {\n  width: inherit;\n  background-color: #D32F2F;\n}\n\n.newResourceTitle {\n  margin-bottom: 1em;\n}\n\n.spinnerContainer {\n  position: absolute;\n  top: calc(50% - 50px);\n  left: calc(50% - 50px);\n}\n\ntextarea {\n  padding: 0.5em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 100%;\n  border: 1px solid lightgrey !important;\n}\n\n.navbar-inverse {\n  background: #03A9F4;\n  color: #FFF;\n  margin-bottom: 0;\n  z-index: 1000;\n}\n\n.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {\n    color: #FFF !important;\n}\n\n.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {\n    color: peachpuff;\n}\n\n#Register, #Logout, #welcome {\n  display: none;\n}\n\n#newResourceModal {\n  z-index: 2000;\n  position: fixed;\n  top: 15%;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n.main{\n  position: relative;\n  /*height: calc(100vh - 64px);*/\n  margin-bottom: 0;\n  /*overflow-y: scroll;*/\n}\n.displayResource {\n  overflow: hidden;\n}\n\n.active {\n    position: fixed;\n    background: white;\n    height: calc(100vh - 64px);\n    bottom: 0;\n    right: 0;\n    z-index: 4000;\n    left: 0;\n    margin: auto;\n    padding-bottom: 1em;\n    overflow-y: scroll;\n}\n\na.disabled {\n    pointer-events: none;\n    color: lightgrey;\n}\n.resourceContent {\n  display: none;\n}\n.active .resourceContent {\n  display: block;\n}\n.resourceTitle {\n  margin: 0px;\n  padding: 0.5em 1em;\n  text-align: center;\n}\n.panel-body.resourceBody {\n  white-space: pre-line;\n  border-left: 26px solid green;\n  border-top: 2px solid green;\n  border-bottom: 2px solid green;\n  border-right: 2px solid green;\n  background: rgba(213, 232, 204, 0.22);\n  padding: 50px;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n\n.resourceHead:hover{\n  background-color: #F5F5F5;\n  cursor: pointer;\n}\n\n.active .resourceHead {\n  background-color: #F5F5F5;\n}\n\n.closeResource {\n  display: none;\n}\n.active .closeResource {\n  display: inline;\n  float: right;\n  color: #4caf50;\n}\n.replyResourceButton {\n    float: right;\n}\n.resourceFooter {\n    padding: 20px;\n}\n.green .resourceTitle {\n  background: #E8F5E9;\n}\n.comment {\n  margin: 1em 0 0 1em;\n  padding: 1em .5em 1em 1em;\n}\n.panel-footer {\n  margin: 0 15px;\n  padding: 0px;\n  border-top: 1px solid #4caf50;\n  background: white;\n  font-style: italic;\n}\n\n.breadcrumb {\n  text-align: right;\n}\n\n.breadcrumb > span{\n  float: left;\n  color: gray;\n}\n\n.new-comment-buttons {\n  float: right;\n}\n\n.new-comment-buttons .btn {\n  margin-left: 1em;\n}\n\n.commentVotebox {\n  float: right;\n}\n\n.up .voteBtn:first-child{\n  color: #00E676\n}\n.down .voteBtn:nth-child(3){\n  color: purple;\n}\n\n.voteBtn {\n  color: lightgrey;\n  margin: 0 .8em;\n  padding: 0 .2em;\n  cursor: pointer;\n}\n\n.disabled .voteBtn{\n  color: lightgrey;\n  cursor: default;\n}\n\n\n@media (max-width:768px) and (min-width:667px) {\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 30%;\n\n  }\n}\n\n/* ----------- iPhone 4 and 4S ----------- */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n  h4, .h4 {\n      font-size: 15px;\n  }\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 38%;\n  }\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n\n  }\n\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  #Register{\n    display: none;\n    left: -10%;\n    width: 100%;\n    position: relative;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    /*h4, .h4 {\n        font-size: 15px;\n    }*/\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 136px;\n        bottom: 22px;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n    h4, .h4 {\n        font-size: 15px;\n    }\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 150px;\n        bottom: 22px;\n    }\n\n}\n\n/* ----------- iPhone 5 and 5S ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n    .main {\n      position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      /*overflow-y: initial;*/\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: calc(100vh);\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n    .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    main {\n      position: relative;\n        height: 100%;\n        margin-bottom: 0;\n        overflow-y: initial;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n}\n\n/* ----------- iPhone 6 ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 43%;\n}\n\n}\n\n\n\n/* ----------iPhone 6 Plus ---------- */\n\n/* Portrait and Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : landscape) {\n\n\n}\n\n/* Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : portrait) {\n\n  span.startCodingName {\n    position: absolute;\n    top: 23px;\n    left: 11%;\n\n  }\n\n}\n\n/* ----------- iPad mini ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    .main {\n    position: relative;\n    height: 100%;\n    margin-bottom: 0;\n    overflow-y: initial;\n  }\nspan.startCodingName {\n  position: absolute;\n  top: 23px;\n  left: 7%;\n\n}\n  .active {\n      position: fixed;\n      background: white;\n      height: 100%;\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 1) {\n    .floatingActionButton {\n        position: fixed;\n        bottom: 1.7em;\n        right: 1.5em;\n        border-radius: 100%;\n        outline: none;\n        color: #FFF;\n        font-size: 36px;\n        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n        -webkit-tap-highlight-color: rgba(0,0,0,0);\n        cursor: pointer;\n    }\n    span.startCodingName {\n      position: absolute;\n      top: 23px;\n      left: 4em;\n\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: 100%;\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    #startCodingName{\n      position: absolute;\n        top: 20px;\n        left:7%;\n    }\n\n}\n\n\n/* ----------- iPad 3 and 4 ----------- */\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n.main {\n  position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n}\n.active {\n  position: fixed;\n  background: white;\n  height: 100%;\n  width: 100vw;\n  top: 0;\n  right: 3em;\n  z-index: 4000;\n  left: 0;\n  margin: auto;\n  padding-bottom: 1em;\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n}\n#Register, #Logout, #welcome {\n    display: none;\n    position: relative;\n    right: 78px;\n}\n\n\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 2) {\nspan.startCodingName {\n  position: absolute;\n  top: 20px;\n  left: 4em;\n}\na.alreadyMember {\n  position: absolute;\n  left: 200px;\n  bottom: 33px;\n}\n#registerButton {\n    display: inline-block;\n    z-index: 100000;\n    position: relative;\n    top: 6px;\n}\n#forgotPassword {\n  position: relative;\n  left: 1em;\n}\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n#startCodingName{\n  position: absolute;\n    top: 20px;\n    left:7%;\n}\n\n}\n\n\n/* Nexus 7 (portrait and landscape) ----------- */\n@media only screen and (min-device-width : 603px) and (max-device-width : 966px) {\n\n}\n\n/* Nexus 7 (landscape) ----------- */\n@media only screen and (min-width : 604px) and (orientation: landscape) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    /*left: 20%;*/\n  }\n}\n\n/* Nexus 7 (portrait) ----------- */\n@media only screen and (max-width : 603px) and (orientation: portrait) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 30%;\n  }\n}\n\n#goHome {\n  position: fixed;\n  background: transparent;\n  z-index: 9999;\n  height: 64px;\n  width: 180px;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, "$primary-color: #4caf50;\n$secondary-color: #F44336;\n\nbody {\n  color: #1F4832;\n  background: #fcfffc;\n}\n\n.heroImage {\n    background: rgb(37, 208, 239);\n    height: 49vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n.heroHead{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.herofooter{\n  text-align: center;\n  color: #F3F3F3;\n  font-style: oblique;\n}\n.heroText{\n  text-align: center;\n}\n.vertical-center {\n  min-height: 100%;\n  min-height: 49vh;\n  /* Make it a flex container */\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -moz-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n}\n\n.btn-round {\n  border-radius: 1;\n  width: 1.7em;\n  height: 1.7em;\n  line-height: 1;\n  font-size: 35px;\n  z-index: -1;\n  position: relative;\n  cursor: pointer;\n  top: -20px;\n  left: -5px;\n}\n\n.breadcrumb.resourceBreadCrumb{\n  background: white;\n}\n\n.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {\n    border-color: rgba(76, 175, 80, 0);\n}\n\ndiv.startcoding-logo{\n  margin:3em auto;\n  width:50em;\n}\n\ndiv.startcoding-logo a{\n  text-decoration:none;\n  color:#64AF67;\n}\n\ndiv.braket-logo {\n  border-radius: 50% 50% 50% 50%;\n  background-color: #22659C;\n  color: #42E2FF;\n  width: 1em;\n  height: 1em;\n  font-size: 1.5em;\n  overflow: hidden;\n  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);\n  display: inline-block;\n  vertical-align: center;\n  position: absolute;\n  bottom: 4px;\n  right: 4px;\n  margin: 0px auto;\n}\n\ndiv.braket-logo div.leaf-shadow{\n  width:6.3em;\n  height:10.6em;\n  background-color:#64AF67;\n  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);\n}\n\n#title{\n  display:inline-block;\n  font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;\n  padding:0;\n  margin:0;\n}\n\n.startcoding-logo:hover {\n\n}\n.startcoding-logo:after {\n    content: \"\";\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    width: 0%;\n    height: 100%;\n    background-color: rgba(255,255,255,0.4);\n    -webkit-transition: none;\n    -moz-transition: none;\n    -ms-transition: none;\n    -o-transition: none;\n    transition: none;\n\n}\n.startcoding-logo:hover:after {\n    width: 120%;\n    background-color: rgba(255,255,255,0);\n    -webkit-transition: all 0.9s ease-out;\n    -moz-transition: all 0.9s ease-out;\n    -ms-transition: all 0.9s ease-out;\n    -o-transition: all 0.9s ease-out;\n    transition: all 0.9s ease-out;\n}\n\nimg.techImage {\n    height: 200px;\n}\n.techContainer {\n    /* margin: 40px; */\n    position: relative;\n    top: 15px;\n}\n.resourcePanels{\n  text-align: center;\n}\n\ndiv#bs-example-navbar-collapse-2 {\n    position: relative;\n    /*left: 8%;*/\n}\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 3.5em;\n}\n\n#registerForm {\n  position: relative;\n  left: 15%;\n  top: 15px;\n}\n#registerButton{\n  display: inline-block;\n  z-index: 100000;\n  position: relative;\n}\n\na.alreadyMember {\n    position: relative;\n    left: 65%;\n}\n\n#userNameRegister.form-control::-webkit-input-placeholder { color: white; }\n#userNameRegister.form-control:-moz-placeholder { color: white; }\n#userNameRegister.form-control::-moz-placeholder { color: white; }\n#userNameRegister.form-control:-ms-input-placeholder { color: white; }\n#userNameRegister{ color:white; }\n\n#passwordRegister.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister.form-control:-moz-placeholder { color: white; }\n#passwordRegister.form-control::-moz-placeholder { color: white; }\n#passwordRegister.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister{ color:white; }\n\n#passwordRegister2.form-control::-webkit-input-placeholder { color: white; }\n#passwordRegister2.form-control:-moz-placeholder { color: white; }\n#passwordRegister2.form-control::-moz-placeholder { color: white; }\n#passwordRegister2.form-control:-ms-input-placeholder { color: white; }\n#passwordRegister2{ color:white; }\n\n#emailRegister.form-control::-webkit-input-placeholder { color: white; }\n#emailRegister.form-control:-moz-placeholder { color: white; }\n#emailRegister.form-control::-moz-placeholder { color: white; }\n#emailRegister.form-control:-ms-input-placeholder { color: white; }\n#emailRegister{ color:white; }\n\n#userNameLogin.form-control::-webkit-input-placeholder { color: white; }\n#userNameLogin.form-control:-moz-placeholder { color: white; }\n#userNameLogin.form-control::-moz-placeholder { color: white; }\n#userNameLogin.form-control:-ms-input-placeholder { color: white; }\n#userNameLogin{ color:white; }\n\n#passwordLogin.form-control::-webkit-input-placeholder { color: white; }\n#passwordLogin.form-control:-moz-placeholder { color: white; }\n#passwordLogin.form-control::-moz-placeholder { color: white; }\n#passwordLogin.form-control:-ms-input-placeholder { color: white; }\n#passwordLogin{ color:white; }\n\n.markdownNotice {\n  float: left;\n  color: grey;\n}\n\n.floatingActionButton {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: inherit;\n  border-radius:100%;\n  outline:none;\n  color:#FFF;\n  font-size:36px;\n  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  cursor: pointer;\n}\n\n.floatingActionButton span {\n  position: absolute;\n  -ms-transform: translate(-10px, -32px);\n  -webkit-transform: translate(-10px, -32px);\n  transform: translate(-10px, -32px);\n}\n\n.floatingActionButton:hover {\n  width: inherit;\n  background-color: #D32F2F;\n}\n\n.newResourceTitle {\n  margin-bottom: 1em;\n}\n\nh4.resourceTitle {\n    margin-bottom: 0;\n}\n\n.spinnerContainer {\n  position: absolute;\n  top: calc(50% - 50px);\n  left: calc(50% - 50px);\n}\n\ntextarea {\n  padding: 0.5em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 100%;\n  border: 1px solid lightgrey !important;\n}\n\n.navbar-inverse {\n  background: #03A9F4;\n  color: #FFF;\n  margin-bottom: 0;\n  z-index: 1000;\n}\n\n.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {\n    color: #FFF !important;\n}\n\n.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {\n    color: peachpuff;\n}\n\n#Register, #Logout, #welcome {\n  display: none;\n}\n\n#newResourceModal {\n  z-index: 2000;\n  position: fixed;\n  top: 15%;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n.main{\n  position: relative;\n  /*height: calc(100vh - 64px);*/\n  margin-bottom: 0;\n  /*overflow-y: scroll;*/\n}\n.displayResource {\n  overflow: hidden;\n}\n\n.active {\n    position: fixed;\n    background: white;\n    height: calc(100vh - 64px);\n    bottom: 0;\n    right: 0;\n    z-index: 4000;\n    left: 0;\n    margin: auto;\n    padding-bottom: 1em;\n    overflow-y: scroll;\n}\n\na.disabled {\n    pointer-events: none;\n    color: lightgrey;\n}\n.active .resourceContent {\n  display: block;\n}\n.panel-body.resourceBody {\n  white-space: pre-line;\n  border-left: 26px solid green;\n  border-top: 2px solid green;\n  border-bottom: 2px solid green;\n  border-right: 2px solid green;\n  background: rgba(213, 232, 204, 0.22);\n  padding: 50px;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n\n.resourceHead:hover{\n  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n}\n\n.active .resourceHead {\n  background-color: #F5F5F5;\n}\n\n.closeResource {\n  display: none;\n}\n.active .closeResource {\n  display: inline;\n  float: right;\n  color: #4caf50;\n}\n.replyResourceButton {\n    float: right;\n}\n.resourceFooter {\n    padding: 20px;\n}\n.green .resourceTitle {\n  background: #E8F5E9;\n}\n.comment {\n  margin: 1em 0 0 1em;\n  padding: 1em .5em 1em 1em;\n}\n.panel-footer {\n  margin: 0 15px;\n  padding: 0px;\n  border-top: 1px solid #4caf50;\n  background: white;\n  font-style: italic;\n}\n.breadcrumb {\n    padding: 0;\n}\n.breadcrumb > span{\n  float: left;\n  color: gray;\n}\n\n.new-comment-buttons {\n  float: right;\n}\n\n.new-comment-buttons .btn {\n  margin-left: 1em;\n}\n\n.commentVotebox {\n  float: right;\n}\n\n.up .voteBtn:first-child{\n  color: #00E676\n}\n.down .voteBtn:nth-child(3){\n  color: purple;\n}\n\n.voteBtn {\n  color: lightgrey;\n  margin: 0 .8em;\n  padding: 0 .2em;\n  cursor: pointer;\n}\n\n.disabled .voteBtn{\n  color: lightgrey;\n  cursor: default;\n}\n\n\n@media (max-width:768px) and (min-width:667px) {\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 30%;\n\n  }\n}\n\n/* ----------- iPhone 4 and 4S ----------- */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n  h4, .h4 {\n      font-size: 15px;\n  }\n  span.startCodingName {\n      position: absolute;\n      top: 20px;\n      left: 38%;\n  }\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n\n  }\n\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  #Register{\n    display: none;\n    left: -10%;\n    width: 100%;\n    position: relative;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    /*h4, .h4 {\n        font-size: 15px;\n    }*/\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 136px;\n        bottom: 22px;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 480px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n    h4, .h4 {\n        font-size: 15px;\n    }\n    span.startCodingName {\n        position: absolute;\n        top: 20px;\n        left: 38%;\n    }\n    a.alreadyMember {\n        position: relative;\n        left: 150px;\n        bottom: 22px;\n    }\n\n}\n\n/* ----------- iPhone 5 and 5S ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n    .main {\n      position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      /*overflow-y: initial;*/\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: calc(100vh);\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n    .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n    main {\n      position: relative;\n        height: 100%;\n        margin-bottom: 0;\n        overflow-y: initial;\n    }\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 320px)\n  and (max-device-width: 568px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\n\n}\n\n/* ----------- iPhone 6 ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: portrait) {\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 375px)\n  and (max-device-width: 667px)\n  and (-webkit-min-device-pixel-ratio: 2)\n  and (orientation: landscape) {\nspan.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 43%;\n}\n\n}\n\n\n\n/* ----------iPhone 6 Plus ---------- */\n\n/* Portrait and Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px) {\n\n  .main {\n    position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n  }\n  .active {\n      position: fixed;\n      background: white;\n      height: calc(100vh);\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n  .heroImage {\n    background: rgb(37, 208, 239);\n    height: 100vh;\n    width: 100vw;\n    left: -30px;\n    position: relative;\n}\n\n}\n\n/* Portrait */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : landscape) {\n\n\n}\n\n/* Landscape */\n@media only screen\nand (min-device-width : 414px)\nand (max-device-width : 736px)\nand (orientation : portrait) {\n\n  span.startCodingName {\n    position: absolute;\n    top: 23px;\n    left: 11%;\n\n  }\n\n}\n\n/* ----------- iPad mini ----------- */\n\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    .main {\n    position: relative;\n    height: 100%;\n    margin-bottom: 0;\n    overflow-y: initial;\n  }\nspan.startCodingName {\n  position: absolute;\n  top: 23px;\n  left: 7%;\n\n}\n  .active {\n      position: fixed;\n      background: white;\n      height: 100%;\n      top: 0;\n      right: 0;\n      z-index: 4000;\n      left: 0;\n      margin: auto;\n      padding-bottom: 1em;\n      overflow-y: scroll;\n      -webkit-overflow-scrolling: touch;\n  }\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 1) {\n    .floatingActionButton {\n        position: fixed;\n        bottom: 1.7em;\n        right: 1.5em;\n        border-radius: 100%;\n        outline: none;\n        color: #FFF;\n        font-size: 36px;\n        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n        -webkit-tap-highlight-color: rgba(0,0,0,0);\n        cursor: pointer;\n    }\n    span.startCodingName {\n      position: absolute;\n      top: 23px;\n      left: 4em;\n\n    }\n    .active {\n        position: fixed;\n        background: white;\n        height: 100%;\n        top: 0;\n        right: 0;\n        z-index: 4000;\n        left: 0;\n        margin: auto;\n        padding-bottom: 1em;\n        overflow-y: scroll;\n        -webkit-overflow-scrolling: touch;\n    }\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 1) {\n\n    #startCodingName{\n      position: absolute;\n        top: 20px;\n        left:7%;\n    }\n\n}\n\n\n/* ----------- iPad 3 and 4 ----------- */\n/* Portrait and Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n.main {\n  position: relative;\n      height: 100%;\n      margin-bottom: 0;\n      overflow-y: initial;\n}\n.active {\n  position: fixed;\n  background: white;\n  height: 100%;\n  width: 100vw;\n  top: 0;\n  right: 3em;\n  z-index: 4000;\n  left: 0;\n  margin: auto;\n  padding-bottom: 1em;\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n}\n#Register, #Logout, #welcome {\n    display: none;\n    position: relative;\n    right: 78px;\n}\n\n\n\n\n}\n\n/* Portrait */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: portrait)\n  and (-webkit-min-device-pixel-ratio: 2) {\nspan.startCodingName {\n  position: absolute;\n  top: 20px;\n  left: 4em;\n}\na.alreadyMember {\n  position: absolute;\n  left: 200px;\n  bottom: 33px;\n}\n#registerButton {\n    display: inline-block;\n    z-index: 100000;\n    position: relative;\n    top: 6px;\n}\n#forgotPassword {\n  position: relative;\n  left: 1em;\n}\n\n\n\n}\n\n/* Landscape */\n@media only screen\n  and (min-device-width: 768px)\n  and (max-device-width: 1024px)\n  and (orientation: landscape)\n  and (-webkit-min-device-pixel-ratio: 2) {\n\n#startCodingName{\n  position: absolute;\n    top: 20px;\n    left:7%;\n}\n\n}\n\n\n/* Nexus 7 (portrait and landscape) ----------- */\n@media only screen and (min-device-width : 603px) and (max-device-width : 966px) {\n\n}\n\n/* Nexus 7 (landscape) ----------- */\n@media only screen and (min-width : 604px) and (orientation: landscape) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    /*left: 20%;*/\n  }\n}\n\n/* Nexus 7 (portrait) ----------- */\n@media only screen and (max-width : 603px) and (orientation: portrait) {\n  span.startCodingName {\n    position: absolute;\n    top: 20px;\n    left: 30%;\n  }\n}\n\n#goHome {\n  position: fixed;\n  background: transparent;\n  z-index: 9999;\n  height: 64px;\n  width: 180px;\n  cursor: pointer;\n}\n", ""]);
 	
 	// exports
 

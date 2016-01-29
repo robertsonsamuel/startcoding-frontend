@@ -39,7 +39,6 @@ class Comment extends React.Component {
   componentWillMount() {
     store.registerListener('me', () => {
       let me = store.getDatum('me');
-      console.log('me!',me);
       this.setState({ me: me });
     });
   }
@@ -130,7 +129,7 @@ class Comment extends React.Component {
 
     API.vote(this.props._id, vote)
     .done( resp => {
-      console.log('sent!');
+    
       //this.props.update();
     })
     .fail( err => console.log("error voting", err));

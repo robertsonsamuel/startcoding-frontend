@@ -1,5 +1,5 @@
-let apiUrl = 'https://protected-river-69772.herokuapp.com';
-//let apiUrl = 'http://localhost:3000';
+//let apiUrl = 'https://protected-river-69772.herokuapp.com';
+let apiUrl = 'http://localhost:3000';
 
 import {canHazToken, parseToken} from './util/authorization';
 import {store} from './util/store';
@@ -43,6 +43,15 @@ let API = {
     .done((data) => {
       store.saveDatum('resources', data);
     });
+  },
+  postResourceVote(resourceId, vote){
+    return $.ajax({
+      url: `${apiUrl}/resources/vote/${resourceId}`,
+      type: 'POST',
+      beforeSend: setAuthHeader,
+      datatype: 'json',
+      data: {vote: vote}
+    })
   },
   postResource(title, body, aLink, category) {
     return $.ajax({
