@@ -57,7 +57,7 @@ class FilterBar extends React.Component {
         <option key={i} value={category}>{category}</option>
       )
     });
-    let hotTags = this.props.suggestions.map((tag, i) => {
+    let hotTags = (this.props.suggestions || []).map((tag, i) => {
       return (
         <span className="ReactTags__tag" key={i}>{tag}</span>
       )
