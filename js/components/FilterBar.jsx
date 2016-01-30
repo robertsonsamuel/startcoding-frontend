@@ -66,10 +66,11 @@ class FilterBar extends React.Component {
       <div>
         <div className="filterBarContainer">
           <h5>Category:</h5>
-
-          <select defaultValue={this.props.category} onChange={this.selectCategory.bind(this)} className="form-control">
-            {categories}
-          </select>
+          <div className="form-group">
+            <select defaultValue={this.props.category} onChange={this.selectCategory.bind(this)} className="form-control">
+              {categories}
+            </select>
+          </div>
 
           <div style={{width: '100%', marginTop: '1em'}} className="text-center">&bull; &bull; &bull;</div>
 
