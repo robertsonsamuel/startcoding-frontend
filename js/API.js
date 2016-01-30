@@ -43,12 +43,19 @@ let API = {
   getResourceById(id) {
     return $.get(`${apiUrl}/resources/one/${id}`);
   },
-  getResources(category) {
-    return $.get(`${apiUrl}/resources/${category}`)
+  getResources(category, tags) {
+    let query = tags && tags.length ? `?tags=${tags.join()}` : '';
+    return $.get(`${apiUrl}/resources/${category + query}`)
     .done((data) => {
-      console.log("here's all our resources", data);
-      store.saveDatum('resources', data);
+      store.saveDatum('resources', data.resources);
     });
+  },
+  getAllTags() {
+    return $.get(`${apiUrl}/tags`)
+    .done((allTags) => {
+      store.saveDatum('allTags', allTags);
+    })
+    .fail(err => console.log(err));
   },
   postResourceVote(resourceId, vote){
     return $.ajax({
@@ -59,7 +66,7 @@ let API = {
       data: {vote: vote}
     })
   },
-  postResource(title, body, aLink, category) {
+  postResource(title, body, aLink, tags, category) {
     return $.ajax({
       url: `${apiUrl}/resources/`,
       type: 'POST',
@@ -69,6 +76,7 @@ let API = {
         title: title,
         body: body,
         link: aLink,
+        tags: tags,
         category: category
       }
     });

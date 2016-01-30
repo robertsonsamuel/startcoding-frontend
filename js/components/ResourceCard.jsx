@@ -14,39 +14,27 @@ class Resource extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      me: store.getDatum('me') || '',
       score: this.props.upvotes - this.props.downvotes
     };
   }
-  putMeOnState(){
-    let me = store.getDatum('me')
-    this.setState({me: me})
-  }
-  componentWillMount(){
-    store.registerListener('me', this.putMeOnState.bind(this) )
-  }
-  componentWillUnmount() {
-    store.stopListening('me', this.putMeOnState.bind(this) )
-  }
-
   saveResource(e){
     e.preventDefault();
-    if (!this.state.me) return pleaseLogin();
+    if (!this.props.me) return pleaseLogin();
     let resourceId = this.props._id
-    let meId = this.state.me._id
+    let meId = this.props.me._id
     API.saveResource(meId, resourceId)
     // console.log('resourceId', id);
     // console.log('user id', meId);
   }
   handleVote(vote) {
 
-    if (!this.state.me) {
+    if (!this.props.me) {
       pleaseLogin();
       return;
     }
 
     let id = this.props._id;
-    let me = this.state.me;
+    let me = this.props.me;
 
     if (vote === 'up') {
       //handle upvotes set, toggle upvote
@@ -79,19 +67,16 @@ class Resource extends React.Component {
     store.saveDatum('me', me)
 
     API.postResourceVote(id, vote)
-    .done( resp => {
-      //this.props.update();
-    })
     .fail( err => console.log("error voting", err));
 
   }
 
   render() {
-    let showUpvote = this.state.me ? this.state.me.upvotes.has(this.props._id) : false;
-    let showDownvote = this.state.me ? this.state.me.downvotes.has(this.props._id) : false;
+    let showUpvote = this.props.me ? this.props.me.upvotes.has(this.props._id) : false;
+    let showDownvote = this.props.me ? this.props.me.downvotes.has(this.props._id) : false;
     let saveButtonText = "save";
-    if (this.state.me) {
-      saveButtonText = (this.state.me.savedResources.has(this.props._id)) ? "unsave" : "save";
+    if (this.props.me) {
+      saveButtonText = (this.props.me.savedResources.has(this.props._id)) ? "unsave" : "save";
     }
     return (
       <div className="resource">

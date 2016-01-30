@@ -312,19 +312,6 @@ textarea {
   overflow: hidden;
 }
 
-.active {
-    position: fixed;
-    background: white;
-    height: calc(100vh - 64px);
-    bottom: 0;
-    right: 0;
-    z-index: 4000;
-    left: 0;
-    margin: auto;
-    padding-bottom: 1em;
-    overflow-y: scroll;
-}
-
 a.disabled {
     pointer-events: none;
     color: lightgrey;

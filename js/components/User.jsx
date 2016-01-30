@@ -6,6 +6,7 @@ import FilterBar from './FilterBar.jsx';
 import NewResourceModal from './NewResourceModal.jsx';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
+import {store} from '../util/store';
 
 class User extends React.Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class User extends React.Component {
     let resourceEls = this.state.allResources.map((resource,i) => {
       let isActive = this.state.activeResource === resource._id;
       return <ResourceCard {...resource}
+                           me={this.props.me}
                            isActive={isActive}
                            onClick={this.handleResourceClick.bind(this,resource._id)}
                            key={i}/>

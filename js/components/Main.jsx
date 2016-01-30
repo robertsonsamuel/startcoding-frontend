@@ -13,12 +13,13 @@ class Main extends React.Component {
     super(props);
     this.state = {
       allResources: [],
-      loading: true
+      loading: true,
     };
   }
   componentDidMount() {
     if (this.props.meId) return (this.getUserSavedResources.bind(this))();
-    (this.getResources.bind(this))()
+    (this.getResources.bind(this))();
+    API.getAllTags();
   }
   componentDidUpdate(prevProps){
     if (prevProps.category !== this.props.category) {
@@ -32,7 +33,6 @@ class Main extends React.Component {
     this.setState({loading: true})
     API.getResources(this.props.category)
     .done( resp => {
-      console.log("got resources");
       this.setState( {allResources: resp.resources, loading: false} );
     })
     .fail( err => genErr(err.responseText))
@@ -44,6 +44,7 @@ class Main extends React.Component {
     let resourceEls = this.state.allResources.map((resource,i) => {
       let isActive = this.state.activeResource === resource._id;
       return <ResourceCard {...resource}
+                           me={this.props.me}
                            isActive={isActive}
                            onClick={this.handleResourceClick.bind(this,resource._id)}
                            key={i}/>
