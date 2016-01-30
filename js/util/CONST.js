@@ -1,3 +1,3 @@
 export default {
-  ALL_CATEGORIES: ['Javascript', 'Python', 'Go', 'Ruby', 'HTML', 'CSS', 'General', 'All' ]
+  ALL_CATEGORIES: ['JavaScript', 'Python', 'Go', 'Ruby', 'HTML', 'CSS', 'General', 'All' ]
 }

@@ -43,8 +43,13 @@ let API = {
   getResourceById(id) {
     return $.get(`${apiUrl}/resources/one/${id}`);
   },
-  getResources(category, tags) {
-    let query = tags && tags.length ? `?tags=${tags.join()}` : '';
+  getResources(category, tags, text) {
+    let tagQuery = tags && tags.length ? `tags=${tags.join()}` : '';
+    let textQuery = text ? `query=${text}` : '';
+    let query = '';
+    if (tagQuery || textQuery) {
+      query = '?' + tagQuery + (tagQuery && textQuery ? '&' : '') + textQuery;
+    }
     return $.get(`${apiUrl}/resources/${category + query}`)
     .done((data) => {
       store.saveDatum('resources', data.resources);
@@ -54,6 +59,7 @@ let API = {
     return $.get(`${apiUrl}/tags`)
     .done((allTags) => {
       store.saveDatum('allTags', allTags);
+      console.log('allTags', allTags);
     })
     .fail(err => console.log(err));
   },

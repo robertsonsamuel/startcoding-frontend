@@ -40,11 +40,8 @@ class NewResourceModal extends React.Component {
   handleDelete(i) {
     let tags = this.state.tags;
     tags.splice(i, 1);
-    this.setState({
-      tags: tags
-    });
+    this.setState({ tags: tags });
   }
-
   handleAddition(tag) {
     let tags = this.state.tags;
     tag = tag.normalize();
@@ -54,18 +51,13 @@ class NewResourceModal extends React.Component {
         text: tag
       });
     // }
-    this.setState({
-      tags: tags
-    });
+    this.setState({ tags: tags });
   }
-
   handleDrag(tag, currPos, newPos) {
     let tags = this.state.tags;
     tags.splice(currPos, 1);
     tags.splice(newPos, 0, tag);
-    this.setState({
-      tags: tags
-    });
+    this.setState({ tags: tags });
   }
 
   newResource(){
