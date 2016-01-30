@@ -15,7 +15,9 @@ export default function init() {
 
   store.saveDatum('token', token);
   API.getMyInfo();
-  window.location.hash = '#/all'
+  if ( window.location.hash.match(/#\/$|^$/) ) {
+    window.location.hash = '#/all'
+  }
   return true;
 
 }
