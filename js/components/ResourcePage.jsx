@@ -5,7 +5,7 @@ import NewComment from './NewComment.jsx';
 import LoadingSpinner from './LoadingSpinner.jsx';
 import EditResource from './EditResource.jsx';
 import classNames from 'classnames';
-import {genErr, pleaseLogin} from '../util/alerts';
+import {genErr, pleaseLogin, confirmDelete} from '../util/alerts';
 import {isAuthorized, canHazToken, parseToken} from '../util/authorization';
 import {formatTime} from '../util/time';
 import {store} from '../util/store';
@@ -67,11 +67,19 @@ class ResourcePage extends React.Component {
     if(!haveToken) return pleaseLogin();
     this.setState({ replying: haveToken });
   }
-  edit(e){
+  edit(e) {
     if (this.state.replying) return;
     if (!this.props.me) return;
     e.preventDefault();
     this.setState({ editing: isAuthorized(this.props.me._id) });
+  }
+  deleteResource() {
+    confirmDelete(() => {
+      API.deleteResource(this.state.resourceInfo._id)
+      .done((resp) => (this.updateResource.bind(this))(resp))
+      .fail(err => genErr(err.responseText));
+    })
+
   }
 
   discard() {
@@ -140,6 +148,7 @@ class ResourcePage extends React.Component {
               <span className="timeStamp">{formatTime(this.state.resourceInfo.timestamp)}</span>
               <button className="btn btn-success replyResourceButton" href="#" onClick={this.reply.bind(this)}>Reply</button>
               <button className={changeButtons} href="#" onClick={this.edit.bind(this)}>Edit</button>
+              <button className={changeButtons} href="#" onClick={this.deleteResource.bind(this)}>Delete</button>
             </div>
             {newComment}
             {this.state.loading ? <LoadingSpinner /> : []}

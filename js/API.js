@@ -92,6 +92,13 @@ let API = {
       }
     });
   },
+  deleteResource(resourceId){
+    return $.ajax({
+      url: `${apiUrl}/resources/${resourceId}`,
+      type: 'DELETE',
+      beforeSend: setAuthHeader
+    });
+  },
   getComments(resourceId) {
     return $.ajax({
       url: `${apiUrl}/comments/${resourceId}`,
