@@ -19,7 +19,10 @@ class Main extends React.Component {
   }
   componentWillMount() {
     console.log('componentWillMount',this.props.category);
+    
     (this.getResources.bind(this))();
+    API.getAllTags();
+
     eventEmitter.registerListener('goMain', () => {
       this.setState({activeResource: false });
       (this.getResources.bind(this))();
