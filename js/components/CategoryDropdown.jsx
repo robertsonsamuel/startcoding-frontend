@@ -1,10 +1,10 @@
 import React from 'react';
-
+import CONST from '../util/CONST.js'
 class CategoryDropdown extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      categoriesArrary: ['Javascript', 'python', 'go', 'ruby','html','css', 'general' ],
+      categoriesArrary: CONST.ALL_CATEGORIES,
       selectedValue: this.props.initialCategory
     };
   }
