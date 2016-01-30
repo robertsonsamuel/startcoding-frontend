@@ -26,8 +26,14 @@ class NewResourceModal extends React.Component {
       loading: false,
       selectedValue: this.props.initialCategory,
       tags: [],
-      suggestions: ["Banana", "Mango", "Pear", "Apricot"]
+      suggestions: store.getDatum('allTags')
     };
+  }
+
+  componentWillMount() {
+    store.registerListener('allTags', () => {
+      this.setState({ suggestions: store.getDatum('allTags') });
+    });
   }
 
   // TAG INPUT STUFF
@@ -42,12 +48,12 @@ class NewResourceModal extends React.Component {
   handleAddition(tag) {
     let tags = this.state.tags;
     tag = tag.normalize();
-    if (!tags.some(existingTag => existingTag.text == tag)) {
+    // if (!tags.some(existingTag => existingTag.text == tag)) {
       tags.push({
         id: tags.length + 1,
         text: tag
       });
-    }
+    // }
     this.setState({
       tags: tags
     });
@@ -75,7 +81,11 @@ class NewResourceModal extends React.Component {
     let title = this.refs.title.value;
     let body = this.refs.body.value;
     let aLink = this.refs.aLink.value;
-    let tags = this.state.tags.map(tag => tag.text);
+    
+    let tagSet = new Set(this.state.tags.map(tag => tag.text));
+    let tags = [...tagSet];
+
+    console.log('tags:', tags);
     let category = this.state.selectedValue;
 
     console.log(category);
@@ -87,12 +97,16 @@ class NewResourceModal extends React.Component {
     this.setState({ loading: true });
     
     API.postResource(title, body, aLink, tags, category)
-    .done(() =>{
+    .done(() => {
       $('#newResourceModal').modal('hide');
+      API.getAllTags(); // get new list of tags
+      
+      // reinitialize
       this.setState({ loading: false, tags: [] });
       this.refs.title.value = '';
       this.refs.body.value = '';
       this.refs.aLink.value = '';
+
       this.props.resourcePosted(() => {
         $('#newResourceModal .input').prop('disabled', false);
       });
@@ -105,9 +119,6 @@ class NewResourceModal extends React.Component {
   }
 
   render() {
-    console.log('rendering newResourceModal');
-    var suggestions = store.getDatum('allTags');
-
     return (
       <div>
         <img src="./img/fab.png" id="actionButon" className="floatingActionButton" onClick={this.newResource.bind(this)}  data-target="#newResourceModal" />
@@ -141,7 +152,7 @@ class NewResourceModal extends React.Component {
                   <div className="col-xs-12">
                     <label htmlFor="reactTags">Tags:</label>
                     <ReactTags tags={this.state.tags}
-                               suggestions={suggestions}
+                               suggestions={this.state.suggestions}
                                handleDelete={this.handleDelete.bind(this)}
                                handleAddition={this.handleAddition.bind(this)}
                                handleDrag={this.handleDrag.bind(this)} />
