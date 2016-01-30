@@ -97,7 +97,7 @@ class ResourcePage extends React.Component {
           <div className="resourceHead">
             <h4 className="resourceTitle">
               <strong>
-                <a href={this.state.resourceInfo.link}>{this.state.resourceInfo.title}</a>
+                <a href={this.state.resourceInfo.link target="_blank"}>{this.state.resourceInfo.title}</a>
               </strong>
             </h4>
           </div>

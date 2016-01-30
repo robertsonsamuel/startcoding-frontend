@@ -6,7 +6,6 @@ import FilterBar from './FilterBar.jsx';
 import NewResourceModal from './NewResourceModal.jsx';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
-import {eventEmitter, store} from '../util/store';
 
 class User extends React.Component {
   constructor(props) {
@@ -30,10 +29,8 @@ class User extends React.Component {
   }
   getUserSavedResources(callback){
     this.setState({loading: true})
-    console.log("getting resources for ", this.props.meId);
     API.savedResources(this.props.meId)
     .done( resp => {
-      console.log("got resources!", resp);
       this.setState( {allResources: resp, loading: false} );
     })
     .fail( err => genErr(err.responseText))

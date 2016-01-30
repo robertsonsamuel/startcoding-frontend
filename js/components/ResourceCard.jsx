@@ -100,7 +100,7 @@ class Resource extends React.Component {
           <div className="panel-heading">
             <h4 className="resourceTitle">
               <strong>
-                <a href={this.props.link}>{this.props.title}</a>
+                <a href={this.props.link} target="_blank">{this.props.title}</a>
               </strong>
             </h4>
             <Votebox score={this.state.score} up={showUpvote} down={showDownvote} handleVote={this.handleVote.bind(this)} />
