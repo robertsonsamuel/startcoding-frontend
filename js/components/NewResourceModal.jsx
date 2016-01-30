@@ -81,7 +81,7 @@ class NewResourceModal extends React.Component {
     let title = this.refs.title.value;
     let body = this.refs.body.value;
     let aLink = this.refs.aLink.value;
-    
+
     let tagSet = new Set(this.state.tags.map(tag => tag.text));
     let tags = [...tagSet];
 
@@ -95,12 +95,12 @@ class NewResourceModal extends React.Component {
 
     $('#newResourceModal .input').prop('disabled', true); // disable inputs
     this.setState({ loading: true });
-    
+
     API.postResource(title, body, aLink, tags, category)
     .done(() => {
       $('#newResourceModal').modal('hide');
       API.getAllTags(); // get new list of tags
-      
+
       // reinitialize
       this.setState({ loading: false, tags: [] });
       this.refs.title.value = '';

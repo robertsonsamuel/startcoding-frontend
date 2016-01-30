@@ -1,22 +1,28 @@
 import React from 'react';
-import CategoryDropdown from './CategoryDropdown.jsx'
+import CONST from '../util/CONST.js'
 import '../../css/FilterBar.css';
-
 
 class FilterBar extends React.Component {
   constructor(props){
     super(props)
-    this.state = {selectedValue: this.props.initialCategory };
+  }
+  selectCategory(e){
+    window.location.hash = '#/' + e.target.value.toLowerCase();
   }
   render(){
+    let categories = CONST.ALL_CATEGORIES.map((cat, i) => {
+      return (
+        <option key={i}  value={cat} >{cat}</option>
+      )
+    })
     return(
       <div>
         <div className="filterBarContainer">
-          <h3>{this.props.initialCategory}</h3>
-          <CategoryDropdown initialCategory={this.props.initialCategory}  />
+          <select defaultValue={this.props.category} onChange={this.selectCategory.bind(this)} className="form-control">
+            {categories}
+          </select>
         </div>
       </div>
-
     )
   }
 }
