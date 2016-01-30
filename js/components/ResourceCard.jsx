@@ -14,9 +14,11 @@ class Resource extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      score: this.props.upvotes - this.props.downvotes
+      score: this.props.upvotes - this.props.downvotes,
+      votingInProcess: false
     };
   }
+
   saveResource(e){
     e.preventDefault();
     if (!this.props.me) return pleaseLogin();
@@ -26,7 +28,11 @@ class Resource extends React.Component {
     // console.log('resourceId', id);
     // console.log('user id', meId);
   }
+
   handleVote(vote) {
+    if (this.state.votingInProcess) return;
+
+    this.setState({ votingInProcess: true });
 
     if (!this.props.me) {
       pleaseLogin();
@@ -67,8 +73,8 @@ class Resource extends React.Component {
     store.saveDatum('me', me)
 
     API.postResourceVote(id, vote)
+    .done( resp => this.setState({ votingInProcess: false }))
     .fail( err => console.log("error voting", err));
-
   }
 
   render() {
@@ -88,7 +94,10 @@ class Resource extends React.Component {
                 <a href={this.props.link} target="_blank">{this.props.title}</a>
               </strong>
             </h4>
-            <Votebox score={this.state.score} up={showUpvote} down={showDownvote} handleVote={this.handleVote.bind(this)} />
+            <Votebox score={this.state.score}
+                     up={showUpvote}
+                     down={showDownvote}
+                     handleVote={this.handleVote.bind(this)} />
           </div>
           <ol className="breadcrumb resourceBreadCrumb">
             <li className=""><span className="timeStamp">{formatTime(this.props.timestamp)}</span></li>
