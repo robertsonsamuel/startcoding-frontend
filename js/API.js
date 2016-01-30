@@ -81,6 +81,17 @@ let API = {
       }
     });
   },
+  putResource(resourceId, body){
+    return $.ajax({
+      url: `${apiUrl}/resources/${resourceId}`,
+      type: 'PUT',
+      beforeSend: setAuthHeader,
+      datatype: 'json',
+      data: {
+        body: body
+      }
+    });
+  },
   getComments(resourceId) {
     return $.ajax({
       url: `${apiUrl}/comments/${resourceId}`,

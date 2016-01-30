@@ -339,6 +339,9 @@ a.disabled {
   background-color: #F5F5F5;
 }
 
+.hide{
+  display: none;
+}
 .closeResource {
   display: none;
 }

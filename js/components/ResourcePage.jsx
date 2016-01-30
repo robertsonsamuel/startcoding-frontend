@@ -3,9 +3,10 @@ import API from '../API';
 import Comment from './Comment.jsx';
 import NewComment from './NewComment.jsx';
 import LoadingSpinner from './LoadingSpinner.jsx';
+import EditResource from './EditResource.jsx';
 import classNames from 'classnames';
 import {genErr, pleaseLogin} from '../util/alerts';
-import {canHazToken} from '../util/authorization';
+import {isAuthorized, canHazToken, parseToken} from '../util/authorization';
 import {formatTime} from '../util/time';
 import {store} from '../util/store';
 import marked from 'marked';
@@ -29,7 +30,8 @@ class ResourcePage extends React.Component {
       allComments: [],
       token: store.getDatum("token") ? store.getDatum("token") : "",
       replying: false,
-      loading: true
+      editing: false,
+      loading: true,
     };
 
     store.registerListener('token', ()=> {
@@ -40,7 +42,7 @@ class ResourcePage extends React.Component {
   componentWillMount() {
     API.getResourceById(this.props.resourceId)
     .done(data => {
-      console.log('got data', data)
+
       this.setState({
         resourceInfo: data.resource,
         allComments: data.comments,
@@ -65,6 +67,25 @@ class ResourcePage extends React.Component {
     if(!haveToken) return pleaseLogin();
     this.setState({ replying: haveToken });
   }
+  edit(e){
+    if (this.state.replying) return;
+    if (!this.props.me) return;
+    e.preventDefault();
+    this.setState({ editing: isAuthorized(this.props.me._id) });
+  }
+
+  discard() {
+    this.setState({ replying: false });
+    this.setState({ editing: false });
+  }
+  putResourceEdit(update){
+    this.setState({ editing: false, updating: true });
+    API.putResource(this.state.resourceInfo._id, update)
+    .done(resp => {
+      (this.updateResource.bind(this))(resp)
+    })
+    .fail(err => genErr(err.responseText));
+  }
 
   postComment(body) {
     this.setState({ replying: false });
@@ -72,13 +93,17 @@ class ResourcePage extends React.Component {
     .done(resp => (this.fetchComments.bind(this))())
     .fail(err => genErr(err.responseText));
   }
-
-  discard() {
-    this.setState({ replying: false });
+  updateResource(resource) {
+    this.setState({
+      resourceInfo: resource,
+      updating: false
+    })
   }
 
   render() {
     let commentEls = [];
+    let changeButtons = classNames( "btn", "btn-info", "replyResourceButton",
+    { hide: (!this.props.me || !this.state.resourceInfo.timestamp || (this.props.me._id !== this.state.resourceInfo.user._id)) })
 
     commentEls = this.state.allComments.map( (comment, i) => {
       return <Comment {...comment} token={this.state.token}
@@ -91,6 +116,11 @@ class ResourcePage extends React.Component {
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
                                                        discard={this.discard.bind(this)} />
                                          : [];
+
+    let resourceBody = this.state.editing ?  <EditResource update={this.putResourceEdit.bind(this)}
+                                                        discard={this.discard.bind(this)}
+                                                        body={this.state.resourceInfo.body}/>
+                                                      : <div dangerouslySetInnerHTML={{__html: marked(this.state.resourceInfo.body || '')}} />
     return (
       <div>
         <div>
@@ -103,11 +133,13 @@ class ResourcePage extends React.Component {
           </div>
           <div className="container resourceContent">
             <div className="panel-body resourceBody">
-              <div dangerouslySetInnerHTML={{__html: marked(this.state.resourceInfo.body || '')}} />
+              {this.state.updating ? <LoadingSpinner /> : []}
+              {resourceBody}
             </div>
             <div className="resourceFooter">
               <span className="timeStamp">{formatTime(this.state.resourceInfo.timestamp)}</span>
-              <button className="btn btn-success replyResourceButton" href="#" onClick={this.reply.bind(this)}>reply</button>
+              <button className="btn btn-success replyResourceButton" href="#" onClick={this.reply.bind(this)}>Reply</button>
+              <button className={changeButtons} href="#" onClick={this.edit.bind(this)}>Edit</button>
             </div>
             {newComment}
             {this.state.loading ? <LoadingSpinner /> : []}

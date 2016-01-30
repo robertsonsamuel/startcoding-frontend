@@ -16,6 +16,7 @@ class App extends React.Component {
     this.state = {
       me: store.getDatum('me')
     }
+
   }
   putMeOnState(){
     let me = store.getDatum('me');
