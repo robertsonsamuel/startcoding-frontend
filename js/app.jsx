@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from './components/Navbar.jsx';
 import Main from './components/Main.jsx';
+import User from './components/User.jsx';
 import SplashPage from './components/splashPage.jsx';
 import ResourcePage from './components/ResourcePage.jsx';
 import '../css/sweetalert.css';
@@ -23,6 +24,13 @@ class App extends React.Component {
           <div>
             <Navbar/>
             <ResourcePage resourceId={this.props.location[1]} />
+          </div>
+        )
+      case 'user':
+        return (
+          <div>
+            <Navbar/>
+            <User category={this.props.location[1]} meId={this.props.location[2]}></User>
           </div>
         )
       default:

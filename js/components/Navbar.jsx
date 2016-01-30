@@ -57,7 +57,7 @@ class Navbar extends React.Component {
   }
   goUser(e) {
     e.preventDefault();
-    window.location.hash = '#/user/' + (store.getDatum('me') ? store.getDatum('me')._id : '')
+    window.location.hash = '#/user/' + 'all/' + (store.getDatum('me') ? store.getDatum('me')._id : '')
     eventEmitter.emitChange('goUser');
   }
   render() {

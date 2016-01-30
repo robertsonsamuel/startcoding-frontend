@@ -1,5 +1,5 @@
-let apiUrl = 'https://protected-river-69772.herokuapp.com';
-// let apiUrl = 'http://localhost:3000';
+// let apiUrl = 'https://protected-river-69772.herokuapp.com';
+let apiUrl = 'http://localhost:3000';
 
 import {canHazToken, parseToken} from './util/authorization';
 import {store} from './util/store';
@@ -46,6 +46,7 @@ let API = {
   getResources(category) {
     return $.get(`${apiUrl}/resources/${category}`)
     .done((data) => {
+      console.log("here's all our resources", data);
       store.saveDatum('resources', data);
     });
   },
@@ -126,6 +127,13 @@ let API = {
       me.savedResources = new Set(resp);
       store.saveDatum('me', me);
     })
+  },
+  savedResources(userId) {
+    return $.ajax({
+      url: `${apiUrl}/users/savedResources/${userId}`,
+      type: 'GET',
+      beforeSend: setAuthHeader
+    });
   }
 };
 

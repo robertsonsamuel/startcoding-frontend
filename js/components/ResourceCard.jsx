@@ -14,21 +14,21 @@ class Resource extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: store.getDatum("token") ? store.getDatum("token") : "",
       me: store.getDatum('me') || '',
       score: this.props.upvotes - this.props.downvotes
     };
-
-    store.registerListener('token', ()=> {
-      this.setState({ token: store.getDatum('token') });
-    });
+  }
+  putMeOnState(){
+    let me = store.getDatum('me')
+    this.setState({me: me})
   }
   componentWillMount(){
-    store.registerListener('me', () => {
-      let me = store.getDatum('me')
-      this.setState({me: me})
-    })
+    store.registerListener('me', this.putMeOnState.bind(this) )
   }
+  componentWillUnmount() {
+    store.stopListening('me', this.putMeOnState.bind(this) )
+  }
+
   saveResource(e){
     e.preventDefault();
     if (!this.state.me) return pleaseLogin();

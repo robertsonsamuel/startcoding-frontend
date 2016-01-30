@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import {genErr} from '../util/alerts';
 import {eventEmitter, store} from '../util/store';
 
-class Main extends React.Component {
+class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,22 +18,23 @@ class Main extends React.Component {
   }
   componentDidMount() {
     if (this.props.meId) return (this.getUserSavedResources.bind(this))();
-    (this.getResources.bind(this))()
+    (this.getUserSavedResources.bind(this))()
   }
   componentDidUpdate(prevProps){
     if (prevProps.category !== this.props.category) {
-      (this.getResources.bind(this))()
+      (this.getUserSavedResources.bind(this))()
     }
   }
   handleResourceClick(resourceId){
     this.setState({activeResource:this.state.activeResource === resourceId ? false : resourceId});
   }
-  getResources(callback){
+  getUserSavedResources(callback){
     this.setState({loading: true})
-    API.getResources(this.props.category)
+    console.log("getting resources for ", this.props.meId);
+    API.savedResources(this.props.meId)
     .done( resp => {
-      console.log("got resources");
-      this.setState( {allResources: resp.resources, loading: false} );
+      console.log("got resources!", resp);
+      this.setState( {allResources: resp, loading: false} );
     })
     .fail( err => genErr(err.responseText))
     .always( () => {
@@ -60,10 +61,9 @@ class Main extends React.Component {
             {resourceEls}
           </div>
         </div>
-        <NewResourceModal initialCategory={this.props.category} resourcePosted={this.getResources.bind(this)} />
       </div>
     )
   }
 }
 
-export default Main;
+export default User;
