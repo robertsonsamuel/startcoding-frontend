@@ -6,17 +6,28 @@ import '../../css/FilterBar.css';
 class FilterBar extends React.Component {
   constructor(props){
     super(props)
-    this.state = {selectedValue: this.props.initialCategory };
+    this.state = {
+      selectedValue: this.props.initialCategory
+    };
+  }
+  let categoriesArrary = ['Javascript', 'Python', 'Go', 'Ruby', 'HTML', 'CSS', 'General', 'All' ];
+  selectCategory(e){
+    window.location.hash = '#/' + e.target.value.toLowerCase();
   }
   render(){
+    let categories = this.state.categoriesArrary.map((category, i) => {
+      return (
+        <option key={i}  value={category} >{category}</option>
+      )
+    })
     return(
       <div>
         <div className="filterBarContainer">
-          <h3>{this.props.initialCategory}</h3>
-          <CategoryDropdown initialCategory={this.props.initialCategory}  />
+          <select value={this.state.selectedValue} onChange={this.selectCategory.bind(this)} className="form-control">
+            {categories}
+          </select>
         </div>
       </div>
-
     )
   }
 }
