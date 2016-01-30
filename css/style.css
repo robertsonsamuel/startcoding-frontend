@@ -146,8 +146,9 @@ img.techImage {
     position: relative;
     top: 15px;
 }
-.resourcePanels{
+.resourcePanels {
   text-align: center;
+  height: 430px;
 }
 
 div#bs-example-navbar-collapse-2 {
