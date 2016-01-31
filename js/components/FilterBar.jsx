@@ -64,21 +64,22 @@ class FilterBar extends React.Component {
     });
     return(
       <div>
-        <div className="filterBarContainer">
-          <h5>Category:</h5>
-          <div className="form-group">
-            <select defaultValue={this.props.category} onChange={this.selectCategory.bind(this)} className="form-control">
-              {categories}
-            </select>
+        <div className="filterBarContainer row">
+          <div className="well bs-component categorySelector" role='search'>
+            <div className="input-group">
+              <span className="input-group-addon" id="basic-addon1">Navigate to: </span>
+              <select defaultValue={this.props.category} onChange={this.selectCategory.bind(this)} className="form-control">
+                {categories}
+              </select>
+            </div>
           </div>
 
-          <div style={{width: '100%', marginTop: '1em'}} className="text-center">&bull; &bull; &bull;</div>
-
-          <input type="text" ref="textSearch" placeholder="Text Search"/>
-          <button className="btn btn-default" onClick={this.doFiltering.bind(this)}>Go</button>
-
-          <div style={{width: '100%', marginTop: '1em'}} className="text-center">&bull; &bull; &bull;</div>
-
+          <div className="searchBox">
+            <div className="searchBar form-group col-xs-9 col-md-8">
+              <input className="form-control searchBar" type="text" ref="textSearch" placeholder="Text Search"/>
+            </div>
+            <button className="btn btn-primary goBtn col-xs-3 col-md-4" onClick={this.doFiltering.bind(this)}>Search</button>
+          </div>
           <h5>Filter By Tags:</h5>
 
           <ReactTags tags={this.state.tags}

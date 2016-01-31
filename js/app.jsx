@@ -33,28 +33,28 @@ class App extends React.Component {
       case '':
         return (
           <div>
-            <Navbar/>
+            <Navbar category={this.props.location[0]}/>
             <SplashPage/>
           </div>
         )
       case 'resource':
         return (
           <div>
-            <Navbar/>
+            <Navbar category={this.props.location[1]}/>
             <ResourcePage resourceId={this.props.location[1]} me={this.state.me} />
           </div>
         )
       case 'user':
         return (
           <div>
-            <Navbar/>
+            <Navbar category={this.props.location[0]}/>
             <User category={this.props.location[1]} meId={this.props.location[2]} me={this.state.me}></User>
           </div>
         )
       default:
         return (
           <div>
-            <Navbar/>
+            <Navbar category={this.props.location[0]}/>
             <Main category={this.props.location[0]} me={this.state.me}></Main>
           </div>
         )

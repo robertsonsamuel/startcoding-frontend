@@ -83,7 +83,6 @@ class Navbar extends React.Component {
                   <span className="startCodingName">Start Coding</span>
               </div>
             </div>
-
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
               <ul id="" className="nav navbar-nav navbar-left">
               </ul>

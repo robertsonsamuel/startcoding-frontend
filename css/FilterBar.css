@@ -1,4 +1,17 @@
 .filterBarContainer{
-  border: 1px solid red;
-  padding: 1em;
+  padding: 0 2em;
+}
+.categorySelector {
+  text-align: center;
+  padding: 1.5em;
+  margin: 2em 0;
+}
+
+.searchBar {
+  padding: 0 1em 0 0;
+}
+
+.searchBox {
+  border-top: 1px solid lightgrey;
+  padding: 2em 0;
 }
