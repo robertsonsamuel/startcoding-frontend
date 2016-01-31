@@ -121,42 +121,34 @@ class NewResourceModal extends React.Component {
                 <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                 <h4 className="modal-title" id="resourceModalLabel">Create a new resource.</h4>
               </div>
-              <div className="modal-body">
-                <div className="row">
-                  <div className="col-sm-12 col-md-12 col-lg-12">
-                    <input type="text" ref="title" className="newResourceTitle input" placeholder="Title" required />
-                    <br/>
-                    <input type="text" ref="aLink" className="newResourceLink input" placeholder="Link or URL" required />
-                    <br/>
-                  </div>
+              <div className="modal-body row">
+                <div className="col-sm-12">
+                  <input type="text" ref="title" className="newResourceTitle input form-control" placeholder="Title" required />
+                  <br/>
+                  <input type="text" ref="aLink" className="newResourceLink input form-control" placeholder="URL" required />
+                  <br/>
                 </div>
                 <div className="spinnerContainer">
                   {this.state.loading ? <LoadingSpinner /> : []}
                 </div>
                 <br/>
-                <div className="row">
-                  <div className="col-sm-12 col-md-12 col-lg-12">
-                    <textarea id="newTitleBody" placeholder="..." className="form-control input" ref="body" rows="5" required >
-                    </textarea>
-                  </div>
+                <div className="col-sm-12">
+                  <textarea id="newTitleBody" placeholder="Details" className="form-control input" ref="body" rows="5" required >
+                  </textarea>
                 </div>
-                <div className="row">
-                  <div className="col-xs-12">
-                    <label htmlFor="reactTags">Tags:</label>
-                    <ReactTags tags={this.state.tags}
-                               suggestions={this.state.suggestions}
-                               handleDelete={this.handleDelete.bind(this)}
-                               handleAddition={this.handleAddition.bind(this)}
-                               handleDrag={this.handleDrag.bind(this)} />
-                  </div>
+                <div className="col-xs-12">
+                  <label htmlFor="reactTags">Tags:</label>
+                  <ReactTags tags={this.state.tags}
+                             suggestions={this.state.suggestions}
+                             handleDelete={this.handleDelete.bind(this)}
+                             handleAddition={this.handleAddition.bind(this)}
+                             handleDrag={this.handleDrag.bind(this)} />
                 </div>
-                <div className="row">
-                  <div className="col-sm-6 col-md-6">
-                    <label htmlFor="categoryDropdown">Category:</label>
-                    <CategoryDropdown initialCategory={this.props.initialCategory} selectCategory={this.selectCategory.bind(this)} />
-                  </div>
-                  <div className="col-sm-6 col-md-6">
-                  </div>
+                <div className="col-sm-6">
+                  <label htmlFor="categoryDropdown">Category:</label>
+                  <CategoryDropdown initialCategory={this.props.initialCategory} selectCategory={this.selectCategory.bind(this)} />
+                </div>
+                <div className="col-sm-6">
                 </div>
               </div>
               <div className="modal-footer">
