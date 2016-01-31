@@ -9,6 +9,8 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 const ReactTags = require('./reactTags').WithContext;
 
+const TAGS_TO_DISPLAY = 20;
+
 class FilterBar extends React.Component {
   constructor(props){
     super(props);
@@ -57,11 +59,15 @@ class FilterBar extends React.Component {
         <option key={i} value={category}>{category}</option>
       )
     });
-    let hotTags = (this.props.suggestions || []).map((tag, i) => {
+    
+    let suggestions = this.props.suggestions.map(tagObject => tagObject.text);
+
+    let hotTags = (this.props.suggestions || []).slice(0, TAGS_TO_DISPLAY).map((tag, i) => {
       return (
-        <span className="ReactTags__tag" key={i}>{tag}</span>
+        <span className="ReactTags__tag" key={i}>{tag.text} ({tag.frequency})</span>
       )
     });
+    
     return(
       <div>
         <div className="filterBarContainer row">
@@ -84,7 +90,7 @@ class FilterBar extends React.Component {
           <div className="tagSearch">
             <div className="tagInputBox">
               <ReactTags tags={this.state.tags}
-                         suggestions={this.props.suggestions}
+                         suggestions={suggestions}
                          handleDelete={this.handleDelete.bind(this)}
                          handleAddition={this.handleAddition.bind(this)}
                          handleDrag={this.handleDrag.bind(this)} />

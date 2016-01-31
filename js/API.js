@@ -59,7 +59,6 @@ let API = {
     return $.get(`${apiUrl}/tags`)
     .done((allTags) => {
       store.saveDatum('allTags', allTags);
-      console.log('allTags', allTags);
     })
     .fail(err => console.log(err));
   },

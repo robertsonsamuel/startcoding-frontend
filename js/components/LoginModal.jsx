@@ -24,7 +24,6 @@ class LoginModal extends React.Component {
     $('#Logout').show();
     $('#LoginModal').modal('hide');
     let payload = parseToken(store.getDatum('token'));
-    console.log('payload', payload);
     $('#username').text(payload.username);
     $('#welcome').show();
     setTimeout(() => $('#loginRegisterForms').show(), 1000);

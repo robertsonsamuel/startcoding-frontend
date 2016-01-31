@@ -78,10 +78,8 @@ class NewResourceModal extends React.Component {
     let tagSet = new Set(this.state.tags.map(tag => tag.text));
     let tags = [...tagSet];
 
-    console.log('tags:', tags);
     let category = this.state.selectedValue;
 
-    console.log(category);
     if (title.length === 0 || body.length === 0 || aLink.length === 0){
       return genErr('Title and Body both required!')
     }

@@ -36,18 +36,14 @@ class Main extends React.Component {
   }
 
   getResources(callback, tags, text){
-    console.log('tags:', tags);
-    console.log('text:', text);
-
     this.setState({loading: true})
 
     API.getResources(this.props.category, tags, text)
     .done(data => {
-
-      console.log('tags object:', data.tags);
-
       // sort tags by frequency
-      let tags = Object.keys(data.tags).sort((a, b) => data.tags[b] - data.tags[a]);
+      let tags = Object.keys(data.tags)
+        .sort((a, b) => data.tags[b] - data.tags[a])
+        .map(tag => { return { text: tag, frequency: data.tags[tag] }; });
       this.setState({
         resources: data.resources,
         tagSuggestions: tags,
@@ -68,10 +64,6 @@ class Main extends React.Component {
 
   render() {
     let resourceEls = this.state.resources.map((resource,i) => {
-      function test() {
-        console.log("testing function", i, this);
-      }
-      test.bind();
       return <ResourceCard {...resource}
                            me={this.props.me}
                            key={i} />
