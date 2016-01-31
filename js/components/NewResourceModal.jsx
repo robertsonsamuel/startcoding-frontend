@@ -12,7 +12,6 @@ import {store} from '../util/store';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 const ReactTags = require('./reactTags').WithContext;
-// const ReactTags = require('react-tag-input').WithContext;
 
 // normalize tag names
 String.prototype.normalize = function() {
@@ -46,12 +45,10 @@ class NewResourceModal extends React.Component {
   handleAddition(tag) {
     let tags = this.state.tags;
     tag = tag.normalize();
-    // if (!tags.some(existingTag => existingTag.text == tag)) {
-      tags.push({
-        id: tags.length + 1,
-        text: tag
-      });
-    // }
+    tags.push({
+      id: tags.length + 1,
+      text: tag
+    });
     this.setState({ tags: tags });
   }
   handleDrag(tag, currPos, newPos) {
@@ -149,7 +146,8 @@ class NewResourceModal extends React.Component {
                 </div>
                 <div className="col-sm-6">
                   <label htmlFor="categoryDropdown">Category:</label>
-                  <CategoryDropdown initialCategory={this.props.initialCategory} selectCategory={this.selectCategory.bind(this)} />
+                  <CategoryDropdown initialCategory={this.props.initialCategory}
+                                    selectCategory={this.selectCategory.bind(this)} />
                 </div>
                 <div className="col-sm-6">
                 </div>

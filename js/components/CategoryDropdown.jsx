@@ -1,12 +1,9 @@
 import React from 'react';
-import {ALL_CATEGORIES} from '../util/CONST.js'
+import {CORRECT_CASE, POSTABLE_CATEGORIES} from '../util/CONST.js'
 
 class CategoryDropdown extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      categoriesArrary: ALL_CATEGORIES
-    };
   }
 
   selectCategory(e){
@@ -14,19 +11,20 @@ class CategoryDropdown extends React.Component {
   }
 
   render(){
-    let lowerCaseCategories = ALL_CATEGORIES.map(category => category.toLowerCase());
-    let index = lowerCaseCategories.indexOf(this.props.initialCategory.toLowerCase());
-    let defaultValue = ALL_CATEGORIES[index];
+    let defaultValue = CORRECT_CASE[this.props.initialCategory.toLowerCase()];
 
-    let categories = this.state.categoriesArrary.map((category, i) => {
+    let categories = POSTABLE_CATEGORIES.map((category, i) => {
       return (
-        <option key={i}  value={category} >{category}</option>
+        <option key={i} value={category} >{category}</option>
       )
     });
 
     return(
       <div>
-        <select id="modalCategoryDropdown" defaultValue={defaultValue} onChange={this.selectCategory.bind(this)} className="form-control">
+        <select id="modalCategoryDropdown"
+                defaultValue={defaultValue}
+                onChange={this.selectCategory.bind(this)}
+                className="form-control">
           {categories}
         </select>
       </div>
