@@ -60,11 +60,14 @@ class Navbar extends React.Component {
     eventEmitter.emitChange('goUser');
   }
   render() {
+    let categoryStyle = this.props.category + 'Style';
+    console.log("categoryStyle", categoryStyle);
+    let navBarClasses = "navbar " + "navbar-inverse " + categoryStyle;
     return (
-      <div>
+      <div id="topBar">
         <LoginModal />
         <div id="goMain" onClick={this.goMain}></div>
-        <nav className="navbar navbar-inverse">
+        <nav className={navBarClasses}>
           <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">

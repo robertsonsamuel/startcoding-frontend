@@ -7,11 +7,11 @@ body {
 }
 
 .heroImage {
-    background: rgb(37, 208, 239);
-    height: 49vh;
-    width: 100vw;
-    left: -30px;
-    position: relative;
+  background: rgb(37, 208, 239);
+  height: 49vh;
+  width: 100vw;
+  left: -30px;
+  position: relative;
 }
 
 .heroHead{
@@ -302,6 +302,33 @@ textarea {
   color: #FFF;
   margin-bottom: 0;
   z-index: 1000;
+}
+
+.navbar-inverse.goStyle{
+  background: brown;
+}
+.navbar-inverse.javascriptStyle{
+  background: yellow;
+}
+.navbar-inverse.cssStyle{
+  background: purple;
+}
+.navbar-inverse.htmlStyle{
+  background: red;
+}
+.navbar-inverse.rubyStyle{
+  background: maroon;
+}
+.navbar-inverse.pythonStyle{
+  background: blue;
+}
+.navbar-inverse.generalStyle{
+  background: grey;
+}
+.navbar-inverse.allStyle{
+}
+
+#topBar {
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {

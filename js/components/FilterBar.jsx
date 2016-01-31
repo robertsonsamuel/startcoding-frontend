@@ -1,5 +1,5 @@
 import React from 'react';
-import {ALL_CATEGORIES} from '../util/CONST.js'
+import {ALL_CATEGORIES, CORRECT_CASE} from '../util/CONST.js'
 import '../../css/FilterBar.css';
 import '../../css/reactTags.css';
 import {store} from '../util/store';
@@ -75,9 +75,7 @@ class FilterBar extends React.Component {
         )
       });
 
-    let lowerCaseCategories = ALL_CATEGORIES.map(category => category.toLowerCase());
-    let index = lowerCaseCategories.indexOf(this.props.category.toLowerCase());
-    let defaultValue = ALL_CATEGORIES[index];
+    let defaultValue = CORRECT_CASE[this.props.category.toLowerCase()];
 
     return (
       <div>

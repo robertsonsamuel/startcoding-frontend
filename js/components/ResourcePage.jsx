@@ -7,7 +7,7 @@ import EditResource from './EditResource.jsx';
 import classNames from 'classnames';
 import {genErr, pleaseLogin, confirmDelete} from '../util/alerts';
 import {isAuthorized, canHazToken, parseToken} from '../util/authorization';
-import {formatTime} from '../util/time';
+import {formatTime} from '../util/helpers';
 import {store} from '../util/store';
 import marked from 'marked';
 import '../../css/reactTags.css';
