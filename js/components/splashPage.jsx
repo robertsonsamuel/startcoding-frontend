@@ -43,7 +43,7 @@ class SplashPage extends React.Component {
   getStartedClickHandler() {
     $('html,body').animate({
       scrollTop: $('.resourcePanels:first-child').offset().top
-    }, 1000);
+    }, 300);
   }
   render(){
     let resourcePanels = catagories.map( (category, i) => {

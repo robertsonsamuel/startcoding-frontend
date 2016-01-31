@@ -96,18 +96,18 @@ class LoginModal extends React.Component {
                 <div className="col-xs-12 col-sm-6">
                   <h1>Login</h1>
                   <form onSubmit={this.login.bind(this)}>
-                    <input ref="loginUsername" type="text" placeholder="Username" required/><br/>
-                    <input ref="loginPassword" type="password" placeholder="Password" required/><br/>
+                    <input className="form-control" ref="loginUsername" type="text" placeholder="Username" required/><br/>
+                    <input className="form-control" ref="loginPassword" type="password" placeholder="Password" required/><br/>
                     <button type="submit" className="form-control btn btn-primary">Log In</button>
                   </form>
                 </div>
                 <div className="col-xs-12 col-sm-6">
                   <h1>Register</h1>
                   <form onSubmit={this.register.bind(this)}>
-                    <input ref="registerUsername" type="text" placeholder="Username" required/><br/>
-                    <input ref="registerEmail" type="email" placeholder="Email" required/><br/>
-                    <input ref="registerPassword" type="password" placeholder="Password" required/><br/>
-                    <input ref="registerPassword2" type="password" placeholder="Retype Password" required/><br/>
+                    <input className="form-control" ref="registerUsername" type="text" placeholder="Username" required/><br/>
+                    <input className="form-control" ref="registerEmail" type="email" placeholder="Email" required/><br/>
+                    <input className="form-control" ref="registerPassword" type="password" placeholder="Password" required/><br/>
+                    <input className="form-control" ref="registerPassword2" type="password" placeholder="Retype Password" required/><br/>
                     <button type="submit" className="form-control btn btn-primary">Register</button>
                   </form>
                 </div>

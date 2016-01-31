@@ -61,7 +61,7 @@ class FilterBar extends React.Component {
         <option key={i} value={category}>{category}</option>
       )
     });
-    
+
     let suggestions = this.props.suggestions.map(tagObject => tagObject.text);
 
     let hotTags = (this.props.suggestions || [])
@@ -78,7 +78,7 @@ class FilterBar extends React.Component {
     let lowerCaseCategories = ALL_CATEGORIES.map(category => category.toLowerCase());
     let index = lowerCaseCategories.indexOf(this.props.category.toLowerCase());
     let defaultValue = ALL_CATEGORIES[index];
-    
+
     return (
       <div>
         <div className="filterBarContainer row">
