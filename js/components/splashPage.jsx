@@ -68,7 +68,7 @@ class SplashPage extends React.Component {
               <div className="col-xs-12 col-sm-6 col-md-12 col-lg-12">
                 <div className="heroText">
                   <h1 className="heroHead">Start Coding Now!</h1>
-                  <h3 className="herofooter">The easiest and best way to discover and save coding resources. </h3>
+                  <h3 className="herofooter">The easiest and best way to discover and share coding resources. </h3>
                   <button className="btn btn-primary heroButton" onClick={this.getStartedClickHandler}>Get Started Now</button>
                 </div>
               </div>
