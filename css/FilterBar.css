@@ -27,3 +27,34 @@
     margin: 0 2em;
   }
 }
+
+/*#filterBg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}*/
+
+.filterCol.javascriptStyle{
+  background: rgba(211, 195, 20, .1)
+}
+.filterCol.cssStyle{
+  background: rgba(120, 129, 207, .1);
+}
+.filterCol.htmlStyle{
+  background: rgba(239, 101, 42, .1);
+}
+.filterCol.rubyStyle{
+  background: rgba(204, 52, 45, .1);
+}
+.filterCol.goStyle{
+  background: rgba(208, 182, 152, .1);
+}
+.filterCol.pythonStyle{
+  background: rgba(30, 65, 95, .1);
+}
+.filterCol.swiftStyle{
+  background: rgba(252, 72, 49, .1);
+}
+.filterCol.generalStyle{
+  background: rgba(86, 141, 109, .1);
+}

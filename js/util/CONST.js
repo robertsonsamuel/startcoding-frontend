@@ -5,6 +5,7 @@ let correctCase = {
   'ruby': 'Ruby',
   'html': 'HTML',
   'css': 'CSS',
+  'swift': 'Swift',
   'general': 'General',
   'all': 'All'
 };

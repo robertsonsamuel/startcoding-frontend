@@ -82,7 +82,7 @@ class FilterBar extends React.Component {
         <div className="filterBarContainer row">
           <div className="well bs-component categorySelector" role='search'>
             <div className="input-group">
-              <span className="input-group-addon" id="basic-addon1">Navigate to: </span>
+              <span className="input-group-addon" id="basic-addon1">Category: </span>
               <select defaultValue={defaultValue}
                       onChange={this.selectCategory.bind(this)}
                       className="form-control">

@@ -7,6 +7,7 @@ import {store} from '../util/store';
 import init from '../util/init';
 import {parseToken} from '../util/authorization';
 import {eventEmitter} from '../util/store';
+import {CORRECT_CASE} from '../util/CONST'
 
 function hideLoginRegisterLogoutUsername(login, register, logout, username) {
   login    ? $('#Login').hide()    : $('#Login').show();
@@ -61,7 +62,6 @@ class Navbar extends React.Component {
   }
   render() {
     let categoryStyle = this.props.category + 'Style';
-    console.log("categoryStyle", categoryStyle);
     let navBarClasses = "navbar " + "navbar-inverse " + categoryStyle;
     return (
       <div id="topBar">
@@ -69,6 +69,9 @@ class Navbar extends React.Component {
         <div id="goMain" onClick={this.goMain}></div>
         <nav className={navBarClasses}>
           <div className="container-fluid">
+            <div className="navTitle">
+              {CORRECT_CASE[this.props.category]}
+            </div>
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
                 <span className="sr-only">Toggle navigation</span>
