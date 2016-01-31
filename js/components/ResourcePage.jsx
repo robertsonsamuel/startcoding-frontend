@@ -80,7 +80,6 @@ class ResourcePage extends React.Component {
       .done((resp) => (this.updateResource.bind(this))(resp))
       .fail(err => genErr(err.responseText));
     })
-
   }
 
   discard() {
@@ -164,9 +163,9 @@ class ResourcePage extends React.Component {
                   </div>
                 </div>
                 <div className="col-sm-4 col-md-4 col-lg-4">
-                <span className="resourceActionButton"><button className="btn btn-success replyResourceButton" href="#" onClick={this.reply.bind(this)}>Reply</button></span>
-                <span className="resourceActionButton"><button className={changeButtons} href="#" onClick={this.edit.bind(this)}>Edit</button></span>
-                <span className="resourceActionButton"><button className={changeButtons} href="#" onClick={this.deleteResource.bind(this)}>Delete</button></span>
+                <span className="resourceActionButton"><button className="btn btn-success replyResourceButton" onClick={this.reply.bind(this)}>Reply</button></span>
+                <span className="resourceActionButton"><button className={changeButtons} onClick={this.edit.bind(this)}>Edit</button></span>
+                <span className="resourceActionButton"><button className={changeButtons} onClick={this.deleteResource.bind(this)}>Delete</button></span>
                 </div>
               </div>
             </div>

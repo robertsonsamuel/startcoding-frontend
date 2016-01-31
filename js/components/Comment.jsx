@@ -61,7 +61,8 @@ class Comment extends React.Component {
     this.setState({ editing: false });
   }
 
-  delete() {
+  delete(e) {
+    e.preventDefault();
     confirmDelete(this.deleteComment.bind(this))
   }
 
@@ -136,7 +137,7 @@ class Comment extends React.Component {
 
   }
 
-  deleteComment(){
+  deleteComment() {
     API.deleteComment(this.props._id)
     .done(resp => this.props.update())
     .fail(err => swal('Delete Failed',err.responseText,'error'));
@@ -182,9 +183,9 @@ class Comment extends React.Component {
         </div>
         <ol className="panel-footer breadcrumb comment">
           <li><span>{timestamp}</span></li>
-          <li><a href="#" className={changeButtons} onClick={this.edit.bind(this)}>edit</a></li>
-          <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
-          <li><a href="#" className={changeButtons} onClick={this.delete.bind(this)}>delete</a></li>
+          <li><a href="" className={changeButtons} onClick={this.edit.bind(this)}>edit</a></li>
+          <li><a href="" onClick={this.reply.bind(this)}>reply</a></li>
+          <li><a href="" className={changeButtons} onClick={this.delete.bind(this)}>delete</a></li>
         </ol>
         {newComment}
         {this.state.loading ? <LoadingSpinner /> : []}
