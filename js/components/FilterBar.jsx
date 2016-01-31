@@ -1,5 +1,5 @@
 import React from 'react';
-import CONST from '../util/CONST.js'
+import {ALL_CATEGORIES} from '../util/CONST.js'
 import '../../css/FilterBar.css';
 import '../../css/reactTags.css';
 import {store} from '../util/store';
@@ -56,7 +56,7 @@ class FilterBar extends React.Component {
   }
 
   render() {
-    let categories = CONST.ALL_CATEGORIES.map((category, i) => {
+    let categories = ALL_CATEGORIES.map((category, i) => {
       return (
         <option key={i} value={category}>{category}</option>
       )
@@ -81,8 +81,7 @@ class FilterBar extends React.Component {
           <div className="well bs-component categorySelector" role='search'>
             <div className="input-group">
               <span className="input-group-addon" id="basic-addon1">Navigate to: </span>
-              <select defaultValue={this.props.category}
-                      onChange={this.selectCategory.bind(this)}
+              <select onChange={this.selectCategory.bind(this)}
                       className="form-control">
                 {categories}
               </select>
