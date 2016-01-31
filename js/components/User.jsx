@@ -16,9 +16,9 @@ function sortTagsByFrequency(resources) {
     return tagFreqs;
   }, {});
 
-  return Object.keys(tagFreqs).sort((a, b) => {
-    return tagFreqs[b] - tagFreqs[a] || a > b;
-  });
+  return Object.keys(tagFreqs)
+    .sort((a, b) => tagFreqs[b] - tagFreqs[a] || a > b)
+    .map(tag => { return { text: tag, frequency: tagFreqs[tag] }; });
 }
 
 class User extends React.Component {

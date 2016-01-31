@@ -53,7 +53,7 @@ class FilterBar extends React.Component {
     this.setState({ tags: tags });
   }
 
-  render(){
+  render() {
     let categories = CONST.ALL_CATEGORIES.map((category, i) => {
       return (
         <option key={i} value={category}>{category}</option>
@@ -62,13 +62,18 @@ class FilterBar extends React.Component {
     
     let suggestions = this.props.suggestions.map(tagObject => tagObject.text);
 
-    let hotTags = (this.props.suggestions || []).slice(0, TAGS_TO_DISPLAY).map((tag, i) => {
-      return (
-        <span className="ReactTags__tag" key={i}>{tag.text} ({tag.frequency})</span>
-      )
-    });
+    let hotTags = (this.props.suggestions || [])
+      .filter(tagObject => {
+        return this.state.tags.every(stateTag => stateTag.text !== tagObject.text);
+      })
+      .slice(0, TAGS_TO_DISPLAY)
+      .map((tagObject, i) => {
+        return (
+          <span className="ReactTags__tag" key={i}>{tagObject.text} ({tagObject.frequency})</span>
+        )
+      });
     
-    return(
+    return (
       <div>
         <div className="filterBarContainer row">
           <div className="well bs-component categorySelector" role='search'>

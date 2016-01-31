@@ -42,7 +42,7 @@ class Main extends React.Component {
     .done(data => {
       // sort tags by frequency
       let tags = Object.keys(data.tags)
-        .sort((a, b) => data.tags[b] - data.tags[a])
+        .sort((a, b) => data.tags[b] - data.tags[a] || a > b)
         .map(tag => { return { text: tag, frequency: data.tags[tag] }; });
       this.setState({
         resources: data.resources,
