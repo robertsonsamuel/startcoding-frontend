@@ -7,6 +7,7 @@ import {pleaseLogin,genErr} from '../util/alerts';
 import '../../css/newResourceModal.css';
 import '../../css/reactTags.css';
 import {store} from '../util/store';
+import {MAX_RESOURCE_BODY_LENGTH} from '../util/CONST.js'
 
 // needed for fancy auto-complete tags box
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -26,7 +27,8 @@ class NewResourceModal extends React.Component {
       loading: false,
       selectedValue: this.props.initialCategory,
       tags: [],
-      suggestions: store.getDatum('allTags')
+      suggestions: store.getDatum('allTags'),
+      body: ''
     };
   }
 
@@ -70,7 +72,7 @@ class NewResourceModal extends React.Component {
   createResource(e){
     e.preventDefault();
     let title = this.refs.title.value;
-    let body = this.refs.body.value;
+    let body = this.state.body;
     let aLink = this.refs.aLink.value;
 
     let tagSet = new Set(this.state.tags.map(tag => tag.text));
@@ -94,8 +96,8 @@ class NewResourceModal extends React.Component {
       // reinitialize
       this.setState({ loading: false, tags: [] });
       this.refs.title.value = '';
-      this.refs.body.value = '';
       this.refs.aLink.value = '';
+      this.setState({ body: '' });
 
       // possibly add the new resource to main
       this.props.optimisticallyAdd(resource);
@@ -108,6 +110,15 @@ class NewResourceModal extends React.Component {
       $('#newResourceModal .input').prop('disabled', false);
       this.setState({ loading: false });
     });
+  }
+
+  handleBodyChange(e) {
+    if (e.target.value.length > MAX_RESOURCE_BODY_LENGTH) {
+      let allowedText = e.target.value.slice(0, MAX_RESOURCE_BODY_LENGTH);
+      this.setState({ body: allowedText });
+    } else {
+      this.setState({ body: e.target.value });
+    }
   }
 
   render() {
@@ -134,8 +145,17 @@ class NewResourceModal extends React.Component {
                 </div>
                 <br/>
                 <div className="col-sm-12">
-                  <textarea id="newTitleBody" placeholder="Details" className="form-control input" ref="body" rows="5" required >
+                  <textarea id="newTitleBody"
+                            placeholder="Details"
+                            className="form-control input"
+                            value={this.state.body}
+                            rows="5"
+                            onChange={this.handleBodyChange.bind(this)}
+                            required >
                   </textarea>
+                  <span style={{float: 'right', color: 'grey'}}>
+                    {this.state.body.length}/{MAX_RESOURCE_BODY_LENGTH}
+                  </span>
                 </div>
                 <div className="col-xs-12">
                   <label htmlFor="reactTags">Tags:</label>

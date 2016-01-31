@@ -1,3 +1,7 @@
+/*
+ * ENUMERATION OF VALID CATEGORIES
+ */
+
 let correctCase = {
   'javascript': 'JavaScript',
   'python': 'Python',
@@ -18,3 +22,10 @@ let allExceptAll = ['-select one-'].concat(Object.keys(correctCase).map(key => c
 export const CORRECT_CASE = correctCase;
 export const ALL_CATEGORIES = allCategories;
 export const POSTABLE_CATEGORIES = allExceptAll;
+
+
+/*
+ * LIMITS ON INPUT SIZES
+ */
+
+export const MAX_RESOURCE_BODY_LENGTH = 250;
