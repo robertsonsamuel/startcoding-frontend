@@ -81,18 +81,19 @@ class FilterBar extends React.Component {
             <button className="btn btn-primary goBtn col-xs-3 col-md-4" onClick={this.doFiltering.bind(this)}>Search</button>
           </div>
 
-          <div className="ReactTags__selected">
-            {hotTags}
+          <div className="tagSearch">
+            <div className="tagInputBox">
+              <ReactTags tags={this.state.tags}
+                         suggestions={this.props.suggestions}
+                         handleDelete={this.handleDelete.bind(this)}
+                         handleAddition={this.handleAddition.bind(this)}
+                         handleDrag={this.handleDrag.bind(this)} />
+            </div>
+            <h5>Popular tags:</h5>
+            <div className="ReactTags__selected">
+              {hotTags}
+            </div>
           </div>
-
-          <div className="tagInputBox">
-            <ReactTags tags={this.state.tags}
-                       suggestions={this.props.suggestions}
-                       handleDelete={this.handleDelete.bind(this)}
-                       handleAddition={this.handleAddition.bind(this)}
-                       handleDrag={this.handleDrag.bind(this)} />
-          </div>
-
         </div>
       </div>
     )
