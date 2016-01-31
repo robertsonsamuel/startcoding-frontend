@@ -40,10 +40,15 @@ let catagories = [
 ];
 
 class SplashPage extends React.Component {
+  getStartedClickHandler() {
+    $('html,body').animate({
+      scrollTop: $('.resourcePanels:first-child').offset().top
+    }, 1000);
+  }
   render(){
     let resourcePanels = catagories.map( (category, i) => {
       return (
-        <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels"  key={i}>
+        <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels"  key={i} id={category}>
           <div className="thumbnail">
             <img className="techImage" src={category.imgSrc}  height="150px" alt="..." />
             <div className="caption">
@@ -64,7 +69,7 @@ class SplashPage extends React.Component {
                 <div className="heroText">
                   <h1 className="heroHead">Start Coding Now!</h1>
                   <h3 className="herofooter">The easiest and best way to discover and save coding resources. </h3>
-                  <button className="btn btn-primary heroButton" >Get Started Now</button>
+                  <button className="btn btn-primary heroButton" onClick={this.getStartedClickHandler}>Get Started Now</button>
                 </div>
               </div>
             </div>
@@ -72,7 +77,7 @@ class SplashPage extends React.Component {
         </div>
         <br />
         <div className="splitSection"></div>
-        <div className="techContainer col-lg-10 col-lg-offset-1">
+        <div id="techContainer" className="techContainer col-lg-10 col-lg-offset-1">
           {resourcePanels}
         </div>
       </div>
