@@ -412,13 +412,6 @@ a.disabled {
 .commentVotebox {
     float: right;
     font-size: 20px;
-}s
-
-.up .voteBtn:first-child{
-  color: #00E676
-}
-.down .voteBtn:nth-child(3){
-  color: purple;
 }
 
 .voteBtn {
@@ -433,6 +426,12 @@ a.disabled {
   cursor: default;
 }
 
+.up .voteBtn:first-child{
+  color: #00E676
+}
+.down .voteBtn:nth-child(3){
+  color: purple;
+}
 
 @media (max-width:768px) and (min-width:667px) {
   span.startCodingName {
