@@ -1,13 +1,13 @@
-.resource {
+.resourceCard {
     margin: 1em;
-    padding: 2em 0 1em 0;
+    padding: 2em 1em 1em 1em;
     border-bottom: 1px solid lightgrey;
+    min-height: 120px
 }
 .resourceCardHeader {
-
 }
 .resourceCardTitle {
+  width: calc(100% - 40px);
   display: inline-block;
-  width: calc(100% - 170px);
   margin: 0 !important;
 }

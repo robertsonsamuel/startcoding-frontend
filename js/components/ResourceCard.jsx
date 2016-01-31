@@ -90,17 +90,19 @@ class Resource extends React.Component {
     }
 
     return (
-      <div className="resource">
+      <div className="resourceCard">
         <div className="resourceCardHeader">
-          <h4 className="resourceCardTitle">
+
+          <h3 className="resourceCardTitle">
             <strong>
               <a href={this.props.link} target="_blank">{this.props.title}</a>
             </strong>
-          </h4>
+          </h3>
           <Votebox score={this.state.score}
                    up={showUpvote}
                    down={showDownvote}
                    handleVote={this.handleVote.bind(this)} />
+
         </div>
         <div className="resourceControlBar">
           <ol className="breadcrumb resourceBreadCrumb">
