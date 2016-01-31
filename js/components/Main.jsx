@@ -27,9 +27,6 @@ class Main extends React.Component {
       (this.getResources.bind(this))()
     }
   }
-  handleResourceClick(resourceId){
-    this.setState({activeResource:this.state.activeResource === resourceId ? false : resourceId});
-  }
   selectCategory(category) {
     window.location.hash = '#/' + category;
   }
@@ -60,17 +57,14 @@ class Main extends React.Component {
   render() {
     let resourceEls = this.state.resources.map((resource,i) => {
       function test() {
-        console.log("testi function", i, this);
+        console.log("testing function", i, this);
       }
       test.bind();
-      let isActive = this.state.activeResource === resource._id;
       return <ResourceCard {...resource}
                            me={this.props.me}
-                           isActive={isActive}
-                           onClick={this.handleResourceClick.bind(this,resource._id)}
                            key={i} />
     });
-    let mainClasses = classNames('main','panel', {displayResource : this.state.activeResource})
+    let mainClasses = classNames('main', 'panel');
     return (
       <div className={mainClasses}>
         <div className="row">

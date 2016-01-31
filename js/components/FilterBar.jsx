@@ -29,7 +29,7 @@ class FilterBar extends React.Component {
   handleDelete(i) {
     let tags = this.state.tags;
     tags.splice(i, 1);
-    (this.doFiltering.bind(this))();
+    (this.doFiltering.bind(this))(); // DELETE THIS TO STOP MAIN FROM UPDATING ON EVERY TAG CHANGE
     this.setState({ tags: tags });
   }
   handleAddition(tag) {
@@ -41,7 +41,7 @@ class FilterBar extends React.Component {
         text: tag
       });
     // }
-    (this.doFiltering.bind(this))();
+    (this.doFiltering.bind(this))(); // DELETE THIS TO STOP MAIN FROM UPDATING ON EVERY TAG CHANGE
     this.setState({ tags: tags });
   }
   handleDrag(tag, currPos, newPos) {

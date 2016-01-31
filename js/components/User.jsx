@@ -75,10 +75,8 @@ class User extends React.Component {
     let tagSuggestions = sortTagsByFrequency(filteredResources);
 
     let resourceEls = filteredResources.map((resource,i) => {
-      let isActive = this.state.activeResource === resource._id;
       return <ResourceCard {...resource}
                            me={this.props.me}
-                           isActive={isActive}
                            key={i}/>
     });
 
