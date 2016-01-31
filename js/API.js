@@ -82,7 +82,7 @@ let API = {
         body: body,
         link: aLink,
         tags: tags,
-        category: category
+        category: category.toLowerCase()
       }
     });
   },
