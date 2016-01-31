@@ -9,6 +9,7 @@ import {genErr, pleaseLogin} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
 import {formatTime} from '../util/time';
 import {store} from '../util/store';
+import '../../css/reactTags.css';
 
 class Resource extends React.Component {
   constructor(props) {
@@ -81,12 +82,15 @@ class Resource extends React.Component {
     let showUpvote = this.props.me ? this.props.me.upvotes.has(this.props._id) : false;
     let showDownvote = this.props.me ? this.props.me.downvotes.has(this.props._id) : false;
     let saveButtonText = "save";
+    let tags = (this.props.tags || []).map((tag,i) => {
+      return <span key={i} className="ReactTags__tag">{tag}</span>
+    });
+
     if (this.props.me) {
       saveButtonText = (this.props.me.savedResources.has(this.props._id)) ? "unsave" : "save";
     }
     return (
       <div className="resource">
-
         <div className="resourceHead">
           <div className="panel-heading">
             <h4 className="resourceTitle">
@@ -99,13 +103,21 @@ class Resource extends React.Component {
                      down={showDownvote}
                      handleVote={this.handleVote.bind(this)} />
           </div>
+          <div className="panel-body">
+          <div className="ReactTags__selected">
+            {tags}
+          </div>
+          </div>
+          <div className="panel-footer">
           <ol className="breadcrumb resourceBreadCrumb">
+            <li className="username"><strong>{this.props.user.username}</strong></li>
             <li className=""><span className="timeStamp">{formatTime(this.props.timestamp)}</span></li>
             <li><a href={`/#/resource/${this.props._id}`}>Discussions</a></li>
             <li>
               <a href='' onClick={this.saveResource.bind(this)}>{saveButtonText}</a>
             </li>
           </ol>
+        </div>
         </div>
 
       </div>

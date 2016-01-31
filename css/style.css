@@ -256,14 +256,25 @@ a.alreadyMember {
   margin-bottom: 1em;
 }
 
-h4.resourceTitle {
-    margin-bottom: 0;
+.resourceTitle {
+  font-size: 25px;
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .spinnerContainer {
   position: absolute;
   top: calc(50% - 50px);
   left: calc(50% - 50px);
+}
+div.ReactTags__selected span.ReactTags__tag {
+    border: 1px solid #ddd;
+    background: #0481B9;
+    font-size: 12px;
+    display: inline-block;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
 }
 
 textarea {
@@ -312,13 +323,21 @@ textarea {
 .displayResource {
   overflow: hidden;
 }
-
+.resourceList{
+  border-left: 1px solid gainsboro;
+}
 a.disabled {
     pointer-events: none;
     color: lightgrey;
 }
 .active .resourceContent {
   display: block;
+}
+.panel-heading {
+  padding: 2px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 .panel-body.resourceBody {
   white-space: pre-line;
@@ -332,9 +351,12 @@ a.disabled {
   margin-top: 10px;
 }
 
-.resourceHead:hover{
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+.resourceHead {
+  border-bottom: 1px solid #22659C;
 }
+/*.resourceHead:hover{
+  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.28), 0 3px 6px rgba(0,0,0,0.23);
+}*/
 
 .active .resourceHead {
   background-color: #F5F5F5;
@@ -364,15 +386,24 @@ a.disabled {
   margin: 1em 0 0 1em;
   padding: 1em .5em 1em 1em;
 }
-.panel-footer {
-  margin: 0 15px;
+.panel-body {
   padding: 0px;
-  border-top: 1px solid #4caf50;
-  background: white;
-  font-style: italic;
+  margin: 0 10px;
+}
+.panel-footer {
+    margin: 0 15px;
+    padding: 0px;
+    position: relative;
+    background: white;
+    top: 20px;
 }
 .breadcrumb {
     padding: 0;
+}
+.breadcrumb.resourceBreadCrumb {
+  background: white;
+  border: antiquewhite;
+  font-size: 13px;
 }
 .breadcrumb > span{
   float: left;
@@ -388,8 +419,9 @@ a.disabled {
 }
 
 .commentVotebox {
-  float: right;
-}
+    float: right;
+    font-size: 20px;
+}s
 
 .up .voteBtn:first-child{
   color: #00E676

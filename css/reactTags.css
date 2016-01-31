@@ -5,22 +5,40 @@ div.ReactTags__tags {
 
 /* Styles for the input */
 div.ReactTags__tagInput {
-  width: 200px;
+  width: 100%;
   border-radius: 2px;
   display: inline-block;
 }
-div.ReactTags__tagInput input, 
-div.ReactTags__tagInput input:focus {
-  height: 31px;
-  margin: 0;
-  font-size: 12px;
+div.ReactTags__tagInput input {
+  -webkit-box-shadow: inset 0 2px 0 rgba(0,0,0,0.075);
+  box-shadow: inset 0 2px 0 rgba(0,0,0,0.075);
+  display: block;
   width: 100%;
-  border: 1px solid #eee;
+  height: 38px;
+  padding: 7px 12px;
+  font-size: 12px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+div.ReactTags__tagInput input:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
 }
 
 /* Styles for selected tags */
 div.ReactTags__selected {
-  float: left;
+  display: block;
 }
 div.ReactTags__selected span.ReactTags__tag {
   border: 1px solid #ddd;
@@ -29,7 +47,6 @@ div.ReactTags__selected span.ReactTags__tag {
   display: inline-block;
   padding: 5px;
   margin: 0 5px;
-  cursor: move;
   border-radius: 2px;
 }
 div.ReactTags__selected a.ReactTags__remove {

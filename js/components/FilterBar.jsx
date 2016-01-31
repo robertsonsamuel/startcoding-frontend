@@ -17,7 +17,7 @@ class FilterBar extends React.Component {
 
   selectCategory(e) {
     this.setState({ tags: [] });
-    window.location.hash = '#/' + e.target.value.toLowerCase();
+    this.props.selectCategory(e.target.value.toLowerCase());
   }
 
   doFiltering() {
@@ -80,19 +80,17 @@ class FilterBar extends React.Component {
             </div>
             <button className="btn btn-primary goBtn col-xs-3 col-md-4" onClick={this.doFiltering.bind(this)}>Search</button>
           </div>
-          <h5>Filter By Tags:</h5>
 
-          <ReactTags tags={this.state.tags}
-                     suggestions={this.props.suggestions}
-                     handleDelete={this.handleDelete.bind(this)}
-                     handleAddition={this.handleAddition.bind(this)}
-                     handleDrag={this.handleDrag.bind(this)} />
+          <div className="ReactTags__selected">
+            {hotTags}
+          </div>
 
-          <div id="hotTags">
-            <h6>Hot Tags:</h6>
-            <div className="ReactTags__selected">
-              {hotTags}
-            </div>
+          <div className="tagInputBox">
+            <ReactTags tags={this.state.tags}
+                       suggestions={this.props.suggestions}
+                       handleDelete={this.handleDelete.bind(this)}
+                       handleAddition={this.handleAddition.bind(this)}
+                       handleDrag={this.handleDrag.bind(this)} />
           </div>
 
         </div>
