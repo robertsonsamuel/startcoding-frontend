@@ -70,7 +70,8 @@ class NewResourceModal extends React.Component {
     this.setState({selectedValue: category});
   }
 
-  createResource(){
+  createResource(e){
+    e.preventDefault();
     let title = this.refs.title.value;
     let body = this.refs.body.value;
     let aLink = this.refs.aLink.value;
@@ -100,6 +101,7 @@ class NewResourceModal extends React.Component {
 
       // possibly add the new resource to main
       this.props.optimisticallyAdd(resource);
+      location.hash = '#/resource/' + resource._id;
     })
     .fail(err => {
       genErr(err.responseText);
@@ -121,11 +123,12 @@ class NewResourceModal extends React.Component {
                 <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                 <h4 className="modal-title" id="resourceModalLabel">Create a new resource.</h4>
               </div>
+              <form onSubmit={this.createResource.bind(this)}>
               <div className="modal-body row">
                 <div className="col-sm-12">
                   <input type="text" ref="title" className="newResourceTitle input form-control" placeholder="Title" required />
                   <br/>
-                  <input type="text" ref="aLink" className="newResourceLink input form-control" placeholder="URL" required />
+                  <input type="url" ref="aLink" className="newResourceLink input form-control" placeholder="http://" required />
                   <br/>
                 </div>
                 <div className="spinnerContainer">
@@ -154,8 +157,9 @@ class NewResourceModal extends React.Component {
               <div className="modal-footer">
                 <span className="markdownNotice">*Your post will render <a href="https://help.github.com/articles/markdown-basics/">markdown</a>!</span>
                 <button type="button" className="btn btn-default input" data-dismiss="modal">Discard</button>
-                <button type="button" className="btn btn-primary input" onClick={this.createResource.bind(this)}>Post</button>
+                <button type="submit" className="btn btn-primary input">Post</button>
               </div>
+              </form>
             </div>
           </div>
         </div>
