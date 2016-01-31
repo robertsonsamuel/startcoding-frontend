@@ -285,15 +285,6 @@ span.timeStamp.resourceTimeStamp {
   top: calc(50% - 50px);
   left: calc(50% - 50px);
 }
-div.ReactTags__selected span.ReactTags__tag {
-    border: 1px solid #ddd;
-    background: #0481B9;
-    font-size: 12px;
-    display: inline-block;
-    padding: 5px;
-    color: white;
-    border-radius: 5px;
-}
 
 textarea {
   padding: 0.5em;
@@ -342,7 +333,7 @@ textarea {
   overflow: hidden;
 }
 .resourceList{
-  border-left: 1px solid gainsboro;
+  /*border-left: 1px solid gainsboro;*/
 }
 a.disabled {
     pointer-events: none;
