@@ -154,11 +154,11 @@ class ResourcePage extends React.Component {
             </div>
             <div className="resourceFooter">
               <div className="row">
-                <div className="col-sm-4 col-md-4 col-lg-4">
+                <div className="col-sm-4 col-md-2 col-lg-2">
                   <span className="timeStamp resourceTimeStamp">{postedBy} posted this </span>
                   <span className="timeStamp resourceTimeStamp">{formatTime(this.state.resourceInfo.timestamp)}.</span>
                 </div>
-                <div className="col-sm-4 col-md-4 col-lg-4">
+                <div className="col-sm-4 col-md-6 col-lg-6">
                   <div className="ReactTags__selected">
                     {tagsEls}
                   </div>
