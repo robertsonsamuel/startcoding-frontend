@@ -21,8 +21,8 @@ class FilterBar extends React.Component {
   }
 
   doFiltering() {
-    let tags = this.state.tags.map(tag => tag.text);
-    this.props.filterResources(null, tags, this.refs.textSearch.value);
+    let tags = new Set(this.state.tags.map(tag => tag.text));
+    this.props.filterResources(null, [...tags], this.refs.textSearch.value);
   }
 
   // TAG INPUT STUFF
