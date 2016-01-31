@@ -38,7 +38,7 @@ class Main extends React.Component {
 
     API.getResources(this.props.category, tags, text)
     .done(data => {
-      
+
       console.log('tags object:', data.tags);
 
       // sort tags by frequency
@@ -63,7 +63,7 @@ class Main extends React.Component {
                            onClick={this.handleResourceClick.bind(this,resource._id)}
                            key={i} />
     });
-    let mainClasses = classNames('main', 'panel', {displayResource : this.state.activeResource})
+    let mainClasses = classNames('main','panel', {displayResource : this.state.activeResource})
     return (
       <div className={mainClasses}>
         <div className="row">
@@ -72,7 +72,7 @@ class Main extends React.Component {
                        filterResources={this.getResources.bind(this)}
                        suggestions={this.state.tagSuggestions} />
           </div>
-          <div className="col-sm-12 col-md-8 col-lg-8">
+          <div className="col-sm-12 col-md-8 col-lg-8 resourceList">
             {this.state.loading ? <LoadingSpinner /> : []}
             {resourceEls}
           </div>
