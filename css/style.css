@@ -259,6 +259,7 @@ a.alreadyMember {
 .resourceTitle {
   font-size: 25px;
   margin-bottom: 0;
+  text-align: center;
 }
 
 .spinnerContainer {
