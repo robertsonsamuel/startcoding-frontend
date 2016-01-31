@@ -7,7 +7,7 @@ import {store} from '../util/store';
 // needed for fancy auto-complete tags box
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
-const ReactTags = require('react-tag-input').WithContext;
+const ReactTags = require('./reactTags').WithContext;
 
 class FilterBar extends React.Component {
   constructor(props){
