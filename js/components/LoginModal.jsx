@@ -100,6 +100,8 @@ class LoginModal extends React.Component {
                     <input className="form-control" ref="loginPassword" type="password" placeholder="Password" required/><br/>
                     <button type="submit" className="form-control btn btn-primary">Log In</button>
                   </form>
+                  <br/>
+                  <span className="forgotPassword"><a href="https://protected-river-69772.herokuapp.com/forgotpassword" target="_blank">Forgot Password ?</a></span>
                 </div>
                 <div className="col-xs-12 col-sm-6">
                   <h1>Register</h1>
