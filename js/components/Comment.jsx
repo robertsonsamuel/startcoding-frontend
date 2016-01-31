@@ -163,7 +163,7 @@ class Comment extends React.Component {
     if (this.props.editTime) {
       timestamp = `*edited ${formatTime(this.props.editTime)}`;
     } else {
-      timestamp = this.props.timestamp ? formatTime(this.props.timestamp) : '';
+      timestamp = formatTime(this.props.timestamp);
     }
     let showUpvote = this.state.me ? this.state.me.upvotes.has(this.props._id) : false;
     let showDownvote = this.state.me ? this.state.me.downvotes.has(this.props._id) : false;

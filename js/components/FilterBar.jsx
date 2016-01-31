@@ -18,8 +18,10 @@ class FilterBar extends React.Component {
   }
 
   selectCategory(e) {
+    let category = e.target.value.toLowerCase();
+    if (category === '-select one-') return;
     this.setState({ tags: [] });
-    this.props.selectCategory(e.target.value.toLowerCase());
+    this.props.selectCategory(category);
   }
 
   doFiltering() {
@@ -79,7 +81,9 @@ class FilterBar extends React.Component {
           <div className="well bs-component categorySelector" role='search'>
             <div className="input-group">
               <span className="input-group-addon" id="basic-addon1">Navigate to: </span>
-              <select defaultValue={this.props.category} onChange={this.selectCategory.bind(this)} className="form-control">
+              <select defaultValue={this.props.category}
+                      onChange={this.selectCategory.bind(this)}
+                      className="form-control">
                 {categories}
               </select>
             </div>
