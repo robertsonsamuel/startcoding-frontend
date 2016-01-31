@@ -9,6 +9,7 @@ import {genErr} from '../util/alerts';
 import {eventEmitter, store} from '../util/store';
 
 class Main extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,19 +18,23 @@ class Main extends React.Component {
       loading: false,
     };
   }
+
   componentDidMount() {
     if (this.props.meId) return (this.getUserSavedResources.bind(this))();
     (this.getResources.bind(this))();
     API.getAllTags();
   }
+
   componentDidUpdate(prevProps){
     if (prevProps.category !== this.props.category) {
       (this.getResources.bind(this))()
     }
   }
+
   selectCategory(category) {
     window.location.hash = '#/' + category;
   }
+
   getResources(callback, tags, text){
     console.log('tags:', tags);
     console.log('text:', text);
@@ -54,6 +59,13 @@ class Main extends React.Component {
       if (callback) callback();
     });
   }
+
+  optimisticallyAdd(resource) {
+    if (resource.category.toLowerCase() === this.props.category.toLowerCase()) {
+      this.setState({ resources: this.state.resources.concat(resource) });
+    }
+  }
+
   render() {
     let resourceEls = this.state.resources.map((resource,i) => {
       function test() {
@@ -80,7 +92,8 @@ class Main extends React.Component {
           </div>
         </div>
         <NewResourceModal initialCategory={this.props.category}
-                          resourcePosted={this.getResources.bind(this)} />
+                          resourcePosted={this.getResources.bind(this)}
+                          optimisticallyAdd={this.optimisticallyAdd.bind(this)} />
       </div>
     )
   }

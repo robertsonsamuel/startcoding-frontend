@@ -90,7 +90,7 @@ class NewResourceModal extends React.Component {
     this.setState({ loading: true });
 
     API.postResource(title, body, aLink, tags, category)
-    .done(() => {
+    .done((resource) => {
       $('#newResourceModal').modal('hide');
       API.getAllTags(); // get new list of tags
 
@@ -100,15 +100,21 @@ class NewResourceModal extends React.Component {
       this.refs.body.value = '';
       this.refs.aLink.value = '';
 
-      this.props.resourcePosted(() => {
-        $('#newResourceModal .input').prop('disabled', false);
-      });
+      // possibly add the new resource to main
+      this.props.optimisticallyAdd(resource);
+
+      // THIS MIGHT BE BREAKING THINGS - NEWLY CREATED RESOURCES HAVE NONZERO SCORE
+      // this.props.resourcePosted(() => {
+      //   $('#newResourceModal .input').prop('disabled', false);
+      // });
     })
     .fail(err => {
-      $('#newResourceModal .input').prop('disabled', false);
       genErr(err.responseText);
     })
-    .always(() => this.setState({ loading: false }));
+    .always(() => {
+      $('#newResourceModal .input').prop('disabled', false);
+      this.setState({ loading: false });
+    });
   }
 
   render() {

@@ -9,6 +9,8 @@ class Votebox extends React.Component {
     super(props);
   }
   render() {
+    console.log('Votebox this.props.score', this.props.score)
+
     let disabled = this.props.meId === "";
     let voteClasses = classNames("commentVotebox", { up: this.props.up }, {down: this.props.down}, {disabled: disabled});
     return (

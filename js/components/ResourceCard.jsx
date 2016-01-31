@@ -88,6 +88,9 @@ class Resource extends React.Component {
     if (this.props.me) {
       saveButtonText = (this.props.me.savedResources.has(this.props._id)) ? "unsave" : "save";
     }
+
+    console.log('ResourceCard this.state.score', this.state.score);
+
     return (
       <div className="resource">
         <div className="resourceHead">
