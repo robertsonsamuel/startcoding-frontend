@@ -61,10 +61,6 @@ body {
   left: -5px;
 }
 
-.breadcrumb.resourceBreadCrumb{
-  background: white;
-}
-
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
     border-color: rgba(76, 175, 80, 0);
 }
@@ -392,7 +388,7 @@ textarea {
   /*border-left: 1px solid gainsboro;*/
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .resourceList {
     padding-top: 3em;
     padding-right: 3em;
@@ -412,7 +408,12 @@ a.disabled {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
-
+.resourceHead {
+  /*border-bottom: 1px solid #22659C;*/
+}
+/*.resourceHead:hover{
+  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.28), 0 3px 6px rgba(0,0,0,0.23);
+}*/
 .hide{
   display: none;
 }
@@ -475,6 +476,7 @@ ol.panel-footer.breadcrumb.comment {
   background: white;
   border: antiquewhite;
   font-size: 13px;
+  margin: 0.2em  0 0 0;
 }
 .breadcrumb > span{
   float: left;
@@ -487,30 +489,6 @@ ol.panel-footer.breadcrumb.comment {
 
 .new-comment-buttons .btn {
   margin-left: 1em;
-}
-
-.commentVotebox {
-    float: right;
-    font-size: 20px;
-}
-
-.voteBtn {
-  color: lightgrey;
-  margin: 0 .8em;
-  padding: 0 .2em;
-  cursor: pointer;
-}
-
-.disabled .voteBtn{
-  color: lightgrey;
-  cursor: default;
-}
-
-.up .voteBtn:first-child{
-  color: #00E676
-}
-.down .voteBtn:nth-child(3){
-  color: purple;
 }
 
 @media (max-width:768px) and (min-width:667px) {

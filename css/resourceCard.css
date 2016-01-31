@@ -1,0 +1,13 @@
+.resource {
+    margin: 1em;
+    padding: 2em 0 1em 0;
+    border-bottom: 1px solid lightgrey;
+}
+.resourceCardHeader {
+
+}
+.resourceCardTitle {
+  display: inline-block;
+  width: calc(100% - 170px);
+  margin: 0 !important;
+}

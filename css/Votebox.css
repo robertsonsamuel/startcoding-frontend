@@ -1,0 +1,26 @@
+
+.voteBox {
+    float: right;
+    font-size: 20px;
+    display: block;
+    width: 150px;
+}
+
+.voteBtn {
+  color: lightgrey;
+  margin: 0 .8em;
+  padding: 0 .2em;
+  cursor: pointer;
+}
+
+.disabled .voteBtn{
+  color: lightgrey;
+  cursor: default;
+}
+
+.up .voteBtn:first-child{
+  color: #00E676
+}
+.down .voteBtn:nth-child(3){
+  color: purple;
+}

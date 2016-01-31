@@ -10,6 +10,7 @@ import {canHazToken} from '../util/authorization';
 import {formatTime} from '../util/helpers';
 import {store} from '../util/store';
 import '../../css/reactTags.css';
+import '../../css/ResourceCard.css';
 
 class Resource extends React.Component {
   constructor(props) {
@@ -90,8 +91,8 @@ class Resource extends React.Component {
 
     return (
       <div className="resource">
-        <div className="panel-heading">
-          <h4 className="resourceTitle">
+        <div className="resourceCardHeader">
+          <h4 className="resourceCardTitle">
             <strong>
               <a href={this.props.link} target="_blank">{this.props.title}</a>
             </strong>
@@ -101,12 +102,7 @@ class Resource extends React.Component {
                    down={showDownvote}
                    handleVote={this.handleVote.bind(this)} />
         </div>
-        <div className="panel-body">
-          <div className="ReactTags__selected">
-            {tags}
-          </div>
-        </div>
-        <div className="panel-footer">
+        <div className="resourceControlBar">
           <ol className="breadcrumb resourceBreadCrumb">
             <li className="username"><strong>{this.props.user.username}</strong></li>
             <li className=""><span className="timeStamp">{formatTime(this.props.timestamp)}</span></li>
@@ -114,6 +110,11 @@ class Resource extends React.Component {
             <li>
               <a href='' onClick={this.saveResource.bind(this)}>{saveButtonText}</a>
             </li>
+            <div className="resourceTagContainer">
+              <div className="ReactTags__selected">
+                {tags}
+              </div>
+            </div>
           </ol>
         </div>
       </div>
