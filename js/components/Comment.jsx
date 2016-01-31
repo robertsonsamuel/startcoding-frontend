@@ -7,7 +7,7 @@ import Votebox from './Votebox.jsx';
 import classNames from 'classnames';
 import API from '../API';
 import {confirmDelete,genErr,pleaseLogin} from '../util/alerts';
-import {formatTime} from '../util/time';
+import {formatTime} from '../util/helpers';
 import {isAuthorized, parseToken} from '../util/authorization';
 import {store} from '../util/store';
 import marked from 'marked';

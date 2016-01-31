@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Votebox from './Votebox.jsx';
 import {genErr, pleaseLogin} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
-import {formatTime} from '../util/time';
+import {formatTime} from '../util/helpers';
 import {store} from '../util/store';
 import '../../css/reactTags.css';
 

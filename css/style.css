@@ -3,15 +3,15 @@ $secondary-color: #F44336;
 
 body {
   color: #1F4832;
-  background: #fcfffc;
+  background: #FEFEFE;
 }
 
 .heroImage {
-    background: rgb(37, 208, 239);
-    height: 49vh;
-    width: 100vw;
-    left: -30px;
-    position: relative;
+  background: rgb(37, 208, 239);
+  height: 49vh;
+  width: 100vw;
+  left: -30px;
+  position: relative;
 }
 
 .heroHead{
@@ -298,10 +298,57 @@ textarea {
 }
 
 .navbar-inverse {
+  padding: 1em 0;
   background: #03A9F4;
   color: #FFF;
   margin-bottom: 0;
   z-index: 1000;
+}
+
+.navTitle {
+  color: #FFF;
+  letter-spacing: 14px;
+  font-size: 1.5em;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
+}
+
+@media (max-width: 768px) {
+  .navTitle {
+    display: none;
+  }
+}
+
+.navbar-inverse.javascriptStyle{
+  background: rgb(211, 195, 20)
+}
+.navbar-inverse.cssStyle{
+  background: rgb(120, 129, 207);
+}
+.navbar-inverse.htmlStyle{
+  background: rgb(239, 101, 42);
+}
+.navbar-inverse.rubyStyle{
+  background: rgb(204, 52, 45);
+}
+.navbar-inverse.goStyle{
+  background: rgb(208, 182, 152);
+}
+.navbar-inverse.pythonStyle{
+  background: rgb(30, 65, 95);
+}
+.navbar-inverse.swiftStyle{
+  background: rgb(252, 72, 49);
+}
+.navbar-inverse.generalStyle{
+  background: rgb(86, 141, 109);
+}
+.navbar-inverse.allStyle{
+}
+
+#topBar {
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
@@ -310,6 +357,11 @@ textarea {
 
 .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {
     color: peachpuff;
+}
+
+.navbar-inverse .navbar-toggle {
+  border-color: #eeeeee;
+  background: #FAFAFA;
 }
 
 #Register, #Logout, #welcome {

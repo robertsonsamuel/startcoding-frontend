@@ -61,7 +61,7 @@ class FilterBar extends React.Component {
         <option key={i} value={category}>{category}</option>
       )
     });
-    
+
     let suggestions = this.props.suggestions.map(tagObject => tagObject.text);
 
     let hotTags = (this.props.suggestions || [])
@@ -76,13 +76,13 @@ class FilterBar extends React.Component {
       });
 
     let defaultValue = CORRECT_CASE[this.props.category.toLowerCase()];
-    
+
     return (
       <div>
         <div className="filterBarContainer row">
           <div className="well bs-component categorySelector" role='search'>
             <div className="input-group">
-              <span className="input-group-addon" id="basic-addon1">Navigate to: </span>
+              <span className="input-group-addon" id="basic-addon1">Category: </span>
               <select defaultValue={defaultValue}
                       onChange={this.selectCategory.bind(this)}
                       className="form-control">

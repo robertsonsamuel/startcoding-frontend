@@ -67,6 +67,7 @@ class Main extends React.Component {
   }
 
   render() {
+    let filterColClass = "col-sm-12 col-md-4 filterCol " + this.props.category + "Style"
     let resourceEls = this.state.resources.map((resource,i) => {
       return <ResourceCard {...resource}
                            me={this.props.me}
@@ -76,13 +77,13 @@ class Main extends React.Component {
     return (
       <div className={mainClasses}>
         <div className="row">
-          <div className="col-sm-12 col-md-4 col-lg-4">
+          <div className={filterColClass}>
             <FilterBar category={this.props.category}
                        selectCategory={this.selectCategory.bind(this)}
                        filterResources={this.getResources.bind(this)}
                        suggestions={this.state.tagSuggestions} />
           </div>
-          <div className="col-sm-12 col-md-8 col-lg-8 resourceList">
+          <div className="col-sm-12 col-md-8 resourceList">
             {this.state.loading ? <LoadingSpinner /> : []}
             {resourceEls}
           </div>

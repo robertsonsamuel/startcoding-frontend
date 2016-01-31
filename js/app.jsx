@@ -16,7 +16,6 @@ class App extends React.Component {
     this.state = {
       me: store.getDatum('me')
     }
-
   }
   putMeOnState(){
     let me = store.getDatum('me');
@@ -64,7 +63,7 @@ class App extends React.Component {
 
 // Split location into `/` separated parts, then render `Application` with it
 function handleNewHash() {
-  var location = window.location.hash.replace(/^#\/?|\/$/g, '').split('/');
+  var location = window.location.hash.replace(/^#\/?|\/$/g, '').split('/').map(s => s.toLowerCase());
   ReactDOM.render(<App location={location} />, document.getElementById('React'));
 }
 
