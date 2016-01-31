@@ -74,6 +74,10 @@ class FilterBar extends React.Component {
           <span className="ReactTags__tag" key={i}>{tagObject.text} ({tagObject.frequency})</span>
         )
       });
+
+    let lowerCaseCategories = ALL_CATEGORIES.map(category => category.toLowerCase());
+    let index = lowerCaseCategories.indexOf(this.props.category.toLowerCase());
+    let defaultValue = ALL_CATEGORIES[index];
     
     return (
       <div>
@@ -81,7 +85,8 @@ class FilterBar extends React.Component {
           <div className="well bs-component categorySelector" role='search'>
             <div className="input-group">
               <span className="input-group-addon" id="basic-addon1">Navigate to: </span>
-              <select onChange={this.selectCategory.bind(this)}
+              <select defaultValue={defaultValue}
+                      onChange={this.selectCategory.bind(this)}
                       className="form-control">
                 {categories}
               </select>

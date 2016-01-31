@@ -7,6 +7,7 @@ import NewResourceModal from './NewResourceModal.jsx';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
 import {eventEmitter, store} from '../util/store';
+import {ALL_CATEGORIES} from '../util/CONST.js'
 
 class Main extends React.Component {
 
@@ -32,6 +33,10 @@ class Main extends React.Component {
   }
 
   selectCategory(category) {
+    let lowerCaseCategories = ALL_CATEGORIES.map(category => category.toLowerCase());
+    let index = lowerCaseCategories.indexOf(category.toLowerCase());
+    $('#modalCategoryDropdown').val(ALL_CATEGORIES[index]);
+
     window.location.hash = '#/' + category;
   }
 

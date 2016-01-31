@@ -5,21 +5,17 @@ class CategoryDropdown extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      categoriesArrary: ALL_CATEGORIES,
-      selectedValue: this.props.initialCategory
+      categoriesArrary: ALL_CATEGORIES
     };
   }
-  changeState(){
-    console.log('changed');
-  }
+
   selectCategory(e){
-    this.setState({selectedValue: e.target.value});
     this.props.selectCategory(e.target.value);
   }
 
   render(){
     let lowerCaseCategories = ALL_CATEGORIES.map(category => category.toLowerCase());
-    let index = lowerCaseCategories.indexOf(this.state.selectedValue.toLowerCase());
+    let index = lowerCaseCategories.indexOf(this.props.initialCategory.toLowerCase());
     let defaultValue = ALL_CATEGORIES[index];
 
     let categories = this.state.categoriesArrary.map((category, i) => {
@@ -30,7 +26,7 @@ class CategoryDropdown extends React.Component {
 
     return(
       <div>
-        <select defaultValue={defaultValue} onChange={this.selectCategory.bind(this)} className="form-control">
+        <select id="modalCategoryDropdown" defaultValue={defaultValue} onChange={this.selectCategory.bind(this)} className="form-control">
           {categories}
         </select>
       </div>
