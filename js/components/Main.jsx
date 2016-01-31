@@ -34,7 +34,8 @@ class Main extends React.Component {
 
   selectCategory(category) {
     category = category.toLowerCase();
-    $('#modalCategoryDropdown').val( CORRECT_CASE[category] );
+    let categoryForModal = (category === 'all') ? '-select one-' : CORRECT_CASE[category];
+    $('#modalCategoryDropdown').val(categoryForModal);
     window.location.hash = '#/' + category;
   }
 

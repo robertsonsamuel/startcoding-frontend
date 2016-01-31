@@ -143,7 +143,8 @@ class NewResourceModal extends React.Component {
                 </div>
                 <div className="col-sm-6">
                   <label htmlFor="categoryDropdown">Category:</label>
-                  <CategoryDropdown initialCategory={this.props.initialCategory} selectCategory={this.selectCategory.bind(this)} />
+                  <CategoryDropdown initialCategory={this.props.initialCategory}
+                                    selectCategory={this.selectCategory.bind(this)} />
                 </div>
                 <div className="col-sm-6">
                 </div>
