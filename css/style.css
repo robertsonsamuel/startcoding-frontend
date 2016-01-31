@@ -251,7 +251,10 @@ a.alreadyMember {
   width: inherit;
   background-color: #D32F2F;
 }
-
+.replyResourceButton {
+    float: right;
+    margin-right: 5px;
+}
 .newResourceTitle {
   margin-bottom: 1em;
 }
