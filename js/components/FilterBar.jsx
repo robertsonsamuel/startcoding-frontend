@@ -11,6 +11,11 @@ const ReactTags = require('./reactTags').WithContext;
 
 const TAGS_TO_DISPLAY = 20;
 
+// normalize tag names
+String.prototype.normalize = function() {
+  return this.replace(/\W/g, '').toLowerCase();
+}
+
 class FilterBar extends React.Component {
   constructor(props){
     super(props);
@@ -33,19 +38,17 @@ class FilterBar extends React.Component {
   handleDelete(i) {
     let tags = this.state.tags;
     tags.splice(i, 1);
-    (this.doFiltering.bind(this))(); // DELETE THIS TO STOP MAIN FROM UPDATING ON EVERY TAG CHANGE
+    (this.doFiltering.bind(this))(); // DELETE THESE TO STOP MAIN FROM UPDATING ON EVERY TAG CHANGE
     this.setState({ tags: tags });
   }
   handleAddition(tag) {
     let tags = this.state.tags;
     tag = tag.normalize();
-    // if (!tags.some(existingTag => existingTag.text == tag)) {
-      tags.push({
-        id: tags.length + 1,
-        text: tag
-      });
-    // }
-    (this.doFiltering.bind(this))(); // DELETE THIS TO STOP MAIN FROM UPDATING ON EVERY TAG CHANGE
+    tags.push({
+      id: tags.length + 1,
+      text: tag
+    });
+    (this.doFiltering.bind(this))(); // DELETE THESE TO STOP MAIN FROM UPDATING ON EVERY TAG CHANGE
     this.setState({ tags: tags });
   }
   handleDrag(tag, currPos, newPos) {
@@ -53,6 +56,11 @@ class FilterBar extends React.Component {
     tags.splice(currPos, 1);
     tags.splice(newPos, 0, tag);
     this.setState({ tags: tags });
+  }
+
+  clickTag(e) {
+    let tag = $(e.target).closest('.ReactTags__tag').find('span:first-child').text();
+    this.handleAddition.call(this, tag);
   }
 
   render() {
@@ -71,7 +79,11 @@ class FilterBar extends React.Component {
       .slice(0, TAGS_TO_DISPLAY)
       .map((tagObject, i) => {
         return (
-          <span className="ReactTags__tag" key={i}>{tagObject.text} ({tagObject.frequency})</span>
+          <span className='ReactTags__tag'
+                onClick={this.clickTag.bind(this)}
+                key={i}>
+            {tagObject.text} ({tagObject.frequency})
+          </span>
         )
       });
 

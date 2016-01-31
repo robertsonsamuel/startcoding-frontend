@@ -112,7 +112,6 @@ class ResourcePage extends React.Component {
     let commentEls = [];
     let postedBy = this.state.resourceInfo.user ? this.state.resourceInfo.user.username : '';
     let tags = this.state.resourceInfo.tags ? this.state.resourceInfo.tags : [];
-    console.log(tags);
     let changeButtons = classNames( "btn", "btn-info", "replyResourceButton",
     { hide: (!this.props.me || !this.state.resourceInfo.timestamp || (this.props.me._id !== this.state.resourceInfo.user._id)) })
 
