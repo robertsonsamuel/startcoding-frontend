@@ -257,6 +257,9 @@ a.alreadyMember {
 }
 .newResourceTitle {
 }
+.resource .badge, .comment .badge {
+  font-size: 15px; /* resource/comment scores */
+}
 .panel-body.resourceBody {
     background: rgb(255, 255, 255);
     padding: 30px;
