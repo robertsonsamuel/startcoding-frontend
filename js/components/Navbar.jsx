@@ -1,6 +1,5 @@
 import React from 'react';
 import RegisterForm from './RegisterForm.jsx';
-import LoginForm from './LoginForm.jsx';
 import LoginModal from './LoginModal.jsx';
 import {LoginError, RegisterError} from '../util/alerts';
 import API from '../API';

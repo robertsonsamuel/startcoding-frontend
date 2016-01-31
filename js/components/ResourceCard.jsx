@@ -29,7 +29,6 @@ class Resource extends React.Component {
   }
 
   handleVote(vote) {
-    console.log("voting", vote, this.state.votingInProcess);
     if (this.state.votingInProcess) return;
 
     this.setState({ votingInProcess: true });
