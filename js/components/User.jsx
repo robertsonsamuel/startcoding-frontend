@@ -12,35 +12,40 @@ class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allResources: [],
+      resources: [],
       loading: true
     };
   }
+
   componentDidMount() {
     if (this.props.meId) return (this.getUserSavedResources.bind(this))();
     (this.getUserSavedResources.bind(this))()
   }
-  componentDidUpdate(prevProps){
-    if (prevProps.category !== this.props.category) {
-      (this.getUserSavedResources.bind(this))()
-    }
-  }
+
+  // componentDidUpdate(prevProps){
+  //   if (prevProps.category !== this.props.category) {
+  //     (this.getUserSavedResources.bind(this))()
+  //   }
+  // }
+
   handleResourceClick(resourceId){
     this.setState({activeResource:this.state.activeResource === resourceId ? false : resourceId});
   }
+
   getUserSavedResources(callback){
     this.setState({loading: true})
     API.savedResources(this.props.meId)
     .done( resp => {
-      this.setState( {allResources: resp, loading: false} );
+      this.setState({ resources: resp, loading: false });
     })
     .fail( err => genErr(err.responseText))
     .always( () => {
       if (callback) callback();
     });
   }
+
   render() {
-    let resourceEls = this.state.allResources.map((resource,i) => {
+    let resourceEls = this.state.resources.map((resource,i) => {
       let isActive = this.state.activeResource === resource._id;
       return <ResourceCard {...resource}
                            me={this.props.me}
@@ -53,7 +58,7 @@ class User extends React.Component {
       <div className={mainClasses}>
         <div className="row">
           <div className="col-sm-12 col-md-4 col-lg-4">
-            <FilterBar category={this.props.category} />
+            <FilterBar category="All" />
           </div>
           <div className="col-sm-12 col-md-8 col-lg-8">
             {this.state.loading ? <LoadingSpinner /> : []}

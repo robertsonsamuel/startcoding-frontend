@@ -48,7 +48,7 @@ class App extends React.Component {
         return (
           <div>
             <Navbar category={this.props.location[0]}/>
-            <User category={this.props.location[1]} meId={this.props.location[2]} me={this.state.me}></User>
+            <User meId={this.props.location[1]} me={this.state.me}></User>
           </div>
         )
       default:
