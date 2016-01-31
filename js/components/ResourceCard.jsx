@@ -26,11 +26,10 @@ class Resource extends React.Component {
     let resourceId = this.props._id
     let meId = this.props.me._id
     API.saveResource(meId, resourceId)
-    // console.log('resourceId', id);
-    // console.log('user id', meId);
   }
 
   handleVote(vote) {
+    console.log("voting", vote, this.state.votingInProcess);
     if (this.state.votingInProcess) return;
 
     this.setState({ votingInProcess: true });

@@ -251,30 +251,42 @@ a.alreadyMember {
   width: inherit;
   background-color: #D32F2F;
 }
-
+.replyResourceButton {
+    float: right;
+    margin-right: 5px;
+}
 .newResourceTitle {
   margin-bottom: 1em;
 }
-
+.panel-body.resourceBody {
+    background: rgb(255, 255, 255);
+    padding: 30px;
+    border: 1px solid #D8D8D8;
+    box-shadow: 0px 3px 25px -10px rgba(128, 128, 128, 0.66);
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
 .resourceTitle {
   font-size: 25px;
   margin-bottom: 0;
-  text-align: center;
+}
+h4.resourceTitle.resourcePage {
+    text-align: center;
+    background-color: white;
+    border: none;
+    padding: 15px;
+    padding: ;
+}
+span.timeStamp.resourceTimeStamp {
+    color: #158CBA;
+    font-size: 18px;
+    font-style: italic;
 }
 
 .spinnerContainer {
   position: absolute;
   top: calc(50% - 50px);
   left: calc(50% - 50px);
-}
-div.ReactTags__selected span.ReactTags__tag {
-    border: 1px solid #ddd;
-    background: #0481B9;
-    font-size: 12px;
-    display: inline-block;
-    padding: 5px;
-    color: white;
-    border-radius: 5px;
 }
 
 textarea {
@@ -324,7 +336,7 @@ textarea {
   overflow: hidden;
 }
 .resourceList{
-  border-left: 1px solid gainsboro;
+  /*border-left: 1px solid gainsboro;*/
 }
 a.disabled {
     pointer-events: none;
@@ -339,18 +351,6 @@ a.disabled {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
-.panel-body.resourceBody {
-  white-space: pre-line;
-  border-left: 26px solid green;
-  border-top: 2px solid green;
-  border-bottom: 2px solid green;
-  border-right: 2px solid green;
-  background: rgba(213, 232, 204, 0.22);
-  padding: 50px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
 .resourceHead {
   border-bottom: 1px solid #22659C;
 }
@@ -386,10 +386,30 @@ a.disabled {
   margin: 1em 0 0 1em;
   padding: 1em .5em 1em 1em;
 }
+.panel-default>.panel-heading .badge {
+    color: #f5f5f5;
+    background-color: #158cba;
+}
+ol.panel-footer.breadcrumb.comment {
+    background: white;
+    position: relative;
+    top: 0;
+    left: -7px;
+    border-style: none;
+}
 .panel-body {
   padding: 0px;
   margin: 0 10px;
 }
+
+.panel-default>.panel-heading {
+    color: #333333;
+    background-color: #FFFFFF;
+    border-color: rgba(128, 2, 2, 0);
+    padding: 10px;
+    border-bottom: 1px solid #2368A9;
+}
+
 .panel-footer {
     margin: 0 15px;
     padding: 0px;
@@ -421,13 +441,6 @@ a.disabled {
 .commentVotebox {
     float: right;
     font-size: 20px;
-}s
-
-.up .voteBtn:first-child{
-  color: #00E676
-}
-.down .voteBtn:nth-child(3){
-  color: purple;
 }
 
 .voteBtn {
@@ -442,6 +455,12 @@ a.disabled {
   cursor: default;
 }
 
+.up .voteBtn:first-child{
+  color: #00E676
+}
+.down .voteBtn:nth-child(3){
+  color: purple;
+}
 
 @media (max-width:768px) and (min-width:667px) {
   span.startCodingName {

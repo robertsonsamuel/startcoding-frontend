@@ -1,5 +1,5 @@
 import moment from 'moment';
 
 export function formatTime(timestamp) {
-  return moment(timestamp).format('lll');
+  return moment(timestamp).startOf('day').fromNow()
 }

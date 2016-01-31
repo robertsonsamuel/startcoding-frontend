@@ -10,6 +10,7 @@ import {isAuthorized, canHazToken, parseToken} from '../util/authorization';
 import {formatTime} from '../util/time';
 import {store} from '../util/store';
 import marked from 'marked';
+import '../../css/reactTags.css';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -110,6 +111,9 @@ class ResourcePage extends React.Component {
 
   render() {
     let commentEls = [];
+    let postedBy = this.state.resourceInfo.user ? this.state.resourceInfo.user.username : '';
+    let tags = this.state.resourceInfo.tags ? this.state.resourceInfo.tags : [];
+    console.log(tags);
     let changeButtons = classNames( "btn", "btn-info", "replyResourceButton",
     { hide: (!this.props.me || !this.state.resourceInfo.timestamp || (this.props.me._id !== this.state.resourceInfo.user._id)) })
 
@@ -120,6 +124,10 @@ class ResourcePage extends React.Component {
     });
 
     let addedClasses = classNames('resource', 'active');
+
+    let tagsEls = tags.map((tag,i) => {
+      return <span key={i} className="ReactTags__tag">{tag}</span>
+    });
 
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
                                                        discard={this.discard.bind(this)} />
@@ -133,7 +141,7 @@ class ResourcePage extends React.Component {
       <div>
         <div>
           <div className="resourceHead">
-            <h4 className="resourceTitle">
+            <h4 className="resourceTitle resourcePage">
               <strong>
                 <a href={this.state.resourceInfo.link} target="_blank">{this.state.resourceInfo.title}</a>
               </strong>
@@ -145,10 +153,22 @@ class ResourcePage extends React.Component {
               {resourceBody}
             </div>
             <div className="resourceFooter">
-              <span className="timeStamp">{formatTime(this.state.resourceInfo.timestamp)}</span>
-              <button className="btn btn-success replyResourceButton" href="#" onClick={this.reply.bind(this)}>Reply</button>
-              <button className={changeButtons} href="#" onClick={this.edit.bind(this)}>Edit</button>
-              <button className={changeButtons} href="#" onClick={this.deleteResource.bind(this)}>Delete</button>
+              <div className="row">
+                <div className="col-sm-4 col-md-2 col-lg-2">
+                  <span className="timeStamp resourceTimeStamp">{postedBy} posted this </span>
+                  <span className="timeStamp resourceTimeStamp">{formatTime(this.state.resourceInfo.timestamp)}.</span>
+                </div>
+                <div className="col-sm-4 col-md-6 col-lg-6">
+                  <div className="ReactTags__selected">
+                    {tagsEls}
+                  </div>
+                </div>
+                <div className="col-sm-4 col-md-4 col-lg-4">
+                <span className="resourceActionButton"><button className="btn btn-success replyResourceButton" href="#" onClick={this.reply.bind(this)}>Reply</button></span>
+                <span className="resourceActionButton"><button className={changeButtons} href="#" onClick={this.edit.bind(this)}>Edit</button></span>
+                <span className="resourceActionButton"><button className={changeButtons} href="#" onClick={this.deleteResource.bind(this)}>Delete</button></span>
+                </div>
+              </div>
             </div>
             {newComment}
             {this.state.loading ? <LoadingSpinner /> : []}
