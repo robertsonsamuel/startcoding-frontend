@@ -129,7 +129,7 @@ class Comment extends React.Component {
 
     API.vote(this.props._id, vote)
     .done( resp => {
-    
+
       //this.props.update();
     })
     .fail( err => console.log("error voting", err));
@@ -169,7 +169,7 @@ class Comment extends React.Component {
 
     return (
       <div className="panel panel-default comment">
-        <div className="panel-heading commentTitle">
+        <div className="panel-heading commentTitle commentHeading">
           <span className="panel-title commentUsername">{this.props.user.username}</span>
           <Votebox score={this.state.score}
                    up={showUpvote}
@@ -180,8 +180,8 @@ class Comment extends React.Component {
           {this.state.updating ? <LoadingSpinner /> : []}
           {commentBody}
         </div>
-        <ol className="panel-footer breadcrumb">
-          <span>{timestamp}</span>
+        <ol className="panel-footer breadcrumb comment">
+          <li><span>{timestamp}</span></li>
           <li><a href="#" className={changeButtons} onClick={this.edit.bind(this)}>edit</a></li>
           <li><a href="#" onClick={this.reply.bind(this)}>reply</a></li>
           <li><a href="#" className={changeButtons} onClick={this.delete.bind(this)}>delete</a></li>
