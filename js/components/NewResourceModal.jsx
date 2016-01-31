@@ -77,6 +77,7 @@ class NewResourceModal extends React.Component {
     let tags = [...tagSet];
 
     let category = (this.state.selectedValue === '-select one-') ? 'general' : this.state.selectedValue;
+    if (category.toLowerCase() === 'all') category = 'general';
 
     if (title.length === 0 || body.length === 0 || aLink.length === 0){
       return genErr('Title and Body both required!')
@@ -84,7 +85,7 @@ class NewResourceModal extends React.Component {
 
     $('#newResourceModal .input').prop('disabled', true); // disable inputs
     this.setState({ loading: true });
-
+    console.log('category problem?',category);
     API.postResource(title, body, aLink, tags, category)
     .done((resource) => {
       $('#newResourceModal').modal('hide');
