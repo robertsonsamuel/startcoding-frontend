@@ -8,10 +8,26 @@ import classNames from 'classnames';
 import {genErr} from '../util/alerts';
 import {store} from '../util/store';
 
+function sortTagsByFrequency(resources) {
+  let tagFreqs = resources.reduce((tagFreqs, resource) => {
+    (resource.tags || []).forEach(tag => {
+      tagFreqs[tag] = tagFreqs[tag] ? tagFreqs[tag] + 1 : 1;
+    });
+    return tagFreqs;
+  }, {});
+
+  return Object.keys(tagFreqs).sort((a, b) => {
+    return tagFreqs[b] - tagFreqs[a] || a > b;
+  });
+}
+
 class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      category: 'all',
+      tagsFilter: [],
+      textFilter: '',
       resources: [],
       loading: true
     };
@@ -22,43 +38,60 @@ class User extends React.Component {
     (this.getUserSavedResources.bind(this))()
   }
 
-  // componentDidUpdate(prevProps){
-  //   if (prevProps.category !== this.props.category) {
-  //     (this.getUserSavedResources.bind(this))()
-  //   }
-  // }
-
-  handleResourceClick(resourceId){
-    this.setState({activeResource:this.state.activeResource === resourceId ? false : resourceId});
+  selectCategory(category) {
+    this.setState({ category: category });
   }
 
-  getUserSavedResources(callback){
+  filterResources(cb, tags, text) {
+    console.log('tags:', tags);
+    console.log('text:', text);
+    this.setState({ tagsFilter: tags, textFilter: text });
+  }
+
+  getUserSavedResources(){
     this.setState({loading: true})
     API.savedResources(this.props.meId)
-    .done( resp => {
-      this.setState({ resources: resp, loading: false });
+    .done( resources => {
+      this.setState({
+        resources: resources,
+        loading: false
+      });
     })
-    .fail( err => genErr(err.responseText))
-    .always( () => {
-      if (callback) callback();
-    });
+    .fail( err => genErr(err.responseText));
   }
 
   render() {
-    let resourceEls = this.state.resources.map((resource,i) => {
+    // filter resources to display:
+    // (A) match the category, (B) match every tag given, and (C) query is in title OR query is in some tag
+    let query = this.state.textFilter.toLowerCase();
+    let filteredResources = this.state.resources.filter(resource => {
+      let tags = resource.tags || [];
+      return (this.state.category === resource.category || this.state.category === 'all') &&
+             (this.state.tagsFilter.every(tag => tags.includes(tag))) &&
+             (resource.title.toLowerCase().includes(query) || tags.some(tag => tag.includes(query)) );
+    });
+
+    // get list of hot tags for displayed resources
+    let tagSuggestions = sortTagsByFrequency(filteredResources);
+
+    let resourceEls = filteredResources.map((resource,i) => {
       let isActive = this.state.activeResource === resource._id;
       return <ResourceCard {...resource}
                            me={this.props.me}
                            isActive={isActive}
-                           onClick={this.handleResourceClick.bind(this,resource._id)}
                            key={i}/>
     });
+
     let mainClasses = classNames('main', 'panel', {displayResource : this.state.activeResource})
+    
     return (
       <div className={mainClasses}>
         <div className="row">
           <div className="col-sm-12 col-md-4 col-lg-4">
-            <FilterBar category="All" />
+            <FilterBar category="All"
+                       selectCategory={this.selectCategory.bind(this)}
+                       filterResources={this.filterResources.bind(this)}
+                       suggestions={tagSuggestions} />
           </div>
           <div className="col-sm-12 col-md-8 col-lg-8">
             {this.state.loading ? <LoadingSpinner /> : []}
