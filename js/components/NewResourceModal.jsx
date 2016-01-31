@@ -100,11 +100,6 @@ class NewResourceModal extends React.Component {
 
       // possibly add the new resource to main
       this.props.optimisticallyAdd(resource);
-
-      // THIS MIGHT BE BREAKING THINGS - NEWLY CREATED RESOURCES HAVE NONZERO SCORE
-      // this.props.resourcePosted(() => {
-      //   $('#newResourceModal .input').prop('disabled', false);
-      // });
     })
     .fail(err => {
       genErr(err.responseText);

@@ -112,7 +112,7 @@ class Resource extends React.Component {
           <ol className="breadcrumb resourceBreadCrumb">
             <li className="username"><strong>{this.props.user.username}</strong></li>
             <li className=""><span className="timeStamp">{formatTime(this.props.timestamp)}</span></li>
-            <li><a href={`/#/resource/${this.props._id}`}>Discussions</a></li>
+            <li><a href={`/#/resource/${this.props._id}`}>Discussions ({this.props.commentCount || 0})</a></li>
             <li>
               <a href='' onClick={this.saveResource.bind(this)}>{saveButtonText}</a>
             </li>
