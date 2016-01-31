@@ -30,6 +30,9 @@ class Main extends React.Component {
   handleResourceClick(resourceId){
     this.setState({activeResource:this.state.activeResource === resourceId ? false : resourceId});
   }
+  selectCategory(category) {
+    window.location.hash = '#/' + category;
+  }
   getResources(callback, tags, text){
     console.log('tags:', tags);
     console.log('text:', text);
@@ -38,7 +41,7 @@ class Main extends React.Component {
 
     API.getResources(this.props.category, tags, text)
     .done(data => {
-      
+
       console.log('tags object:', data.tags);
 
       // sort tags by frequency
@@ -69,6 +72,7 @@ class Main extends React.Component {
         <div className="row">
           <div className="col-sm-12 col-md-4 col-lg-4">
             <FilterBar category={this.props.category}
+                       selectCategory={this.selectCategory.bind(this)}
                        filterResources={this.getResources.bind(this)}
                        suggestions={this.state.tagSuggestions} />
           </div>
