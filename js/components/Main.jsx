@@ -59,6 +59,10 @@ class Main extends React.Component {
   }
   render() {
     let resourceEls = this.state.resources.map((resource,i) => {
+      function test() {
+        console.log("testi function", i, this);
+      }
+      test.bind();
       let isActive = this.state.activeResource === resource._id;
       return <ResourceCard {...resource}
                            me={this.props.me}
