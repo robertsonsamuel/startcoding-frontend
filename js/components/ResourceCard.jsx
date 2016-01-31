@@ -90,24 +90,23 @@ class Resource extends React.Component {
 
     return (
       <div className="resource">
-        <div className="resourceHead">
-          <div className="panel-heading">
-            <h4 className="resourceTitle">
-              <strong>
-                <a href={this.props.link} target="_blank">{this.props.title}</a>
-              </strong>
-            </h4>
-            <Votebox score={this.state.score}
-                     up={showUpvote}
-                     down={showDownvote}
-                     handleVote={this.handleVote.bind(this)} />
-          </div>
-          <div className="panel-body">
+        <div className="panel-heading">
+          <h4 className="resourceTitle">
+            <strong>
+              <a href={this.props.link} target="_blank">{this.props.title}</a>
+            </strong>
+          </h4>
+          <Votebox score={this.state.score}
+                   up={showUpvote}
+                   down={showDownvote}
+                   handleVote={this.handleVote.bind(this)} />
+        </div>
+        <div className="panel-body">
           <div className="ReactTags__selected">
             {tags}
           </div>
-          </div>
-          <div className="panel-footer">
+        </div>
+        <div className="panel-footer">
           <ol className="breadcrumb resourceBreadCrumb">
             <li className="username"><strong>{this.props.user.username}</strong></li>
             <li className=""><span className="timeStamp">{formatTime(this.props.timestamp)}</span></li>
@@ -117,8 +116,6 @@ class Resource extends React.Component {
             </li>
           </ol>
         </div>
-        </div>
-
       </div>
     )
   }

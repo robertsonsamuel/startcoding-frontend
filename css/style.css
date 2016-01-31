@@ -379,6 +379,7 @@ textarea {
 }
 .main{
   position: relative;
+  min-height: 100vh;
   /*height: calc(100vh - 64px);*/
   margin-bottom: 0;
   /*overflow-y: scroll;*/
@@ -387,8 +388,17 @@ textarea {
   overflow: hidden;
 }
 .resourceList{
+  padding-bottom: 7em;
   /*border-left: 1px solid gainsboro;*/
 }
+
+@media (min-width: 768px) {
+  .resourceList {
+    padding-top: 3em;
+    padding-right: 3em;
+  }
+}
+
 a.disabled {
     pointer-events: none;
     color: lightgrey;
@@ -401,16 +411,6 @@ a.disabled {
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
-}
-.resourceHead {
-  border-bottom: 1px solid #22659C;
-}
-/*.resourceHead:hover{
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.28), 0 3px 6px rgba(0,0,0,0.23);
-}*/
-
-.active .resourceHead {
-  background-color: #F5F5F5;
 }
 
 .hide{
@@ -537,9 +537,8 @@ ol.panel-footer.breadcrumb.comment {
   }
   .main {
     position: relative;
-      height: 100%;
-      margin-bottom: 0;
-      overflow-y: initial;
+    margin-bottom: 0;
+    overflow-y: initial;
 
   }
 
