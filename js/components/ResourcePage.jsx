@@ -131,7 +131,8 @@ class ResourcePage extends React.Component {
     });
 
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
-                                                       discard={this.discard.bind(this)} />
+                                                       discard={this.discard.bind(this)}
+                                                       isOdd={true}/>
                                          : [];
 
     let resourceBody = this.state.editing ?  <EditResource update={this.putResourceEdit.bind(this)}

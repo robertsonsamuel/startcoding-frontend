@@ -1,0 +1,12 @@
+.new-comment-buttons {
+  float: right;
+  margin-top: .8em
+}
+
+.new-comment-buttons .btn {
+  margin-left: 1em;
+}
+
+.newCommentBody {
+  padding-bottom: 3em;
+}
