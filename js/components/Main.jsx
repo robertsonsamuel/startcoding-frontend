@@ -76,8 +76,8 @@ class Main extends React.Component {
     let mainClasses = classNames('main', 'panel');
     return (
       <div className={mainClasses}>
-        <div className="row">
-          <div className={filterColClass}>
+        <div className="row" style={{overflow: 'hidden', minHeight: '100vh'}}>
+          <div className={filterColClass} style={{marginBottom: '-99999px', paddingBottom: '99999px'}}>
             <FilterBar category={this.props.category}
                        selectCategory={this.selectCategory.bind(this)}
                        filterResources={this.getResources.bind(this)}
