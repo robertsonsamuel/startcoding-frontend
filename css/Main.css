@@ -1,3 +1,18 @@
+@media (min-width: 992px) {
+  .resourceList {
+    padding-right: 3em;
+  }
+}
+
+.resourceList{
+  padding-bottom: 7em;
+}
+
+.displayResource {
+  overflow: hidden;
+}
+
+
 .filterRow {
   overflow: hidden;
   min-height: 100vh;

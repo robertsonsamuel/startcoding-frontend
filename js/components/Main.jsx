@@ -68,6 +68,7 @@ class Main extends React.Component {
   }
 
   render() {
+
     let filterColClass = "col-sm-12 col-md-4 filterCol " + this.props.category + "Style"
     let resourceEls = this.state.resources.map((resource,i) => {
       return <ResourceCard {...resource}

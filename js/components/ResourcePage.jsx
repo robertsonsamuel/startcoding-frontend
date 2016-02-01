@@ -110,7 +110,6 @@ class ResourcePage extends React.Component {
   }
 
   render() {
-    // let isOdd = true;
     let commentEls = [];
     let postedBy = this.state.resourceInfo.user ? this.state.resourceInfo.user.username : '';
     let tags = this.state.resourceInfo.tags ? this.state.resourceInfo.tags : [];
@@ -119,7 +118,7 @@ class ResourcePage extends React.Component {
 
     commentEls = this.state.allComments.map( (comment, i) => {
       return <Comment {...comment}
-              isOdd={false}
+              isOdd={true}
               token={this.state.token}
               update={this.fetchComments.bind(this)}
               key={i} />
@@ -141,31 +140,25 @@ class ResourcePage extends React.Component {
                                           : <div dangerouslySetInnerHTML={{__html: marked(this.state.resourceInfo.body || '')}} />
     return (
       <div className="resourcePage">
-        <div className="resourceHead">
-          <h4 className="resourceTitle resourcePage">
-            <strong>
-              <a href={this.state.resourceInfo.link} target="_blank">{this.state.resourceInfo.title}</a>
-            </strong>
-          </h4>
-        </div>
         <div className="container resourceContent">
           <div className="panel-body resourceBody">
+            <h4 className="resourceTitle resourcePage">
+              <strong>
+                <a href={this.state.resourceInfo.link} target="_blank">{this.state.resourceInfo.title}</a>
+              </strong>
+            </h4>
             {this.state.updating ? <LoadingSpinner /> : []}
             {resourceBody}
+            <span className="timeStamp resourceTimeStamp">By {postedBy}, </span>
+            <span className="timeStamp resourceTimeStamp">{formatTime(this.state.resourceInfo.timestamp)}.</span>
+            <div className="ReactTags__selected">
+              {tagsEls}
+            </div>
           </div>
           <div className="resourceFooter">
             <div className="row">
-              <div className="col-sm-4 col-md-2 col-lg-2">
-                <span className="timeStamp resourceTimeStamp">By {postedBy}, </span>
-                <span className="timeStamp resourceTimeStamp">{formatTime(this.state.resourceInfo.timestamp)}.</span>
-              </div>
-              <div className="col-sm-4 col-md-6 col-lg-6">
-                <div className="ReactTags__selected">
-                  {tagsEls}
-                </div>
-              </div>
-              <div className="col-sm-4 col-md-4 col-lg-4">
-              <span className="resourceActionButton"><button className="btn btn-success replyResourceButton" onClick={this.reply.bind(this)}>Reply</button></span>
+              <div className="col-xs-12 col-md-4 col-md-offset-8">
+              <span className="resourceActionButton"><button className="btn btn-primary replyResourceButton" onClick={this.reply.bind(this)}>Reply</button></span>
               <span className="resourceActionButton"><button className={changeButtons} onClick={this.edit.bind(this)}>Edit</button></span>
               <span className="resourceActionButton"><button className={changeButtons} onClick={this.deleteResource.bind(this)}>Delete</button></span>
               </div>
