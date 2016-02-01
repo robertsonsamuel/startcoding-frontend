@@ -86,7 +86,7 @@ class User extends React.Component {
 
     return (
       <div className={mainClasses}>
-        <div className="row">
+        <div className="row filterRow">
           <div className={filterColClass}>
             <FilterBar category={this.props.category}
                        selectCategory={this.selectCategory.bind(this)}
