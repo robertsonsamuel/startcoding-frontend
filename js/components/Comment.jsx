@@ -150,7 +150,6 @@ class Comment extends React.Component {
   }
 
   render() {
-    console.log("isodd", this.props.isOdd, this.props.body);
     let payload = parseToken(this.props.token);
     let changeButtons = classNames({
       disabled: (payload.id != this.props.user._id) || !this.props.timestamp
@@ -160,7 +159,8 @@ class Comment extends React.Component {
       return <Comment {...child} isOdd={!this.props.isOdd} token={this.props.token} update={this.props.update} key={i} />
     });
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
-                                                       discard={this.discard.bind(this)}/>
+                                                       discard={this.discard.bind(this)}
+                                                       isOdd={!this.props.isOdd}/>
                                          : [];
     let commentBody = this.state.editing ? <EditComment update={this.updateComment.bind(this)}
                                                         discard={this.discard.bind(this)}

@@ -3,6 +3,9 @@ import RegisterForm from './RegisterForm.jsx';
 import {genErr} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
 import {MAX_COMMENT_LENGTH} from '../util/CONST.js';
+import classNames from 'classnames';
+import '../../css/Comment.css';
+import '../../css/NewComment.css';
 
 class NewComment extends React.Component {
   constructor(props) {
@@ -12,7 +15,7 @@ class NewComment extends React.Component {
   }
 
   componentDidMount() {
-    $('#newCommentBody').focus();
+    $('#newCommentTextArea').focus();
   }
 
   post() {
@@ -20,7 +23,7 @@ class NewComment extends React.Component {
       this.props.post(this.state.body);
     } else {
       genErr('Comment cannot be blank');
-      $('#newCommentBody').focus();
+      $('#newCommentTextArea').focus();
     }
   }
 
@@ -38,27 +41,24 @@ class NewComment extends React.Component {
   }
 
   render() {
+    let commentClasses = classNames("panel", "panel-default", "comment", {odd: this.props.isOdd})
     return (
-      <div className="panel panel-default comment">
-        <div className="panel-heading">
-          <div className="panel-title">
-            {this.state.name}
-          </div>
-        </div>
-        <div className="panel-body">
-          <textarea id="newCommentBody"
+      <div className={commentClasses}>
+        <div className="commentBody newCommentBody">
+          <strong>{this.state.name}</strong>
+          <textarea id="newCommentTextArea"
                     className="form-control"
                     value={this.state.body}
                     onChange={this.handleBodyChange.bind(this)}
                     rows="4">
           </textarea>
-          <span className="new-comment-buttons">
+          <div className="new-comment-buttons">
             <span className="markdownNotice">
               *Your post will render <a href="https://help.github.com/articles/markdown-basics/">markdown</a>!
-              </span>
+            </span>
             <button className="btn btn-default" onClick={this.discard.bind(this)}>Discard</button>
             <button className="btn btn-primary" onClick={this.post.bind(this)}>Post</button>
-          </span>
+          </div>
         </div>
       </div>
     )

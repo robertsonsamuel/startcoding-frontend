@@ -42,8 +42,8 @@ let catagories = [
 class SplashPage extends React.Component {
   getStartedClickHandler() {
     $('html,body').animate({
-      scrollTop: $('.resourcePanels:first-child').offset().top
-    }, 300);
+      scrollTop: $('#hero').offset().top + $('#hero').height()
+    }, 500);
   }
   render(){
     let resourcePanels = catagories.map( (category, i) => {
@@ -63,9 +63,9 @@ class SplashPage extends React.Component {
     return(
       <div className="container-fluid">
         <div clasName="row">
-        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="hero" className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div className="heroImage vertical-center">
-              <div className="col-xs-12 col-sm-6 col-md-12 col-lg-12">
+              <div className="col-xs-12 col-md-6">
                 <div className="heroText">
                   <h1 className="heroHead">Start Coding Now!</h1>
                   <h3 className="herofooter">The easiest and best way to discover and share coding resources. </h3>
