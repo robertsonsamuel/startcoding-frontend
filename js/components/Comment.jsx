@@ -11,6 +11,7 @@ import {formatTime} from '../util/helpers';
 import {isAuthorized, parseToken} from '../util/authorization';
 import {store} from '../util/store';
 import marked from 'marked';
+import '../../css/Comment.css';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -149,13 +150,14 @@ class Comment extends React.Component {
   }
 
   render() {
+    console.log("isodd", this.props.isOdd, this.props.body);
     let payload = parseToken(this.props.token);
     let changeButtons = classNames({
       disabled: (payload.id != this.props.user._id) || !this.props.timestamp
     })
 
     let commentEls = this.props.children.map( (child, i) => {
-      return <Comment {...child} token={this.props.token} update={this.props.update} key={i} />
+      return <Comment {...child} isOdd={!this.props.isOdd} token={this.props.token} update={this.props.update} key={i} />
     });
     let newComment = this.state.replying ? <NewComment post={this.postComment.bind(this)}
                                                        discard={this.discard.bind(this)}/>
@@ -172,26 +174,27 @@ class Comment extends React.Component {
     }
     let showUpvote = this.state.me ? this.state.me.upvotes.has(this.props._id) : false;
     let showDownvote = this.state.me ? this.state.me.downvotes.has(this.props._id) : false;
-
+    let commentClasses = classNames("panel", "panel-default", "comment", {odd: this.props.isOdd})
     return (
-      <div className="panel panel-default comment">
-        <div className="panel-heading commentTitle commentHeading">
-          <span className="panel-title commentUsername">{this.props.user.username}</span>
+      <div className={commentClasses}>
+        <div className="commentVoteContainer">
           <Votebox score={this.state.score}
                    up={showUpvote}
                    down={showDownvote}
                    handleVote={this.handleVote.bind(this)}/>
         </div>
-        <div className="panel-body">
+        <div className="commentBody">
           {this.state.updating ? <LoadingSpinner /> : []}
+          <strong>{this.props.user.username}</strong>
           {commentBody}
+          <ol className="commentBreadcrumb">
+            <li><span>{timestamp}</span></li>&gt;
+            <li><a href="" className={changeButtons} onClick={this.edit.bind(this)}>edit</a></li>&gt;
+            <li><a href="" onClick={this.reply.bind(this)}>reply</a></li>&gt;
+            <li><a href="" className={changeButtons} onClick={this.delete.bind(this)}>delete</a></li>
+          </ol>
         </div>
-        <ol className="panel-footer breadcrumb comment">
-          <li><span>{timestamp}</span></li>
-          <li><a href="" className={changeButtons} onClick={this.edit.bind(this)}>edit</a></li>
-          <li><a href="" onClick={this.reply.bind(this)}>reply</a></li>
-          <li><a href="" className={changeButtons} onClick={this.delete.bind(this)}>delete</a></li>
-        </ol>
+
         {newComment}
         {this.state.loading ? <LoadingSpinner /> : []}
         {commentEls}

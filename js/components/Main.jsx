@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import {genErr} from '../util/alerts';
 import {eventEmitter, store} from '../util/store';
 import {CORRECT_CASE} from '../util/CONST.js'
+import '../../css/Main.css';
 
 class Main extends React.Component {
 
@@ -84,7 +85,7 @@ class Main extends React.Component {
     let mainClasses = classNames('main', 'panel');
     return (
       <div className={mainClasses}>
-        <div className="row">
+        <div className="row filterRow">
           <div className={filterColClass}>
             <FilterBar category={this.props.category}
                        selectCategory={this.selectCategory.bind(this)}

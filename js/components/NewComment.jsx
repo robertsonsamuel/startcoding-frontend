@@ -2,27 +2,41 @@ import React from 'react';
 import RegisterForm from './RegisterForm.jsx';
 import {genErr} from '../util/alerts';
 import {canHazToken} from '../util/authorization';
+import {MAX_COMMENT_LENGTH} from '../util/CONST.js';
 
 class NewComment extends React.Component {
   constructor(props) {
     super(props);
     let name = canHazToken().username;
-    this.state = { name: name };
+    this.state = { name: name, body: '' };
   }
+
   componentDidMount() {
     $('#newCommentBody').focus();
   }
+
   post() {
-    if (this.refs.body.value) {
-      this.props.post(this.refs.body.value);
+    if (this.state.body) {
+      this.props.post(this.state.body);
     } else {
       genErr('Comment cannot be blank');
       $('#newCommentBody').focus();
     }
   }
+
   discard() {
     this.props.discard();
   }
+
+  handleBodyChange(e) {
+    if (e.target.value.length > MAX_COMMENT_LENGTH) {
+      let allowedText = e.target.value.slice(0, MAX_COMMENT_LENGTH);
+      this.setState({ body: allowedText });
+    } else {
+      this.setState({ body: e.target.value });
+    }
+  }
+
   render() {
     return (
       <div className="panel panel-default comment">
@@ -32,7 +46,11 @@ class NewComment extends React.Component {
           </div>
         </div>
         <div className="panel-body">
-          <textarea id="newCommentBody" className="form-control" ref="body" rows="4">
+          <textarea id="newCommentBody"
+                    className="form-control"
+                    value={this.state.body}
+                    onChange={this.handleBodyChange.bind(this)}
+                    rows="4">
           </textarea>
           <span className="new-comment-buttons">
             <span className="markdownNotice">

@@ -7,7 +7,7 @@ import {pleaseLogin,genErr} from '../util/alerts';
 import '../../css/newResourceModal.css';
 import '../../css/reactTags.css';
 import {store} from '../util/store';
-import {MAX_RESOURCE_BODY_LENGTH} from '../util/CONST.js'
+import {MAX_RESOURCE_TITLE_LENGTH, MAX_RESOURCE_BODY_LENGTH} from '../util/CONST.js';
 
 // needed for fancy auto-complete tags box
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -28,6 +28,7 @@ class NewResourceModal extends React.Component {
       selectedValue: this.props.initialCategory,
       tags: [],
       suggestions: store.getDatum('allTags'),
+      title: '',
       body: ''
     };
   }
@@ -75,7 +76,7 @@ class NewResourceModal extends React.Component {
 
   createResource(e){
     e.preventDefault();
-    let title = this.refs.title.value;
+    let title = this.state.title;
     let body = this.state.body;
     let aLink = this.refs.aLink.value;
 
@@ -99,13 +100,12 @@ class NewResourceModal extends React.Component {
 
       // reinitialize
       this.setState({ loading: false, tags: [] });
-      this.refs.title.value = '';
       this.refs.aLink.value = '';
-      this.setState({ body: '' });
+      this.setState({ title: '', body: '' });
 
       // possibly add the new resource to main
       this.props.optimisticallyAdd(resource);
-      location.hash = '#/resource/' + resource._id;
+      location.hash = `#/${this.props.initialCategory}/resource/${resource._id}`;
     })
     .fail(err => {
       genErr(err.responseText);
@@ -114,6 +114,15 @@ class NewResourceModal extends React.Component {
       $('#newResourceModal .input').prop('disabled', false);
       this.setState({ loading: false });
     });
+  }
+
+  handleTitleChange(e) {
+    if (e.target.value.length > MAX_RESOURCE_TITLE_LENGTH) {
+      let allowedText = e.target.value.slice(0, MAX_RESOURCE_TITLE_LENGTH);
+      this.setState({ title: allowedText });
+    } else {
+      this.setState({ title: e.target.value });
+    }
   }
 
   handleBodyChange(e) {
@@ -126,6 +135,7 @@ class NewResourceModal extends React.Component {
   }
 
   render() {
+    console.log("initial category", this.props.initialCategory);
     return (
       <div>
         <img src="./img/fab.png" id="actionButon" className="floatingActionButton" onClick={this.newResource.bind(this)}  data-target="#newResourceModal" />
@@ -139,7 +149,12 @@ class NewResourceModal extends React.Component {
               <form onSubmit={this.createResource.bind(this)}>
               <div className="modal-body row">
                 <div className="col-sm-12">
-                  <input type="text" ref="title" className="newResourceTitle input form-control" placeholder="Title" required />
+                  <input type="text"
+                         className="newResourceTitle input form-control"
+                         placeholder="Title"
+                         value={this.state.title}
+                         onChange={this.handleTitleChange.bind(this)}
+                         required />
                   <br/>
                   <input type="url" ref="aLink" className="newResourceLink input form-control" placeholder="http://" required />
                   <br/>

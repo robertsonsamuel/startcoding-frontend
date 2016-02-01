@@ -11,6 +11,7 @@ import {formatTime} from '../util/helpers';
 import {store} from '../util/store';
 import marked from 'marked';
 import '../../css/reactTags.css';
+import '../../css/ResourcePage.css';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -109,6 +110,7 @@ class ResourcePage extends React.Component {
   }
 
   render() {
+    // let isOdd = true;
     let commentEls = [];
     let postedBy = this.state.resourceInfo.user ? this.state.resourceInfo.user.username : '';
     let tags = this.state.resourceInfo.tags ? this.state.resourceInfo.tags : [];
@@ -116,9 +118,11 @@ class ResourcePage extends React.Component {
     { hide: (!this.props.me || !this.state.resourceInfo.timestamp || (this.props.me._id !== this.state.resourceInfo.user._id)) })
 
     commentEls = this.state.allComments.map( (comment, i) => {
-      return <Comment {...comment} token={this.state.token}
-                                   update={this.fetchComments.bind(this)}
-                                   key={i} />
+      return <Comment {...comment}
+              isOdd={false}
+              token={this.state.token}
+              update={this.fetchComments.bind(this)}
+              key={i} />
     });
 
     let addedClasses = classNames('resource', 'active');
@@ -132,9 +136,9 @@ class ResourcePage extends React.Component {
                                          : [];
 
     let resourceBody = this.state.editing ?  <EditResource update={this.putResourceEdit.bind(this)}
-                                                        discard={this.discard.bind(this)}
-                                                        body={this.state.resourceInfo.body}/>
-                                                      : <div dangerouslySetInnerHTML={{__html: marked(this.state.resourceInfo.body || '')}} />
+                                                           discard={this.discard.bind(this)}
+                                                           body={this.state.resourceInfo.body}/>
+                                          : <div dangerouslySetInnerHTML={{__html: marked(this.state.resourceInfo.body || '')}} />
     return (
       <div>
         <div>
