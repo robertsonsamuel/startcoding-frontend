@@ -50,7 +50,7 @@ class SplashPage extends React.Component {
       return (
         <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 resourcePanels"  key={i} id={category}>
           <div className="thumbnail">
-            <img className="techImage" src={category.imgSrc}  height="150px" alt="..." />
+            <a href={category.href}><img className="techImage" src={category.imgSrc}  height="150px" alt="..." /></a>
             <div className="caption">
               <h3>{category.name}</h3>
               <p>{category.short}</p>

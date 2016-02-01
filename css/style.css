@@ -135,7 +135,13 @@ div.braket-logo div.leaf-shadow{
 }
 
 img.techImage {
-    height: 200px;
+  height: 200px;
+  padding: 15px;
+}
+.img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    display: block;
+    max-width: 100%;
+    height: 210px;
 }
 .techContainer {
     /* margin: 40px; */
