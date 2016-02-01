@@ -6,7 +6,8 @@ import {store} from '../util/store';
 import init from '../util/init';
 import {parseToken} from '../util/authorization';
 import {eventEmitter} from '../util/store';
-import {CORRECT_CASE} from '../util/CONST'
+import {CORRECT_CASE} from '../util/CONST';
+import '../../css/Navbar.css';
 
 function hideLoginRegisterLogoutUsername(login, register, logout, username) {
   login    ? $('#Login').hide()    : $('#Login').show();

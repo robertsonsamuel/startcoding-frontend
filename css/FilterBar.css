@@ -58,3 +58,6 @@
 .filterCol.generalStyle{
   background: rgba(86, 141, 109, .1);
 }
+.filterCol.userStyle{
+  background: rgba(101, 113, 131, .1)
+}

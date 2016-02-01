@@ -87,7 +87,8 @@ class FilterBar extends React.Component {
         )
       });
 
-    let defaultValue = CORRECT_CASE[this.props.category.toLowerCase()];
+    let currentCategory = this.props.category || "All";
+    let defaultValue = CORRECT_CASE[currentCategory];
 
     return (
       <div>

@@ -81,12 +81,13 @@ class User extends React.Component {
     });
 
     let mainClasses = classNames('main', 'panel')
+    let filterColClass = "col-sm-12 col-md-4 filterCol " + this.props.category + "Style"
 
     return (
       <div className={mainClasses}>
         <div className="row">
-          <div className="col-sm-12 col-md-4 col-lg-4">
-            <FilterBar category="All"
+          <div className={filterColClass}>
+            <FilterBar category={this.props.category}
                        selectCategory={this.selectCategory.bind(this)}
                        filterResources={this.filterResources.bind(this)}
                        suggestions={tagSuggestions} />
