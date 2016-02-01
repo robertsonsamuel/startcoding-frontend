@@ -1,6 +1,8 @@
 import React from 'react';
 import {genErr} from '../util/alerts';
 import {MAX_COMMENT_LENGTH} from '../util/CONST.js';
+import '../../css/EditComment.css';
+
 
 class EditComment extends React.Component {
   constructor(props) {
@@ -37,7 +39,7 @@ class EditComment extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="editComment">
         <textarea id="editCommentBody"
                   className="form-control"
                   placeholder="Description Required"
