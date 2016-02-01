@@ -11,6 +11,7 @@ import {formatTime} from '../util/helpers';
 import {store} from '../util/store';
 import marked from 'marked';
 import '../../css/reactTags.css';
+import '../../css/ResourcePage.css';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
