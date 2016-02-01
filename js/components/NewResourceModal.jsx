@@ -105,7 +105,7 @@ class NewResourceModal extends React.Component {
 
       // possibly add the new resource to main
       this.props.optimisticallyAdd(resource);
-      location.hash = '#/resource/' + resource._id;
+      location.hash = `#/${this.props.initialCategory}/resource/${resource._id}`;
     })
     .fail(err => {
       genErr(err.responseText);
@@ -135,6 +135,7 @@ class NewResourceModal extends React.Component {
   }
 
   render() {
+    console.log("initial category", this.props.initialCategory);
     return (
       <div>
         <img src="./img/fab.png" id="actionButon" className="floatingActionButton" onClick={this.newResource.bind(this)}  data-target="#newResourceModal" />
