@@ -132,9 +132,9 @@ class ResourcePage extends React.Component {
                                          : [];
 
     let resourceBody = this.state.editing ?  <EditResource update={this.putResourceEdit.bind(this)}
-                                                        discard={this.discard.bind(this)}
-                                                        body={this.state.resourceInfo.body}/>
-                                                      : <div dangerouslySetInnerHTML={{__html: marked(this.state.resourceInfo.body || '')}} />
+                                                           discard={this.discard.bind(this)}
+                                                           body={this.state.resourceInfo.body}/>
+                                          : <div dangerouslySetInnerHTML={{__html: marked(this.state.resourceInfo.body || '')}} />
     return (
       <div>
         <div>
