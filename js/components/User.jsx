@@ -80,8 +80,8 @@ class User extends React.Component {
                            key={i}/>
     });
 
-    let mainClasses = classNames('main', 'panel', {displayResource : this.state.activeResource})
-    
+    let mainClasses = classNames('main', 'panel')
+
     return (
       <div className={mainClasses}>
         <div className="row">

@@ -165,11 +165,6 @@ span.startCodingName {
   left: 3.5em;
 }
 
-#registerForm {
-  position: relative;
-  left: 15%;
-  top: 15px;
-}
 #registerButton{
   display: inline-block;
   z-index: 100000;

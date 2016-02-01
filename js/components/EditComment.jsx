@@ -1,5 +1,4 @@
 import React from 'react';
-import RegisterForm from './RegisterForm.jsx';
 import {genErr} from '../util/alerts';
 import {MAX_COMMENT_LENGTH} from '../util/CONST.js';
 

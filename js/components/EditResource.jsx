@@ -1,5 +1,4 @@
 import React from 'react';
-import RegisterForm from './RegisterForm.jsx';
 import {genErr} from '../util/alerts';
 import {MAX_RESOURCE_BODY_LENGTH} from '../util/CONST.js';
 

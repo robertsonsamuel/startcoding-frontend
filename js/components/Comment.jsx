@@ -1,5 +1,4 @@
 import React from 'react';
-import RegisterForm from './RegisterForm.jsx';
 import NewComment from './NewComment.jsx';
 import LoadingSpinner from './LoadingSpinner.jsx';
 import EditComment from './EditComment.jsx';
