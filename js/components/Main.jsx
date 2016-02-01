@@ -103,6 +103,7 @@ class Main extends React.Component {
                 {resourceEls}
               </div>
               <div role="tabpanel" className="tab-pane" id="profile">
+                  {this.state.loading ? <LoadingSpinner /> : []}
                 {resourceEls}
               </div>
             </div>

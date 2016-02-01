@@ -16,7 +16,7 @@ class Resource extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      score: this.props.upvotes - this.props.downvotes,
+      delta: 0,
       votingInProcess: false
     };
   }
@@ -41,36 +41,37 @@ class Resource extends React.Component {
 
     let id = this.props._id;
     let me = this.props.me;
+    let delta = this.state.delta;
 
     if (vote === 'up') {
       //handle upvotes set, toggle upvote
       if (me.upvotes.has(id)) {
         me.upvotes.delete(id);
-        this.state.score = this.state.score - 1;
+        delta -= 1;
       } else {
         me.upvotes.add(id);
-        this.state.score = this.state.score + 1;
+        delta += 1;
       }
 
       //handle downvotes set, remove downvote if one exists
-      if(me.downvotes.delete(id)) this.state.score = this.state.score + 1;
+      if(me.downvotes.delete(id)) delta += 1;
 
     } else if (vote === 'down') {
 
       //handle downvotes set, toggle downvotes
-      if(me.downvotes.has(id)) {
+      if (me.downvotes.has(id)) {
         me.downvotes.delete(id)
-        this.state.score = this.state.score + 1;
+        delta += 1;
       } else {
-         me.downvotes.add(id);
-        this.state.score = this.state.score - 1;
+        me.downvotes.add(id);
+        delta -= 1;
       }
       //handle upvotes set, remove upvote if one exists
-      if(me.upvotes.delete(id)) this.state.score = this.state.score - 1;
+      if(me.upvotes.delete(id)) delta -= 1;
     }
 
-
-    store.saveDatum('me', me)
+    this.setState({delta: delta});
+    store.saveDatum('me', me);
 
     API.postResourceVote(id, vote)
     .done( resp => this.setState({ votingInProcess: false }))
@@ -97,7 +98,7 @@ class Resource extends React.Component {
               <a href={this.props.link} target="_blank">{this.props.title}</a>
             </strong>
           </h3>
-          <Votebox score={this.state.score}
+          <Votebox score={this.props.score + this.state.delta}
                    up={showUpvote}
                    down={showDownvote}
                    handleVote={this.handleVote.bind(this)} />
