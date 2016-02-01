@@ -7,7 +7,9 @@ class BackButton extends React.Component {
   }
   render() {
     return (
-      <span class="glyphicon-class">glyphicon glyphicon-arrow-left</span>
+      <div className="BackButton">
+        <span class="glyphicon-class">glyphicon glyphicon-chevron-left</span> Go back
+      </div>
     )
   }
 }

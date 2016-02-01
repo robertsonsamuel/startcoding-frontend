@@ -4,6 +4,7 @@ import Comment from './Comment.jsx';
 import NewComment from './NewComment.jsx';
 import LoadingSpinner from './LoadingSpinner.jsx';
 import EditResource from './EditResource.jsx';
+import BackButton from './BackButton.jsx';
 import classNames from 'classnames';
 import {genErr, pleaseLogin, confirmDelete} from '../util/alerts';
 import {isAuthorized, canHazToken, parseToken} from '../util/authorization';

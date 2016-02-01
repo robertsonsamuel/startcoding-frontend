@@ -4,6 +4,7 @@ import LoadingSpinner from './LoadingSpinner.jsx';
 import ResourceCard from './ResourceCard.jsx';
 import FilterBar from './FilterBar.jsx';
 import NewResourceModal from './NewResourceModal.jsx';
+import BackButton from './BackButton.jsx';
 import classNames from 'classnames';
 import {genErr} from '../util/alerts';
 import {eventEmitter, store} from '../util/store';

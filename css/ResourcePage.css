@@ -1,7 +1,9 @@
 .resourcePage {
   background: #FEFEFE;
 }
-
+.resourceContent {
+  min-height: 100vh;
+}
 .resourceContent>.comment{
   padding-left: 0;
   padding-right: 0;
