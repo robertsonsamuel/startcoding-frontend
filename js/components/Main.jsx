@@ -16,6 +16,7 @@ class Main extends React.Component {
     this.state = {
       resources: [],
       tagSuggestions: [],
+      newest: false,
       loading: false,
     };
   }
@@ -39,10 +40,17 @@ class Main extends React.Component {
     window.location.hash = '#/' + category;
   }
 
+  changeTabs(tab){
+    let newest = tab === 'newest';
+    if (this.state.newest !== newest){
+      this.setState({newest: newest}, this.getResources.bind(this));
+    }
+  }
+
   getResources(callback, tags, text){
     this.setState({loading: true})
 
-    API.getResources(this.props.category, tags, text)
+    API.getResources(this.props.category, tags, text, this.state.newest)
     .done(data => {
       // sort tags by frequency
       let tags = Object.keys(data.tags)
@@ -84,8 +92,21 @@ class Main extends React.Component {
                        suggestions={this.state.tagSuggestions} />
           </div>
           <div className="col-sm-12 col-md-8 resourceList">
-            {this.state.loading ? <LoadingSpinner /> : []}
-            {resourceEls}
+              <ul className="nav nav-tabs" role="tablist">
+                <li role="presentation" className="active"><a onClick={this.changeTabs.bind(this, 'hot')} href="#home" aria-controls="home" role="tab" data-toggle="tab">Top</a></li>
+                <li role="presentation"><a onClick={this.changeTabs.bind(this, 'newest')} href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Newest</a></li>
+              </ul>
+              <div className="tab-content">
+                  <div role="tabpanel" className="tab-pane active" id="home">
+                    {this.state.loading ? <LoadingSpinner /> : []}
+                    {resourceEls}
+                  </div>
+                  <div role="tabpanel" className="tab-pane" id="profile">
+                    <h1>NEWSET HERE!</h1>
+                    {resourceEls}
+                  </div>
+                </div>
+
           </div>
         </div>
         <NewResourceModal initialCategory={this.props.category}
