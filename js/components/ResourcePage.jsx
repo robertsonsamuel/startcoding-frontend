@@ -140,42 +140,40 @@ class ResourcePage extends React.Component {
                                                            body={this.state.resourceInfo.body}/>
                                           : <div dangerouslySetInnerHTML={{__html: marked(this.state.resourceInfo.body || '')}} />
     return (
-      <div>
-        <div>
-          <div className="resourceHead">
-            <h4 className="resourceTitle resourcePage">
-              <strong>
-                <a href={this.state.resourceInfo.link} target="_blank">{this.state.resourceInfo.title}</a>
-              </strong>
-            </h4>
+      <div className="resourcePage">
+        <div className="resourceHead">
+          <h4 className="resourceTitle resourcePage">
+            <strong>
+              <a href={this.state.resourceInfo.link} target="_blank">{this.state.resourceInfo.title}</a>
+            </strong>
+          </h4>
+        </div>
+        <div className="container resourceContent">
+          <div className="panel-body resourceBody">
+            {this.state.updating ? <LoadingSpinner /> : []}
+            {resourceBody}
           </div>
-          <div className="container resourceContent">
-            <div className="panel-body resourceBody">
-              {this.state.updating ? <LoadingSpinner /> : []}
-              {resourceBody}
-            </div>
-            <div className="resourceFooter">
-              <div className="row">
-                <div className="col-sm-4 col-md-2 col-lg-2">
-                  <span className="timeStamp resourceTimeStamp">By {postedBy}, </span>
-                  <span className="timeStamp resourceTimeStamp">{formatTime(this.state.resourceInfo.timestamp)}.</span>
-                </div>
-                <div className="col-sm-4 col-md-6 col-lg-6">
-                  <div className="ReactTags__selected">
-                    {tagsEls}
-                  </div>
-                </div>
-                <div className="col-sm-4 col-md-4 col-lg-4">
-                <span className="resourceActionButton"><button className="btn btn-success replyResourceButton" onClick={this.reply.bind(this)}>Reply</button></span>
-                <span className="resourceActionButton"><button className={changeButtons} onClick={this.edit.bind(this)}>Edit</button></span>
-                <span className="resourceActionButton"><button className={changeButtons} onClick={this.deleteResource.bind(this)}>Delete</button></span>
+          <div className="resourceFooter">
+            <div className="row">
+              <div className="col-sm-4 col-md-2 col-lg-2">
+                <span className="timeStamp resourceTimeStamp">By {postedBy}, </span>
+                <span className="timeStamp resourceTimeStamp">{formatTime(this.state.resourceInfo.timestamp)}.</span>
+              </div>
+              <div className="col-sm-4 col-md-6 col-lg-6">
+                <div className="ReactTags__selected">
+                  {tagsEls}
                 </div>
               </div>
+              <div className="col-sm-4 col-md-4 col-lg-4">
+              <span className="resourceActionButton"><button className="btn btn-success replyResourceButton" onClick={this.reply.bind(this)}>Reply</button></span>
+              <span className="resourceActionButton"><button className={changeButtons} onClick={this.edit.bind(this)}>Edit</button></span>
+              <span className="resourceActionButton"><button className={changeButtons} onClick={this.deleteResource.bind(this)}>Delete</button></span>
+              </div>
             </div>
-            {newComment}
-            {this.state.loading ? <LoadingSpinner /> : []}
-            {commentEls}
           </div>
+          {newComment}
+          {this.state.loading ? <LoadingSpinner /> : []}
+          {commentEls}
         </div>
       </div>
     )
