@@ -7,7 +7,11 @@ import {pleaseLogin,genErr} from '../util/alerts';
 import '../../css/newResourceModal.css';
 import '../../css/reactTags.css';
 import {store} from '../util/store';
-import {MAX_RESOURCE_TITLE_LENGTH, MAX_RESOURCE_BODY_LENGTH} from '../util/CONST.js';
+import {
+  POSTABLE_CATEGORIES,
+  MAX_RESOURCE_TITLE_LENGTH,
+  MAX_RESOURCE_BODY_LENGTH
+} from '../util/CONST.js';
 
 // needed for fancy auto-complete tags box
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -31,6 +35,10 @@ class NewResourceModal extends React.Component {
       title: '',
       body: ''
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ selectedValue: nextProps.initialCategory });
   }
 
   setFreshTags() {
@@ -68,6 +76,7 @@ class NewResourceModal extends React.Component {
   newResource(){
     if(!canHazToken()) return pleaseLogin();
     $('#newResourceModal').modal('show');
+    $('.newResourceTitle').focus();
   }
 
   selectCategory(category){
@@ -83,16 +92,18 @@ class NewResourceModal extends React.Component {
     let tagSet = new Set(this.state.tags.map(tag => tag.text));
     let tags = [...tagSet];
 
-    let category = (this.state.selectedValue === '-select one-') ? 'general' : this.state.selectedValue;
-    if (category.toLowerCase() === 'all') category = 'general';
+    let category = this.state.selectedValue.toLowerCase();
+    if (category === '-select one-') {
+      category = 'general';
+    }
 
     if (title.length === 0 || body.length === 0 || aLink.length === 0){
-      return genErr('Title and Body both required!')
+      return genErr('Title, Link, and Body are all required!')
     }
 
     $('#newResourceModal .input').prop('disabled', true); // disable inputs
     this.setState({ loading: true });
-    console.log('category problem?',category);
+
     API.postResource(title, body, aLink, tags, category)
     .done((resource) => {
       $('#newResourceModal').modal('hide');
@@ -104,8 +115,8 @@ class NewResourceModal extends React.Component {
       this.setState({ title: '', body: '' });
 
       // possibly add the new resource to main
-      this.props.optimisticallyAdd(resource);
-      location.hash = `#/${this.props.initialCategory}/resource/${resource._id}`;
+      // this.props.optimisticallyAdd(resource);
+      location.hash = `#/${category}/resource/${resource._id}`;
     })
     .fail(err => {
       genErr(err.responseText);
@@ -135,7 +146,6 @@ class NewResourceModal extends React.Component {
   }
 
   render() {
-    console.log("initial category", this.props.initialCategory);
     return (
       <div>
         <img src="./img/fab.png" id="actionButon" className="floatingActionButton" onClick={this.newResource.bind(this)}  data-target="#newResourceModal" />
