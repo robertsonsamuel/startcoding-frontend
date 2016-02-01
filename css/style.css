@@ -4,6 +4,7 @@ $secondary-color: #F44336;
 body {
   color: #1F4832;
   background: #FEFEFE;
+  font-size: 16px;
 }
 
 .heroImage {
@@ -433,26 +434,10 @@ a.disabled {
 .resourceFooter {
     padding: 20px;
 }
-.comment {
-  margin: 1em 0 0 1em;
-  padding: 1em .5em 1em 1em;
-}
 .panel-default>.panel-heading .badge {
     color: #f5f5f5;
     background-color: #158cba;
 }
-ol.panel-footer.breadcrumb.comment {
-    background: white;
-    position: relative;
-    top: 0;
-    left: -7px;
-    border-style: none;
-}
-.panel-body {
-  padding: 0px;
-  margin: 0 10px;
-}
-
 .panel-default>.panel-heading {
     color: #333333;
     background-color: #FFFFFF;

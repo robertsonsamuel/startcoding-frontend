@@ -110,6 +110,7 @@ class ResourcePage extends React.Component {
   }
 
   render() {
+    // let isOdd = true;
     let commentEls = [];
     let postedBy = this.state.resourceInfo.user ? this.state.resourceInfo.user.username : '';
     let tags = this.state.resourceInfo.tags ? this.state.resourceInfo.tags : [];
@@ -117,9 +118,11 @@ class ResourcePage extends React.Component {
     { hide: (!this.props.me || !this.state.resourceInfo.timestamp || (this.props.me._id !== this.state.resourceInfo.user._id)) })
 
     commentEls = this.state.allComments.map( (comment, i) => {
-      return <Comment {...comment} token={this.state.token}
-                                   update={this.fetchComments.bind(this)}
-                                   key={i} />
+      return <Comment {...comment}
+              isOdd={false}
+              token={this.state.token}
+              update={this.fetchComments.bind(this)}
+              key={i} />
     });
 
     let addedClasses = classNames('resource', 'active');
