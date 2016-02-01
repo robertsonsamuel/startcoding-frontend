@@ -41,7 +41,7 @@ class LoginModal extends React.Component {
     })
     .done(token => {
       (this.resetModalAfterSuccess.bind(this))();
-      window.location.hash = '#/all';
+      if (!this.props.category) window.location.hash = '#/all';;
     })
     .fail(err => LoginError(err.responseText))
     .always(() => {
@@ -68,8 +68,8 @@ class LoginModal extends React.Component {
       password2: this.refs.registerPassword2.value
     })
     .done(token => {
-      window.location.hash = '#/all';
       (this.resetModalAfterSuccess.bind(this))();
+      if (!this.props.category) window.location.hash = '#/all';;
     })
     .fail(err => RegisterError(err.responseText))
     .always(() => {

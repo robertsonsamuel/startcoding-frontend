@@ -41,7 +41,7 @@ class NewResourceModal extends React.Component {
   componentWillUnmount() {
     store.stopListening('allTags', this.setFreshTags.bind(this));
   }
-  
+
   // TAG INPUT STUFF
   handleDelete(i) {
     let tags = this.state.tags;
