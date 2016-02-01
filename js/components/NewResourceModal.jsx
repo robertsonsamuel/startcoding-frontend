@@ -7,6 +7,7 @@ import {pleaseLogin,genErr} from '../util/alerts';
 import '../../css/newResourceModal.css';
 import '../../css/reactTags.css';
 import {store} from '../util/store';
+import {MAX_RESOURCE_BODY_LENGTH} from '../util/CONST.js'
 
 // needed for fancy auto-complete tags box
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -26,7 +27,8 @@ class NewResourceModal extends React.Component {
       loading: false,
       selectedValue: this.props.initialCategory,
       tags: [],
-      suggestions: store.getDatum('allTags')
+      suggestions: store.getDatum('allTags'),
+      body: ''
     };
   }
 
@@ -71,15 +73,17 @@ class NewResourceModal extends React.Component {
     this.setState({selectedValue: category});
   }
 
-  createResource(){
+  createResource(e){
+    e.preventDefault();
     let title = this.refs.title.value;
-    let body = this.refs.body.value;
+    let body = this.state.body;
     let aLink = this.refs.aLink.value;
 
     let tagSet = new Set(this.state.tags.map(tag => tag.text));
     let tags = [...tagSet];
 
     let category = (this.state.selectedValue === '-select one-') ? 'general' : this.state.selectedValue;
+    if (category.toLowerCase() === 'all') category = 'general';
 
     if (title.length === 0 || body.length === 0 || aLink.length === 0){
       return genErr('Title and Body both required!')
@@ -87,7 +91,7 @@ class NewResourceModal extends React.Component {
 
     $('#newResourceModal .input').prop('disabled', true); // disable inputs
     this.setState({ loading: true });
-
+    console.log('category problem?',category);
     API.postResource(title, body, aLink, tags, category)
     .done((resource) => {
       $('#newResourceModal').modal('hide');
@@ -96,11 +100,12 @@ class NewResourceModal extends React.Component {
       // reinitialize
       this.setState({ loading: false, tags: [] });
       this.refs.title.value = '';
-      this.refs.body.value = '';
       this.refs.aLink.value = '';
+      this.setState({ body: '' });
 
       // possibly add the new resource to main
       this.props.optimisticallyAdd(resource);
+      location.hash = '#/resource/' + resource._id;
     })
     .fail(err => {
       genErr(err.responseText);
@@ -109,6 +114,15 @@ class NewResourceModal extends React.Component {
       $('#newResourceModal .input').prop('disabled', false);
       this.setState({ loading: false });
     });
+  }
+
+  handleBodyChange(e) {
+    if (e.target.value.length > MAX_RESOURCE_BODY_LENGTH) {
+      let allowedText = e.target.value.slice(0, MAX_RESOURCE_BODY_LENGTH);
+      this.setState({ body: allowedText });
+    } else {
+      this.setState({ body: e.target.value });
+    }
   }
 
   render() {
@@ -122,11 +136,12 @@ class NewResourceModal extends React.Component {
                 <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                 <h4 className="modal-title" id="resourceModalLabel">Create a new resource.</h4>
               </div>
+              <form onSubmit={this.createResource.bind(this)}>
               <div className="modal-body row">
                 <div className="col-sm-12">
                   <input type="text" ref="title" className="newResourceTitle input form-control" placeholder="Title" required />
                   <br/>
-                  <input type="text" ref="aLink" className="newResourceLink input form-control" placeholder="URL" required />
+                  <input type="url" ref="aLink" className="newResourceLink input form-control" placeholder="http://" required />
                   <br/>
                 </div>
                 <div className="spinnerContainer">
@@ -134,8 +149,17 @@ class NewResourceModal extends React.Component {
                 </div>
                 <br/>
                 <div className="col-sm-12">
-                  <textarea id="newTitleBody" placeholder="Details" className="form-control input" ref="body" rows="5" required >
+                  <textarea id="newTitleBody"
+                            placeholder="Details"
+                            className="form-control input"
+                            value={this.state.body}
+                            rows="5"
+                            onChange={this.handleBodyChange.bind(this)}
+                            required >
                   </textarea>
+                  <span style={{float: 'right', color: 'grey'}}>
+                    {this.state.body.length}/{MAX_RESOURCE_BODY_LENGTH}
+                  </span>
                 </div>
                 <div className="col-xs-12">
                   <label htmlFor="reactTags">Tags:</label>
@@ -156,8 +180,9 @@ class NewResourceModal extends React.Component {
               <div className="modal-footer">
                 <span className="markdownNotice">*Your post will render <a href="https://help.github.com/articles/markdown-basics/">markdown</a>!</span>
                 <button type="button" className="btn btn-default input" data-dismiss="modal">Discard</button>
-                <button type="button" className="btn btn-primary input" onClick={this.createResource.bind(this)}>Post</button>
+                <button type="submit" className="btn btn-primary input">Post</button>
               </div>
+              </form>
             </div>
           </div>
         </div>

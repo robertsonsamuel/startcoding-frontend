@@ -5,6 +5,7 @@ import Main from './components/Main.jsx';
 import User from './components/User.jsx';
 import SplashPage from './components/splashPage.jsx';
 import ResourcePage from './components/ResourcePage.jsx';
+import Footer from './components/Footer.jsx';
 import {store} from './util/store'
 import '../css/sweetalert.css';
 import '../css/google.css';
@@ -34,6 +35,7 @@ class App extends React.Component {
           <div>
             <Navbar category={this.props.location[0]}/>
             <SplashPage/>
+              <Footer />
           </div>
         )
       case 'user':

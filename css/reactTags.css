@@ -42,6 +42,7 @@ div.ReactTags__selected {
   display: block;
 }
 div.ReactTags__selected span.ReactTags__tag {
+  cursor: pointer;
   border: 1px solid #ddd;
   background: #eee;
   font-size: 12px;

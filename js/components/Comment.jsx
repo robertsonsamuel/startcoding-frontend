@@ -36,11 +36,16 @@ class Comment extends React.Component {
     };
   }
 
+  setNewMe() {
+    let me = store.getDatum('me');
+    this.setState({ me: me });
+  }
+
   componentWillMount() {
-    store.registerListener('me', () => {
-      let me = store.getDatum('me');
-      this.setState({ me: me });
-    });
+    store.registerListener('me', this.setNewMe.bind(this) );
+  }
+  componentWillUnmount() {
+    store.stopListening('me', this.setNewMe.bind(this) );
   }
 
   reply(e) {

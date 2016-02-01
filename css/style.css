@@ -152,9 +152,10 @@ div#bs-example-navbar-collapse-2 {
     /*left: 8%;*/
 }
 span.startCodingName {
-    position: absolute;
-    top: 20px;
-    left: 3.5em;
+  position: absolute;
+  top: 28px;
+  font-size: 25px;
+  left: 3.5em;
 }
 
 #registerForm {
@@ -174,7 +175,7 @@ a.alreadyMember {
 }
 
 #userBtn {
-  margin: 0 1em;
+  margin: 0;
   font-size: 18px;
   font-weight: bold;
 }
@@ -252,6 +253,9 @@ a.alreadyMember {
     margin-right: 5px;
 }
 .newResourceTitle {
+}
+.resource .badge, .comment .badge {
+  font-size: 15px; /* resource/comment scores */
 }
 .panel-body.resourceBody {
     background: rgb(255, 255, 255);
@@ -376,9 +380,7 @@ textarea {
 .main{
   position: relative;
   min-height: 100vh;
-  /*height: calc(100vh - 64px);*/
   margin-bottom: 0;
-  /*overflow-y: scroll;*/
 }
 .displayResource {
   overflow: hidden;
@@ -505,11 +507,7 @@ ol.panel-footer.breadcrumb.comment {
   h4, .h4 {
       font-size: 15px;
   }
-  span.startCodingName {
-      position: absolute;
-      top: 20px;
-      left: 38%;
-  }
+
   .main {
     position: relative;
     margin-bottom: 0;
@@ -559,7 +557,7 @@ ol.panel-footer.breadcrumb.comment {
     }*/
     span.startCodingName {
         position: absolute;
-        top: 20px;
+        top: 28px;
         left: 38%;
     }
     a.alreadyMember {
@@ -580,9 +578,9 @@ ol.panel-footer.breadcrumb.comment {
         font-size: 15px;
     }
     span.startCodingName {
-        position: absolute;
-        top: 20px;
-        left: 38%;
+      position: absolute;
+      top: 28px;
+      left: 35%;
     }
     a.alreadyMember {
         position: relative;
@@ -697,6 +695,11 @@ ol.panel-footer.breadcrumb.comment {
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
 
+    span.startCodingName {
+        position: absolute;
+        top: 28px;
+        left: 30%;
+    }
 
 }
 
@@ -706,11 +709,12 @@ ol.panel-footer.breadcrumb.comment {
   and (max-device-width: 667px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
-span.startCodingName {
-    position: absolute;
-    top: 20px;
-    left: 43%;
-}
+
+    span.startCodingName {
+      position: absolute;
+      top: 28px;
+      left: 35%;
+    }
 
 }
 
@@ -756,8 +760,13 @@ and (max-device-width : 736px) {
 @media only screen
 and (min-device-width : 414px)
 and (max-device-width : 736px)
-and (orientation : landscape) {
+and (orientation : portrait) {
 
+  span.startCodingName {
+    position: absolute;
+    top: 28px;
+    left: 35%;
+}
 
 }
 
@@ -765,16 +774,18 @@ and (orientation : landscape) {
 @media only screen
 and (min-device-width : 414px)
 and (max-device-width : 736px)
-and (orientation : portrait) {
+and (orientation : landscape) {
 
   span.startCodingName {
     position: absolute;
-    top: 23px;
-    left: 11%;
-
+    top: 28px;
+    left: 40%;
   }
 
+
 }
+
+
 
 /* ----------- iPad mini ----------- */
 
@@ -790,12 +801,6 @@ and (orientation : portrait) {
     margin-bottom: 0;
     overflow-y: initial;
   }
-span.startCodingName {
-  position: absolute;
-  top: 23px;
-  left: 7%;
-
-}
   .active {
       position: fixed;
       background: white;
@@ -831,11 +836,10 @@ span.startCodingName {
         cursor: pointer;
     }
     span.startCodingName {
-      position: absolute;
-      top: 23px;
-      left: 4em;
-
-    }
+    position: absolute;
+    top: 28px;
+    left: 3em;
+}
     .active {
         position: fixed;
         background: white;
@@ -914,26 +918,28 @@ span.startCodingName {
   and (max-device-width: 1024px)
   and (orientation: portrait)
   and (-webkit-min-device-pixel-ratio: 2) {
-span.startCodingName {
-  position: absolute;
-  top: 20px;
-  left: 4em;
-}
-a.alreadyMember {
-  position: absolute;
-  left: 200px;
-  bottom: 33px;
-}
-#registerButton {
-    display: inline-block;
-    z-index: 100000;
+
+  span.startCodingName {
+      position: absolute;
+      top: 28px;
+      left: 3em;
+  }
+
+  a.alreadyMember {
+    position: absolute;
+    left: 200px;
+    bottom: 33px;
+  }
+  #registerButton {
+      display: inline-block;
+      z-index: 100000;
+      position: relative;
+      top: 6px;
+  }
+  #forgotPassword {
     position: relative;
-    top: 6px;
-}
-#forgotPassword {
-  position: relative;
-  left: 1em;
-}
+    left: 1em;
+  }
 
 
 
@@ -962,20 +968,12 @@ a.alreadyMember {
 
 /* Nexus 7 (landscape) ----------- */
 @media only screen and (min-width : 604px) and (orientation: landscape) {
-  span.startCodingName {
-    position: absolute;
-    top: 20px;
-    /*left: 20%;*/
-  }
+
 }
 
 /* Nexus 7 (portrait) ----------- */
 @media only screen and (max-width : 603px) and (orientation: portrait) {
-  span.startCodingName {
-    position: absolute;
-    top: 20px;
-    left: 30%;
-  }
+
 }
 
 #goMain {
