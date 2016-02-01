@@ -3,6 +3,7 @@ import API from '../API';
 import {store} from '../util/store';
 import classNames from 'classnames';
 import {pleaseLogin} from '../util/alerts';
+import '../../css/Votebox.css';
 
 class Votebox extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Votebox extends React.Component {
   }
   render() {
     let disabled = this.props.meId === "";
-    let voteClasses = classNames("commentVotebox", { up: this.props.up }, {down: this.props.down}, {disabled: disabled});
+    let voteClasses = classNames("voteBox", { up: this.props.up }, {down: this.props.down}, {disabled: disabled});
     return (
       <span className={voteClasses}>
         <span className="voteBtn glyphicon glyphicon-arrow-up"

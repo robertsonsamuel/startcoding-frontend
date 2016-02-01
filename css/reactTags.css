@@ -48,7 +48,7 @@ div.ReactTags__selected span.ReactTags__tag {
   font-size: 12px;
   display: inline-block;
   padding: 5px;
-  margin: 0 5px;
+  margin: 2px;
   border-radius: 2px;
 }
 div.ReactTags__selected a.ReactTags__remove {
@@ -84,7 +84,6 @@ div.ReactTags__suggestions ul li.active {
 }
 
 div.ReactTags__selected span.ReactTags__tag {
-  margin: 0.5em 1em;
   border: 1px solid #e7e7e7;
   background: #eeeeee;
   font-size: 12px;

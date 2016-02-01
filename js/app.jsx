@@ -38,13 +38,6 @@ class App extends React.Component {
               <Footer />
           </div>
         )
-      case 'resource':
-        return (
-          <div>
-            <Navbar category={this.props.location[1]}/>
-            <ResourcePage resourceId={this.props.location[1]} me={this.state.me} />
-          </div>
-        )
       case 'user':
         return (
           <div>
@@ -53,12 +46,21 @@ class App extends React.Component {
           </div>
         )
       default:
-        return (
-          <div>
-            <Navbar category={this.props.location[0]}/>
-            <Main category={this.props.location[0]} me={this.state.me}></Main>
-          </div>
-        )
+        if (this.props.location[1]==='resource') {
+          return (
+            <div>
+              <Navbar category={this.props.location[0]}/>
+              <ResourcePage resourceId={this.props.location[2]} me={this.state.me} />
+            </div>
+          )
+        } else {
+          return (
+            <div>
+              <Navbar category={this.props.location[0]}/>
+              <Main category={this.props.location[0]} me={this.state.me}></Main>
+            </div>
+          )
+        }
     }
   }
 }

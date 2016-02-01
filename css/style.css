@@ -61,10 +61,6 @@ body {
   left: -5px;
 }
 
-.breadcrumb.resourceBreadCrumb{
-  background: white;
-}
-
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
     border-color: rgba(76, 175, 80, 0);
 }
@@ -390,8 +386,17 @@ textarea {
   overflow: hidden;
 }
 .resourceList{
+  padding-bottom: 7em;
   /*border-left: 1px solid gainsboro;*/
 }
+
+@media (min-width: 992px) {
+  .resourceList {
+    padding-top: 3em;
+    padding-right: 3em;
+  }
+}
+
 a.disabled {
     pointer-events: none;
     color: lightgrey;
@@ -406,16 +411,11 @@ a.disabled {
   border-top-left-radius: 3px;
 }
 .resourceHead {
-  border-bottom: 1px solid #22659C;
+  /*border-bottom: 1px solid #22659C;*/
 }
 /*.resourceHead:hover{
   box-shadow: 0 10px 6px rgba(0, 0, 0, 0.28), 0 3px 6px rgba(0,0,0,0.23);
 }*/
-
-.active .resourceHead {
-  background-color: #F5F5F5;
-}
-
 .hide{
   display: none;
 }
@@ -432,9 +432,6 @@ a.disabled {
 }
 .resourceFooter {
     padding: 20px;
-}
-.green .resourceTitle {
-  background: #E8F5E9;
 }
 .comment {
   margin: 1em 0 0 1em;
@@ -478,6 +475,7 @@ ol.panel-footer.breadcrumb.comment {
   background: white;
   border: antiquewhite;
   font-size: 13px;
+  margin: 0.2em  0 0 0;
 }
 .breadcrumb > span{
   float: left;
@@ -490,30 +488,6 @@ ol.panel-footer.breadcrumb.comment {
 
 .new-comment-buttons .btn {
   margin-left: 1em;
-}
-
-.commentVotebox {
-    float: right;
-    font-size: 20px;
-}
-
-.voteBtn {
-  color: lightgrey;
-  margin: 0 .8em;
-  padding: 0 .2em;
-  cursor: pointer;
-}
-
-.disabled .voteBtn{
-  color: lightgrey;
-  cursor: default;
-}
-
-.up .voteBtn:first-child{
-  color: #00E676
-}
-.down .voteBtn:nth-child(3){
-  color: purple;
 }
 
 @media (max-width:768px) and (min-width:667px) {
@@ -536,9 +510,8 @@ ol.panel-footer.breadcrumb.comment {
 
   .main {
     position: relative;
-      height: 100%;
-      margin-bottom: 0;
-      overflow-y: initial;
+    margin-bottom: 0;
+    overflow-y: initial;
 
   }
 

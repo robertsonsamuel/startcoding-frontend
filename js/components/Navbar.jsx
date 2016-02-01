@@ -65,7 +65,7 @@ class Navbar extends React.Component {
     let navBarClasses = "navbar " + "navbar-inverse " + categoryStyle;
     return (
       <div id="topBar">
-        <LoginModal />
+        <LoginModal category={this.props.category} />
         <div id="goMain" onClick={this.goMain}></div>
         <nav className={navBarClasses}>
           <div className="container-fluid">

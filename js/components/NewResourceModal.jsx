@@ -32,10 +32,14 @@ class NewResourceModal extends React.Component {
     };
   }
 
+  setFreshTags() {
+    this.setState({ suggestions: store.getDatum('allTags') });
+  }
   componentWillMount() {
-    store.registerListener('allTags', () => {
-      this.setState({ suggestions: store.getDatum('allTags') });
-    });
+    store.registerListener('allTags', this.setFreshTags.bind(this));
+  }
+  componentWillUnmount() {
+    store.stopListening('allTags', this.setFreshTags.bind(this));
   }
 
   // TAG INPUT STUFF
