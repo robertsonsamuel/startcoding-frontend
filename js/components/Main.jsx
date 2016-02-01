@@ -92,21 +92,19 @@ class Main extends React.Component {
                        suggestions={this.state.tagSuggestions} />
           </div>
           <div className="col-sm-12 col-md-8 resourceList">
-              <ul className="nav nav-tabs" role="tablist">
-                <li role="presentation" className="active"><a onClick={this.changeTabs.bind(this, 'hot')} href="#home" aria-controls="home" role="tab" data-toggle="tab">Top</a></li>
-                <li role="presentation"><a onClick={this.changeTabs.bind(this, 'newest')} href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Newest</a></li>
-              </ul>
-              <div className="tab-content">
-                  <div role="tabpanel" className="tab-pane active" id="home">
-                    {this.state.loading ? <LoadingSpinner /> : []}
-                    {resourceEls}
-                  </div>
-                  <div role="tabpanel" className="tab-pane" id="profile">
-                    <h1>NEWSET HERE!</h1>
-                    {resourceEls}
-                  </div>
-                </div>
-
+            <ul className="nav nav-tabs" role="tablist">
+              <li role="presentation" className="active"><a onClick={this.changeTabs.bind(this, 'top')} href="#home" aria-controls="home" role="tab" data-toggle="tab">Top</a></li>
+              <li role="presentation"><a onClick={this.changeTabs.bind(this, 'newest')} href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Newest</a></li>
+            </ul>
+            <div className="tab-content">
+              <div role="tabpanel" className="tab-pane active" id="home">
+                {this.state.loading ? <LoadingSpinner /> : []}
+                {resourceEls}
+              </div>
+              <div role="tabpanel" className="tab-pane" id="profile">
+                {resourceEls}
+              </div>
+            </div>
           </div>
         </div>
         <NewResourceModal initialCategory={this.props.category}

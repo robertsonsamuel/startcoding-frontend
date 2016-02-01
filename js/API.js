@@ -43,12 +43,13 @@ let API = {
   getResourceById(id) {
     return $.get(`${apiUrl}/resources/one/${id}`);
   },
-  getResources(category, tags, text) {
+  getResources(category, tags, text, newest) {
     let tagQuery = tags && tags.length ? `tags=${tags.join()}` : '';
     let textQuery = text ? `query=${text}` : '';
+    let newQuery = newest ? 'newest=true' : '';
     let query = '';
-    if (tagQuery || textQuery) {
-      query = '?' + tagQuery + (tagQuery && textQuery ? '&' : '') + textQuery;
+    if (tagQuery || textQuery || newQuery) {
+      query = '?' + [tagQuery, textQuery, newQuery].join('&');
     }
     return $.get(`${apiUrl}/resources/${category + query}`)
     .done((data) => {
