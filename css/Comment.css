@@ -15,7 +15,6 @@
 .commentBody {
   width: calc(100% - 35px);
   padding: 0 0em 0 1.5em;
-  margin: 0 10px;
 }
 .commentBreadcrumb {
   padding: 0;
