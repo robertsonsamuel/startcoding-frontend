@@ -77,14 +77,17 @@ class Main extends React.Component {
   }
 
   render() {
-
+    let mainClasses = classNames('main', 'panel');
     let filterColClass = "col-sm-12 col-md-4 filterCol " + this.props.category + "Style"
+    
     let resourceEls = this.state.resources.map((resource,i) => {
       return <ResourceCard {...resource}
                            me={this.props.me}
                            key={i} />
     });
-    let mainClasses = classNames('main', 'panel');
+
+    let initialCategory = (this.props.category === 'all') ? '-select one-' : this.props.category;
+
     return (
       <div className={mainClasses}>
         <div className="row filterRow">
@@ -111,7 +114,7 @@ class Main extends React.Component {
             </div>
           </div>
         </div>
-        <NewResourceModal initialCategory={this.props.category}
+        <NewResourceModal initialCategory={initialCategory}
                           resourcePosted={this.getResources.bind(this)}
                           optimisticallyAdd={this.optimisticallyAdd.bind(this)} />
       </div>
