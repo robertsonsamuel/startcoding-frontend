@@ -76,6 +76,7 @@ class User extends React.Component {
 
     let resourceEls = filteredResources.map((resource,i) => {
       return <ResourceCard {...resource}
+                           score={resource.upvotes - resource.downvotes}
                            me={this.props.me}
                            key={i}/>
     });
