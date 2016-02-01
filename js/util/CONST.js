@@ -31,6 +31,6 @@ export const POSTABLE_CATEGORIES = allExceptAll;
 export const MAX_USERNAME_LENGTH = 20;
 export const MAX_PASSWORD_LENGTH = 100;
 
-export const MAX_RESOURCE_TITLE_LENGTH = 100; // implemented
-export const MAX_RESOURCE_BODY_LENGTH  = 250; // implemented
-export const MAX_COMMENT_LENGTH        = 2500;
+export const MAX_RESOURCE_TITLE_LENGTH = 100;  // implemented
+export const MAX_RESOURCE_BODY_LENGTH  = 250;  // implemented
+export const MAX_COMMENT_LENGTH        = 2500; // implemented

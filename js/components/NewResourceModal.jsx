@@ -7,7 +7,7 @@ import {pleaseLogin,genErr} from '../util/alerts';
 import '../../css/newResourceModal.css';
 import '../../css/reactTags.css';
 import {store} from '../util/store';
-import {MAX_RESOURCE_TITLE_LENGTH, MAX_RESOURCE_BODY_LENGTH} from '../util/CONST.js'
+import {MAX_RESOURCE_TITLE_LENGTH, MAX_RESOURCE_BODY_LENGTH} from '../util/CONST.js';
 
 // needed for fancy auto-complete tags box
 import HTML5Backend from 'react-dnd-html5-backend';
