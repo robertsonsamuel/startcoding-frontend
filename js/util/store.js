@@ -27,7 +27,6 @@ class EventEmitter {
     let theEvent = this[callbacks][name];
     if (!theEvent) return;
     let cbIndex = theEvent.indexOf(listeningFunction);
-    console.log("index", cbIndex, listeningFunction);
     this[callbacks][name] = theEvent.splice(cbIndex,1);
   }
   emitChange(name) {
