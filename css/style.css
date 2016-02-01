@@ -415,19 +415,7 @@ a.disabled {
 
   }
 
-  .active {
-      position: fixed;
-      background: white;
-      height: calc(100vh);
-      top: 0;
-      right: 0;
-      z-index: 4000;
-      left: 0;
-      margin: auto;
-      padding-bottom: 1em;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-  }
+
   #Register{
     display: none;
     left: -10%;
@@ -504,19 +492,7 @@ a.disabled {
       margin-bottom: 0;
       /*overflow-y: initial;*/
     }
-    .active {
-        position: fixed;
-        background: white;
-        height: calc(100vh);
-        top: 0;
-        right: 0;
-        z-index: 4000;
-        left: 0;
-        margin: auto;
-        padding-bottom: 1em;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-    }
+
     .heroImage {
     background: rgb(37, 208, 239);
     height: 100vh;
@@ -565,19 +541,7 @@ a.disabled {
       margin-bottom: 0;
       overflow-y: initial;
   }
-  .active {
-      position: fixed;
-      background: white;
-      height: calc(100vh);
-      top: 0;
-      right: 0;
-      z-index: 4000;
-      left: 0;
-      margin: auto;
-      padding-bottom: 1em;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-  }
+
   .heroImage {
     background: rgb(37, 208, 239);
     height: 100vh;
@@ -633,19 +597,7 @@ and (max-device-width : 736px) {
       margin-bottom: 0;
       overflow-y: initial;
   }
-  .active {
-      position: fixed;
-      background: white;
-      height: calc(100vh);
-      top: 0;
-      right: 0;
-      z-index: 4000;
-      left: 0;
-      margin: auto;
-      padding-bottom: 1em;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-  }
+
   .heroImage {
     background: rgb(37, 208, 239);
     height: 100vh;
@@ -701,19 +653,7 @@ and (orientation : landscape) {
     margin-bottom: 0;
     overflow-y: initial;
   }
-  .active {
-      position: fixed;
-      background: white;
-      height: 100%;
-      top: 0;
-      right: 0;
-      z-index: 4000;
-      left: 0;
-      margin: auto;
-      padding-bottom: 1em;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-  }
+
 
 }
 
@@ -740,19 +680,7 @@ and (orientation : landscape) {
     top: 28px;
     left: 3em;
 }
-    .active {
-        position: fixed;
-        background: white;
-        height: 100%;
-        top: 0;
-        right: 0;
-        z-index: 4000;
-        left: 0;
-        margin: auto;
-        padding-bottom: 1em;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-    }
+
 
 
 
@@ -787,20 +715,7 @@ and (orientation : landscape) {
       margin-bottom: 0;
       overflow-y: initial;
 }
-.active {
-  position: fixed;
-  background: white;
-  height: 100%;
-  width: 100vw;
-  top: 0;
-  right: 3em;
-  z-index: 4000;
-  left: 0;
-  margin: auto;
-  padding-bottom: 1em;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-}
+
 #Register, #Logout, #welcome {
     display: none;
     position: relative;
