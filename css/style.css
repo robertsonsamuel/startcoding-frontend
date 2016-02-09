@@ -7,18 +7,26 @@ body {
   font-size: 16px;
 }
 
-.heroImage {
-  background: rgb(37, 208, 239);
-  height: 49vh;
-  width: 100vw;
-  left: -30px;
-  position: relative;
+.navbar {
+  border: none;
+  border-radius: 0;
+}
+
+.banner {
+  background-color: rgb(37, 208, 239);
+  height: 200px;
+  width: 100%;
+  text-align: center;
+  margin-top: 0;
+  /*left: -30px;
+  position: relative;*/
 }
 
 .heroHead{
   text-align: center;
   color: #F3F3F3;
   font-style: oblique;
+  padding-top: 30px;
 }
 .herofooter{
   text-align: center;
@@ -30,7 +38,7 @@ body {
 }
 .vertical-center {
   min-height: 100%;
-  min-height: 49vh;
+  /*min-height: 49vh;*/
   /* Make it a flex container */
   display: -webkit-box;
   display: -moz-box;
@@ -66,17 +74,27 @@ body {
     border-color: rgba(76, 175, 80, 0);
 }
 
+.navbar-brand {
+  margin-top: -10px;
+  margin-right: 15px;
+}
+
 div.startcoding-logo{
   margin:3em auto;
   width:50em;
 }
-
-div.startcoding-logo a{
+div.startcoding-logo a {
   text-decoration:none;
   color:#64AF67;
 }
+span.startCodingName {
+  position: absolute;
+  top: 28px;
+  font-size: 32px;
+  left: 3.5em;
+}
 
-div.braket-logo {
+/*div.braket-logo {
   border-radius: 50% 50% 50% 50%;
   background-color: #22659C;
   color: #42E2FF;
@@ -98,7 +116,7 @@ div.braket-logo div.leaf-shadow{
   height:10.6em;
   background-color:#64AF67;
   -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);
-}
+}*/
 
 #title{
   display:inline-block;
@@ -107,9 +125,6 @@ div.braket-logo div.leaf-shadow{
   margin:0;
 }
 
-.startcoding-logo:hover {
-
-}
 .startcoding-logo:after {
     content: "";
     position: absolute;
@@ -157,12 +172,6 @@ img.techImage {
 div#bs-example-navbar-collapse-2 {
     position: relative;
     /*left: 8%;*/
-}
-span.startCodingName {
-  position: absolute;
-  top: 28px;
-  font-size: 25px;
-  left: 3.5em;
 }
 
 #registerButton{
@@ -301,6 +310,7 @@ textarea {
 
 
 #topBar {
+
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {

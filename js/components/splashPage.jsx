@@ -62,19 +62,12 @@ class SplashPage extends React.Component {
     })
     return(
       <div className="container-fluid">
-        <div clasName="row">
-        <div id="hero" className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div className="heroImage vertical-center">
-              <div className="col-xs-12 col-md-6">
-                <div className="heroText">
-                  <h1 className="heroHead">Start Coding Now!</h1>
-                  <h3 className="herofooter">The easiest and best way to discover and share coding resources. </h3>
-                  <button className="btn btn-primary heroButton" onClick={this.getStartedClickHandler}>Get Started Now</button>
-                </div>
-              </div>
+          <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 vertical-center">
+            <div className="col-xs-12 col-md-6 banner">
+                <h1 className="heroHead">Start Coding Now!</h1>
+                <h3 className="herofooter">The easiest and best way to discover and share coding resources. </h3>
             </div>
           </div>
-        </div>
         <br />
         <div className="splitSection"></div>
         <div id="techContainer" className="techContainer col-lg-10 col-lg-offset-1">

@@ -81,8 +81,8 @@ class Navbar extends React.Component {
               </button>
               <div className="navbar-brand">
                 <div className="btn-round">
-                    <img src="../../img/logo-8.png" height="58px" />
-                  </div>
+                  <img src="../../img/logo-8.png" height="80px" />
+                </div>
                   <span className="startCodingName">Start Coding</span>
               </div>
             </div>
