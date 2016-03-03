@@ -80,7 +80,7 @@ class Navbar extends React.Component {
                 <span className="icon-bar"></span>
               </button>
               <div className="navbar-brand">
-                <div className="btn-round">
+                <div className="btn-round sc-logo">
                   <img src="../../img/logo-8.png" height="80px" />
                 </div>
                   <span className="startCodingName">Start Coding</span>
@@ -91,7 +91,7 @@ class Navbar extends React.Component {
               </ul>
               <ul id="loginRegister" className="nav navbar-nav navbar-right">
                 <li>
-                  <a href="#" data-toggle="modal" data-target="#LoginModal">
+                  <a href="#" data-toggle="modal" data-target="#LoginModal" className="button btn login-btn">
                     <strong>Login / Register</strong>
                   </a>
                 </li>

@@ -28,4 +28,21 @@
 .navbar-inverse.generalStyle{
   background: rgb(86, 141, 109);
 }
-
+span.startCodingName {
+  line-height: 10px;
+}
+.login-btn {
+  margin-top: 3px;
+  background-color: #88C543;
+  height: 25px;
+  font-size: 14px;
+}
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:hover {
+  background-color: #AFD469;
+}
+.navbar-nav>li>a.login-btn {
+  line-height: 4px;
+}
+.sc-logo {
+  margin-top: -5px;
+}
