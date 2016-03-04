@@ -293,16 +293,6 @@ textarea {
   z-index: 1000;
 }
 
-.navTitle {
-  color: #FFF;
-  letter-spacing: 14px;
-  font-size: 1.5em;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%)
-}
-
 @media (max-width: 768px) {
   .navTitle {
     display: none;
@@ -382,19 +372,7 @@ a.disabled {
     background: white;
     top: 20px;
 }
-.breadcrumb {
-    padding: 0;
-}
-.breadcrumb.resourceBreadCrumb {
-  background: white;
-  border: antiquewhite;
-  font-size: 13px;
-  margin: 0.2em  0 0 0;
-}
-.breadcrumb > span{
-  float: left;
-  color: gray;
-}
+
 
 @media (max-width:768px) and (min-width:667px) {
   span.startCodingName {

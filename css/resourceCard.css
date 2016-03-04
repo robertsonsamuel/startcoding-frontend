@@ -1,3 +1,6 @@
+.resourceControlBar {
+  margin-top: -15px;
+}
 .resourceCard {
     margin: 1em;
     padding: 2em 1em 1em 1em;
@@ -5,9 +8,31 @@
     min-height: 120px
 }
 .resourceCardHeader {
+  margin-top: -20px;
+  margin-bottom: 0;
 }
 .resourceCardTitle {
   width: calc(100% - 40px);
   display: inline-block;
   margin: 0 !important;
+}
+.breadcrumb {
+  padding: 0;
+}
+.breadcrumb.resourceBreadCrumb {
+  background: white;
+  border: antiquewhite;
+  font-size: 15px;
+  margin: 10px 0 10px 0;
+}
+.breadcrumb.resourceBreadCrumb > li {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.breadcrumb > span{
+  float: left;
+  color: gray;
+}
+.resourceTagContainer {
+  margin-left: -3px;
 }
