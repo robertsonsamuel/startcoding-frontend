@@ -1,5 +1,5 @@
 .resourcePage {
-  background: #FEFEFE;
+  background: #dedede;
 }
 .resourceContent {
   min-height: 100vh;
@@ -13,6 +13,7 @@
 
 .resourcePage .ReactTags__tag {
   cursor: auto;
+  margin-left: 0;
 }
 
 .resourcePage .ReactTags__selected {
@@ -20,9 +21,8 @@
 }
 
 .panel-body.resourceBody {
-  background: rgb(255, 255, 255);
-  padding: 30px 30px 0 30px;
-  margin-bottom: 10px;
+  padding: 30px 30px 0 0;
+  margin-bottom: -40px;
   margin-top: 10px;
 }
 
@@ -38,7 +38,6 @@
 }
 
 h4.resourceTitle.resourcePage {
-    background-color: white;
     border: none;
     padding-bottom: 15px;
 }
