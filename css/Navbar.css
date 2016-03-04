@@ -31,6 +31,9 @@
 span.startCodingName {
   line-height: 10px;
 }
+.nav.navbar-right {
+  margin-top: 0;
+}
 .login-btn {
   margin-top: 3px;
   background-color: #88C543;
@@ -38,6 +41,12 @@ span.startCodingName {
   font-size: 14px;
 }
 .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:hover {
+  background-color: #AFD469;
+}
+.navbar-inverse .navbar-nav>li>a:active, .navbar-inverse .navbar-nav>li>a:active {
+  background-color: #AFD469;
+}
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:focus {
   background-color: #AFD469;
 }
 .navbar-nav>li>a.login-btn {

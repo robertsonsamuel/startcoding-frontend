@@ -98,7 +98,7 @@ class FilterBar extends React.Component {
               <span className="input-group-addon" id="basic-addon1">Category: </span>
               <select defaultValue={defaultValue}
                       onChange={this.selectCategory.bind(this)}
-                      className="form-control">
+                      className="form-control select">
                 {categories}
               </select>
             </div>

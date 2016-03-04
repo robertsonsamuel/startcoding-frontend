@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var css = require("css-loader");
+var classNames = require('classnames');
 
 module.exports = {
   entry:"./js/app.jsx",

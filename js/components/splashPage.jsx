@@ -3,13 +3,13 @@ import React from 'react';
 let catagories = [
   {
     name: "Ruby",
-    short: "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language.",
+    short: "A dynamic, reflective, object-oriented, general-purpose programming language.",
     href: "#/ruby",
     imgSrc: "https://coderdojo.com/wp-content/uploads/2015/03/Ruby.png",
   },
   {
     name: "JavaScript",
-    short: "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. ",
+    short: "A high-level, dynamic, untyped, and interpreted programming language. ",
     href: "#/javascript",
     imgSrc: "http://www.w3devcampus.com/wp-content/uploads/logoAndOther/logo_JavaScript.png",
   },
@@ -21,19 +21,19 @@ let catagories = [
   },
   {
     name: "Python",
-    short: "Python is a widely used general-purpose, high-level programming language.",
+    short: "A widely used general-purpose, high-level programming language.",
     href: "#/python",
     imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png",
   },
   {
     name: "Go",
-    short: "Go also commonly referred to as golang, is a open source programming language developed at Google.",
+    short: "An open source programming language developed at Google; is also commonly referred to as golang.",
     href: "#/go",
     imgSrc: "https://blog.golang.org/gopher/gopher.png",
   },
   {
     name: "Swift",
-    short: "Swift is a multi-paradigm, compiled programming language created for iOS and OS X by Apple Inc.",
+    short: "A multi-paradigm compiled programming language created for iOS and OS X by Apple Inc.",
     href: "#/swift",
     imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Swift_logo.svg/2000px-Swift_logo.svg.png",
   }
@@ -54,7 +54,7 @@ class SplashPage extends React.Component {
             <div className="caption">
               <h3>{category.name}</h3>
               <p>{category.short}</p>
-              <p><a href={category.href} className="btn btn-primary" role="button">Learn about {category.name}</a></p>
+              <p><a href={category.href} className="btn btn-primary" role="button">{category.name}</a></p>
             </div>
           </div>
         </div>

@@ -14,13 +14,11 @@ body {
 }
 
 .banner {
-  background-color: rgb(37, 208, 239);
+  background-color: #AFD469;
   height: 200px;
   width: 100%;
   text-align: center;
   margin-top: 0;
-  /*left: -30px;
-  position: relative;*/
 }
 
 .heroHead{
@@ -309,11 +307,6 @@ textarea {
   .navTitle {
     display: none;
   }
-}
-
-
-#topBar {
-
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {

@@ -4,7 +4,11 @@
   }
 }
 
-.resourceList{
+.nav {
+  margin-top: 15px;
+}
+
+.resourceList {
   padding-bottom: 7em;
 }
 
