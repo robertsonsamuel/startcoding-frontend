@@ -12,6 +12,12 @@
 .nav-tabs>li>a {
   border-color: #ddd;
 }
+ul.nav-tabs>li.active>a {
+  background-color: #AFD469;
+}
+ul.nav-tabs>li.active>a:focus {
+  background-color: #AFD469;
+}
 .resourceList {
   margin-bottom: -99999px;
   padding-bottom: 99999px;
