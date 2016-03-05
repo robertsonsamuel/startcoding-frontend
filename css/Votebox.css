@@ -1,10 +1,12 @@
 
 .voteBox {
   text-align: center;
-  float: right;
+  float: left;
   font-size: 20px;
   display: inline-block;
   width: 35px;
+  margin-left: -10px;
+  margin-right: 10px;
 }
 
 .voteBtn {
@@ -23,4 +25,8 @@
 }
 .down .voteBtn:nth-child(3){
   color: tomato;
+}
+.badge {
+  margin-top: -8px;
+  margin-left: 1px;
 }
