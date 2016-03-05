@@ -3,24 +3,106 @@
     padding-right: 3em;
   }
 }
-
 .nav {
   margin-top: 15px;
 }
-
 .resourceList {
-  padding-bottom: 7em;
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  margin-left: 0;
+  margin-right: 0;
 }
+
+.resourceList>.javascriptStyle{
+  background: rgba(211, 195, 20, .1);
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  padding-top: 25px;
+  padding-right: 50px;
+  padding-left: 45px;
+  margin-right: -30px;
+}
+.resourceList>.cssStyle{
+  background: rgba(120, 129, 207, .1);
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  padding-top: 25px;
+  padding-right: 50px;
+  padding-left: 45px;
+  margin-right: -30px;
+}
+.resourceList>.htmlStyle{
+  background: rgba(239, 101, 42, .1);
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  padding-top: 25px;
+  padding-right: 50px;
+  padding-left: 45px;
+  margin-right: -30px;
+}
+.resourceList>.rubyStyle{
+  background: rgba(204, 52, 45, .1);
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  padding-top: 25px;
+  padding-right: 50px;
+  padding-left: 45px;
+  margin-right: -30px;
+}
+.resourceList>.goStyle{
+  background: rgba(208, 182, 152, .1);
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  padding-top: 25px;
+  padding-right: 50px;
+  padding-left: 45px;
+  margin-right: -30px;
+}
+.resourceList>.pythonStyle{
+  background: rgba(30, 65, 95, .1);
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  padding-top: 25px;
+  padding-right: 50px;
+  padding-left: 45px;
+  margin-right: -30px;
+}
+.resourceList>.swiftStyle{
+  background: rgba(252, 72, 49, .1);
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  padding-top: 25px;
+  padding-right: 50px;
+  padding-left: 45px;
+  margin-right: -30px;
+}
+.resourceList>.generalStyle{
+  background: rgba(86, 141, 109, .1);
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  padding-top: 25px;
+  padding-right: 50px;
+  padding-left: 45px;
+  margin-right: -30px;
+}
+.resourceList>.userStyle{
+  background: rgba(101, 113, 131, .1);
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  padding-top: 25px;
+  padding-right: 50px;
+  padding-left: 45px;
+  margin-right: -30px;
+}
+
 
 .displayResource {
   overflow: hidden;
 }
-
 .filterRow {
   overflow: hidden;
   min-height: 100vh;
 }
-
 @media (min-width: 992px) {
   .filterCol {
     margin-bottom: -99999px;

@@ -7,7 +7,6 @@ body {
   background: #FEFEFE;
   font-size: 16px;
 }
-
 .navbar {
   border: none;
   border-radius: 0;
@@ -37,7 +36,6 @@ body {
 }
 .vertical-center {
   min-height: 100%;
-  /*min-height: 49vh;*/
   /* Make it a flex container */
   display: -webkit-box;
   display: -moz-box;
@@ -95,30 +93,6 @@ span.startCodingName {
   left: 3.5em;
 }
 
-/*div.braket-logo {
-  border-radius: 50% 50% 50% 50%;
-  background-color: #22659C;
-  color: #42E2FF;
-  width: 1em;
-  height: 1em;
-  font-size: 1.5em;
-  overflow: hidden;
-  box-shadow: 6px 9px 7px rgba(0,0,0,0.1);
-  display: inline-block;
-  vertical-align: center;
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  margin: 0px auto;
-}
-
-div.braket-logo div.leaf-shadow{
-  width:6.3em;
-  height:10.6em;
-  background-color:#64AF67;
-  -webkit-transform: rotate(-45deg) translateX(-1.6em) translateY(-2.4em);
-}*/
-
 #title{
   display:inline-block;
   font:7em normal 'Roboto', 'Open Sans', Arial, sans-serif;
@@ -161,7 +135,6 @@ img.techImage {
     height: 210px;
 }
 .techContainer {
-    /* margin: 40px; */
     position: relative;
     top: 15px;
 }
@@ -172,7 +145,6 @@ img.techImage {
 
 div#bs-example-navbar-collapse-2 {
     position: relative;
-    /*left: 8%;*/
 }
 
 #registerButton{
@@ -300,11 +272,11 @@ textarea {
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
-    color: #FFF !important;
+  color: #FFF !important;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {
-    color: peachpuff;
+  color: peachpuff;
 }
 
 .navbar-inverse .navbar-toggle {
@@ -325,15 +297,15 @@ textarea {
   right: 0;
   margin: 0 auto;
 }
-.main{
+.main {
   position: relative;
   min-height: 100vh;
   margin-bottom: 0;
 }
 
 a.disabled {
-    pointer-events: none;
-    color: lightgrey;
+  pointer-events: none;
+  color: lightgrey;
 }
 .active .resourceContent {
   display: block;
@@ -344,13 +316,7 @@ a.disabled {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
-.resourceHead {
-  /*border-bottom: 1px solid #22659C;*/
-}
-/*.resourceHead:hover{
-  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.28), 0 3px 6px rgba(0,0,0,0.23);
-}*/
-.hide{
+.hide {
   display: none;
 }
 .panel-default>.panel-heading .badge {

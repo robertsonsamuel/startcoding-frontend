@@ -78,8 +78,9 @@ class Main extends React.Component {
 
   render() {
     let mainClasses = classNames('main', 'panel');
-    let filterColClass = "col-sm-12 col-md-4 filterCol " + this.props.category + "Style"
-    
+    let filterColClass = "col-sm-12 col-md-4 filterCol " + this.props.category + "Style";
+    let mainCatClass = this.props.category + "Style";
+
     let resourceEls = this.state.resources.map((resource,i) => {
       return <ResourceCard {...resource}
                            me={this.props.me}
@@ -98,18 +99,20 @@ class Main extends React.Component {
                        suggestions={this.state.tagSuggestions} />
           </div>
           <div className="col-sm-12 col-md-8 resourceList">
-            <ul className="nav nav-tabs" role="tablist">
-              <li role="presentation" className="active"><a onClick={this.changeTabs.bind(this, 'top')} href="#home" aria-controls="home" role="tab" data-toggle="tab">Top</a></li>
-              <li role="presentation"><a onClick={this.changeTabs.bind(this, 'newest')} href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Newest</a></li>
-            </ul>
-            <div className="tab-content">
-              <div role="tabpanel" className="tab-pane active" id="home">
-                {this.state.loading ? <LoadingSpinner /> : []}
-                {resourceEls}
-              </div>
-              <div role="tabpanel" className="tab-pane" id="profile">
+            <div className={mainCatClass}>
+              <ul className="nav nav-tabs" role="tablist">
+                <li role="presentation" className="active"><a onClick={this.changeTabs.bind(this, 'top')} href="#home" aria-controls="home" role="tab" data-toggle="tab">Top</a></li>
+                <li role="presentation"><a onClick={this.changeTabs.bind(this, 'newest')} href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Newest</a></li>
+              </ul>
+              <div className="tab-content">
+                <div role="tabpanel" className="tab-pane active" id="home">
                   {this.state.loading ? <LoadingSpinner /> : []}
-                {resourceEls}
+                  {resourceEls}
+                </div>
+                <div role="tabpanel" className="tab-pane" id="profile">
+                    {this.state.loading ? <LoadingSpinner /> : []}
+                  {resourceEls}
+                </div>
               </div>
             </div>
           </div>
