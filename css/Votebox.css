@@ -19,8 +19,8 @@
 }
 
 .up .voteBtn:first-child{
-  color: #00E676
+  color: yellowgreen;
 }
 .down .voteBtn:nth-child(3){
-  color: purple;
+  color: tomato;
 }
