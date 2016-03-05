@@ -43,8 +43,8 @@ div.ReactTags__selected {
 }
 div.ReactTags__selected span.ReactTags__tag {
   cursor: pointer;
-  border: 1px solid #ddd;
-  background: #eee;
+  border: 1px solid #555;
+  background: #aaa;
   font-size: 12px;
   display: inline-block;
   padding: 5px;
@@ -84,12 +84,12 @@ div.ReactTags__suggestions ul li.active {
 }
 
 div.ReactTags__selected span.ReactTags__tag {
-  border: 1px solid #e7e7e7;
-  background: #eeeeee;
+  border: 1px solid #888;
+  background: #aaa;
   font-size: 12px;
   display: inline-block;
   padding: 5px;
-  color: grey;
+  color: #666;
   border-radius: 5px;
   margin-left: 0;
   margin-right: 5px;

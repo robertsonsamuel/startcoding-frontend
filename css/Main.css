@@ -6,6 +6,12 @@
 .nav {
   margin-top: 15px;
 }
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+.nav-tabs>li>a {
+  border-color: #ddd;
+}
 .resourceList {
   margin-bottom: -99999px;
   padding-bottom: 99999px;
