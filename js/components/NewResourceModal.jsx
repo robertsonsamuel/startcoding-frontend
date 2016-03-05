@@ -154,7 +154,7 @@ class NewResourceModal extends React.Component {
             <div className="modal-content">
               <div className="modal-header">
                 <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                <h4 className="modal-title" id="resourceModalLabel">Create a new resource.</h4>
+                <h4 className="modal-title" id="resourceModalLabel">Create a new resource</h4>
               </div>
               <form onSubmit={this.createResource.bind(this)}>
               <div className="modal-body row">

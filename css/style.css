@@ -101,28 +101,27 @@ span.startCodingName {
 }
 
 .startcoding-logo:after {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 0%;
-    height: 100%;
-    background-color: rgba(255,255,255,0.4);
-    -webkit-transition: none;
-    -moz-transition: none;
-    -ms-transition: none;
-    -o-transition: none;
-    transition: none;
-
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 0%;
+  height: 100%;
+  background-color: rgba(255,255,255,0.4);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 .startcoding-logo:hover:after {
-    width: 120%;
-    background-color: rgba(255,255,255,0);
-    -webkit-transition: all 0.9s ease-out;
-    -moz-transition: all 0.9s ease-out;
-    -ms-transition: all 0.9s ease-out;
-    -o-transition: all 0.9s ease-out;
-    transition: all 0.9s ease-out;
+  width: 120%;
+  background-color: rgba(255,255,255,0);
+  -webkit-transition: all 0.9s ease-out;
+  -moz-transition: all 0.9s ease-out;
+  -ms-transition: all 0.9s ease-out;
+  -o-transition: all 0.9s ease-out;
+  transition: all 0.9s ease-out;
 }
 
 img.techImage {
@@ -239,7 +238,7 @@ a.alreadyMember {
 .newResourceTitle {
 }
 .resource .badge, .comment .badge {
-  font-size: 15px; /* resource/comment scores */
+  font-size: 15px;
 }
 
 .spinnerContainer {

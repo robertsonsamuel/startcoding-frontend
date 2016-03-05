@@ -1,5 +1,5 @@
 .comment {
-  padding: 1.5em 0em .5em 0;
+  padding: 1.5em 0em .5em 25px;
   margin: 2em .5em 0 2em;
 }
 
@@ -14,7 +14,7 @@
 
 .commentBody {
   width: calc(100% - 35px);
-  padding: 0 0em 0 1.5em;
+  padding: 0 0em 0 34px;
 }
 .commentBreadcrumb {
   padding: 0;
@@ -29,4 +29,8 @@
 .commentBreadcrumb > li:first-child {
   margin-left: 0;
   font-style: normal;
+}
+
+.comment > .commentVoteContainer > .voteBox {
+  margin-left: -10px;
 }
