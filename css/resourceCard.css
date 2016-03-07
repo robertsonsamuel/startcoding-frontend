@@ -30,6 +30,8 @@ ol.breadcrumb.resourceBreadCrumb {
 }
 ol.breadcrumb>li+li:before {
   color: #222;
+  content: "•";
+  font-size: 20px;
 }
 .breadcrumb.resourceBreadCrumb > li {
   margin-bottom: 10px;
