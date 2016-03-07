@@ -7,7 +7,7 @@ class Footer extends React.Component {
         <footer className="footer">
           <div className="container">
             <div className="row">
-              <div className="col-sm-12 col-md-4 col-lg-4">
+              <div className="col-sm-8 col-md-4 col-lg-4">
                 <p className="text-muted">StartCoding.org is a free to use place where users may bookmark, save and share
                   the best resources on the web for learning how to code.
                 </p>

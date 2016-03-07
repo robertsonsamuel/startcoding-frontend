@@ -1,8 +1,12 @@
 footer.footer {
-    background: #EEEEEE;
-    height: 100px;
-    margin-top: 150px;
-    color: white;
-    border-top: 1px solid rgba(128, 128, 128, 0.17);
-    padding-top: 30px;
+  background: #EEEEEE;
+  height: 100px;
+  margin-top: 150px;
+  color: white;
+  border-top: 1px solid rgba(128, 128, 128, 0.17);
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+footer.footer>.container {
+  padding-bottom: 30px;
 }
