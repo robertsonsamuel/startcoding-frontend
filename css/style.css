@@ -304,23 +304,23 @@ a.disabled {
   display: none;
 }
 .panel-default>.panel-heading .badge {
-    color: #f5f5f5;
-    background-color: #158cba;
+  color: #f5f5f5;
+  background-color: #158cba;
 }
 .panel-default>.panel-heading {
-    color: #333333;
-    background-color: #FFFFFF;
-    border-color: rgba(128, 2, 2, 0);
-    padding: 10px;
-    border-bottom: 1px solid #2368A9;
+  color: #333333;
+  background-color: #FFFFFF;
+  border-color: rgba(128, 2, 2, 0);
+  padding: 10px;
+  border-bottom: 1px solid #2368A9;
 }
 
 .panel-footer {
-    margin: 0 15px;
-    padding: 0px;
-    position: relative;
-    background: white;
-    top: 20px;
+  margin: 0 15px;
+  padding: 0px;
+  position: relative;
+  background: white;
+  top: 20px;
 }
 textarea#editResourceBody {
   width: 50%;
@@ -333,8 +333,8 @@ textarea#editResourceBody {
 @media (max-width:768px) and (min-width:667px) {
   span.startCodingName {
       position: absolute;
-      top: 20px;
-      left: 30%;
+/*      top: 20px;
+      left: 30%;*/
 
   }
 }
@@ -386,7 +386,7 @@ textarea#editResourceBody {
     span.startCodingName {
         position: absolute;
         top: 28px;
-        left: 38%;
+        left: 27%;
     }
     a.alreadyMember {
         position: relative;
@@ -736,6 +736,6 @@ and (orientation : landscape) {
   background: transparent;
   z-index: 9999;
   height: 64px;
-  width: 180px;
+  width: 95px;
   cursor: pointer;
 }

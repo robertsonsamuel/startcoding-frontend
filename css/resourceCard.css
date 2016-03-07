@@ -15,6 +15,7 @@
   width: calc(100% - 40px);
   display: inline-block;
   margin: 0 !important;
+  word-wrap: break-word;
 }
 .resourceCardHeader > .resourceCardTitle > strong > a {
   color: #333;
@@ -35,7 +36,8 @@ ol.breadcrumb>li+li:before {
 }
 .breadcrumb.resourceBreadCrumb > li {
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 15px;
+  line-height: 1px;
 }
 .breadcrumb > span{
   float: left;

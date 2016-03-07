@@ -94,6 +94,7 @@ class User extends React.Component {
                        suggestions={tagSuggestions} />
           </div>
           <div className="col-sm-12 col-md-8 col-lg-8">
+            <h1>Saved Resources</h1>
             {this.state.loading ? <LoadingSpinner /> : []}
             {resourceEls}
           </div>

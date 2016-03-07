@@ -1,11 +1,11 @@
 .navbar-inverse.javascriptStyle{
-  background: rgb(211, 195, 20)
+  background: rgb(240, 219, 79)
 }
 .navbar-inverse.cssStyle{
   background: rgb(120, 129, 207);
 }
 .navbar-inverse.htmlStyle{
-  background: rgb(239, 101, 42);
+  background: rgb(228, 77, 38);
 }
 .navbar-inverse.rubyStyle{
   background: rgb(204, 52, 45);
@@ -17,7 +17,7 @@
   background: rgb(30, 65, 95);
 }
 .navbar-inverse.swiftStyle{
-  background: rgb(252, 72, 49);
+  background: rgb(251, 161, 61);
 }
 .navbar-inverse.generalStyle{
   background: rgb(86, 141, 109);

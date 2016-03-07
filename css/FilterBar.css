@@ -33,16 +33,33 @@
   padding: 2em 0 4em 0;
 }
 
-
+.nav {
+  margin-top: 15px;
+}
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+.nav-tabs>li>a {
+  border-color: #ddd;
+}
+.nav-tabs>li:first-child {
+  margin-left: 10px;
+}
+ul.nav-tabs>li.active>a {
+  background-color: #AFD469;
+}
+ul.nav-tabs>li.active>a:focus {
+  background-color: #AFD469;
+}
 
 .filterCol.javascriptStyle{
-  background: rgba(211, 195, 20, .1)
+  background: rgba(240, 219, 79, .1);
 }
 .filterCol.cssStyle{
   background: rgba(120, 129, 207, .1);
 }
 .filterCol.htmlStyle{
-  background: rgba(239, 101, 42, .1);
+  background: rgba(228, 77, 38, .1);
 }
 .filterCol.rubyStyle{
   background: rgba(204, 52, 45, .1);
@@ -54,7 +71,7 @@
   background: rgba(30, 65, 95, .1);
 }
 .filterCol.swiftStyle{
-  background: rgba(252, 72, 49, .1);
+  background: rgba(251, 161, 61, .1);
 }
 .filterCol.generalStyle{
   background: rgba(86, 141, 109, .1);
